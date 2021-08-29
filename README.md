@@ -1,13 +1,9 @@
 # [Shell](https://nilesoft.org)
 **Shell** is a powerful context menu manager for Windows File Explorer.
 
-
 ![Shell logo](https://www.nilesoft.org/images/logo-256.png)
 
-
-
 ### Features
-
 * Full management of the context menu.
 * Adding new custom menu items such as submenu (cascaded menus), menuitem and separator.
 * Modify regular menu items added by system or third-party programs.
