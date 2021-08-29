@@ -23,7 +23,6 @@
 * Minimal resource usage.
 * No limitations.
 
-
 ### Requirements
   * Microsoft Windows (64-bit) 7/8/10/11 
 
@@ -37,3 +36,5 @@ Browse the [online documentation here.](https://nilesoft.org/docs)
 ![Shell Screenshot](https://www.nilesoft.org/images/screenshots/fm.png)
 
 ![Shell Screenshot](https://www.nilesoft.org/images/screenshots/desktop.png)
+
+Feel free to raise an issue.
