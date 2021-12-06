@@ -2,8 +2,7 @@
 **Shell** is a powerful context menu manager for Windows File Explorer.
 
 <p align="center">
-	
- ![Shell logo](https://www.nilesoft.org/images/logo-256.png)
+	<img src="https://www.nilesoft.org/images/logo-256.png" width="256">
 	<br>
 	<br>
 </p>
