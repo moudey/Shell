@@ -2,9 +2,9 @@
 **Shell** is a powerful context menu manager for Windows File Explorer.
 
 <p align="center">
-	<img src="https://www.nilesoft.org/images/logo-256.png" width="256">
-	<br>
-	<br>
+ <img src="https://www.nilesoft.org/images/logo-256.png" width="256">
+ <br>
+ <br>
 </p>
 
 
@@ -31,11 +31,16 @@
 Browse the [online documentation here.](https://nilesoft.org/docs)
 
 ### Screenshots
-
-![Shell Screenshot](https://www.nilesoft.org/images/screenshots/dev.png)
-
-![Shell Screenshot](https://www.nilesoft.org/images/screenshots/fm.png)
-
-![Shell Screenshot](https://www.nilesoft.org/images/screenshots/desktop.png)
+<p align="center">
+ <img src="https://www.nilesoft.org/images/screenshots/dev.png">
+ <br>
+ <br>
+ <img src="https://www.nilesoft.org/images/screenshots/fm.png">
+ <br>
+ <br>
+ <img src="https://www.nilesoft.org/images/screenshots/desktop.png">
+ <br>
+ <br>
+</p>
 
 Feel free to raise an issue.
