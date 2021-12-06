@@ -1,0 +1,193 @@
+﻿@page
+@{
+	ViewData["page-support"] = "Expressions \\ Operators";
+}
+<div class="message is-danger">
+	<p class="message-body">Documentation under construction.</p>
+</div>
+<div id="operators">
+	<h4>Operators</h4>
+	<p>An operator is a symbol that tells to perform specific mathematical or logical manipulations. <b>Shell</b> is rich in built-in operators and provide the following types of operators</p>
+	<p>This chapter will examine the arithmetic, relational, logical, bitwise, assignment and other operators one by one.</p>
+	<h5 id="arithmetic">Arithmetic Operators</h5>
+	<p>The five arithmetical operations supported</p>
+	<table class="table table-bordered table-sm">
+		<tbody>
+			<tr>
+				<th class="text-center" width="10%">Operator</th>
+				<th>Description</th>
+			</tr>
+			<tr>
+				<td class="text-center">+</td>
+				<td>Addition</td>
+			</tr>
+			<tr>
+				<td class="text-center">-</td>
+				<td>Subtraction</td>
+			</tr>
+			<tr>
+				<td class="text-center">*</td>
+				<td>Multiplication</td>
+			</tr>
+			<tr>
+				<td class="text-center">/</td>
+				<td>Division</td>
+			</tr>
+			<tr>
+				<td class="text-center">%</td>
+				<td>Modulo</td>
+			</tr>
+		</tbody>
+	</table>
+	<br>
+	<h5 id="relational">Relational and comparison operators</h5>
+	<p>Two expressions can be compared using relational and equality operators. For example, to know if two values are equal or if one is greater than the other.</p>
+	<p>The result of such an operation is either true or false (i.e., a Boolean value).</p>
+	<p>The relational operators are:</p>
+	<table class="table table-bordered table-sm">
+		<tbody>
+			<tr>
+				<th  class="text-center"width="10%">operator</th><th>description</th>
+			</tr>
+			<tr>
+				<td class="text-center">==</td><td>Equal to</td>
+			</tr>
+			<tr>
+				<td class="text-center">!=</td><td>Not equal to</td>
+			</tr>
+			<tr>
+				<td class="text-center">&lt;</td><td>Less than</td>
+			</tr>
+			<tr>
+				<td class="text-center">&gt;</td><td>Greater than</td>
+			</tr>
+			<tr>
+				<td class="text-center">&lt;=</td><td>Less than or equal to</td>
+			</tr>
+			<tr>
+				<td class="text-center">&gt;=</td><td>Greater than or equal to</td>
+			</tr>
+		</tbody>
+	</table>
+	<br>
+	<h5 id="logical">Logical Operators (!, ||, &amp;&amp;)</h5>
+	<p> The operator <code>!</code> is operator for the Boolean operation NOT. It has only one operand, to its right, and inverts it, producing false if its operand is true, and true if its operand is false. Basically, it returns the opposite Boolean value of evaluating its operand. For example:</p>
+<p> The logical operators <code>&amp;&amp;</code> and <code>||</code> are used when evaluating two expressions to obtain a single relational result. The operator <code>&amp;&amp;</code> corresponds to the Boolean logical operation AND, which yields true if both its operands are true, and false otherwise. The following panel shows the result of operator <code>&amp;&amp;</code> evaluating the expression <code>a &amp;&amp; b</code>:</p>
+	<table class="table table-bordered table-sm">
+		<tbody>
+			<tr>
+				<th class="text-center" width="10%">operator</th>
+				<th>description</th>
+			</tr>
+			<tr>
+				<td class="text-center">&amp;&amp;</td>
+				<td>Called Logical AND  operator. If both the operands are non-zero, then condition becomes true.</td>
+			</tr>
+			<tr>
+				<td class="text-center">||</td>
+				<td>Called Logical OR Operator. If any of the two operands is non-zero, then condition becomes true.</td>
+			</tr>
+			<tr>
+				<td class="text-center">!</td>
+				<td>
+				Called Logical NOT Operator. Use to reverses the logical state of its operand. If a condition is true, then Logical NOT operator will make false.
+				<pre><code>!(5 == 5)   <cite>// evaluates to false because the expression at its right (5 == 5) is true</cite>
+!(6 &lt;= 4)   <cite>// evaluates to true because (6 &lt;= 4) would be false</cite>
+!<var>true</var>       <cite>// evaluates to false</cite>
+!<var>false</var>      <cite>// evaluates to true</cite></code></pre>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<br>
+	<h5 id="ternary">Conditional ternary operator</h5>
+	<p>The conditional operator evaluates an expression, returning one value if that expression evaluates to true, and a different one if the expression evaluates as false. Its syntax is:</p>
+	<pre><code>condition ? result1 : result2</code></pre>
+	<p>If condition is true, the entire expression evaluates to result1, and otherwise to result2.</p>
+<pre><code>7==5 ? 4 : 3     <cite>// evaluates to 3, since 7 is not equal to 5.</cite>
+7==5+2 ? 4 : 3   <cite>// evaluates to 4, since 7 is equal to 5+2.</cite>
+5>3 ? a : b      <cite>// evaluates to the value of a, since 5 is greater than 3.</cite>
+a>b ? a : b      <cite>// evaluates to whichever is greater, a or b.</cite></code></pre>
+
+	<h5 id="bitwise">Bitwise Operators</h5>
+	<p>Bitwise operators modify variables considering the bit patterns that represent the values they store.</p>
+	<table  class="table table-bordered table-sm">
+		<tbody>
+			<tr>
+				<th class="text-center" width="10%">Operator</th>
+				<th>Description</th>
+			</tr>
+			<tr>
+				<td class="text-center">&amp;</td>
+				</td><td>Bitwise AND</td>
+			</tr>
+			<tr>
+				<td class="text-center">|</td>
+				<td>Bitwise inclusive OR</td>
+			</tr>
+			<tr>
+				<td class="text-center">^</td>
+				<td>Bitwise exclusive OR</td>
+			</tr>
+			<tr>
+				<td class="text-center">~</td>
+				<td>Unary complement (bit inversion)</td>
+			</tr>
+			<tr>
+				<td class="text-center">&lt;&lt;</td>
+				<td>Shift bits left</td>
+			</tr>
+			<tr>
+				<td class="text-center">&gt;&gt;</td>
+				<td>Shift bits right</td>
+			</tr>
+		</tbody>
+	</table>
+	<h5 id="precedence">Precedence of operators</h5>
+	<p> A single expression may have multiple operators. For example:</p>
+	<pre><code>x = 5 + 7 % 2</code></pre>
+	<p>the above expression always assigns 6 to variable x, because the <code>%</code> operator has a higher precedence than the <code>+</code> operator, and is always evaluated before. Parts of the expressions can be enclosed in parenthesis to override this precedence order, or to make explicitly clear the intended effect. Notice the difference:</p>
+<pre><code>x = 5 + (7 % 2)    <cite>// x = 6 (same as without parenthesis)</cite>
+x = (5 + 7) % 2    <cite>// x = 0</cite></code></pre>
+<p>From greatest to smallest priority, Operators are evaluated in the following order:</p>
+<table class="table table-sm table-bordered">
+	<tbody>
+		<tr>
+			<th>Level</th>
+			<th>Precedence group</th>
+			<th>Operator</th>
+			<th>Description</th>
+			<th>Grouping</th>
+		</tr>
+		<tr>
+			<td rowspan="4">1</td>
+			<td rowspan="4">Postfix (unary)</td>
+			<td><code>++ --</code></td>
+			<td>postfix increment / decrement</td>
+			<td rowspan="4">Left-to-right</td>
+		</tr>
+		<tr><td><code>()</code></td><td>functional forms</td></tr>
+		<tr><td><code>[]</code></td><td>subscript</td></tr>
+		<tr><td><code>.</code></td><td>member access</td>
+		</tr>
+		<tr><td rowspan="3">2</td><td rowspan="3">Prefix (unary)</td><td><code>++ --</code></td><td>prefix increment / decrement</td><td rowspan="3">Right-to-left</td></tr>
+		<tr><td><code>~ !</code></td><td>bitwise NOT / logical NOT</td></tr>
+		<tr><td><code>+ -</code></td><td>unary prefix</td></tr>
+		<tr><td>4</td><td>Arithmetic: scaling</td><td><code>* / %</code></td><td>multiply, divide, modulo</td><td>Left-to-right</td></tr>
+		<tr><td>5</td><td>Arithmetic: addition</td><td><code>+ -</code></td><td>addition, subtraction</td><td>Left-to-right</td></tr>
+		<tr><td>6</td><td>Bitwise shift</td><td><code>&lt;&lt; &gt;&gt;</code></td><td>shift left, shift right</td><td>Left-to-right</td></tr>
+		<tr><td>7</td><td>Relational</td><td><code>&lt; &gt; &lt;= &gt;=</code></td><td>comparison operators</td><td>Left-to-right</td></tr>
+		<tr><td>8</td><td>Equality</td><td><code>== !=</code></td><td>equality / inequality</td><td>Left-to-right</td></tr>
+		<tr><td>9</td><td>And</td><td><code>&amp;</code></td><td>bitwise AND</td><td>Left-to-right</td></tr>
+		<tr><td>10</td><td>Exclusive or</td><td><code>^</code></td><td>bitwise XOR</td><td>Left-to-right</td></tr>
+		<tr><td>11</td><td>Inclusive or</td><td><code>|</code></td><td>bitwise OR</td><td>Left-to-right</td></tr>
+		<tr><td>12</td><td>Conjunction</td><td><code>&amp;&amp;</code></td><td>logical AND</td><td>Left-to-right</td></tr>
+		<tr><td>13</td><td>Disjunction</td><td><code>||</code></td><td>logical OR</td><td>Left-to-right</td></tr>
+		<tr><td rowspan="2">15</td><td rowspan="2">Assignment-level expressions</td><td><code>=</code></td><td>assignment</td><td rowspan="2">Right-to-left</td></tr>
+		<tr><td><code>?:</code></td><td>conditional operator</td></tr>
+		<tr><td>16</td><td>Sequencing</td><td><code>,</code></td><td>comma separator</td><td>Left-to-right</td></tr>
+	</tbody>
+</table>
+	<p>When an expression has two operators with the same precedence level, grouping determines which one is evaluated first: either left-to-right or right-to-left.<br>
+	Enclosing all sub-statements in parentheses (even those unnecessary because of their precedence) improves code readability.</p>
+</div>
