@@ -3,11 +3,11 @@
 	ViewData["page-support"] = "Functions \\ IO";
 }
 <h5>IO</h5>
-<div class="notification is-danger is-light">
-	Documentation under construction.
-</div>
-<pre>
-io.attribute.archive
+<br>
+<section class="my-5">
+	<h5>io.attribute enumerations.</h5>
+	<p>Syntax</p>
+	<pre><code>io.attribute.archive
 io.attribute.compressed
 io.attribute.device
 io.attribute.directory
@@ -20,21 +20,115 @@ io.attribute.readonly
 io.attribute.sparsefile
 io.attribute.system
 io.attribute.temporary
-io.attribute.virtual
-io.attributes
-io.copy
-io.delete
-io.directory
-io.dir.make
-io.file.append
-io.file.create
-io.file.make
-io.file.read
-io.file.size
-io.file.write
-io.move
-io.rename
-</pre>
+io.attribute.virtual</code></pre>
+</section>
+<section class="my-5">
+	<h5>io.attributes</h5>
+	<p>Retrieves file system attributes for a specified path.</p>
+	<p>Syntax</p>
+	<code>io.attributes(path)</code><br><br>
+	<p>attribute verification</p>
+<pre><code>// check if path is hidden
+io.attribute.hidden(path)
 
-@*If the help function is passed without an argument, then the interactive help utility starts up on the console.
-The help function has the following syntax:*@
+// check if path is directory
+io.attribute.directory(path)
+
+var { atrr = io.attributes(path) }
+
+// check if attr is hidden
+io.attribute.hidden(atrr)
+
+// check if attr is directory
+io.attribute.directory(atrr)</code></pre>
+</section>
+<section class="my-5">
+	<h5>io.copy</h5>
+	<p>Copies an existing file to a new file.</p>
+	<p>Syntax</p>
+	<code>io.copy(pathFrom, pathTo)</code>
+</section>
+<section class="my-5">
+	<h5>io.move</h5>
+	<p>Moves an existing file or a directory, including its children..</p>
+	<p>Syntax</p>
+	<code>io.move(oldPath, newPath)</code>
+</section>
+<section class="my-5">
+	<h5>io.rename</h5>
+	<p>Rename a file or directory.</p>
+	<p>Syntax</p>
+	<code>io.rename(oldName, newName)</code>
+</section>
+<section class="my-5">
+	<h5>io.delete</h5>
+	<p>Deletes an existing path.</p>
+	<p>Syntax</p>
+	<code>io.delete(path)</code>
+</section>
+<section class="my-5">
+	<h5>io.directory.create (io.dir.create)</h5>
+	<p>Create new directory.</p>
+	<p>Syntax</p>
+	<code>io.directory.create(path)</code>
+</section>
+<section class="my-5">
+	<h5>io.directory.exists (io.dir.exists)</h5>
+	<p>Check if one or more directories exists.</p>
+	<p>Syntax</p>
+	<code>io.directory.exists(path)</code>
+	<br>
+	<code>io.directory.exists(path1, path2, path3, ...)</code>
+</section>
+<section class="my-5">
+	<h5>io.directory.empty (io.dir.empty)</h5>
+	<p>Check if one or more directory is empty.</p>
+	<p>Syntax</p>
+	<code>io.directory.empty(path)</code>
+	<br>
+	<code>io.directory.empty(path1, path2, path3, ...)</code>
+</section>
+<h5 class="my-5">File functions.</h5>
+<section class="my-5">
+	<h5>io.file.size</h5>
+	<p>Retrieves the size of the specified file, in bytes.</p>
+	<p>Syntax</p>
+	<code>io.file.size(path)</code>
+</section>
+<section class="my-5">
+	<h5>io.file.exists</h5>
+	<p>Check if one or more files exists.</p>
+	<p>Syntax</p>
+	<code>io.file.exists(path)</code>
+	<br>
+	<code>io.file.exists(path1, path2, path3, ...)</code>
+</section>
+<section class="my-5">
+	<h5>io.file.read</h5>
+	<p>Read file contents as text with character count option.</p>
+	<p>Syntax</p>
+	<code>io.file.read(path)</code><br>
+	<code>io.file.read(path, 12)</code>
+</section>
+<section class="my-5">
+	<h5>io.file.create</h5>
+	<p>Create new file with content option.</p>
+	<p>Syntax</p>
+	<code>io.file.create(path)</code><br>
+	<code>io.file.create(path, "Hello World!")</code>
+</section>
+<section class="my-5">
+	<h5>io.file.write</h5>
+	<p>Writing to a file with new content.</p>
+	<p>Syntax</p>
+	<code>io.file.write(path, "Hello World!")</code>
+</section>
+<section class="my-5">
+	<h5>io.file.append</h5>
+	<p>Appends text to an existing file, or to a new file if the specified file does not exist.</p>
+	<p>Syntax</p>
+	<code>io.file.append(path, "Hello ")</code>
+	<br>
+	<code>io.file.append(path, "World!")</code>
+</section>
+

@@ -3,12 +3,10 @@
 	ViewData["page-support"] = "Functions \\ KEY";
 }
 <h5>KEY</h5>
-<div class="notification is-danger is-light">
-	Documentation under construction.
-</div>
-<pre>
-key
-key.alt
+<p>Keyboard functions</p>
+<section class="my-5">
+	<h5>keys enumerations</h5>
+	<pre><code>key.alt
 key.apps
 key.back
 key.cancel
@@ -61,6 +59,28 @@ key.snapshot
 key.space
 key.tab
 key.up
-key.win
-</pre>
+key.win</code></pre>
+</section>
+
+<section class="my-5">
+	<h5>key</h5>
+	<p>Syntax</p>
+	<pre>
+<code>// check if SHIFT key is pressed
+key(key.shift)
+
+// or
+key == key.shift
+
+// or
+key.shift()
+
+// check if tow keys (SHIFT+CTRL+X) is pressed
+key(key.shift, key.control)
+
+// check if keys (SHIFT+CTRL+X) is pressed
+key(key.shift, key.control, 87)</code>
+	</pre>
+</section>
+
 
