@@ -1,15 +1,14 @@
 ﻿@page
 @{
-	ViewData["title"] = "Goto - Examples";
+ViewData["title"] = "Goto - Examples";
 	ViewData["page-support"] = "Examples \\ Goto";
-	ViewData["meta-og:image"] = "/images/support/examples/goto.png";
 }
 <h5>Goto example</h5>
 <pre class="syntax"><code>shell
 {
     dynamic
     {
-        menu(mode=<span class="syntax-keyword">multiple</span> title=<span class="syntax-string">'goto'</span> separator=<span class="syntax-keyword">bottom</span> image=<span class="syntax-number">0xed25</span>)
+        menu(mode=<span class="syntax-keyword">multiple</span> title=<span class="syntax-string">'goto'</span> separator=<span class="syntax-keyword">after</span> image=<span class="syntax-number">0xed25</span>)
         {
             item(title=<span class="syntax-string">'Windows'</span> image-<span class="syntax-keyword">inherit</span> cmd=<span class="syntax-code">@@sys.dir</span>)
             item(title=<span class="syntax-string">'System'</span> image-<span class="syntax-keyword">inherit</span> cmd=<span class="syntax-code">@@sys.bin</span>)
@@ -22,7 +21,7 @@
             item(title=<span class="syntax-string">'Control Panel (All Tasks)'</span> image=<span class="syntax-number">0xe115</span> cmd=<span class="syntax-string">'shell:::{ED7BA470-8E54-465E-825C-99712043E01C}'</span>)
             item(title=<span class="syntax-string">'run'</span> cmd=<span class="syntax-string">'shell:::{2559a1f3-21d7-11d4-bdaf-00c04f60b9f0}'</span>)
             separator
-            item(title=<span class="syntax-code">@@user.name@@@@@@sys.name</span> vis=<span class="syntax-keyword">disable</span>)
+            item(title=<span class="syntax-string">'@@user.name@@@@@@sys.name'</span> vis=<span class="syntax-keyword">disable</span>)
             item(title=<span class="syntax-string">'Desktop'</span> image-<span class="syntax-keyword">inherit</span> cmd=<span class="syntax-code">@@user.desktop</span>)
             item(title=<span class="syntax-string">'Downloads'</span> image-<span class="syntax-keyword">inherit</span> cmd=<span class="syntax-code">@@user.downloads</span>)
             item(title=<span class="syntax-string">'Pictures'</span> image-<span class="syntax-keyword">inherit</span> cmd=<span class="syntax-code">@@user.pictures</span>)
@@ -31,7 +30,7 @@
             item(title=<span class="syntax-string">'Profile'</span> image-<span class="syntax-keyword">inherit</span> cmd=<span class="syntax-code">@@user.dir</span>)
             item(title=<span class="syntax-string">'AppData'</span> image-<span class="syntax-keyword">inherit</span> cmd=<span class="syntax-code">@@user.appdata</span>)
             item(title=<span class="syntax-string">'Temp'</span> image-<span class="syntax-keyword">inherit</span> cmd=<span class="syntax-code">@@user.temp</span>)
-            menu(title=<span class="syntax-string">'settings'</span> separator=<span class="syntax-keyword">top</span> image=<span class="syntax-number">0xe115</span>)
+            menu(title=<span class="syntax-string">'settings'</span> separator=<span class="syntax-keyword">before</span> image=<span class="syntax-number">0xe115</span>)
             {
                 <span class="syntax-comment">// https://docs.microsoft.com/en-us/windows/uwp/launch-resume/launch-settings-app</span>
                 item(title=<span class="syntax-string">'systeminfo'</span> image=<span class="syntax-number">0xe946</span> cmd-line=<span class="syntax-string">'/K systeminfo'</span>)

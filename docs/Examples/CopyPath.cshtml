@@ -1,8 +1,7 @@
 ﻿@page
 @{
-	ViewData["title"] = "Copy Path - Examples";
+ViewData["title"] = "Copy Path - Examples";
 	ViewData["page-support"] = "Examples \\ Copy Path";
-	ViewData["meta-og:image"] = "/images/support/examples/copypath1.png";
 }
 <h5>Copy Path example</h5>
 <pre class="syntax"><code>shell 
@@ -10,7 +9,7 @@
     dynamic
     {
         <span class="syntax-comment">// type can set with '~taskbar' equals all file types except taskbar.</span>
-        menu(type=<span class="syntax-string">'file|dir|back|root|namespace'</span> title=<span class="syntax-string">'copy to clipboard'</span> image=<span class="syntax-number">#ff00ff</span>)
+        menu(type=<span class="syntax-string">'file|dir|back|root|namespace'</span> mode=<span class="syntax-keyword">multiple</span>  title=<span class="syntax-string">'copy to clipboard'</span> image=<span class="syntax-number">#ff00ff</span>)
         {
             <span class="syntax-comment">// Appears only when multiple selections.</span>
             item(vis=<span class="syntax-code">@@(sel.count > 1)</span> title=<span class="syntax-string">'Copy path (</span><span class="syntax-code">@@sel.count</span><span class="syntax-string">) items selected'</span>
