@@ -35,9 +35,9 @@
 		<tr>
 		  <td>Title</td>
 		  <td>Sets a value indicating the caption of the menuitem.<br/>
-			  <p class="text-danger">This property must be included with menu and item, not Applies to separator.</p>
+			  <p class="text-danger">This property must be included with menu and item, not required for separator.</p>
 			  Default = <span class="syntax-keyword">null</span>
-			  <p class="syntax-prop">Applies to menu, item.</p>
+			  <p class="syntax-prop">Required for menu, item.</p>
 		  </td>
 		</tr>
 		<tr>
@@ -66,7 +66,7 @@
 				</tr>
 			</table>
 			Default = <span class="syntax-keyword">Single</span>
-			<p class="syntax-prop">Applies to menu, item, separator.</p>
+			<p class="syntax-prop">Required for menu, item, separator.</p>
 		  </td>
 		</tr>
 		<tr>
@@ -138,7 +138,7 @@
 				</tr>
 			</table>
 			Default = <span class="syntax-keyword">All types</span>
-			<p class="syntax-prop">Applies to menu, item, separator.</p>
+			<p class="syntax-prop">Required for menu, item, separator.</p>
 		  </td>
 		</tr>
 		<tr>
@@ -150,7 +150,7 @@
 					<td>Them menuitem will not be displayed.</td>
 				</tr>
 				<tr>
-					<td class="syntax-keyword">Enable, Normal</td>
+					<td class="syntax-keyword">Normal</td>
 					<td>Enabled the menuitem.</td>
 				</tr>
 				<tr>
@@ -170,8 +170,8 @@
 					<td>Hide the menuitem when the <kbd>Shift</kbd> key is pressed.</td>
 				</tr>
 			</table>
-			Default = <span class="syntax-keyword">Normal</span>
-			<p class="syntax-prop">Applies to menu, item, separator.</p>
+			Default = <span class="syntax-keyword">Noraml</span>
+			<p class="syntax-prop">Required for menu, item, separator.</p>
 		  </td>
 		</tr>
 		<tr>
@@ -179,7 +179,7 @@
 			<td>
 				<p>Accept menuitem when the specified path name or path extension is contains or equal to the current find property.<br />Use this delimiter <code>|</code> to separate patterns.</p>
 				Default = <span class="syntax-keyword">null</span>
-				<p class="syntax-prop">Applies to menu, item, separator.</p>
+				<p class="syntax-prop">Required for menu, item, separator.</p>
 			</td>
 		</tr>
 		<tr>
@@ -204,7 +204,7 @@
 				</tr>
 			</table>
 			Default = <span class="syntax-keyword">none</span>
-			<p class="syntax-prop">Applies to menu, item.</p>
+			<p class="syntax-prop">Required for menu, item.</p>
 		  </td>
 		</tr>
 		<tr>
@@ -233,54 +233,60 @@
 				</tr>
 			</table>
 			Default = <span class="syntax-keyword">auto</span>
-			<p class="syntax-prop">Applies to menu, item, separator.</p>
+			<p class="syntax-prop">Required for menu, item, separator.</p>
 		  </td>
 		</tr>
-		 <tr>
-		  <td>Image, Icon</td>
-		  <td>The icon that appears in a menuitem, This property can be assigned as image files, resource icons, glyph or color. With one of the following parameters
-		  <table class="table">
-				<tr>
-					<td class="syntax-keyword">null</td>
-					<td>Show menuitem without icon.</td>
-				</tr>
-				<tr>
-					<td class="syntax-keyword">Inherit</td>
-					<td>@*Inheriting the image from the parent.*@
-						Inherits this property from its parent element.</td>
-				</tr>
-				<tr>
-					<td class="syntax-keyword">Cmd</td>
-					<td>Assign image from the command property.</td>
-				</tr>
-				<tr>
-					<td class="syntax-keyword">Glyph</td>
-					<td>Assign image as Glyph.</td>
-				</tr>
-				<tr>
-					<td class="syntax-keyword">Color</td>
-					<td>Assign image as color.</td>
-				</tr>
-				<tr>
-					<td class="syntax-keyword">Path</td>
-					<td>Assign image from location path or resource icon.</td>
-				</tr>
-			</table>
-			Default = <span class="syntax-keyword">null</span>
-			<p class="syntax-prop">Applies to menu, item.</p>
-		  </td>
+		<tr>
+			<td>Image</td>
+			<td>The icon that appears in a menuitem, This property can be assigned as image files, resource icons, glyph or color. With one of the following parameters
+				<table class="table">
+					<tr>
+						<td class="syntax-keyword">null</td>
+						<td>Show menuitem without icon.</td>
+					</tr>
+					<tr>
+						<td class="syntax-keyword">Inherit</td>
+						<td>@*Inheriting the image from the parent.*@
+							Inherits this property from its parent element.</td>
+					</tr>
+					<tr>
+						<td class="syntax-keyword">Cmd</td>
+						<td>Assign image from the command property.</td>
+					</tr>
+					<tr>
+						<td class="syntax-keyword">Glyph</td>
+						<td>Assign image as Glyph.</td>
+					</tr>
+					<tr>
+						<td class="syntax-keyword">Color</td>
+						<td>Assign image as color.</td>
+					</tr>
+					<tr>
+						<td class="syntax-keyword">Path</td>
+						<td>Assign image from location path or resource icon.</td>
+					</tr>
+				</table>
+				Default = <span class="syntax-keyword">null</span>
+				<p class="syntax-prop">Required for menu, item.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>Parent</td>
+			<td><p>Move current item to another menu.</p>
+			Default = <span class="syntax-keyword">null</span></td>
+		</tr>
 		<tr>
 			<td>Command (cmd)</td>
 			<td><p>The command associated with the menuitem. Occurs when the menuitem is clicked or selected using a shortcut key or access key defined for the menuitem.</p>
 			Default = <span class="syntax-keyword">null</span>
-			<p class="syntax-prop">Applies to item.</p>
+			<p class="syntax-prop">Required for item.</p>
 			</td>
 		</tr>
 		<tr>
 			<td>Arguments (arg, args)</td>
 			<td><p>The parameter to pass to the Command property of a menuitem.</p>
 				Default = <span class="syntax-keyword">null</span>
-				<p class="syntax-prop">Applies to item.</p>
+				<p class="syntax-prop">Required for item.</p>
 			</td>
 		</tr>
 		<tr>
@@ -288,20 +294,20 @@
 			<td>Controls how the window is to be shown. can be one of the following parameters:
 			<p class="syntax-keyword">Hidden, Show, Visible, Minimized, Maximized</p>
 			Default = <span class="syntax-keyword">show</span>
-			<p class="syntax-prop">Applies to item.</p>
+			<p class="syntax-prop">Required for item.</p>
 			</td>
 		</tr>
 		<tr>
 			<td>Directory (dir)</td>
 			<td><p>Specify the work directory to execute the command.</p>
 			Default = <span class="syntax-keyword">null</span>
-			<p class="syntax-prop">Applies to item.</p></td>
+			<p class="syntax-prop">Required for item.</p></td>
 		</tr>
 		<tr>
 			<td>admin</td>
 			<td><p>Execute the command with administrative permissions.</p>
 				Default = <span class="syntax-keyword">false</span>
-				<p class="syntax-prop">Applies to item.</p>
+				<p class="syntax-prop">Required for item.</p>
 			</td>
 		</tr>
 		<tr>
@@ -346,7 +352,7 @@
 					</tr>
 				</table>
 				Default = <span class="syntax-keyword">open</span>
-				<p class="syntax-prop">Applies to item.</p>
+				<p class="syntax-prop">Required for item.</p>
 			</td>
 		</tr>
 		<tr>
@@ -354,37 +360,21 @@
 			<td>
 				<p>Waiting Until end of command.</p>
 				Default = <span class="syntax-keyword">false</span>
-				<p class="syntax-prop">Applies to item.</p>
+				<p class="syntax-prop">Required for item.</p>
 			</td>
 		</tr>
 		<tr>
 			<td>Checked</td>
-			<td>
-				<p>Value that indicates whether the menuitem is checked.</p>
-				<table class="table">
-					<tr>
-						<td class="syntax-number">0</td>
-						<td>No checked mark.</td>
-					</tr>
-					<tr>
-						<td class="syntax-number">1</td>
-						<td>Displays menu item using a check mark.</td>
-					</tr>
-					<tr>
-						<td class="syntax-number">2</td>
-						<td>Displays menu item using a radio-button mark instead of a check mark.</td>
-					</tr>
-				</table>
-				Default = <span class="syntax-number">0</span>
-				<p class="syntax-prop">Applies to item.</p>
-			</td>
+			<td><p>Value that indicates whether the menuitem is checked.</p>
+			Default = <span class="syntax-keyword">false</span>
+			<p class="syntax-prop">Required for item.</p>
 		</tr>
 		<tr>
 			<td>Default</td>
 			<td>
 				<p>Specifies that the menuitem is the default. A menu can contain only one default menuitem, which is displayed in bold.</p>
 				Default = <span class="syntax-keyword">false</span>
-				<p class="syntax-prop">Applies to item.</p>
+				<p class="syntax-prop">Required for item.</p>
 			</td>
 		</tr>
 		</tbody>
