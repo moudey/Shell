@@ -1,7 +1,7 @@
 ﻿@using Nilesoft.Models
 @{
 	Layout = "_Layout";
-	//ViewData["Title"] = "Documentation";
+	//ViewData["title"] = "Documentation";
 
 	var doc_page = ViewData["doc_page"];
 
@@ -35,7 +35,7 @@
 				new TreeListItem { Title = "Numeric literal", Link = "numeric" },
 				new TreeListItem { Title = "Color literal", Link = "color" },
 				new TreeListItem { Title = "Operators", Link = "operators" },
-				new TreeListItem { Title = "Identfier", Link = "identfier" }
+				new TreeListItem { Title = "Identifier", Link = "identifier" }
 			}
 		},
 		new TreeListItem
@@ -45,6 +45,7 @@
 			{
 				new TreeListItem { Title = "app", Link= "app" },
 				new TreeListItem { Title = "color", Link = "color" },
+				new TreeListItem { Title = "image", Link = "image" },
 				new TreeListItem { Title = "io", Link = "io" },
 				new TreeListItem { Title = "key", Link = "key" },
 				new TreeListItem { Title = "msg", Link = "msg" },
@@ -69,6 +70,13 @@
 	};
 }
 <h4 class="is-size-4 mb-5">Documentation</h4>
+			<section id="ad-responsive-horizontal-728-90" class="has-text-centered my-6">
+				<ins class="adsbygoogle"
+					 style="display:inline-block;width:90%;height:90px"
+					 data-ad-client="ca-pub-2559766466824022"
+					 data-ad-slot="6484658586"></ins>
+				<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+			</section>
 <div class="columns">
 	<aside id="categories" class="column is-one-quarter px-2">
 		<section class="menu">
@@ -124,8 +132,7 @@
 			</div>
 		</section>
 		<section id="ad-responsive-vertical">
-			<div class="container p-3 has-text-centered my-4">
-				<!-- ad-responsive-vertical -->
+			<div class="container p-3 has-text-centered my-6">
 				<ins class="adsbygoogle"
 					 style="display:block"
 					 data-ad-client="ca-pub-2559766466824022"
@@ -138,20 +145,8 @@
 	</aside>
 	<div id="content" class="column">
 		<div class="content">
-			@*<nav class="breadcrumb has-bullet-separator" aria-label="breadcrumbs">
-				<ul>
-					@{ var x = path.Split('/', StringSplitOptions.RemoveEmptyEntries);
-						for (var i = 0; i < x.Length; i++)
-						{
-							<li><a href="@string.Join("/", x, 0, i)" @if (i + 1 == x.Length)
-							{ @Html.Raw("class=\"is-active\"")}>@x[i]</a></li>
-						}
-					}
-				</ul>
-			</nav>*@
 			@RenderBody()
-			<section id="ad-responsive-horizontal" class="has-text-centered my-4">
-				<!-- ad-responsive-horizontal -->
+			<section id="ad-responsive-horizontal" class="has-text-centered my-6">
 				<ins class="adsbygoogle"
 					 style="display:block"
 					 data-ad-client="ca-pub-2559766466824022"
