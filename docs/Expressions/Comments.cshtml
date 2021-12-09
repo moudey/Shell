@@ -1,5 +1,6 @@
 ﻿@page
 @{
+ViewData["title"] = "Comments - Expressions";
 	ViewData["page-support"] = "Expressions \\ Comments";
 }
 <h4>Comments</h4>
@@ -8,7 +9,7 @@
 	<h5>Single-line Comments</h5>
 	<p>
 		Single-line comments start with two forward slashes (<code>//</code>).<br>
-		Any text between <code>//</code> and the end of the line is ignored by the compiler (will not be executed).
+		Any text between <code>//</code> and the end of the line is ignored (will not be executed).
 	</p>
 	<p>This example uses a single-line comment before a line of code:</p>
 	<pre class="syntax"><code>shell
@@ -36,7 +37,7 @@
 	<h5>Multi-line Comments</h5>
 	<p>
 		Multi-line comments start with <code>/*</code> and ends with <code>*/</code>.<br>
-		Any text between <code>/*</code> and <code>*/</code> will be ignored by the compiler:
+		Any text between <code>/*</code> and <code>*/</code> will be ignored.
 	</p>
 <pre class="syntax"><code>shell
 {
