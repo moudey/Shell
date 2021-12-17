@@ -10,6 +10,7 @@
 
 ### Features
 * Full management of the context menu.
+* Fully customize appearance.
 * Adding new custom menu items such as submenu (cascaded menus), menuitem and separator.
 * Modify regular menu items added by system or third-party programs.
 * Support all file system objects files, folders, desktop and taskbar.
@@ -25,20 +26,23 @@
 * No limitations.
 
 ### Requirements
-  * Microsoft Windows (64-bit) 7/8/10/11 
+  * Microsoft Windows 7/8/10/11 
 
 ### Documentation
 Browse the [online documentation here.](https://nilesoft.org/docs)
 
 ### Screenshots
 <p align="center">
- <img src="https://www.nilesoft.org/images/screenshots/dev.png">
- <br>
- <br>
- <img src="https://www.nilesoft.org/images/screenshots/fm.png">
- <br>
- <br>
- <img src="https://www.nilesoft.org/images/screenshots/desktop.png">
+ <br><img src="https://www.nilesoft.org/images/screenshots/dev.png">
+ <br><img src="https://www.nilesoft.org/images/screenshots/fm.png">
+ <br><img src="https://www.nilesoft.org/images/screenshots/desktop.png">
+ <br><img src="https://www.nilesoft.org/images/screenshots/ss1.png">
+ <br><img src="https://www.nilesoft.org/images/screenshots/ss2.png">
+ <br><img src="https://www.nilesoft.org/images/screenshots/ss3.png">
+ <br><img src="https://www.nilesoft.org/images/screenshots/ss4.png">
+ <br><img src="https://www.nilesoft.org/images/screenshots/ss5.png">
+ <br><img src="https://www.nilesoft.org/images/screenshots/ss6.png">
+ <br><img src="https://www.nilesoft.org/images/screenshots/ss7.png">
  <br>
  <br>
 </p>
