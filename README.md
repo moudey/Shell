@@ -36,13 +36,13 @@ Browse the [online documentation here.](https://nilesoft.org/docs)
  <br><img src="https://www.nilesoft.org/images/screenshots/dev.png">
  <br><img src="https://www.nilesoft.org/images/screenshots/fm.png">
  <br><img src="https://www.nilesoft.org/images/screenshots/desktop.png">
- <br><img src="https://www.nilesoft.org/images/screenshots/ss1.png">
- <br><img src="https://www.nilesoft.org/images/screenshots/ss2.png">
- <br><img src="https://www.nilesoft.org/images/screenshots/ss3.png">
- <br><img src="https://www.nilesoft.org/images/screenshots/ss4.png">
- <br><img src="https://www.nilesoft.org/images/screenshots/ss5.png">
- <br><img src="https://www.nilesoft.org/images/screenshots/ss6.png">
- <br><img src="https://www.nilesoft.org/images/screenshots/ss7.png">
+ <img src="https://www.nilesoft.org/images/screenshots/ss1.png">
+ <img src="https://www.nilesoft.org/images/screenshots/ss2.png">
+ <img src="https://www.nilesoft.org/images/screenshots/ss3.png">
+ <img src="https://www.nilesoft.org/images/screenshots/ss4.png">
+ <img src="https://www.nilesoft.org/images/screenshots/ss5.png">
+ <img src="https://www.nilesoft.org/images/screenshots/ss6.png">
+ <img src="https://www.nilesoft.org/images/screenshots/ss7.png">
  <br>
  <br>
 </p>
