@@ -54,6 +54,7 @@ Screenshots
  <img src="https://www.nilesoft.org/images/screenshots/ss6.png">
  <img src="https://www.nilesoft.org/images/screenshots/ss7.png">
  <img src="https://nilesoft.org/images/screenshots/columns.png">
+ <img src="https://nilesoft.org/images/screenshots/colors.png">
  <br>
  <br>
 </p>
