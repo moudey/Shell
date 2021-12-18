@@ -7,6 +7,8 @@
  <br>
 </p>
 
+Download the latest official version:  
+https://nilesoft.org/download
 
 ### Features
 * Full management of the context menu.
@@ -49,3 +51,9 @@ Browse the [online documentation here.](https://nilesoft.org/docs)
 </p>
 
 Feel free to raise an issue.
+
+Donations
+------------------
+Don't hesitate to donate if you appreciate Shell and would like to support our work.  
+[![PayPal](https://www.paypalobjects.com/webstatic/de_DE/i/de-pp-logo-100px.png)](https://www.paypal.me/nilesoft/10)
+
