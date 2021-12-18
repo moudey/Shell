@@ -11,6 +11,7 @@ Download the latest official version:
 https://nilesoft.org/download
 
 ### Features
+------------------
 * Full management of the context menu.
 * Fully customize appearance.
 * Adding new custom menu items such as submenu (cascaded menus), menuitem and separator.
@@ -28,9 +29,11 @@ https://nilesoft.org/download
 * No limitations.
 
 ### Requirements
+------------------
   * Microsoft Windows 7/8/10/11 
 
 ### Documentation
+------------------
 Browse the [online documentation here.](https://nilesoft.org/docs)
 
 ### Screenshots
@@ -50,9 +53,7 @@ Browse the [online documentation here.](https://nilesoft.org/docs)
  <br>
 </p>
 
-Feel free to raise an issue.
-
-Donations
+### Donations
 ------------------
 Don't hesitate to donate if you appreciate Shell and would like to support our work.  
 [![PayPal](https://www.paypalobjects.com/webstatic/de_DE/i/de-pp-logo-100px.png)](https://www.paypal.me/nilesoft/10)
