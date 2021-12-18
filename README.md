@@ -14,6 +14,7 @@ Features
 ------------------
 * Full management of the context menu.
 * Fully customize appearance.
+* Multiple column support.
 * Adding new custom menu items such as submenu (cascaded menus), menuitem and separator.
 * Modify regular menu items added by system or third-party programs.
 * Support all file system objects files, folders, desktop and taskbar.
