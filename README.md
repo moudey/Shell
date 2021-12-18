@@ -43,6 +43,7 @@ Browse the [online documentation here.](https://nilesoft.org/docs)
  <img src="https://www.nilesoft.org/images/screenshots/ss5.png">
  <img src="https://www.nilesoft.org/images/screenshots/ss6.png">
  <img src="https://www.nilesoft.org/images/screenshots/ss7.png">
+ <img src="https://nilesoft.org/images/screenshots/columns.png">
  <br>
  <br>
 </p>
