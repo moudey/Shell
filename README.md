@@ -62,5 +62,5 @@ Screenshots
 Donations
 ------------------
 Don't hesitate to donate if you appreciate Shell and would like to support our work.  
-[![PayPal](https://www.paypalobjects.com/webstatic/de_DE/i/de-pp-logo-100px.png)](https://www.paypal.me/nilesoft/10)
 
+[![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://www.paypal.me/nilesoft)
