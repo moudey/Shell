@@ -65,4 +65,4 @@ Don't hesitate to donate if you appreciate Shell and would like to support our w
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://www.paypal.me/nilesoft)
 [![Donate](https://img.shields.io/badge/Donate-BuyMeACoffee-yellow.svg)](https://www.buymeacoffee.com/moudeygo)
-[![Donate](https://img.shields.io/badge/Donate-kofi-yellow.svg)](https://ko-fi.com/moudey)
+[![Donate](https://img.shields.io/badge/Donate-kofi-red.svg)](https://ko-fi.com/moudey)
