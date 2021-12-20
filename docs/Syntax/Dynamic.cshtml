@@ -33,9 +33,15 @@
 		  </thead>
 		<tbody>
 		<tr>
+			<td>Where</td>
+			<td>Allow menu item to be passed if a true value is returned<br>
+				Default = <span class="syntax-keyword">true</span>
+			</td>
+		</tr>
+		<tr>
 		  <td>Title</td>
 		  <td>Sets a value indicating the caption of the menuitem.<br/>
-			  <p class="text-danger">This property must be included with menu and item, not required for separator.</p>
+			  <p class="text-danger">This property must be included with menu and item if image propery is not defined, not required for separator.</p>
 			  Default = <span class="syntax-keyword">null</span>
 			  <p class="syntax-prop">Required for menu, item.</p>
 		  </td>
@@ -377,7 +383,12 @@
 				<p class="syntax-prop">Required for item.</p>
 			</td>
 		</tr>
+		<tr>
+			<td>Column(col)</td>
+			<td><p>Create a new column.</p>
+			Default = <span class="syntax-keyword">true</span>
+			<p class="syntax-prop">Required for item, menu.</p>
+		</tr>
 		</tbody>
 	</table>
 </div>
-<p>The <code>title</code> property must include at least the following types of (menu or item).</p>

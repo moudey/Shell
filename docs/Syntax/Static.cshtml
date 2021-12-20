@@ -28,9 +28,15 @@ ViewData["title"] = "Static Items";
 		  </thead>
 	  <tbody>
 		<tr>
+			<td>Where</td>
+			<td>Allow menu item to be passed if a true value is returned<br>
+				Default = <span class="syntax-keyword">true</span>
+			</td>
+		</tr>
+		<tr>
 			<td>Find</td>
 			<td>Accept menuitem when the specific menuitem title is contains or equal to the current find property.<br>Use this delimiter <code>|</code> to separate patterns.
-				<p class="has-text-danger">This property must be included with another property at least.</p>
+				<p class="has-text-danger">This property must be included with another property at least if where property is not defined.</p>
 				Default = <span class="syntax-keyword">null</span>
 			</td>
 		</tr>

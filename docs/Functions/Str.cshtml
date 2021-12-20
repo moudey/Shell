@@ -134,7 +134,7 @@
 	<h5>str.remove</h5>
 	<p>Removes an element or a range of elements in a string from a specified position.</p>
 	<p>Syntax</p>
-	<code>str.remove("Hello World!", " ")</code><br
+	<code>str.replace("Hello World!", " ")</code><br>
 	<code>str.remove("Hello World!", 5)</code><br>
 	<code>str.remove("Hello World!", 5, 1)</code>
 </section>
@@ -142,32 +142,58 @@
 	<h5>str.replace</h5>
 	<p>Replace elements in a string at a specified position with specific characters or characters copied from other ranges or strings.</p>
 	<p>Syntax</p>
-	<code>str.replace("Hello World!", "World", "User")</code><br
+	<code>str.replace("Hello World!", "World", "User")</code><br>
 	<code>str.replace("Hello World!", "world", "user", true)</code>
 </section>
 <section class="my-5">
 	<h5>str.padleft</h5>
 	<p>Returns a new string of a specified length in which the beginning of the current string is padded with spaces or with a specified character.</p>
 	<p>Syntax</p>
-	<code>str.padleft("Hello World!", "*")</code><br
+	<code>str.padleft("Hello World!", "*")</code><br>
 	<code>str.padleft("Hello World!", "*", 3)</code>
 </section>
 <section class="my-5">
 	<h5>str.padright</h5>
 	<p>Returns a new string of a specified length in which the end of the current string is padded with spaces or with a specified character.</p>
 	<p>Syntax</p>
-	<code>str.padright("Hello World!", "*")</code><br
+	<code>str.padright("Hello World!", "*")</code><br>
 	<code>str.padright("Hello World!", "*", 3)</code>
 </section>
 <section class="my-5">
 	<h5>str.padding</h5>
 	<p>Returns a new string of a specified length in which the start and end of the current string is padded with spaces or with a specified character.</p>
 	<p>Syntax</p>
-	<code>str.padding("Hello World!", "*")</code><br
+	<code>str.padding("Hello World!", "*")</code><br>
 	<code>str.padding("Hello World!", "*", 3)</code>
 </section>
 
-@*<section class="my-5">
+<section class="my-5">
+	<h5>str.guid</h5>
+	<p>Returns a new guid string</p>
+	<p>Syntax</p>
+	<code>str.guid</code> return 00000000000000000000000000000000 <br>
+	<code>str.guid(1)</code> return 00000000-0000-0000-0000-000000000000 <br>
+	<code>str.guid(2)</code> return {00000000-0000-0000-0000-000000000000} <br>
+	<code>str.guid(3)</code> return (00000000-0000-0000-0000-000000000000) <br>
+</section>
+
+<section class="my-5">
+	<h5>str.capitalize</h5>
+	<p>Returns a new capitalize string</p>
+	<p>Syntax</p>
+	<code>str.capitalize('hello world')</code> return "Hello World" <br>
+</section>
+
+<section class="my-5">
+	<h5>str.res</h5>
+	<p>Returns a string resource from the executable file. <em>"shell32.dll" is the default file.</em></p>
+	<p>Syntax</p>
+	<code>str.res(-4640)</code> return "Runs the selected command with elevation" from "shell32.dll"<br>
+	<code>str.res('explorer.dll', -22000)</code> return "Desktop" <br>
+</section>
+
+@*
+<section class="my-5">
 	<h5>str.format</h5>
 	<p>Formats the string as sprintf does.</p>
 	<p>Syntax</p>

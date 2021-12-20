@@ -10,6 +10,8 @@
 	<li>Syntax are not case sensitive.</li>
 	<li>Spaces around the equal (<code>=</code>) sign are optional and are ignored.</li>
 	<li>The properties of static and dynamic items are separated by blank spaces or on a separate line and must be placed in parentheses <code>( )</code>.</li>
+	<li>variable are optional.</li>
+	<li>default are optional.</li>
 	<li>Static items are optional.</li>
 	<li>Static items have one type: item.</li>
 	<li>Dynamic items are optional.</li>
@@ -29,6 +31,14 @@ varabiles can be placed in the var, or in the dynamic body section of an menu, o
     {
         <span class="syntax-comment">// variables content</span>
         variable-name = variable-value
+        ...
+    }
+	
+    default
+    {
+        <span class="syntax-comment">// defaults content</span>
+        default-name = default-value
+        default-name = [default-value, default-value, ...]
         ...
     }
 	
