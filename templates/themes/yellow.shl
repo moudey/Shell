@@ -1,0 +1,13 @@
+shell
+{
+	default
+	{
+		symbol=#fff
+		text=[#fff, #888, #660]
+		block=[#bb0, #ff0, 0]
+		separator=[#ff0, 1]
+		//font = [12, 'Brush Script']
+		frame=[#ff0, 2]
+		shadow=false
+	}
+}

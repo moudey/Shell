@@ -1,0 +1,12 @@
+shell
+{
+	default
+	{
+		symbol=#fff
+		text=[#fff, #aaa, #555]
+		block=[#888, #eee, 0]
+		separator=[#fff, 1]
+		frame=[#fff, 2]
+		shadow=false
+	}
+}
