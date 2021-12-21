@@ -12,20 +12,18 @@ https://nilesoft.org/download
 
 Features
 ------------------
-* Full management of the context menu.
+* Fully management of the context menu.
 * Fully customize appearance.
-* Multiple column support.
 * Adding new custom menu items such as submenu (cascaded menus), menuitem and separator.
-* Modify regular menu items added by system or third-party programs.
+* Modify regular menu items added by system or third-party.
 * Support all file system objects files, folders, desktop and taskbar.
 * Support expressions syntax.
 * Support Built-in functions and predefined variables.
-* Support colors, glyphs, embedded icons, and image files such as .ico, .png or .bmp.
+* Support colors, glyphs, svg, embedded icons, and image files such as .ico, .png or .bmp.
 * Support search and filter.
-* Support Taskbar context menu.
 * Support for complex nested context menus.
+* Support multiple column.
 * Quickly and easily configure file in plain text
-* Clean and simple user interface.
 * Minimal resource usage.
 * No limitations.
 
