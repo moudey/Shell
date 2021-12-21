@@ -53,11 +53,15 @@ Screenshots
  <img src="https://www.nilesoft.org/images/screenshots/ss5.png">
  <img src="https://www.nilesoft.org/images/screenshots/ss6.png">
  <img src="https://www.nilesoft.org/images/screenshots/ss7.png">
- <img src="https://nilesoft.org/images/screenshots/columns.png">
- <img src="https://nilesoft.org/images/screenshots/colors.png">
+ <img src="./templates/themes/images/columns.png">
+ <img src="./templates/themes/images/colors.png">
+ <img src="./templates/themes/images/blue.png">
+ <img src="./templates/themes/images/green.png">
+ <img src="./templates/themes/images/yellow.png">
+ <img src="./templates/themes/images/gray.png">
+ <img src="./templates/themes/images/font-brush-script.png">
+ <img src="./templates/themes/images/font-fixedsys.png">
  <img src="./templates/themes/images/font-segoe-script.png">
-  <img src="./templates/themes/images/font-fixedsys.png">
-  <img src="./templates/themes/images/font-brush-script.png">
  <br>
  <br>
 </p>
