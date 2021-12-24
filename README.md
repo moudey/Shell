@@ -1,5 +1,5 @@
 # [Shell](https://nilesoft.org)
-**Shell** is a powerful context menu manager for Windows File Explorer.
+Powerful context menu manager for Windows File Explorer.
 
 <p align="center">
  <img src="https://www.nilesoft.org/images/logo-256.png">
