@@ -1,5 +1,5 @@
 # [Shell](https://nilesoft.org)
-Powerful context menu manager for Windows File Explorer.
+Powerful manager for Windows File Explorer context menu.
 
 <p align="center">
  <img src="https://www.nilesoft.org/images/logo-256.png">
@@ -7,23 +7,25 @@ Powerful context menu manager for Windows File Explorer.
  <br>
 </p>
 
-Download the latest official version:  
-https://nilesoft.org/download
+<p>
+Shell is a context menu extender that lets you handpick the items to integrate into Windows File Explorer context menu, create custom commands to access all your favorite web pages, files, and folders, and launch any application directly from the context menu.<br>
+It also provides you a convenient solution to modify or remove any context menu item added by the system or third party software.
+</p>
+
 
 Features
 ------------------
-* Fully management of the context menu.
-* Fully customize appearance.
-* Adding new custom menu items such as submenu (cascaded menus), menuitem and separator.
-* Modify regular menu items added by system or third-party.
+* Lightweight, portable and relatively easy to use.
+* Fully customize the appearance.
+* Adding new custom items such as (sub-menu, menuitem and separator).
+* Modify or remove items that already exist.
 * Support all file system objects files, folders, desktop and taskbar.
-* Support expressions syntax.
-* Support Built-in functions and predefined variables.
-* Support colors, glyphs, svg, embedded icons, and image files such as .ico, .png or .bmp.
+* Support expressions syntax. with built-in functions and predefined variables.
+* Support colors, glyphs, SVG, embedded icons, and image files such as .ico, .png or .bmp.
 * Support search and filter.
-* Support for complex nested context menus.
+* Support for complex nested menus.
 * Support multiple column.
-* Quickly and easily configure file in plain text
+* Quickly and easily configure file in plain text.
 * Minimal resource usage.
 * No limitations.
 
@@ -36,6 +38,12 @@ Requirements
 Documentation
 ------------------
 Browse the [online documentation here.](https://nilesoft.org/docs)
+
+
+Download
+------------------
+Download the latest official version:  
+https://nilesoft.org/download
 
 
 Screenshots
