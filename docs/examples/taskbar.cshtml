@@ -1,0 +1,28 @@
+﻿@page
+@{
+ViewData["title"] = "Taskbar - Examples";
+	ViewData["page-support"] = "Examples \\ Taskbar";
+}
+
+<h5>Taskbar example</h5>
+<pre class="syntax"><code>shell 
+{
+     var
+    {
+        hello_world = <span class="syntax-string">'Hello World!'</span>
+    }
+
+    dynamic
+    {
+	  item(title=<span class="syntax-code">@@hello_world</span> cmd=<span class="syntax-code">@@msgbox(@@hello_world)</span>)
+	  separator
+	  item(title=<span class="syntax-string">'Command prompt'</span> cmd=<span class="syntax-string">'cmd.exe'</span> args=<span class="syntax-string">'/k echo </span><span class="syntax-code">@@hello_world</span><span class="syntax-string">'</span>)
+	  separator
+	  menu(title=<span class="syntax-string">'Sub menu'</span>)
+	  {
+	      item(title=<span class="syntax-string">'Open Paint'</span> cmd=<span class="syntax-string">'paint.exe'</span> arg=<span class="syntax-code">@@sel.path</span>)
+	      separator
+	      item(title=<span class="syntax-string">'Open Notepad'</span> cmd=<span class="syntax-string">'notepad.exe'</span> arg=<span class="syntax-string">'"</span><span class="syntax-code">@@sel.path</span><span class="syntax-string">"'</span>)
+	  }
+    }
+}</code></pre>

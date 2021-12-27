@@ -1,0 +1,136 @@
+﻿@page
+@{
+	ViewData["title"] = "Syntax";
+	ViewData["page-support"] = "Syntax";
+}
+<h4>Syntax Rules for Configuration Files</h4>
+<br>
+<p>This chapter describes the syntax rules for configuration file.</p>
+<ul>
+	<li>Syntax are not case sensitive.</li>
+	<li>Spaces around the equal (<code>=</code>) sign are optional and are ignored.</li>
+	<li>The properties of static and dynamic items are separated by blank spaces or on a separate line and must be placed in parentheses <code>( )</code>.</li>
+	<li>variable are optional.</li>
+	<li>default are optional.</li>
+	<li>Static items are optional.</li>
+	<li>Static items have one type: item.</li>
+	<li>Dynamic items are optional.</li>
+	<li>Dynamic items have three types: menu, item, and separator(sep).</li>
+</ul>
+<p><i>Tip:</i> When there is an error, it is recorded in the log file (shell.log).</p>
+
+@*<p>You can place any number of varabiles in an menu.
+varabiles can be placed in the var, or in the dynamic body section of an menu, or in both.</p>*@
+
+<p>The following rules apply to the syntax of configuration file (shell.shl):</p>
+<h5>shell.shl structure</h5>
+<pre class="syntax"><code>shell 
+{
+    <span class="syntax-comment">// global variables</span>
+    var
+    {
+        <span class="syntax-comment">// variables content</span>
+        variable-name = variable-value
+        ...
+    }
+	
+    default
+    {
+        <span class="syntax-comment">// defaults content</span>
+        default-name = default-value
+        default-name = [default-value, default-value, ...]
+        ...
+    }
+	
+    <span class="syntax-comment">// static items</span>
+    static
+    {
+        <span class="syntax-comment">// static items content</span>
+        item ( property-name = property-value   ... )
+        ...
+    }
+
+    <span class="syntax-comment">// dynamic items</span>
+    dynamic
+    {
+        <span class="syntax-comment">// dynamic items content</span>
+        item ( property-name = property-value   ... )
+        
+        separator [( property-name = property-value   ... )]
+        
+        menu ( property-name = property-value   ... )
+        {
+           var <span class="syntax-comment">// local variables</span>
+           {
+                variable-name = variable-value
+                ...
+            }
+            
+            item ( property-name = property-value   ... )
+            ...
+        }
+        ...
+    }
+}</code></pre>
+
+<br>
+<p><b>Breaking Long Lines</b><br>For best readability, users often like to avoid lines longer than 80 characters. single quotes also allow  break up a line.</p>
+<pre class="syntax"><code>shell 
+{
+    dynamic
+    {
+	  item(title=<span class="syntax-string">'Command prompt'</span>
+	        cmd=<span class="syntax-string">'cmd.exe'</span>)
+    }
+}</code></pre>
+@*<br>
+<h5 class="mt-5">Example</h5>
+<pre class="syntax"><code>shell 
+{
+     var
+    {
+        hello_world = <span class="syntax-string">'Hello World!'</span>
+    }
+	
+    static
+    {
+        <span class="syntax-comment">// remove items</span>
+        item(find=<span class="syntax-string">'restore'</span> vis=<span class="syntax-keyword">hidden</span>)
+        item(find=<span class="syntax-string">'give access to'</span> vis=<span class="syntax-keyword">hidden</span>)
+
+        <span class="syntax-comment">// show only on extended with shift key</span>
+        item(find=<span class="syntax-string">'send to'</span> vis=<span class="syntax-keyword">extended</span>)
+        item(find=<span class="syntax-string">'new'</span> vis=<span class="syntax-keyword">extended</span>)
+
+        <span class="syntax-comment">// remove or extend multiple items by one line</span>
+        item(find=<span class="syntax-string">'delete|format|rename|paste'</span> vis=<span class="syntax-keyword">extended</span>)
+        
+        <span class="syntax-comment">// change title</span>
+        item(find=<span class="syntax-string">'defender'</span> title=<span class="syntax-string">'Scan with Defender'</span>)
+		
+        <span class="syntax-comment">// change image</span>
+        item(find=<span class="syntax-string">'copy'</span> image=<span class="syntax-number">#dd0000</span>)
+        
+        <span class="syntax-comment">// change image, title</span>
+        item(find=<span class="syntax-string">'open with'</span> image=<span class="syntax-number">#dd0000</span> title=<span class="syntax-string">'Open...'</span>)
+    }
+	
+    dynamic
+    {
+	  item(title=<span class="syntax-code">@@hello_world</span> cmd=<span class="syntax-code">@@msg(hello_world)</span>)
+	  separator
+	  item(title=<span class="syntax-string">'Command prompt'</span> cmd=<span class="syntax-string">'cmd.exe'</span> args=<span class="syntax-string">'/k echo </span><span class="syntax-code">@@hello_world</span><span class="syntax-string">'</span>)
+	  separator
+	  menu(title=<span class="syntax-string">'Sub menu'</span>)
+	  {
+	      item(title=<span class="syntax-string">'Open Paint'</span> cmd=<span class="syntax-string">'paint.exe'</span> arg=<span class="syntax-code">@@sel.path</span>)
+	      separator
+	      item(title=<span class="syntax-string">'Open Notepad'</span> cmd=<span class="syntax-string">'notepad.exe'</span> arg=<span class="syntax-string">'"</span><span class="syntax-code">@@sel.path</span><span class="syntax-string">"'</span>)
+	  }
+    }
+}</code></pre>
+<div class="has-text-centered my-5">
+	<a class="lightbox">
+		<img class="is-256" src="~/images/support/config.png">
+	</a>
+</div>*@

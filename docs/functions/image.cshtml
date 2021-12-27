@@ -1,0 +1,49 @@
+﻿@page
+@{
+	ViewData["title"] = "Functions";
+	ViewData["page-support"] = "Functions \\ Image";
+}
+<h5>IMAGE (DRAW)</h5>
+<p>The image namespace contains functions that return an icon and are only assigned to the <code>image</code> property</p>
+<section class="my-5">
+	<h5>image.glyph</h5>
+	<p>Return font icon with color and size option.</p>
+	<p>Syntax</p>
+	<code>image.glyph(0xE00B)</code><br>
+	<code>image.glyph("\uE00B")</code><br>
+	<code>image.glyph("\xE00B")</code><br>
+	<br>
+	<code>image.glyph(0xE00B, #0000ff)</code><br>
+	<code>image.glyph(0xE00B, #0000ff, 10)</code><br>
+	<code>image.glyph(0xE00B, #0000ff, 12, "Segoe MDL2 Assets")</code><br>
+</section>
+<section class="my-5">
+	<h5>image.icon</h5>
+	<p>Returns an icon through a path or through resources.</p>
+	<p>Syntax</p>
+	<code>image.icon(path)</code><br>
+	<code>image.icon(path, index)</code><br>
+	<code>image.icon(path, -id)</code><br>
+	<br>
+	<code>image(path)</code><br>
+	<code>image(path, index)</code><br>
+	<code>image(path, -id)</code><br>
+</section>
+<section class="my-5">
+	<h5>image.rect</h5>
+	<p>Returns a colored rectangle icon of an optional size.</p>
+	<p>Syntax</p>
+	<code>image.rect(#0000ff)</code><br>
+	<code>image.rect(#0000ff, 10)</code><br>
+</section>
+
+@*
+<pre>
+image.res
+image.str
+image.symbol
+draw.str
+draw.symbol
+draw.circle
+</pre>
+*@

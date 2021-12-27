@@ -1,0 +1,190 @@
+﻿@page
+@{
+	ViewData["page-support"] = "Functions \\ PATH";
+}
+<h5>PATH</h5>
+<br>
+<section class="my-5">
+	<h5>path.combine (path.join)</h5>
+	<p>Combines an array of strings into a path.</p>
+	<p>Syntax</p>
+	<code>path.combine(path1, path2)</code><br>
+	<code>path.combine("C:", "Windows", "Explorer.exe")</code>
+</section>
+<section class="my-5">
+	<h5>path.currentdirectory (path.curdir)</h5>
+	<p>Retrieves the current directory for the current process.</p>
+	<p>Syntax</p>
+	<code>path.currentdirectory</code>
+</section>
+<section class="my-5">
+	<h5>path.directory.name (path.dir.name)</h5>
+	<p>Return the directory name from the path.</p>
+	<p>Syntax</p>
+	<code>path.directory.name('c:\windows\system32') // returns: system32</code>
+</section>
+<section class="my-5">
+	<h5>path.directory.box (path.dir.box)</h5>
+	<p>Shows the directory selection box and returns the path of the specified directory.</p>
+	<p>Syntax</p>
+	<code>path.directory.box</code>
+</section>
+<section class="my-5">
+	<h5>path.empty</h5>
+	<p>Check if one or more path is empty.</p>
+	<p>Syntax</p>
+	<code>path.empty(path)</code><br>
+	<code>path.empty(path1, path2, ...)</code>
+</section>
+<section class="my-5">
+	<h5>path.exists</h5>
+	<p>Check if one or more path exists..</p>
+	<p>Syntax</p>
+	<code>path.exists(path)</code><br>
+	<code>path.exists(path1, path2, ...)</code>
+</section>
+<section class="my-5">
+	<h5>path.full</h5>
+	<p>Returns the absolute path for the specified path string.</p>
+	<p>Syntax</p>
+	<code>path.full(path)</code>
+</section>
+<section class="my-5">
+	<h5>path.short</h5>
+	<p>Retrieves the short path form of the specified path.</p>
+	<p>Syntax</p>
+	<code>path.short(path)</code>
+</section>
+<section class="my-5">
+	<h5>path.name</h5>
+	<p>Return the name from the path.</p>
+	<p>Syntax</p>
+	<code>path.name(path)</code>
+</section>
+<section class="my-5">
+	<h5>path.location (path.parent)</h5>
+	<p>Return the path of the parent</p>
+	<p>Syntax</p>
+	<code>path.location(path)</code>
+</section>
+<section class="my-5">
+	<h5>path.location.name</h5>
+	<p>Return the name from the parent</p>
+	<p>Syntax</p>
+	<code>path.location.name(path)</code>
+</section>
+<section class="my-5">
+	<h5>path.root</h5>
+	<p>Return the drive path</p>
+	<p>Syntax</p>
+	<code>path.root(path)</code>
+</section>
+<section class="my-5">
+	<h5>path.title</h5>
+	<p>Return the title from the path</p>
+	<p>Syntax</p>
+	<code>path.title(path)</code>
+</section>
+<section class="my-5">
+	<h5>path.type</h5>
+	<p>Return the type of path</p>
+	<p>Syntax</p>
+	<code>path.type(path) == type.file</code>
+</section>
+<section class="my-5">
+	<h5>path.file.name</h5>
+	<p>Return the name of path</p>
+	<p>Syntax</p>
+	<code>path.file.name(path)</code>
+</section>
+<section class="my-5">
+	<h5>path.file.title</h5>
+	<p>Return the name of path without extension</p>
+	<p>Syntax</p>
+	<code>path.file.title(path)</code>
+</section>
+<section class="my-5">
+	<h5>path.file.ext</h5>
+	<p>Return the extension of path</p>
+	<p>Syntax</p>
+	<code>path.file.ext(path)</code>
+</section>
+<section class="my-5">
+	<h5>path.file.box</h5>
+	<p>Shows the file selection box and returns the path of the specified file.</p>
+	<p>Syntax</p>
+	<code>path.file.box</code><br>
+	<code>path.file.box('All|*.*|Text|*.txt')</code><br>
+	<code>path.file.box('exe|*.exe', 'c:\windows')</code><br>
+	<code>path.file.box('exe|*.exe', 'c:\windows', 'explorer.exe')</code>
+</section>
+<section class="my-5">
+	<h5>path.isabsolute</h5>
+	<p></p>
+	<p>Syntax</p>
+	<code>path.isabsolute(path)</code>
+</section>
+<section class="my-5">
+	<h5>path.isrelative</h5>
+	<p></p>
+	<p>Syntax</p>
+	<code>path.isrelative(path)</code>
+</section>
+<section class="my-5">
+	<h5>path.isfile</h5>
+	<p></p>
+	<p>Syntax</p>
+	<code>path.isfile(path)</code>
+</section>
+<section class="my-5">
+	<h5>path.isdirectory</h5>
+	<p></p>
+	<p>Syntax</p>
+	<code>path.isdirectory(path)</code>
+</section>
+<section class="my-5">
+	<h5>path.isroot (path.isdrive)</h5>
+	<p></p>
+	<p>Syntax</p>
+	<code>path.isdrive(path)</code>
+</section>
+<section class="my-5">
+	<h5>path.isclsid (path.isnamespace)</h5>
+	<p></p>
+	<p>Syntax</p>
+	<code>path.isclsid(path)</code>
+</section>
+<section class="my-5">
+	<h5>path.isexe</h5>
+	<p></p>
+	<p>Syntax</p>
+	<code>path.isexe(path)</code>
+</section>
+<section class="my-5">
+	<h5>path.removeextension</h5>
+	<p>Remove the extension from the passed parameter.</p>
+	<p>Syntax</p>
+	<code>path.removeextension</code>
+</section>
+<section class="my-5">
+	<h5>path.lnktarget (path.lnk)</h5>
+	<p>Return a path from the shortcut</p>
+	<p>Syntax</p>
+	<code>path.lnktarget</code>
+</section>
+<section class="my-5">
+	<h5>path.getknownfolder</h5>
+	<p>Retrieves the full path of a known folder identified.</p>
+	<p>Syntax</p>
+	<code>path.getknownfolder('{905e63b6-c1bf-494e-b29c-65b732d3d21a}')</code>
+</section>
+
+<section class="my-5">
+	<h5>path.separator(path.sep)</h5>
+	<p>Replacing the back slash with a forward slash or defining a spacer.</p>
+	<p>Syntax</p>
+	<code>path.separator('c:\windows\system32')</code> <em>return "c:/windows/system32"</em><br>
+	<code>path.separator('c:\windows\system32', '#')</code> <em>return "c:#windows#system32"</em>
+</section>
+
+

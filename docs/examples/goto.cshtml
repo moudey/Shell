@@ -1,0 +1,63 @@
+﻿@page
+@{
+ViewData["title"] = "Goto - Examples";
+	ViewData["page-support"] = "Examples \\ Goto";
+}
+<h5>Goto example</h5>
+<pre class="syntax"><code>shell
+{
+    dynamic
+    {
+        menu(mode=<span class="syntax-keyword">multiple</span> title=<span class="syntax-string">'goto'</span> separator=<span class="syntax-keyword">after</span> image=<span class="syntax-number">0xed25</span>)
+        {
+            item(title=<span class="syntax-string">'Windows'</span> image-<span class="syntax-keyword">inherit</span> cmd=<span class="syntax-code">@@sys.dir</span>)
+            item(title=<span class="syntax-string">'System'</span> image-<span class="syntax-keyword">inherit</span> cmd=<span class="syntax-code">@@sys.bin</span>)
+            item(title=<span class="syntax-string">'Program Files'</span> image-<span class="syntax-keyword">inherit</span> cmd=<span class="syntax-code">@@sys.prog</span>)
+            item(title=<span class="syntax-string">'Program Files x86'</span> image-<span class="syntax-keyword">inherit</span> cmd=<span class="syntax-code">@@sys.prog32</span>)
+            item(title=<span class="syntax-string">'ProgramData'</span> image-<span class="syntax-keyword">inherit</span> cmd=<span class="syntax-code">@@sys.programdata</span>)
+            item(title=<span class="syntax-string">'Applications'</span> image-<span class="syntax-keyword">inherit</span> cmd=<span class="syntax-string">'shell:appsfolder'</span>)
+            item(title=<span class="syntax-string">'Users'</span> image-<span class="syntax-keyword">inherit</span> cmd=<span class="syntax-code">@@sys.users</span>)
+            item(title=<span class="syntax-string">'Control Panel'</span> image=<span class="syntax-number">0xe115</span> cmd=<span class="syntax-string">'shell:::{5399E694-6CE5-4D6C-8FCE-1D8870FDCBA0}'</span>)
+            item(title=<span class="syntax-string">'Control Panel (All Tasks)'</span> image=<span class="syntax-number">0xe115</span> cmd=<span class="syntax-string">'shell:::{ED7BA470-8E54-465E-825C-99712043E01C}'</span>)
+            item(title=<span class="syntax-string">'run'</span> cmd=<span class="syntax-string">'shell:::{2559a1f3-21d7-11d4-bdaf-00c04f60b9f0}'</span>)
+            separator
+            item(title=<span class="syntax-string">'@@user.name@@@@@@sys.name'</span> vis=<span class="syntax-keyword">disable</span>)
+            item(title=<span class="syntax-string">'Desktop'</span> image-<span class="syntax-keyword">inherit</span> cmd=<span class="syntax-code">@@user.desktop</span>)
+            item(title=<span class="syntax-string">'Downloads'</span> image-<span class="syntax-keyword">inherit</span> cmd=<span class="syntax-code">@@user.downloads</span>)
+            item(title=<span class="syntax-string">'Pictures'</span> image-<span class="syntax-keyword">inherit</span> cmd=<span class="syntax-code">@@user.pictures</span>)
+            item(title=<span class="syntax-string">'Documents'</span> image-<span class="syntax-keyword">inherit</span> cmd=<span class="syntax-code">@@user.documents</span>)
+            item(title=<span class="syntax-string">'Startmenu'</span> image-<span class="syntax-keyword">inherit</span> cmd=<span class="syntax-code">@@user.startmenu</span>)
+            item(title=<span class="syntax-string">'Profile'</span> image-<span class="syntax-keyword">inherit</span> cmd=<span class="syntax-code">@@user.dir</span>)
+            item(title=<span class="syntax-string">'AppData'</span> image-<span class="syntax-keyword">inherit</span> cmd=<span class="syntax-code">@@user.appdata</span>)
+            item(title=<span class="syntax-string">'Temp'</span> image-<span class="syntax-keyword">inherit</span> cmd=<span class="syntax-code">@@user.temp</span>)
+            menu(title=<span class="syntax-string">'settings'</span> separator=<span class="syntax-keyword">before</span> image=<span class="syntax-number">0xe115</span>)
+            {
+                <span class="syntax-comment">// https://docs.microsoft.com/en-us/windows/uwp/launch-resume/launch-settings-app</span>
+                item(title=<span class="syntax-string">'systeminfo'</span> image=<span class="syntax-number">0xe946</span> cmd-line=<span class="syntax-string">'/K systeminfo'</span>)
+                item(title=<span class="syntax-string">'search'</span> cmd=<span class="syntax-string">'search-ms:'</span> image=<span class="syntax-number">0xe721</span>)
+                item(title=<span class="syntax-string">'settings'</span> image-<span class="syntax-keyword">inherit</span> cmd=<span class="syntax-string">'ms-settings:'</span>)
+                item(title=<span class="syntax-string">'about'</span> image=<span class="syntax-number">0xe946</span> cmd=<span class="syntax-string">'ms-settings:about'</span>)
+                item(title=<span class="syntax-string">'usb'</span> image=<span class="syntax-number">0xe88e</span> cmd=<span class="syntax-string">'ms-settings:usb'</span>)
+                item(title=<span class="syntax-string">'network-status'</span> image=<span class="syntax-number">0xec27</span> cmd=<span class="syntax-string">'ms-settings:network-status'</span>)
+                item(title=<span class="syntax-string">'network-ethernet'</span> image=<span class="syntax-number">0xe839</span> cmd=<span class="syntax-string">'ms-settings:network-ethernet'</span>)
+                item(title=<span class="syntax-string">'personalization-background'</span> image=<span class="syntax-number">0xeb9f</span> cmd=<span class="syntax-string">'ms-settings:personalization-background'</span>)
+                item(title=<span class="syntax-string">'personalization-colors'</span> image=<span class="syntax-number">0xe790</span> cmd=<span class="syntax-string">'ms-settings:colors'</span>)
+                item(title=<span class="syntax-string">'lockscreen'</span> image=<span class="syntax-number">0xee3f</span> cmd=<span class="syntax-string">'ms-settings:lockscreen'</span>)
+                item(title=<span class="syntax-string">'personalization-start'</span> image=<span class="syntax-number">0xeca5</span> cmd=<span class="syntax-string">'ms-settings:personalization-start'</span>)
+                item(title=<span class="syntax-string">'appsfeatures'</span> image=<span class="syntax-number">0xe179</span> cmd=<span class="syntax-string">'ms-settings:appsfeatures'</span>)
+                item(title=<span class="syntax-string">'optionalfeatures'</span> image=<span class="syntax-number">0xe179</span> cmd=<span class="syntax-string">'ms-settings:optionalfeatures'</span>)
+                item(title=<span class="syntax-string">'defaultapps'</span> image=<span class="syntax-number">0xe17d</span> cmd=<span class="syntax-string">'ms-settings:defaultapps'</span>)
+                item(title=<span class="syntax-string">'yourinfo'</span> image=<span class="syntax-number">0xe136</span> cmd=<span class="syntax-string">'ms-settings:yourinfo'</span>)
+                item(title=<span class="syntax-string">'windowsupdate'</span> image=<span class="syntax-number">0xe895</span> cmd=<span class="syntax-string">'ms-settings:windowsupdate'</span>)
+                item(title=<span class="syntax-string">'windowsdefender'</span> image=<span class="syntax-number">0xe83d</span> cmd=<span class="syntax-string">'ms-settings:windowsdefender'</span>)
+                item(title=<span class="syntax-string">'network connections'</span> image-<span class="syntax-keyword">inherit</span> cmd=<span class="syntax-string">'shell:::{7007ACC7-3202-11D1-AAD2-00805FC1270E}'</span>)
+            }
+        }
+    }
+}</code></pre>
+
+<div class="has-text-centered my-5">
+	<a class="lightbox">
+		<img class="is-256" src="~/images/support/examples/goto.png">
+	</a>
+</div>

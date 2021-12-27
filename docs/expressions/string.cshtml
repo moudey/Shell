@@ -1,0 +1,52 @@
+﻿@page
+@{
+	ViewData["title"] = "String literal - Expressions";
+	ViewData["page-support"] = "Expressions \\ String literal";
+}
+<h4>String literal</h4>
+<br>
+<p>string is zero or more characters written inside single or double quotes.</p>
+<p>You can use quotes inside a string, as long as they don't match the quotes surrounding the string:</p>
+<pre class="syntax"><code>var
+{
+    var1 = <span class="syntax-string">"It's alright"</span>
+    var2 = <span class="syntax-string">"He is called 'Johnny'"</span>
+    var3 = <span class="syntax-string">'He is called "Johnny"'</span>
+}</code></pre>
+<br>
+<h5>Single quotes</h5>
+<br>
+<p>single quotes allow you to use the syntax of expressions within them.<br/>The <code>@@</code> sign must be placed before the expressions.</p>
+<pre><code>dynamic
+{
+    item(title = 'windows dir path: @@sys.dir')
+}</code></pre>
+<br>
+<h5>Double quotes</h5>
+<br>
+<p>double quotes allow you to use the Escape Character inside them only.<br/>The backslash (<code>\</code>) escape character turns special characters into characters.<br/>The sequence <code>\" </code> inserts a double quote in a string:</p>
+<pre><code>var
+{
+    var1 = "hello\"world"
+    // result: hello"world
+}</code></pre>
+<p>The complete set of escape sequences is as follows:</p>
+<table class="table">
+	<tbody>
+		<tr><td>\'</td><td>Single quote</td></tr>
+		<tr><td>\"</td><td>Double quote</td></tr>
+		<tr><td>\\</td><td>Backslash</td></tr>
+		<tr><td>\0</td><td>Null</td></tr>
+		<tr><td>\a</td><td>Alert</td></tr>
+		<tr><td>\b</td><td>Backspace</td></tr>
+		<tr><td>\f</td><td>Form Feed</td></tr>
+		<tr><td>\n</td><td>New Line</td></tr>
+		<tr><td>\r</td><td>Carriage Return</td></tr>
+		<tr><td>\t</td><td>Horizontal Tab</td></tr>
+		<tr><td>\v</td><td>Vertical Tab</td></tr>
+		<tr><td>\uxxxx</td><td>Unicode escape sequence (UTF-16) \uHHHH (range: 0000 - FFFF)</td></tr>
+		<tr><td>\xnnnn</td><td>Unicode escape sequence for character with hex value nnnn (variable length version of \uxxxx)</td></tr>
+		<tr><td>\Uxxxxxxxx</td><td>Unicode escape sequence (UTF-32) \U00HHHHHH (range: 000000 - 10FFFF)</td></tr>
+	</tbody>
+</table>
+

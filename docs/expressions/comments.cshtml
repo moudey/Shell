@@ -1,0 +1,59 @@
+﻿@page
+@{
+ViewData["title"] = "Comments - Expressions";
+	ViewData["page-support"] = "Expressions \\ Comments";
+}
+<h4>Comments</h4>
+<p>Comments can be used to explain <b>Shell</b> code, and to make it more readable. It can also be used to prevent execution <b>Shell</b> code. Comments can be singled-lined or multi-lined.</p>
+<div id="single-line">
+	<h5>Single-line Comments</h5>
+	<p>
+		Single-line comments start with two forward slashes (<code>//</code>).<br>
+		Any text between <code>//</code> and the end of the line is ignored (will not be executed).
+	</p>
+	<p>This example uses a single-line comment before a line of code:</p>
+	<pre class="syntax"><code>shell
+{
+    dynamic 
+    {
+        <span class="syntax-comment">// This is a comment</span>
+        item(title=<span class="syntax-string">'Hello World!'</span>)
+        
+        <span class="syntax-comment">//item(title='Hello World!')
+    }
+}</code></pre>
+
+	<p>This example uses a single-line comment at the end of a line of code:</p>
+	<pre class="syntax"><code>shell
+{
+    dynamic 
+    {
+        item(title=<span class="syntax-string">'Hello World!'</span>) <span class="syntax-comment">// This is a comment</span>
+    }
+}</code></pre>
+</div>
+<br>
+<div id="multi-line">
+	<h5>Multi-line Comments</h5>
+	<p>
+		Multi-line comments start with <code>/*</code> and ends with <code>*/</code>.<br>
+		Any text between <code>/*</code> and <code>*/</code> will be ignored.
+	</p>
+<pre class="syntax"><code>shell
+{
+    dynamic
+    {
+        item(title=<span class="syntax-string">'Hello,</span><span class="syntax-comment">/* multiple-lines comment inside */</span><span class="syntax-string"> world'</span>)
+        
+        <span class="syntax-comment">/*
+        item(title='test item 1')
+        item(title='test item 2')
+        */</span>
+    }
+
+}</code></pre>
+	<p>
+		Single or multi-line comments?<br>
+		It is up to you which you want to use. Normally, we use <code>//</code> for short comments, and <code>/* */</code> for longer.
+	</p>
+</div>

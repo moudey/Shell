@@ -1,0 +1,52 @@
+﻿@page
+@{
+ViewData["title"] = "Copy Path - Examples";
+	ViewData["page-support"] = "Examples \\ Copy Path";
+}
+<h5>Copy Path example</h5>
+<pre class="syntax"><code>shell 
+{
+    dynamic
+    {
+        <span class="syntax-comment">// type can set with '~taskbar' equals all file types except taskbar.</span>
+        menu(type=<span class="syntax-string">'file|dir|back|root|namespace'</span> mode=<span class="syntax-keyword">multiple</span>  title=<span class="syntax-string">'copy to clipboard'</span> image=<span class="syntax-number">#ff00ff</span>)
+        {
+            <span class="syntax-comment">// Appears only when multiple selections.</span>
+            item(vis=<span class="syntax-code">@@(sel.count > 1)</span> title=<span class="syntax-string">'Copy path (</span><span class="syntax-code">@@sel.count</span><span class="syntax-string">) items selected'</span>
+                    cmd=<span class="syntax-code">@@sys.copy(sel(false, "\n"))</span>)
+
+            item(mode=<span class="syntax-keyword">single</span> title=<span class="syntax-code">@@sel.path</span> 
+                    cmd=<span class="syntax-code">@@sys.copy(sel.path)</span>)
+
+            item(mode=<span class="syntax-keyword">single</span> type=<span class="syntax-string">'file|dir|back.dir'</span>
+                    vis=<span class="syntax-code">@@sel.short.len!=sel.path.len</span> title=<span class="syntax-code">@@sel.short</span>
+                    cmd=<span class="syntax-code">@@sys.copy(sel.short)</span>)
+            separator
+            item(mode=<span class="syntax-keyword">single</span> vis=<span class="syntax-code">@@(sel.parent.len>3)</span> title=<span class="syntax-code">@@sel.parent</span> 
+                    cmd=<span class="syntax-code">@@sys.copy(sel.parent)</span>)
+            separator
+            item(mode=<span class="syntax-keyword">single</span> type=<span class="syntax-string">'file|dir|back.dir'</span> title=<span class="syntax-code">@@sel.file.name</span>
+                    cmd=<span class="syntax-code">@@sys.copy(sel.file.name)</span>)
+                   
+            item(mode=<span class="syntax-keyword">single</span> type=<span class="syntax-string">'file'</span> title=<span class="syntax-code">@@sel.file.title</span>
+                    cmd=<span class="syntax-code">@@sys.copy(sel.file.title)</span>)
+
+            item(mode=<span class="syntax-keyword">single</span> type=<span class="syntax-string">'file'</span> title=<span class="syntax-code">@@sel.file.ext</span>
+                   cmd=<span class="syntax-code">@@sys.copy(sel.file.ext)</span>)
+        }
+    }
+}</code></pre>
+
+<div class="has-text-centered my-5">
+	<a class="lightbox">
+		<img class="is-256" src="~/images/support/examples/copypath1.png">
+	</a>
+
+	<a class="lightbox">
+		<img class="is-256" src="~/images/support/examples/copypath2.png">
+	</a>
+
+	<a class="lightbox">
+		<img class="is-256" src="~/images/support/examples/copypath3.png">
+	</a>
+</div>

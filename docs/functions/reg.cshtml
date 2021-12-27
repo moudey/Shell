@@ -1,0 +1,37 @@
+﻿@page
+@{
+	ViewData["page-support"] = "Functions \\ REG";
+}
+<h5>REG</h5>
+@*<div class="notification is-danger is-light">
+	Documentation under construction.
+</div>*@
+<p>Registary functions</p>
+<br>
+<section class="my-5">
+	<h5>Registry hive enum</h5>
+	<p>Syntax</p>
+	<pre><code>reg.cr	// HKEY_CLASSES_ROOT
+reg.cu	// HKEY_CURRENT_USER
+reg.lm	// HKEY_LOCAL_MACHINE
+reg.u	// HKEY_USERS
+reg.cc	// HKEY_CURRENT_CONFIG</code></pre>
+</section>
+<section class="my-5">
+	<h5>Registry value kind Enum</h5>
+	<p>Syntax</p>
+	<pre><code>reg.none	// No data type
+reg.sz		// REG_SZ
+reg.expand	// REG_EXPAND_SZ
+reg.binary	// REG_BINARY
+reg.multi	// REG_MULTI_SZ
+reg.dword	// REG_DWORD
+reg.qword	// REG_QWORD</code></pre>
+</section>
+
+<section class="my-5">
+	<h5>The function of reading from the Registry.</h5>
+	<p>Syntax</p>
+	<code>reg(reg.lm, 'SOFTWARE\Microsoft\Windows NT\CurrentVersion','ProductName')</code><br><br>
+	<code>reg(reg.cr, 'txtfile\DefaultIcon')</code>
+</section>
