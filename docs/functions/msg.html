@@ -1,0 +1,121 @@
+﻿<h4>MSG</h4>
+<p>Displays a modal dialog box that contains a system icon, a set of buttons, and a brief application-specific message, such as status or error information. The message box returns an integer value that indicates which button the user clicked.</p>
+
+<h5>Syntax</h5>
+<pre>
+msg(text)
+msg(text, title)
+msg(text, title, flags)
+</pre>
+<br>
+<h5>Parameters</h5>
+<table class="table table-borderless">
+	<tr>
+		<td class="kw">text</td>
+		<td>The message to be displayed.</td>
+	</tr>
+	<tr>
+		<td class="kw">title</td>
+		<td>The dialog box title. If this parameter is NULL, the default title is <b>Nilesoft Shell</b>.</td>
+	</tr>
+	<tr>
+		<td class="kw">flags</td>
+		<td>The contents and behavior of the dialog box. This parameter can be a combination of flags from the following groups of flags.</td>
+	</tr>
+</table>
+
+<h5>Flags</h5>
+<br>
+<h5>To display an icon in the message box, specify one of the following values.</h5>
+<dl>
+	<dt>msg.error</dt>
+	<dd>A stop-sign icon appears in the message box.</dd>
+	
+	<dt>msg.question</dt>
+	<dd>A question-mark icon appears in the message box.</dd>
+	
+	<dt>msg.warning</dt>
+	<dd>An exclamation-point icon appears in the message box.</dd>
+	
+	<dt>msg.info</dt>
+	<dd>An icon consisting of a lowercase letter i in a circle appears in the message box.</dd>
+</dl
+<br>
+<h5>To indicate the buttons displayed in the message box, specify one of the following values.</h5>
+<dl class="keyword">
+  <dt>msg.ok</dt>
+	<dd>The message box contains one push button: OK. This is the default.</dd>
+  
+  <dt>msg.okcancel</dt>
+	<dd>The message box contains two push buttons: OK and Cancel.</dd>
+  
+  <dt>msg.yesnocancel</dt>
+	<dd>The message box contains three push buttons: Yes, No, and Cancel.</dd>
+  
+  <dt>msg.yesno</dt>
+	<dd>The message box contains two push buttons: Yes and No.</dd>
+</dl>
+<br>
+<h5>To indicate the default button, specify one of the following values.</h5>
+<dl>
+  <dt>msg.defbutton1</dt>
+	<dd>The first button is the default button.</dd>
+  
+  <dt>msg.defbutton2</dt>
+	<dd>The second button is the default button.</dd>
+  
+  <dt>msg.defbutton3</dt>
+	<dd>The third button is the default button.</dd>
+</dl>
+<br>
+<h5>To indicate the modality of the dialog box, specify one of the following values.</h5>
+<dl>
+  <dt>msg.applmodal</dt>
+	<dd>The user must respond to the message box before continuing work in the current window. However, the user can move to the windows of other threads and work in those windows.</dd>
+  <dt>msg.taskmodal</dt>
+	<dd></dd>Same as msg.applmodal except that all the top-level windows belonging to the current thread are disabled. </dd>
+</dl>
+<br>
+<h5>To specify other options, use one or more of the following values.</h5>
+<dl>
+	<dt>msg.right</dt>
+	<dd>The text is right-justified.</dd>
+  <dt>msg.rtlreading</dt>
+	<dd>Displays message and caption text using right-to-left reading order on Hebrew and Arabic systems.</dd>
+  <dt>msg.setforeground</dt>
+	<dd>The message box becomes the foreground window.</dd>
+  <dt>msg.topmost</dt>
+	<dd></dd>
+</dl>
+<br>
+<h5>Return value</h5>
+<p>If a message box has a Cancel button, the function returns the <code>msg.idcancel</code> value if either the <kbd>ESC</kbd> key is pressed or the Cancel button is selected. If the message box has no Cancel button, pressing <kbd>ESC</kbd> will no effect - unless an <code>msg.ok</code> button is present. If an <code>msg.ok</code> button is displayed and the user presses <kbd>ESC</kbd>, the return value will be <code>msg.idok</code>.</p>
+<p>If the function fails, the return value is zero.<br>
+If the function succeeds, the return value is one of the following values:
+<dl>
+  <dt>msg.idok or 1</dt>
+	<dd>The OK button was selected.</dd>
+  
+  <dt>msg.idcancel or 2</dt>
+	<dd>The Cancel button was selected.</dd>
+
+  <dt>msg.idyes or 6</dt>
+	<dd>The Yes button was selected.</dd>
+  
+  <dt>msg.idno or 7</dt>
+	<dd>The No button was selected.</dd>
+ </dl>
+</p>
+<h5>Examples</h5>
+<pre class="syntax"><code>msg("Hello, Warld!","NileSoft Shell", msg.info | msg.ok)<br>
+msg("Hello, Warld!","NileSoft Shell")<br>
+msg("Hello, Warld!")</code></pre>
+<br><br>
+<section class="my-5">
+	<h5>msg.beep(type)</h5>
+	<p>Plays a waveform sound. The waveform sound for each sound type is identified by an entry in the registry.</p>
+	<p>Syntax</p>
+	<code>sys.beep</code><br>
+	<code>sys.beep(msg.error)</code><br>
+	<code>sys.beep(msg.warning)</code>
+</section>

@@ -1,0 +1,47 @@
+﻿<h4>Installation</h4>
+<br>
+<p>Download the release package and unzip its content in any location you want.</p>
+<p>Open an elevated command prompt.</p>
+<div class="alert alert-primary" role="alert">Administrative permissions required for installation</div>
+<h5>Command-Line Help</h5><br>
+<code>shell -[options]</code>
+<br><br>
+<h5>Options</h5>
+<table class="table table-sm">
+	<tr>
+		<td class="syntax-keyword w-25">-register (-r)</td>
+		<td>Registering.</td>
+	</tr>
+	<tr>
+		<td class="syntax-keyword">-unregister (-u)</td>
+		<td>Unregistering.</td>
+	</tr>
+	<tr>
+		<td class="syntax-keyword">-init (-i)</td>
+		<td>Initialize images cache.</td>
+	</tr>
+	<tr>
+		<td class="syntax-keyword">-restart (-re)</td>
+		<td>Restart Windows Explorer.</td>
+	</tr>
+	<tr>
+		<td class="syntax-keyword">-silent (-s)</td>
+		<td>Prevents displaying messages.</td>
+	</tr>
+	<tr>
+		<td class="syntax-keyword">-?</td>
+		<td>Dispay this help message.</td>
+	</tr>
+</table>
+
+<div id="intsall">
+	<h5>Intsall</h5>
+	<code>shell -register -init</code>
+</div>
+<hr>
+<div id="unintsall">
+	<h5>Unintsall</h5>
+	<code>shell -unregister -restart</code>
+	<br>
+	<p class="mt-5"><i>Tip:</i> Close all instances of Windows File Explorer before uninstalling to avoid needing a reboot after it has been uninstalled.</p>
+</div>
