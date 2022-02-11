@@ -1,10 +1,11 @@
-﻿<h5>IMAGE (ICON)</h5>
+<h5>IMAGE (ICON)</h5>
 <p>The image namespace contains functions that return an icon and are only assigned to the <code>image</code> property</p>
 <section class="my-5">
 	<h5>image.glyph</h5>
 	<p>Return font icon with color and size option.</p>
 	<p>Syntax</p>
 	<code>image.glyph(0xE00B)</code><br>
+	<code>image.glyph(\uE00B)</code><br>
 	<code>image.glyph("\uE00B")</code><br>
 	<code>image.glyph("\xE00B")</code><br>
 	<br>
@@ -13,16 +14,23 @@
 	<code>image.glyph(0xE00B, #0000ff, 12, "Segoe MDL2 Assets")</code><br>
 </section>
 <section class="my-5">
-	<h5>image.icon</h5>
+	<h5>image.res</h5>
 	<p>Returns an icon through a path or through resources.</p>
 	<p>Syntax</p>
-	<code>image.icon(path)</code><br>
-	<code>image.icon(path, index)</code><br>
-	<code>image.icon(path, -id)</code><br>
+	<code>image.res(path)</code><br>
+	<code>image.res(path, index)</code><br>
+	<code>image.res(path, -id)</code><br>
 	<br>
 	<code>image(path)</code><br>
 	<code>image(path, index)</code><br>
 	<code>image(path, -id)</code><br>
+</section>
+<section class="my-5">
+	<h5>image.svg, image.svgf</h5>
+	<p>Returns an svg image via a string or from a file path.</p>
+	<p>Syntax</p>
+	<code>image.svg('<svg viewBox="0 0 100 100"><path fill="red" d="M0 0 L 100 0 L50 100 Z"/></svg>')</code><br>
+	<code>image.svgf(path)</code><br>
 </section>
 <section class="my-5">
 	<h5>image.rect</h5>
