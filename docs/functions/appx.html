@@ -1,0 +1,56 @@
+<h5>APPX</h5>
+<br>
+<p>
+	<h5>appx.path(packageName)</h5>
+	Returns the path of Package.
+</p>
+<pre><code>appx.path("WindowsTerminal")
+result:
+C:\Program Files\WindowsApps\Microsoft.WindowsTerminal_1.11.3471.0_x64__8wekyb3d8bbwe
+</code></pre>
+<br>
+<p>
+	<h5>appx.name(packageName)</h5>
+	Returns the display name of the Package.
+</p>
+<pre><code>appx.name("WindowsTerminal")
+result:
+Windows Termina
+</code></pre>
+<br>
+<p>
+	<h5>appx.id((packageName))</h5>
+	Returns the full name of the Package.
+</p>
+<pre><code>appx.id("WindowsTerminal")
+result:
+Microsoft.WindowsTerminal_1.11.3471.0_x64__8wekyb3d8bbwe
+</code></pre>
+<br>
+<p>
+	<h5>appx.family(packageName)</h5>
+	Returns the family name of the Package.
+</p>
+<pre><code>appx.family("WindowsTerminal")
+result:
+Microsoft.WindowsTerminal_8wekyb3d8bbwe
+</code></pre>
+<br>
+<p>
+	<h5>appx.version(packageName)</h5>
+	Returns version of the Package.
+</p>
+<pre><code>appx.version("WindowsTerminal")
+result:
+1.11.3471.0
+</code></pre>
+<br>
+<p>
+	<h5>appx.shell(packageName)</h5>
+	Return package settings to run.
+</p>
+<pre><code>appx.shell("WindowsTerminal")
+result:
+shell:appsFolder\Microsoft.WindowsTerminal_8wekyb3d8bbwe!App
+</code></pre>
+<br>
