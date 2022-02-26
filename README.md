@@ -49,6 +49,8 @@ https://nilesoft.org/download
 Screenshots
 ------------------
 <p align="center">
+<img src="https://www.nilesoft.org/images/screenshots/main.png"><br>
+<img src="https://www.nilesoft.org/images/screenshots/shadow.png"><br>
  <img src="https://www.nilesoft.org/images/screenshots/dev.png"><br>
  <img src="https://www.nilesoft.org/images/screenshots/fm.png"><br>
  <img src="https://www.nilesoft.org/images/screenshots/desktop.png"><br>
