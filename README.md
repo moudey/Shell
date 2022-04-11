@@ -51,25 +51,12 @@ Screenshots
 <p align="center">
 <img src="https://www.nilesoft.org/images/screenshots/main.png"><br>
 <img src="https://www.nilesoft.org/images/screenshots/shadow.png"><br>
- <img src="https://www.nilesoft.org/images/screenshots/dev.png"><br>
- <img src="https://www.nilesoft.org/images/screenshots/fm.png"><br>
  <img src="https://www.nilesoft.org/images/screenshots/desktop.png"><br>
- <img src="https://www.nilesoft.org/images/screenshots/ss1.png"><br>
- <img src="https://www.nilesoft.org/images/screenshots/ss2.png"><br>
- <img src="https://www.nilesoft.org/images/screenshots/ss3.png"><br>
- <img src="https://www.nilesoft.org/images/screenshots/ss4.png"><br>
- <img src="https://www.nilesoft.org/images/screenshots/ss5.png"><br>
- <img src="https://www.nilesoft.org/images/screenshots/ss6.png"><br>
- <img src="https://www.nilesoft.org/images/screenshots/ss7.png"><br>
- <img src="./templates/themes/images/columns.png"><br>
- <img src="./templates/themes/images/colors.png"><br>
- <img src="./templates/themes/images/blue.png"><br>
- <img src="./templates/themes/images/green.png"><br>
- <img src="./templates/themes/images/yellow.png"><br>
- <img src="./templates/themes/images/gray.png"><br>
- <img src="./templates/themes/images/font-brush-script.png"><br>
- <img src="./templates/themes/images/font-fixedsys.png"><br>
- <img src="./templates/themes/images/font-segoe-script.png">
+ <img src="https://www.nilesoft.org/images/screenshots/taskbar.png"><br>
+ <img src="https://www.nilesoft.org/images/screenshots/s0.png"><br>
+ <img src="https://www.nilesoft.org/images/screenshots/s1.png"><br>
+ <img src="https://www.nilesoft.org/images/screenshots/s2.png"><br>
+ <img src="https://www.nilesoft.org/images/screenshots/s3.png"><br>
  <br>
  <br>
 </p>
