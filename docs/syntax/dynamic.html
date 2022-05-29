@@ -1,4 +1,4 @@
-﻿<h4>Dynamic Items</h4>
+<h4>Dynamic Items</h4>
 <br>
 <p>This section adds new menu items to the context menu.</p>
 <p>Dynamic items have three types (menu, item, and separator). with properties to add new items with customization explained below in more details.<br>The types (menu and item) must contain the property title at least and their value cannot be <span class="syntax-keyword">null</span>.<br>A separator-type item can be added without any properties.</p>
@@ -188,7 +188,21 @@
 			<td>
 				<p>Accept menuitem when the specified path name or path extension is contains or equal to the current find property.<br />Use this delimiter <code>|</code> to separate patterns.</p>
 				Default = <span class="syntax-keyword">null</span>
-				<p class="syntax-prop">Required for menu, item, separator.</p>
+<h3>Syntax</h5>
+find = 'exe' Find any word contains "exe"<br>
+find = '"exe"' Match whole word only<br>
+find = '*exe' Find a word that ends with<br>
+find = 'exe*' Find a word that starts with<br>
+<br>
+find = '!exe' Find any word not contains "exe"<br>
+find = '!"exe"' Search for any word not equal to "exe"<br>
+find = '!*exe' Find a word that not ends with<br>
+find = 'exe*!' Find a word that starts with<br>
+<br>
+find = '.exe' Find an equal extension for ".exe"<br>
+find = '!.exe' Find an not equal extension for ".exe"<br>
+<br>
+find = '.exe|.dll' Find an equal extension for ".exe" or ".dll"
 			</td>
 		</tr>
 		<tr>
@@ -396,6 +410,19 @@
 			<td>Keys</td>
 			<td><p>Show keyboard shortcuts.</p>
 			Default = <span class="syntax-keyword">null</span></td>
+		</tr>
+		<tr>
+			<td>Tip</td>
+			<td>
+			<p>Show a tip for the current item</p>
+			Default = <span class="syntax-keyword">null</span><br/>
+			Syntax <br/>
+			<pre class="syntax"><code>
+tip = "Lorem Ipsum is simply dummy text."
+tip = ["Lorem Ipsum is simply dummy text.", <span class="syntax-keyword">tip.info</span>]
+tip = ["Lorem Ipsum is simply dummy text.", <span class="syntax-keyword">tip.info</span>, <span class="syntax-number">1.2</span>]
+</code></pre>
+			</td>
 		</tr>
 		</tbody>
 	</table>
