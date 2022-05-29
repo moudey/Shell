@@ -49,8 +49,9 @@ https://nilesoft.org/download
 Screenshots
 ------------------
 <p align="center">
-<img src="https://www.nilesoft.org/images/screenshots/main.png"><br>
-<img src="https://www.nilesoft.org/images/screenshots/shadow.png"><br>
+ <img src="https://www.nilesoft.org/images/screenshots/main.png"><br>
+ <img src="https://www.nilesoft.org/images/screenshots/tip.png"><br>
+ <img src="https://www.nilesoft.org/images/screenshots/shadow.png"><br>
  <img src="https://www.nilesoft.org/images/screenshots/desktop.png"><br>
  <img src="https://www.nilesoft.org/images/screenshots/taskbar.png"><br>
  <img src="https://www.nilesoft.org/images/screenshots/s0.png"><br>
