@@ -67,5 +67,6 @@ Donations
 Don't hesitate to donate if you appreciate Shell and would like to support our work.  
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://www.paypal.me/nilesoft)
-[![Donate](https://img.shields.io/badge/Donate-BuyMeACoffee-yellow.svg)](https://www.buymeacoffee.com/moudeygo)
+[![Donate](https://img.shields.io/badge/Donate-BuyMeACoffee-yellow.svg)](https://www.buymeacoffee.com/moudey)
+[![Donate](https://img.shields.io/badge/Donate-Liberapay-gold.svg)](https://liberapay.com/moudey)
 [![Donate](https://img.shields.io/badge/Donate-kofi-red.svg)](https://ko-fi.com/moudey)
