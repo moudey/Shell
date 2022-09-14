@@ -2,17 +2,17 @@
 <br>
 <p>string is zero or more characters written inside single or double quotes.</p>
 <p>You can use quotes inside a string, as long as they don't match the quotes surrounding the string:</p>
-<pre class="syntax"><code>var
+<pre><code class="lang-shell">var
 {
-    var1 = <span class="syntax-string">"It's alright"</span>
-    var2 = <span class="syntax-string">"He is called 'Johnny'"</span>
-    var3 = <span class="syntax-string">'He is called "Johnny"'</span>
+    var1 = "It's alright"
+    var2 = "He is called 'Johnny'"
+    var3 = 'He is called "Johnny"'
 }</code></pre>
 <br>
 <h5>Single quotes</h5>
 <br>
 <p>single quotes allow you to use the syntax of expressions within them.<br/>The <code>@</code> sign must be placed before the expressions.</p>
-<pre><code>dynamic
+<pre><code class="lang-shell">dynamic
 {
     item(title = 'windows dir path: @sys.dir')
 }</code></pre>
@@ -20,7 +20,7 @@
 <h5>Double quotes</h5>
 <br>
 <p>double quotes allow you to use the Escape Character inside them only.<br/>The backslash (<code>\</code>) escape character turns special characters into characters.<br/>The sequence <code>\" </code> inserts a double quote in a string:</p>
-<pre><code>var
+<pre><code class="lang-shell">var
 {
     var1 = "hello\"world"
     // result: hello"world

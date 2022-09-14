@@ -20,26 +20,26 @@
 </p>
 <p><i>Note:</i> It is recommended to use descriptive names in order to create understandable and maintainable code</p>
 <h5 class="mt-5">Example</h5>
-<pre class="syntax"><code>shell 
+<pre><code class="lang-shell">shell 
 {
     var
     {
-        hello_world = <span class="syntax-string">'Hello World!'</span>
-        test_add1 = <span class="syntax-number">5</span> + <span class="syntax-number">6</span>
+        hello_world = 'Hello World!'
+        test_add1 = 5 + 6
     }
 	
     dynamic
     {
-	  item(title = <span class="syntax-code">@hello_world</span> cmd = <span class="syntax-code">@msg(hello_world)</span>)
+	  item(title = @hello_world cmd = @msg(hello_world))
 
-	  menu(title = <span class="syntax-code">@test_add1</span>)
+	  menu(title = @test_add1)
 	  {
 	      var
 	      {
-	          test_sub1 = <span class="syntax-number">11</span> - <span class="syntax-number">5</span>
+	          test_sub1 = 11 - 5
 	      }
 	      
-	      item(title = <span class="syntax-code">@test_sub1</span>)
+	      item(title = @test_sub1)
 	  }
     }
 }</code></pre>

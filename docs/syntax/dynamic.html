@@ -3,15 +3,15 @@
 <p>This section adds new menu items to the context menu.</p>
 <p>Dynamic items have three types (menu, item, and separator). with properties to add new items with customization explained below in more details.<br>The types (menu and item) must contain the property title at least and their value cannot be <span class="syntax-keyword">null</span>.<br>A separator-type item can be added without any properties.</p>
 <p>In the following example, it shows how to write add an items to dynamic:</p>
-<pre class="syntax"><code>shell 
+<pre><code class="lang-shell">shell 
 {
     dynamic
     {
-        item(title = <span class="syntax-string">'Hello, World!'</span>)
+        item(title = 'Hello, World!')
         separtor
-        menu(title = <span class="syntax-string">'sub menu'</span> image = <span class="syntax-number">#0000ff</span>)
+        menu(title = 'sub menu' image = #0000ff)
         {
-            item(title = <span class="syntax-string">'test subitem'</span>)
+            item(title = 'test subitem')
         }
     }
 }</code></pre>
@@ -187,8 +187,8 @@
 			<td>Find</td>
 			<td>
 				<p>Accept menuitem when the specified path name or path extension is contains or equal to the current find property.<br />Use this delimiter <code>|</code> to separate patterns.</p>
-				Default = <span class="syntax-keyword">null</span>
-<h3>Syntax</h5>
+				Default = <span class="syntax-keyword">null</span><br/>
+<strong>Syntax</strong><br/>
 find = 'exe' Find any word contains "exe"<br>
 find = '"exe"' Match whole word only<br>
 find = '*exe' Find a word that ends with<br>
@@ -416,11 +416,11 @@ find = '.exe|.dll' Find an equal extension for ".exe" or ".dll"
 			<td>
 			<p>Show a tip for the current item</p>
 			Default = <span class="syntax-keyword">null</span><br/>
-			Syntax <br/>
-			<pre class="syntax"><code>
+			<strong>Syntax</strong><br/>
+			<pre><code class="lang-shell">
 tip = "Lorem Ipsum is simply dummy text."
-tip = ["Lorem Ipsum is simply dummy text.", <span class="syntax-keyword">tip.info</span>]
-tip = ["Lorem Ipsum is simply dummy text.", <span class="syntax-keyword">tip.info</span>, <span class="syntax-number">1.2</span>]
+tip = ["Lorem Ipsum is simply dummy text.", tip.info]
+tip = ["Lorem Ipsum is simply dummy text.", tip.info, 1.2]
 </code></pre>
 			</td>
 		</tr>

@@ -1,37 +1,37 @@
 ﻿<h5>Favorite applications and directories example</h5>
-<pre class="syntax"><code>shell 
+<pre><code class="lang-shell">shell 
 {
     dynamic
     {
-        menu(type=<span class="syntax-string">'desktop|taskbar'</span> title=<span class="syntax-string">'Favorites'</span> image=<span class="syntax-number">#00ff00</span>)
+        menu(type='desktop|taskbar' title='Favorites' image=#00ff00)
         {
-            menu(title=<span class="syntax-string">'Applications'</span> image=<span class="syntax-number">#ff0000</span>)
+            menu(title='Applications' image=#ff0000)
             {
-                item(title=<span class="syntax-string">'Command prompt'</span> <span class="syntax-keyword">image</span> cmd=<span class="syntax-string">'cmd.exe'</span>)
-                item(title=<span class="syntax-string">'PowerShell'</span> <span class="syntax-keyword">image</span> cmd=<span class="syntax-string">'powershell.exe'</span>)
-                item(title=<span class="syntax-string">'Registry editor'</span> <span class="syntax-keyword">image</span> cmd=<span class="syntax-string">'regedit.exe'</span>)
+                item(title='Command prompt' image cmd='cmd.exe')
+                item(title='PowerShell' image cmd='powershell.exe')
+                item(title='Registry editor' image cmd='regedit.exe')
                 separator
-                item(title=<span class="syntax-string">'Paint'</span> <span class="syntax-keyword">image</span> cmd=<span class="syntax-string">'mspaint.exe'</span>)
-                item(title=<span class="syntax-string">'Notepad'</span> <span class="syntax-keyword">image</span> cmd=<span class="syntax-string">'notepad.exe'</span>)
+                item(title='Paint' image cmd='mspaint.exe')
+                item(title='Notepad' image cmd='notepad.exe')
             }
             separator
-            menu(title=<span class="syntax-string">'Directories'</span> image=<span class="syntax-number">#0000ff</span>)
+            menu(title='Directories' image=#0000ff)
             {
-                item(title=<span class="syntax-string">'Downloads'</span> cmd=<span class="syntax-code">@user.downloads</span>)
-                item(title=<span class="syntax-string">'Pictures'</span> cmd=<span class="syntax-code">@user.pictures</span>)
-                item(title=<span class="syntax-string">'Home'</span> cmd=<span class="syntax-code">@user.directory</span>)
+                item(title='Downloads' cmd=@user.downloads)
+                item(title='Pictures' cmd=@user.pictures)
+                item(title='Home' cmd=@user.directory)
                 separator
-                item(title=<span class="syntax-string">'Windows'</span> cmd=<span class="syntax-code">@sys.directory</span>)
-                item(title=<span class="syntax-string">'Program files'</span> cmd=<span class="syntax-code">@sys.prog</span>)
+                item(title='Windows' cmd=@sys.directory)
+                item(title='Program files' cmd=@sys.prog())
             }
         }
     }
 }</code></pre>
 <figure class="has-text-centered my-5">
 	<a class="lightbox">
-		<img class="is-256" src="/images/support/examples/fav1.png">
+		<img class="is-256" src="/images/docs/fav1.png">
 	</a>
 	<a class="lightbox">
-		<img class="is-256" src="/images/support/examples/fav2.png">
+		<img class="is-256" src="/images/docs/fav2.png">
 	</a>
 </figure>

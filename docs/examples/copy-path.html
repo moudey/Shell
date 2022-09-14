@@ -1,47 +1,47 @@
 ﻿<h5>Copy Path example</h5>
-<pre class="syntax"><code>shell 
+<pre><code class="lang-shell">shell 
 {
     dynamic
     {
-        <span class="syntax-comment">// type can set with '~taskbar' equals all file types except taskbar.</span>
-        menu(type=<span class="syntax-string">'file|dir|back|root|namespace'</span> mode=<span class="syntax-keyword">multiple</span>  title=<span class="syntax-string">'copy to clipboard'</span> image=<span class="syntax-number">#ff00ff</span>)
+        // type can set with '~taskbar' equals all file types except taskbar.
+        menu(type='file|dir|back|root|namespace' mode=multiple  title='copy to clipboard' image=#ff00ff)
         {
-            <span class="syntax-comment">// Appears only when multiple selections.</span>
-            item(vis=<span class="syntax-code">@(sel.count > 1)</span> title=<span class="syntax-string">'Copy path (</span><span class="syntax-code">@sel.count</span><span class="syntax-string">) items selected'</span>
-                    cmd=<span class="syntax-code">@sys.copy(sel(false, "\n"))</span>)
+            // Appears only when multiple selections.
+            item(vis=@(sel.count > 1) title='Copy path (@sel.count) items selected'
+                    cmd=@sys.copy(sel(false, "\n")))
 
-            item(mode=<span class="syntax-keyword">single</span> title=<span class="syntax-code">@sel.path</span> 
-                    cmd=<span class="syntax-code">@sys.copy(sel.path)</span>)
+            item(mode=single title=@sel.path 
+                    cmd=@sys.copy(sel.path))
 
-            item(mode=<span class="syntax-keyword">single</span> type=<span class="syntax-string">'file|dir|back.dir'</span>
-                    vis=<span class="syntax-code">@sel.short.len!=sel.path.len</span> title=<span class="syntax-code">@sel.short</span>
-                    cmd=<span class="syntax-code">@sys.copy(sel.short)</span>)
+            item(mode=single type='file|dir|back.dir'
+                    vis=@sel.short.len!=sel.path.len title=@sel.short
+                    cmd=@sys.copy(sel.short))
             separator
-            item(mode=<span class="syntax-keyword">single</span> vis=<span class="syntax-code">@(sel.parent.len>3)</span> title=<span class="syntax-code">@sel.parent</span> 
-                    cmd=<span class="syntax-code">@sys.copy(sel.parent)</span>)
+            item(mode=single vis=@(sel.parent.len>3) title=@sel.parent 
+                    cmd=@sys.copy(sel.parent))
             separator
-            item(mode=<span class="syntax-keyword">single</span> type=<span class="syntax-string">'file|dir|back.dir'</span> title=<span class="syntax-code">@sel.file.name</span>
-                    cmd=<span class="syntax-code">@sys.copy(sel.file.name)</span>)
+            item(mode=single type='file|dir|back.dir' title=@sel.file.name
+                    cmd=@sys.copy(sel.file.name))
                    
-            item(mode=<span class="syntax-keyword">single</span> type=<span class="syntax-string">'file'</span> title=<span class="syntax-code">@sel.file.title</span>
-                    cmd=<span class="syntax-code">@sys.copy(sel.file.title)</span>)
+            item(mode=single type='file' title=@sel.file.title
+                    cmd=@sys.copy(sel.file.title))
 
-            item(mode=<span class="syntax-keyword">single</span> type=<span class="syntax-string">'file'</span> title=<span class="syntax-code">@sel.file.ext</span>
-                   cmd=<span class="syntax-code">@sys.copy(sel.file.ext)</span>)
+            item(mode=single type='file' title=@sel.file.ext
+                   cmd=@sys.copy(sel.file.ext))
         }
     }
 }</code></pre>
 
 <div class="has-text-centered my-5">
 	<a class="lightbox">
-		<img class="is-256" src="/images/support/examples/copypath1.png">
+		<img class="is-256" src="/images/docs/copypath1.png">
 	</a>
 
 	<a class="lightbox">
-		<img class="is-256" src="/images/support/examples/copypath2.png">
+		<img class="is-256" src="/images/docs/copypath2.png">
 	</a>
 
 	<a class="lightbox">
-		<img class="is-256" src="/images/support/examples/copypath3.png">
+		<img class="is-256" src="/images/docs/copypath3.png">
 	</a>
 </div>

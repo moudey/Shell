@@ -2,178 +2,163 @@
 <br><br>
 <p>Default are containers for storing default values.</p>
 
-<pre class="syntax"><code>shell 
+<pre><code class="language-shell">shell 
 {
     default
     {
-        <span class="syntax-comment">// view = auto, compact, small, medium, large, wide</span>
-        view = <span class="syntax-code">view.compact</span>
+        // view = auto, compact, small, medium, large, wide
+        view = view.compact
 
-        <span class="syntax-comment">// theme = auto, dark, light, white, black, modern, modern_light, modern_dark</span>
-        theme = <span class="syntax-code">theme.modern</span>
+        // theme = auto, dark, light, white, black, modern, modern_light, modern_dark
+        theme = theme.modern
 
-        <span class="syntax-comment">// border size value from 0 to 10</span>
-        frame = <span class="syntax-number">1</span>
-        <span class="syntax-comment">// or</span>
+        // border size value from 0 to 10
+        frame = 1
+        // or
         frame // border
         {
-            <span class="syntax-comment">// border size value from 0 to 10</span>
-            size = <span class="syntax-number">1</span>
+            // border size value from 0 to 10
+            size = 1
 
-            color = <span class="syntax-number">#2c2c2c</span>
+            color = #2c2c2c
 
-            <span class="syntax-comment">// opacity value from 0 to 100</span>
-            opacity = <span class="syntax-number">20</span>
+            // opacity value from 0 to 100
+            opacity = 20
 
-            <span class="syntax-comment">// radius size value from 0 to 3</span>
-            radius = <span class="syntax-number">1</span>
+            // radius size value from 0 to 3
+            radius = 1
 
             padding = [0, 4, 0, 4]
         }
 
-        <span class="syntax-comment">// shadow size value from 0 to 10</span>
-        shadow = <span class="syntax-number">1</span>
-        <span class="syntax-comment">// or</span>
+        // shadow size value from 0 to 10
+        shadow = 1
+        // or
         shadow
         {
-            <span class="syntax-comment">// shadow size value from 0 to 10</span>
-            size = <span class="syntax-number">1</span>
+            // shadow size value from 0 to 10
+            size = 1
 
-            <span class="syntax-comment">// opacity value from 0 to 100</span>
-            opacity = <span class="syntax-number">50</span>
+            // opacity value from 0 to 100
+            opacity = 50
 
-            color = <span class="syntax-number">#000</span>
+            color = #000
         }
 
         item
         {
-            <span class="syntax-comment">// text = [normal, selected]</span>
-            text = [<span class="syntax-number">#fff</span>, <span class="syntax-number">#fff</span>]
+            // text = [normal, selected]
+            text = [#fff, #fff]
         
-            <span class="syntax-comment">// back = [normal, selected]</span>
-            back = [<span class="syntax-number">#2c2c2c</span>, <span class="syntax-number">#3c3c3c</span>]
+            // back = [normal, selected]
+            back = [#2c2c2c, #3c3c3c]
         
-            <span class="syntax-comment">// radius size value from 0 to 3</span>
-            radius = <span class="syntax-number">1</span>
+            // radius size value from 0 to 3
+            radius = 1
 
-            margin = [<span class="syntax-number">4</span>, <span class="syntax-number">0</span>]
+            margin = [4, 0]
 
-            padding = [<span class="syntax-number">8</span>, <span class="syntax-number">4</span>]
+            padding = [8, 4]
         }
         
-        separator = <span class="syntax-number">#202020</span>
-        <span class="syntax-comment">// or</span>
+        separator = #202020
+        // or
         separator // sep
         {
-            color = <span class="syntax-number">#202020</span>
+            color = #202020
         
-            size = <span class="syntax-number">1</span>
+            size = 1
         
-            margin = [<span class="syntax-number">8</span>,<span class="syntax-number">2</span>]
+            margin = [8, 2]
         }
 	
-        <span class="syntax-comment">// symbol = [normal, selected]</span>
-        symbol = [<span class="syntax-number">#f00</span>, <span class="syntax-number">#800</span>]
-        <span class="syntax-comment">// or</span>
+        // symbol = [normal, selected]
+        symbol = [#f00, #800]
+        // or
         symbol
         {
-            <span class="syntax-comment">// sub = [normal, selected]</span>
-            sub = [<span class="syntax-number">#f00</span>, <span class="syntax-number">#800</span>]
+            // sub = [normal, selected]
+            sub = [#f00, #800]
 
-            <span class="syntax-comment">// checked = [normal, selected]</span>
-            checked = [<span class="syntax-number">#0f0</span>, <span class="syntax-number">#080</span>]
+            // checked = [normal, selected]
+            checked = [#0f0, #080]
         
-            <span class="syntax-comment">// radio = [normal, selected]</span>
-            radio = [<span class="syntax-number">#00f</span>, <span class="syntax-number">#008</span>]
+            // radio = [normal, selected]
+            radio = [#00f, #008]
         }
 
         image
         {
-            gap = <span class="syntax-number">8</span>
-            size = <span class="syntax-number">16</span>
-            color = <span class="syntax-number">#ffff</span>
+            gap = 8
+            size = 16
+            color = #ffff
         }
 
-        tip = <span class="syntax-number">true</span>
-        <span class="syntax-comment">// or</span>
+        tip = true
+        // or
         tip
         {
-            enabled = <span class="syntax-number">true</span>
+            enabled = true
 
-            <span class="syntax-comment">// normal = [background, text]</span>
-            normal = [<span class="syntax-keyword">default</span>, <span class="syntax-keyword">default</span>]
+            // normal = [background, text]
+            normal = [default, default]
 
-            <span class="syntax-comment">// normal = [background, text]</span>
-            primary = [<span class="syntax-number">#000</span>, <span class="syntax-number">#fff</span>]
+            // normal = [background, text]
+            primary = [#000, #fff]
 
-            <span class="syntax-comment">// info = [background, text]</span>
-            info = [<span class="syntax-number">#88f</span>, <span class="syntax-number">#fff</span>]
+            // info = [background, text]
+            info = [#88f, #fff]
 
-            <span class="syntax-comment">// success = [background, text]</span>
-            success = [<span class="syntax-number">#8f8</span>, <span class="syntax-number">#fff</span>]
+            // success = [background, text]
+            success = [#8f8, #fff]
 
-            <span class="syntax-comment">// warning = [background, text]</span>
-            warning = [<span class="syntax-number">#ff8</span>, <span class="syntax-number">#fff</span>]
+            // warning = [background, text]
+            warning = [#ff8, #fff]
 
-            <span class="syntax-comment">// danger = [background, text]</span>
-            danger = [<span class="syntax-number">#f88</span>, <span class="syntax-number">#fff</span>]
+            // danger = [background, text]
+            danger = [#f88, #fff]
 
-            <span class="syntax-comment">// max width value from 200 to 2000</span>
-            width = <span class="syntax-number">400</span>
+            // max width value from 200 to 2000
+            width = 400
 
-            <span class="syntax-comment">// opacity value from 0 to 100</span>
-            opacity = <span class="syntax-number">100</span>
+            // opacity value from 0 to 100
+            opacity = 100
 
-            <span class="syntax-comment">// radius size value from 0 to 3</span>
-            radius = <span class="syntax-number">1</span>
+            // radius size value from 0 to 3
+            radius = 1
 
-            time = <span class="syntax-number">1.5</span>
+            time = 1.5
 
-            padding = [<span class="syntax-number">8</span>, <span class="syntax-number">4</span>]
+            padding = [8, 4]
         }
         
-        <span class="syntax-comment">// show menu delay value from 0 to 4000</span>
-        showdelay = <span class="syntax-number">200</span>
+        // show menu delay value from 0 to 4000
+        showdelay = 200
 
-        <span class="syntax-comment">// font = [size, font name]</span>
-        font = [<span class="syntax-number">12</span>, <span class="syntax-string">'Brush Script'</span>]
-	
-	<span class="syntax-comment">// Force layout to RTL, LTR, or auto. [auto, true, false]</span>
-	rtl = auto
-	
-	<span class="syntax-comment">// Enable/disable groups and images for static items</span>
-	static-auto = true
-	
-	<span class="syntax-comment">// Enable/disable groups for static items</span>
-	static-auto-group = true 
-	
-	<span class="syntax-comment">// Enable/disable images for static items</span>
-	static-auto-image = true
+        // font = [size, font name]
+        font = [12, 'Brush Script']
     }
 }</code></pre>
 
 <h3>Padding and Margin value syntax</h3>
-<p>- Use the padding shorthand property with four values:</p>
+<p>Use the padding shorthand property with four values:</p>
 <code>padding = [1, 2, 3, 4]</code>
-<pre><code>
-left = 1
+<pre><code>left = 1
 right = 2
 top = 3
 bottom = 4</code></pre>
 
-<p>- Use the padding shorthand property with two values:</p>
+<p>Use the padding shorthand property with two values:</p>
 <code>padding = [4, 2]</code>
-<pre><code>
-left = 4
+<pre><code>left = 4
 right = 4
 top = 2
 bottom = 2</code></pre>
 
-<p>- Use the padding shorthand property with one value:</p>
+<p>Use the padding shorthand property with one value:</p>
 
 <code>padding = 4</code>
-<pre><code>
-left = 4
+<pre><code>left = 4
 right = 4
 top = 4
 bottom = 4</code></pre>

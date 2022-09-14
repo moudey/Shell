@@ -2,12 +2,12 @@
 <br>
 <p>This section modifies context menu items added by the system or by a third party. more than one item can be added with some properties to customize the context menu. explained below in more details.<br>The items must have the property <code>find</code>. to search in the titles of the menu items to catches them and customize by other properties such as changing the title, icon, visibility, or moving it to another location.</p>
 <p>In the following example, it shows how to write add an items to static:</p>
-<pre class="syntax"><code>shell 
+<pre><code class="lang-shell">shell 
 {
     static
     {
-        item(find = <span class="syntax-string">'copy'</span> image = <span class="syntax-number">#00ff00</span>)
-        item(find = <span class="syntax-string">'paste'</span> image = <span class="syntax-number">#0000ff</span>)
+        item(find = 'copy'image = #00ff00)
+        item(find = 'paste' image = #0000ff)
     }
 }</code></pre>
 <br>
@@ -33,7 +33,8 @@
 			<td>Accept menuitem when the specific menuitem title is contains or equal to the current find property.<br>Use this delimiter <code>|</code> to separate patterns.
 				<p class="has-text-danger">This property must be included with another property at least if where property is not defined.</p>
 				Default = <span class="syntax-keyword">null</span>
-<h3>Syntax</h5>
+<br>
+<br><strong>Syntax</strong><br>
 find = 'undo' Find any word contains "undo"<br>
 find = '"undo"' Match whole word only<br>
 find = '*undo' Find a word that ends with<br>
@@ -209,11 +210,11 @@ find = 'undo delete|undo copy' Find an equal title for "undo delete" or "undo co
 			<td>
 			<p>Show a tip for the current item</p>
 			Default = <span class="syntax-keyword">null</span><br/>
-			Syntax <br/>
-			<pre class="syntax"><code>
+			<strong>Syntax</strong><br/>
+			<pre><code class="lang-shell">
 tip = "Lorem Ipsum is simply dummy text."
-tip = ["Lorem Ipsum is simply dummy text.", <span class="syntax-keyword">tip.info</span>]
-tip = ["Lorem Ipsum is simply dummy text.", <span class="syntax-keyword">tip.info</span>, <span class="syntax-number">1.2</span>]
+tip = ["Lorem Ipsum is simply dummy text.", tip.info]
+tip = ["Lorem Ipsum is simply dummy text.", tip.info, 1.2]
 </code></pre>
 			</td>
 		</tr>

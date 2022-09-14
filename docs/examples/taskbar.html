@@ -1,22 +1,22 @@
 ﻿<h5>Taskbar example</h5>
-<pre class="syntax"><code>shell 
+<pre class="lang-shell"><code>shell 
 {
     var
     {
-        hello_world = <span class="syntax-string">'Hello World!'</span>
+        hello_world = 'Hello World!'
     }
 
     dynamic
     {
-	  item(title=<span class="syntax-code">@hello_world</span> cmd=<span class="syntax-code">@msgbox(hello_world)</span>)
+	  item(title=@hello_world cmd=@msgbox(hello_world))
 	  separator
-	  item(title=<span class="syntax-string">'Command prompt'</span> cmd=<span class="syntax-string">'cmd.exe'</span> args=<span class="syntax-string">'/k echo </span><span class="syntax-code">@hello_world</span><span class="syntax-string">'</span>)
+	  item(title='Command prompt' cmd='cmd.exe' args='/k echo @hello_world')
 	  separator
-	  menu(title=<span class="syntax-string">'Sub menu'</span>)
+	  menu(title='Sub menu')
 	  {
-	      item(title=<span class="syntax-string">'Open Paint'</span> cmd=<span class="syntax-string">'paint.exe'</span> arg=<span class="syntax-code">@sel.path</span>)
+	      item(title='Open Paint' cmd='paint.exe' arg=@sel.path)
 	      separator
-	      item(title=<span class="syntax-string">'Open Notepad'</span> cmd=<span class="syntax-string">'notepad.exe'</span> arg=<span class="syntax-string">'"</span><span class="syntax-code">@sel.path</span><span class="syntax-string">"'</span>)
+	      item(title='Open Notepad' cmd='notepad.exe' arg='"@sel.path"')
 	  }
     }
 }</code></pre>
