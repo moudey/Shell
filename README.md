@@ -42,7 +42,7 @@ Browse the [online documentation here.](https://nilesoft.org/docs)
 
 Download
 ------------------
-Download the latest official version:  
+Download the latest version:  
 https://nilesoft.org/download
 
 
@@ -62,9 +62,9 @@ Screenshots
  <br>
 </p>
 
-Donations
+Donate
 ------------------
-Don't hesitate to donate if you appreciate Shell and would like to support our work.  
+If you really love Shell and would like to see it continue to improve.
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://www.paypal.me/nilesoft)
 [![Donate](https://img.shields.io/badge/Donate-BuyMeACoffee-yellow.svg)](https://www.buymeacoffee.com/moudey)
