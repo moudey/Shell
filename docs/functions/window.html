@@ -1,0 +1,34 @@
+<h5>WINDOW, WND</h5>
+<br>
+<p></p>
+<br>
+<section class="my-5">
+	<p>Syntax</p>
+	<pre><code>
+window.is_taskbar	// Returns true if the window handle is for the Taskbar window
+window.is_desktop	// Returns true if the window handle is for the Desktop window
+window.is_explorer	// Returns true if the window handle is for the Explorer window
+window.is_tree		// Returns true if the window handle is for the Side window
+window.is_edit		// Returns true if the window handle is for the Edit menu
+window.is_start		// Returns true if the window handle is for the Win+X menu
+
+window.send(name, msg, wparam, lparam)	// Search for the window by name and send the specified message
+window.post(name, msg, wparam, lparam)	// Search for the window by name and send the specified message without waiting
+
+window.send(null, msg, wparam, lparam)	// Send the specified message to current window.
+window.post(null, msg, wparam, lparam)	// Send the specified message without waiting to current window.
+
+window.command(command)	// Send WM_COMMAND to current window.
+window.command(command, name)	// Search for the window by name and send the command to it.
+
+window.handle
+window.name
+window.title
+window.owner
+window.parent
+window.parent.handle
+window.parent.name
+window.is_contextmenuhandler
+						
+</code></pre>
+</section>

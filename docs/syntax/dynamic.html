@@ -46,27 +46,27 @@
 		  <td>Accept item by selections behavior. Value have one of the following parameters:
 			<table class="table">
 				<tr>
-					<td class="syntax-keyword">None</td>
+					<td class="syntax-keyword">none</td>
 					<td>Accept item when there are no selections.</td>
 				</tr>
 				<tr>
-					<td class="syntax-keyword">Single</td>
+					<td class="syntax-keyword">single</td>
 					<td>Accept menuitem when there are single selection.</td>
 				</tr>
 				<tr>
-					<td class="syntax-keyword">MultiUnique</td>
+					<td class="syntax-keyword">multi_unique</td>
 					<td>Accept when multiple selections are single type.</td>
 				</tr>
 				<tr>
-					<td class="syntax-keyword">MultiSingle</td>
+					<td class="syntax-keyword">multi_single</td>
 					<td>Accept when multiple selections are single file extension.</td>
 				</tr>
 				<tr>
-					<td class="syntax-keyword">Multiple</td>
+					<td class="syntax-keyword">multiple</td>
 					<td>Accept all types.</td>
 				</tr>
 			</table>
-			Default = <span class="syntax-keyword">Single</span>
+			Default = <span class="syntax-keyword">single</span>
 			<p class="syntax-prop">Required for menu, item, separator.</p>
 		  </td>
 		</tr>
@@ -77,12 +77,16 @@
 			<p class="has-text-danger">The property not supported syntax expressions.</p>
 			<table class="table">
 				<tr>
+					<td class="syntax-keyword">*</td>
+					<td>Accept menuitem when any type are selected.</td>
+				</tr>
+				<tr>
 					<td class="syntax-keyword">File</td>
 					<td>Accept menuitem when file are selected.</td>
 				</tr>
 				<tr>
 					<td class="syntax-keyword">Directory(Dir)</td>
-					<td>Accept menuitem when Diretory are selected.</td>
+					<td>Accept menuitem when Directory are selected.</td>
 				</tr>
 				<tr>
 					<td class="syntax-keyword">Drive</td>
@@ -138,7 +142,7 @@
 					<td>Accept menuitem when the Taskbar are selected.</td>
 				</tr>
 			</table>
-			Default = <span class="syntax-keyword">All types</span>
+			Default = <span class="syntax-keyword">Accepts all types except for the taskbar.</span>
 			<p class="syntax-prop">Required for menu, item, separator.</p>
 		  </td>
 		</tr>
@@ -165,18 +169,6 @@
 				<tr>
 					<td class="syntax-keyword">Label</td>
 					<td>Display item as label without an image</td>
-				</tr>
-				<tr>
-					<td class="syntax-keyword">Extended</td>
-					<td>The menuitem appears when the <kbd>Shift</kbd> key is pressed.</td>
-				</tr>
-				<tr>
-					<td class="syntax-keyword">ExtendedHidden</td>
-					<td>The item appears disabled when the <kbd>Shift</kbd> key is pressed.</td>
-				</tr>
-				<tr>
-					<td class="syntax-keyword">ExtendedDisable</td>
-					<td>Hide the menuitem when the <kbd>Shift</kbd> key is pressed.</td>
 				</tr>
 			</table>
 			Default = <span class="syntax-keyword">Noraml</span>
@@ -214,11 +206,11 @@ find = '.exe|.dll' Find an equal extension for ".exe" or ".dll"
 					<td>Not adding a separator with the menuitem.</td>
 				</tr>
 				<tr>
-					<td class="syntax-keyword">Before</td>
+					<td class="syntax-keyword">Before, Top</td>
 					<td>Add a separator before the menuitem.</td>
 				</tr>
 				<tr>
-					<td class="syntax-keyword">After</td>
+					<td class="syntax-keyword">After, Bottom</td>
 					<td>Add a separator after the menuitem.</td>
 				</tr>
 				<tr>
@@ -260,7 +252,7 @@ find = '.exe|.dll' Find an equal extension for ".exe" or ".dll"
 		  </td>
 		</tr>
 		<tr>
-			<td>Image</td>
+			<td>Image, Icon</td>
 			<td>The icon that appears in a menuitem, This property can be assigned as image files, resource icons, glyph or color. With one of the following parameters
 				<table class="table">
 					<tr>
@@ -294,7 +286,7 @@ find = '.exe|.dll' Find an equal extension for ".exe" or ".dll"
 			</td>
 		</tr>
 		<tr>
-			<td>Parent</td>
+			<td>Parent, Menu</td>
 			<td><p>Move current item to another menu.</p>
 			Default = <span class="syntax-keyword">null</span></td>
 		</tr>
@@ -313,6 +305,24 @@ find = '.exe|.dll' Find an equal extension for ".exe" or ".dll"
 			</td>
 		</tr>
 		<tr>
+			<td>Invoke</td>
+			<td>Set execution type
+				<table class="table">
+					<tr>
+						<td class="syntax-keyword">0, single</td>
+						<td>execute the command for each file selected</td>
+					</tr>
+					<tr>
+						<td class="syntax-keyword">1, multiple</td>
+						<td>execute the command in one process</td>
+					</tr>
+				</table>
+				Default = <span class="syntax-keyword">0</span>
+				<p class="syntax-prop">Required for item.</p>
+			</td>
+		</tr>
+		
+		<tr>
 			<td>Window</td>
 			<td>Controls how the window is to be shown. can be one of the following parameters:
 			<p class="syntax-keyword">Hidden, Show, Visible, Minimized, Maximized</p>
@@ -327,7 +337,7 @@ find = '.exe|.dll' Find an equal extension for ".exe" or ".dll"
 			<p class="syntax-prop">Required for item.</p></td>
 		</tr>
 		<tr>
-			<td>admin</td>
+			<td>Admin</td>
 			<td><p>Execute the command with administrative permissions.</p>
 				Default = <span class="syntax-keyword">false</span>
 				<p class="syntax-prop">Required for item.</p>
@@ -388,9 +398,24 @@ find = '.exe|.dll' Find an equal extension for ".exe" or ".dll"
 		</tr>
 		<tr>
 			<td>Checked</td>
-			<td><p>Value that indicates whether the menuitem is checked.</p>
-			Default = <span class="syntax-keyword">false</span>
-			<p class="syntax-prop">Required for item.</p>
+			<td>Value that indicates whether the menuitem checked type:
+				<table class="table">
+					<tr>
+						<td class="syntax-keyword">0</td>
+						<td>Not checked</td>
+					</tr>
+					<tr>
+						<td class="syntax-keyword">1</td>
+						<td>Display as checked mark.</td>
+					</tr>
+					<tr>
+						<td class="syntax-keyword">2</td>
+						<td>Display as radio bullet.</td>
+					</tr>
+				</table>
+				Default = <span class="syntax-keyword">0</span>
+				<p class="syntax-prop">Required for item.</p>
+			</td>
 		</tr>
 		<tr>
 			<td>Default</td>
@@ -398,6 +423,14 @@ find = '.exe|.dll' Find an equal extension for ".exe" or ".dll"
 				<p>Specifies that the menuitem is the default. A menu can contain only one default menuitem, which is displayed in bold.</p>
 				Default = <span class="syntax-keyword">false</span>
 				<p class="syntax-prop">Required for item.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>Expanded</td>
+			<td>
+				<p>Move items to the parent item.</p>
+				Default = <span class="syntax-keyword">false</span>
+				<p class="syntax-prop">Required for menu.</p>
 			</td>
 		</tr>
 		<tr>

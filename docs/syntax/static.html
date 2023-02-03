@@ -49,6 +49,13 @@ find = 'undo delete|undo copy' Find an equal title for "undo delete" or "undo co
 			</td>
 		</tr>
 		<tr>
+		  <td>In</td>
+		  <td>
+			<p>Determine the path of the menu being searched.</p>
+			Default = <span class="syntax-keyword">null</span>
+		  </td>
+		</tr>
+		<tr>
 		  <td>Title</td>
 		  <td>
 			<p>Change value indicating the caption of the menuitem.</p>
@@ -60,7 +67,7 @@ find = 'undo delete|undo copy' Find an equal title for "undo delete" or "undo co
 		  <td>Accept item by selections behavior. Value have one of the following parameters:
 			<table class="table">
 				<tr>
-					<td class="syntax-keyword">None</td>
+					<td class="syntax-keyword">none</td>
 					<td>Accept item when there are no selections.</td>
 				</tr>
 				<tr>
@@ -68,19 +75,95 @@ find = 'undo delete|undo copy' Find an equal title for "undo delete" or "undo co
 					<td>Accept menuitem when there are single selection.</td>
 				</tr>
 				<tr>
-					<td class="syntax-keyword">MultiUnique</td>
+					<td class="syntax-keyword">multi_unique</td>
 					<td>Accept when multiple selections are single type.</td>
 				</tr>
 				<tr>
-					<td class="syntax-keyword">MultiSingle</td>
+					<td class="syntax-keyword">multi_single</td>
 					<td>Accept when multiple selections are single file extension.</td>
 				</tr>
 				<tr>
-					<td class="syntax-keyword">Multiple</td>
+					<td class="syntax-keyword">multiple</td>
 					<td>Accept all types.</td>
 				</tr>
 			</table>
-			Default = <span class="syntax-keyword">single</span>
+			Default = <span class="syntax-keyword">multiple</span>
+		  </td>
+		</tr>
+		<tr>
+		  <td>Type</td>
+		  <td>Specify the types of object files allowed for the menu item to appear. The property is assigned to one or more of these parameters and this character <code>|</code> is used to separate types.<br/>
+			Add a character <code>~</code> before single type to exclude.
+			<p class="has-text-danger">The property not supported syntax expressions.</p>
+			<table class="table">
+				<tr>
+					<td class="syntax-keyword">*</td>
+					<td>Accept menuitem when any type are selected.</td>
+				</tr>
+				<tr>
+					<td class="syntax-keyword">File</td>
+					<td>Accept menuitem when file are selected.</td>
+				</tr>
+				<tr>
+					<td class="syntax-keyword">Dirctory(Dir)</td>
+					<td>Accept menuitem when Dirctory are selected.</td>
+				</tr>
+				<tr>
+					<td class="syntax-keyword">Drive</td>
+					<td>Drive objects</td>
+				</tr>
+				<tr>
+					<td class="syntax-keyword">USB</td>
+					<td>Accept menuitem when USB flash drive are selected.</td>
+				</tr>
+				<tr>
+					<td class="syntax-keyword">DVD</td>
+					<td>The drive is a DVD-ROM drive</td>
+				</tr>
+				<tr>
+					<td class="syntax-keyword">Fixed</td>
+					<td>Accept menuitem when Fixed drive are selected. The drive has fixed media; for example, a hard disk drive or flash drive.</td>
+				</tr>
+				<tr>
+					<td class="syntax-keyword">VHD</td>
+					<td>Accept menuitem when Virtual Hard Disk are selected.</td>
+				</tr>
+				<tr>
+					<td class="syntax-keyword">Removable</td>
+					<td>The drive has removable media; for example, a floppy drive, thumb drive, or flash card reader.</td>
+				</tr>
+				<tr>
+					<td class="syntax-keyword">Remote</td>
+					<td>The drive is a remote (network) drive.</td>
+				</tr>
+				<tr>
+					<td class="syntax-keyword">Back</td>
+					<td>Accept menu item when the background of all types are selected or can specify of this types for the background (back.directory, back.drive[back.fixed, back.usb, back.dvd, back.vhd, back.Removable], back.namespace[back.computer, back.recyclebin])
+					</td>
+				</tr>		
+				<tr>
+					<td class="syntax-keyword">Desktop</td>
+					<td>Accept menuitem when the Desktop are selected.</td>
+				</tr>
+				<tr>
+					<td class="syntax-keyword">Namespace</td>
+					<td>Accept menuitem when Namespace are selected. Can be virtual objects such as the My Network Places and Recycle Bin.</td>
+				</tr>
+				<tr>
+					<td class="syntax-keyword">Computer</td>
+					<td>Accept menuitem when the My Computer are selected.</td>
+				</tr>
+				<tr>
+					<td class="syntax-keyword">Recyclebin</td>
+					<td>Accept menuitem when the Recycle bin are selected.</td>
+				</tr>
+				<tr>
+					<td class="syntax-keyword">Taskbar</td>
+					<td>Accept menuitem when the Taskbar are selected.</td>
+				</tr>
+			</table>
+			Default = <span class="syntax-keyword">Accepts all types except for the taskbar.</span>
+			<p class="syntax-prop">Required for menu, item, separator.</p>
 		  </td>
 		</tr>
 		<tr>
@@ -98,18 +181,6 @@ find = 'undo delete|undo copy' Find an equal title for "undo delete" or "undo co
 				<tr>
 					<td class="syntax-keyword">Disable</td>
 					<td>Disabled the menuitem.</td>
-				</tr>
-				<tr>
-					<td class="syntax-keyword">Extended</td>
-					<td>The menuitem appears when the <kbd>Shift</kbd> key is pressed.</td>
-				</tr>
-				<tr>
-					<td class="syntax-keyword">ExtendedHidden</td>
-					<td>Hide the menuitem when the <kbd>Shift</kbd> key is pressed.</td>
-				</tr>
-				<tr>
-					<td class="syntax-keyword">ExtendedDisable</td>
-					<td>The item appears disabled when the <kbd>Shift</kbd> key is pressed.</td>
 				</tr>
 			</table>
 			Default = <span class="syntax-keyword">normal</span>
@@ -152,11 +223,11 @@ find = 'undo delete|undo copy' Find an equal title for "undo delete" or "undo co
 					<td>Not adding a separator with the menuitem.</td>
 				</tr>
 				<tr>
-					<td class="syntax-keyword">Before</td>
+					<td class="syntax-keyword">Before, Top</td>
 					<td>Add a separator before the menuitem.</td>
 				</tr>
 				<tr>
-					<td class="syntax-keyword">After</td>
+					<td class="syntax-keyword">After, Bottom</td>
 					<td>Add a separator after the menuitem.</td>
 				</tr>
 				<tr>
@@ -168,7 +239,7 @@ find = 'undo delete|undo copy' Find an equal title for "undo delete" or "undo co
 		  </td>
 		</tr>
 		<tr>
-		  <td>Image</td>
+		  <td>Image, Icon</td>
 		  <td>The icon that appears in a menuitem, This property can be assigned as image files, resource icons, glyph or color. With one of the following parameters
 		  <table class="table">
 				<tr>
@@ -196,7 +267,28 @@ find = 'undo delete|undo copy' Find an equal title for "undo delete" or "undo co
 		  </td>
 		</tr>
 		<tr>
-			<td>Parent</td>
+			<td>Checked</td>
+			<td>Value that indicates whether the menuitem checked type:
+				<table class="table">
+					<tr>
+						<td class="syntax-keyword">0</td>
+						<td>Not checked</td>
+					</tr>
+					<tr>
+						<td class="syntax-keyword">1</td>
+						<td>Display as checked mark.</td>
+					</tr>
+					<tr>
+						<td class="syntax-keyword">2</td>
+						<td>Display as radio bullet.</td>
+					</tr>
+				</table>
+				Default = <span class="syntax-keyword">0</span>
+				<p class="syntax-prop">Required for item.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>Parent, Menu</td>
 			<td><p>Move current menu item(s) to another menu.</p>
 			Default = <span class="syntax-keyword">null</span></td>
 		</tr>

@@ -17,8 +17,8 @@
   <i>Tip:</i> When there is an error, it is recorded in the log file (shell.log).
 </div>
 
-<p>The following rules apply to the syntax of configuration file (shell.shl):</p>
-<h5>shell.shl structure</h5>
+<p>The following rules apply to the syntax of configuration file (shell.nss):</p>
+<h5>shell.nss structure</h5>
 <pre><code class="lang-shell">shell 
 {
     // global variables
@@ -29,13 +29,26 @@
         ...
     }
 	
-    default // def or settings
+    set // settings
     {
-        // defaults content
-        default-name = default-value
-        default-name = [default-value, default-value, ...]
+		theme
+		{
+			set-name = set-value
+			...
+		}
+		
+        set-name = set-value
+        set-name = [set-value, set-value, ...]
         ...
     }
+	
+	images
+	{
+		id = value
+		"item 1" = value
+		id1,id2, id3, "item 2" = value
+		....
+	}
 	
     // static items
     static

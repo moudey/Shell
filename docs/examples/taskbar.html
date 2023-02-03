@@ -8,13 +8,13 @@
 
     dynamic
     {
-	  item(title=@hello_world cmd=@msgbox(hello_world))
+	  item(title=hello_world cmd=msg(hello_world))
 	  separator
-	  item(title='Command prompt' cmd='cmd.exe' args='/k echo @hello_world')
+	  item(title='Command prompt' cmd args='/k echo @hello_world')
 	  separator
 	  menu(title='Sub menu')
 	  {
-	      item(title='Open Paint' cmd='paint.exe' arg=@sel.path)
+	      item(title='Open Paint' cmd='paint.exe' arg=sel.path)
 	      separator
 	      item(title='Open Notepad' cmd='notepad.exe' arg='"@sel.path"')
 	  }
