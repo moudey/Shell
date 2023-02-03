@@ -49,17 +49,18 @@ https://nilesoft.org/download
 Screenshots
 ------------------
 <p align="center">
- <img src="https://www.nilesoft.org/images/screenshots/main.png"><br>
- <img src="https://www.nilesoft.org/images/screenshots/tip.png"><br>
- <img src="https://www.nilesoft.org/images/screenshots/shadow.png"><br>
- <img src="https://www.nilesoft.org/images/screenshots/desktop.png"><br>
- <img src="https://www.nilesoft.org/images/screenshots/taskbar.png"><br>
- <img src="https://www.nilesoft.org/images/screenshots/s0.png"><br>
- <img src="https://www.nilesoft.org/images/screenshots/s1.png"><br>
- <img src="https://www.nilesoft.org/images/screenshots/s2.png"><br>
- <img src="https://www.nilesoft.org/images/screenshots/s3.png"><br>
- <br>
- <br>
+<img src="/screenshots/folder-back.png"><br>
+<img src="/screenshots/file-manage.png"><br>
+<img src="/screenshots/view.png"><br>
+<img src="/screenshots/edit.png"><br>
+<img src="/screenshots/terminal.png"><br>
+<img src="/screenshots/taskbar.png"><br>
+<img src="/screenshots/goto2.png"><br>
+<img src="/screenshots/gradient.png"><br>
+<img src="/screenshots/acrylic.png"><br>
+
+<br>
+<br>
 </p>
 
 Donate
