@@ -65,3 +65,8 @@ If you really love Shell and would like to see it continue to improve.
 
 [![Paypal](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://www.paypal.me/nilesoft)
 [![BuyMeACoffee](https://img.shields.io/badge/Donate-BuyMeACoffee-yellow.svg)](https://www.buymeacoffee.com/moudey)
+
+Sponsors
+------------------
+[@SteffanDonal](https://github.com/SteffanDonal)
+
