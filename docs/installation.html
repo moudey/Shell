@@ -1,27 +1,165 @@
 ﻿<h4>Installation</h4>
 <br>
+<div class="notification is-info is-light mt-5" role="alert">
+	<i>Info:</i> Administrative permissions are required for installation.
+</div>
+<br>
+<p>Shell can be installed in the following ways:</p>
+<ul>
+	<li><a href="#installer"  style="border-bottom: 1px solid currentColor;">Installer</a></li>
+	<li><a href="#portable"   style="border-bottom: 1px solid currentColor;">Portable</a></li>
+	<li><a href="#winget"     style="border-bottom: 1px solid currentColor;">Windows Package Manager</a></li>
+	<li><a href="#scoop"      style="border-bottom: 1px solid currentColor;">Scoop</a></li>
+	<li><a href="#chocolatey" style="border-bottom: 1px solid currentColor;">Chocolatey</a></li>
+</ul><br>
+<p>Please also note the following reference sections:</p>
+<ul>
+	<li><a href="#cli"        style="border-bottom: 1px solid currentColor;">Command-Line Help</a></li>
+	<li><a href="#keys"       style="border-bottom: 1px solid currentColor;">Keys to enable/disable Shell functionalities</a></li>
+</ul>
+
+<br>
 
 <div id="installer">
 	<h5>Installer version</h5>
 	<div id="installer-install">
 		<h5>Install</h5>
-		<p>Download the installation file, run it, follow the installation steps, and agree to restart Windows File Explorer.</p>
+		<p><a href="https://nilesoft.org/download" style="border-bottom: 1px solid currentColor;">Download</a> the
+			installation file (<span class="is-family-monospace">Installer/Portable</span>),
+			run <code>setup.exe</code>,
+			follow the installation steps,
+			and agree to restart Windows File Explorer.</p>
+		<p>The program will be installed to <code>C:\Program Files\Nilesoft Shell\</code>, unless you have chosen
+		a different installation path during the installation steps.</p>
 	</div>
+	<hr>
 	<div id="installer-uninstall">
 		<h5>Uninstall</h5>
-		<p>Inside the shell folder, run the <code>unst000.exe</code> or <code>unstall.exe</code> file, then follow the steps, and then agree to restart Windows File Explorer.</p>
+		<p>Inside the Shell program folder (<code>C:\Program Files\Nilesoft Shell\</code> by default), run the <code>unst000.exe</code> or <code>unstall.exe</code> file, then follow the steps, and then agree to restart Windows File Explorer.</p>
 	</div>
 </div>
+
 <br/>
+
 <div id="portable">
 	<h5>Portable version</h5>
-	<p>Download the release package and unzip its content in any location you want.</p>
-	<p>Open an elevated command prompt.</p>
-	<div class="alert alert-primary" role="alert">Administrative permissions required for installation</div>
-	<h5>Command-Line Help</h5><br>
+	<div id="portable-install">
+		<h5>Install</h5>
+		<p><a href="https://nilesoft.org/download" style="border-bottom: 1px solid currentColor;">Download</a> the
+			installation file (<span class="is-family-monospace">Installer/Portable</span>),
+			run <code>setup.exe</code>,
+			click <span class="is-family-monospace">Next</span>, chose the folder you want the program to be extracted to,
+			<strong>Check the option <span class="is-family-monospace">Portable Mode</span></strong>, and click
+			<span class="is-family-monospace">Extract</span>.</p>
+		<p>Open an <strong>elevated command prompt</strong> (or use <a href="https://github.com/gerardog/gsudo" style="border-bottom: 1px solid currentColor;">gsudo</a>),
+			change to the directory you have extracted the program to,
+			and run</p>
+		<code>shell -register -restart</code>
+		<p>For further details see the chapter <a href="#cli" style="border-bottom: 1px solid currentColor;">Command-Line Help</a> below.</p>
+	</div>
+	<hr>
+	<div id="portable-uninstall">
+		<h5>Uninstall</h5>
+		<p>Open an <strong>elevated command prompt</strong> (or use <a href="https://github.com/gerardog/gsudo" style="border-bottom: 1px solid currentColor;">gsudo</a>),
+			change to the directory you have extracted the program to,
+			and run</p>
+		<code>shell -unregister -restart</code>
+		<br>
+		<div class="notification is-info is-light mt-5">
+			<i>Tip:</i> Close all instances of Windows File Explorer before uninstalling to avoid needing a reboot after it (Shell) has been uninstalled.
+		</div>
+		<br>
+		<p>For further details see the chapter <a href="#cli" style="border-bottom: 1px solid currentColor;">Command-Line Help</a> below.</p>
+	</div>
+</div>
+
+<br/>
+
+<div id="winget">
+	<h5>Windows Package Manager</h5>
+	<p>Windows Package Manager is available from Windows 10 version 1809.</p>
+	<div id="winget-install">
+		<h5>Install</h5>
+		<p>Open a command prompt, and run</p>
+		<code>winget install Nilesoft.Shell</code>
+		<p>The program will be installed to <code>C:\Program Files\Nilesoft Shell\</code>.</p>
+	</div>
+	<hr>
+	<div id="winget-uninstall">
+		<h5>Uninstall</h5>
+		<p>Open a command prompt, and run</p>
+		<code>winget uninstall Nilesoft.Shell</code>
+	</div>
+</div>
+
+<br/>
+
+<div id="scoop">
+	<h5>Scoop</h5>
+	<p>Scoop can be installed following the instructions at <a href="https://scoop.sh/" style="border-bottom: 1px solid currentColor;">scoop.sh</a>.</p>
+	<div id="scoop-install">
+		<h5>Install</h5>
+		<p>Open a command prompt, and run</p>
+		<code>scoop install nilesoft-shell</code>
+		<p>The program will be installed to <code>%USERPROFILE%\scoop\apps\nilesoft-shell\current\</code>.</p>
+		<br>
+		<div class="notification is-info is-light mt-5">
+			<i>Tip:</i> If you get the error <code>Couldn't find manifest for 'nilesoft-shell'</code>, please run<br/>
+			<code>scoop bucket add extras</code> first.
+		</div>
+		<br>
+		<p>Open an <strong>elevated command prompt</strong> (or use <a href="https://github.com/gerardog/gsudo" style="border-bottom: 1px solid currentColor;">gsudo</a>),
+			and run</p>
+		<code>shell -register -restart</code>
+		<p>For further details see the chapter <a href="#cli" style="border-bottom: 1px solid currentColor;">Command-Line Help</a> below.</p>
+	</div>
+	<hr>
+	<div id="scoop-uninstall">
+		<h5>Uninstall</h5>
+		<p>Open an <strong>elevated command prompt</strong> (or use <a href="https://github.com/gerardog/gsudo" style="border-bottom: 1px solid currentColor;">gsudo</a>),
+			and run</p>
+		<code>shell -unregister -restart</code>
+		<p>Then run</p>
+		<code>scoop uninstall nilesoft-shell</code>
+	</div>
+</div>
+
+<br/>
+
+<div id="chocolatey">
+	<h5>Chocolatey</h5>
+	<p>Chocolatey can be installed following the instructions at <a href="https://chocolatey.org/install#individual" style="border-bottom: 1px solid currentColor;">chocolatey.org</a>.</p>
+	<div id="chocolatey-install">
+		<h5>Install</h5>
+		<div class="notification is-info is-light mt-5">
+			<i>Notice:</i> Until the package has been moderated, you need to add the specific version string to the installer,
+			adding e.g.<br/>
+			<code>choco install nilesoft.shell --version=1.8.1</code><br/>
+			Please find the latest published version at <a href="https://community.chocolatey.org/packages/nilesoft.shell#versionhistory" style="border-bottom: 1px solid currentColor;">
+			Chocolatey's Version History</a> and use the latest version number (replacing <code>1.8.1</code>).
+		</div>
+		<br>
+		<p>Open an <strong>elevated command prompt</strong> (or use <a href="https://github.com/gerardog/gsudo" style="border-bottom: 1px solid currentColor;">gsudo</a>),
+			and run</p>
+		<code>choco install nilesoft.shell</code>
+		<p>The program will be installed to <code>C:\Program Files\Nilesoft Shell\</code>.</p>
+	</div>
+	<hr>
+	<div id="chocolatey-uninstall">
+		<h5>Uninstall</h5>
+		<p>Open an <strong>elevated command prompt</strong> (or use <a href="https://github.com/gerardog/gsudo" style="border-bottom: 1px solid currentColor;">gsudo</a>),
+			and run</p>
+		<code>choco uninstall nilesoft.shell</code>
+	</div>
+</div>
+
+<br/>
+
+<div id="cli">
+	<h5 id="cli-help">Command-Line Help</h5><br>
 	<code>shell -[options]</code>
 	<br><br>
-	<h5>Options</h5>
+	<h5 id="cli-options">Options</h5>
 	<table class="table table-sm">
 		<tr>
 			<td class="syntax-keyword w-25">-register (-r)</td>
@@ -36,6 +174,10 @@
 			<td>Restart Windows Explorer.</td>
 		</tr>
 		<tr>
+			<td class="syntax-keyword">-treat</td>
+			<td>Disable Windows 11 context menu.</td>
+		</tr>
+		<tr>
 			<td class="syntax-keyword">-silent (-s)</td>
 			<td>Prevents displaying messages.</td>
 		</tr>
@@ -44,28 +186,14 @@
 			<td>Display this help message.</td>
 		</tr>
 	</table>
-
-	<div id="portable-install">
-		<h5>Install</h5>
-		<code>shell -register -restart</code>
-	</div>
-	<hr>
-	<div id="portable-uninstall">
-		<h5>Uninstall</h5>
-		<code>shell -unregister -restart</code>
-		<br>
-		<div class="notification is-info is-light mt-5">
-			<i>Tip:</i> Close all instances of Windows File Explorer before uninstalling to avoid needing a reboot after it (Shell) has been uninstalled.
-		</div>
-	</div>
 </div>
 
 <hr>
 <div id="keys">
-<h5>Use the following keys to enable/disable</h5>
-<p>These keys are used when you press <code>right-click</code> or press <code>Shift</code>+<code>F10</code> keys</p>
-<code>CTRL</code> To enable and reload the configuration file "shell.shl"<br/>
-<code>WIN</code> To make priority to the modern context menu for Windows 11<br>
-<code>CTRL</code>+<code>WIN</code> To disable Shell and Enable Classic Context Menu<br>
-<code>RIGHT-CLICK + LEFT-CLICK</code> To reload the configuration file "shell.shl"<br/>
+	<h5>Use the following keys to enable/disable</h5>
+	<p>These keys are used when you press <code>right-click</code> or press <code>Shift</code>+<code>F10</code> keys</p>
+	<code>CTRL</code> To enable and reload the configuration file <code>shell.nss</code><br/>
+	<code>WIN</code> To make priority to the modern context menu for Windows 11<br>
+	<code>CTRL</code>+<code>WIN</code> To disable Shell and Enable Classic Context Menu<br>
+	<code>RIGHT-CLICK + LEFT-CLICK</code> To reload the configuration file <code>shell.nss</code><br/>
 </div>
