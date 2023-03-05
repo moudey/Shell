@@ -4,7 +4,9 @@
 <ul>
 	<li>Syntax are not case sensitive.</li>
 	<li>Spaces around the equal (<code>=</code>) sign are optional and are ignored.</li>
-	<li>The properties of static and dynamic items are separated by blank spaces or on a separate line and must be placed in parentheses <code>( )</code>.</li>
+	<li>The properties of static and dynamic items are separated by blank spaces or on a separate line and must be
+		placed in parentheses <code>( )</code>.
+	</li>
 	<li>variable are optional.</li>
 	<li>default are optional.</li>
 	<li>Static items are optional.</li>
@@ -14,34 +16,34 @@
 </ul>
 
 <div class="notification is-info is-light">
-  <i>Tip:</i> When there is an error, it is recorded in the log file (shell.log).
+	<i>Tip:</i> When there is an error, it is recorded in the log file (shell.log).
 </div>
 
 <p>The following rules apply to the syntax of configuration file (shell.nss):</p>
 <h5>shell.nss structure</h5>
 <pre><code class="lang-shell">shell 
 {
-    // global variables
-    var // variables 
-    {
-        // variables content
-        variable-name = variable-value
-        ...
-    }
-	
-    set // settings
-    {
+	// global variables
+	var // variables 
+	{
+		// variables content
+		variable-name = variable-value
+		...
+	}
+
+	set // settings
+	{
 		theme
 		{
 			set-name = set-value
 			...
 		}
-		
-        set-name = set-value
-        set-name = [set-value, set-value, ...]
-        ...
-    }
-	
+
+		set-name = set-value
+		set-name = [set-value, set-value, ...]
+		...
+	}
+
 	images
 	{
 		id = value
@@ -49,45 +51,46 @@
 		id1,id2, id3, "item 2" = value
 		....
 	}
-	
-    // static items
-    static
-    {
-        // static items content
-        item ( property-name = property-value   ... )
-        ...
-    }
 
-    // dynamic items
-    dynamic
-    {
-        // dynamic items content
-        item ( property-name = property-value   ... )
-        
-        separator [( property-name = property-value   ... )]
-        
-        menu ( property-name = property-value   ... )
-        {
-           var // local variables
-           {
-                variable-name = variable-value
-                ...
-            }
-            
-            item ( property-name = property-value   ... )
-            ...
-        }
-        ...
-    }
+	// static items
+	static
+	{
+		// static items content
+		item ( property-name = property-value   ... )
+		...
+	}
+
+	// dynamic items
+	dynamic
+	{
+		// dynamic items content
+		item ( property-name = property-value   ... )
+
+		separator [( property-name = property-value   ... )]
+
+		menu ( property-name = property-value   ... )
+		{
+		   var // local variables
+		   {
+				variable-name = variable-value
+				...
+			}
+			
+			item ( property-name = property-value   ... )
+			...
+		}
+		...
+	}
 }</code></pre>
 
 <br>
-<p><b>Breaking Long Lines</b><br>For best readability, users often like to avoid lines longer than 80 characters. single quotes also allow  break up a line.</p>
+<p><b>Breaking Long Lines</b><br>For best readability, users often like to avoid lines longer than 80 characters. single
+	quotes also allow break up a line.</p>
 <pre><code class="lang-shell">shell 
 {
-    dynamic
-    {
-	  item(title='Command prompt'
-	        cmd='cmd.exe')
-    }
+	dynamic
+	{
+		item(title='Command prompt'
+			cmd='cmd.exe')
+	}
 }</code></pre>
