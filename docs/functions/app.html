@@ -2,53 +2,88 @@
 <br>
 <p>The namespace of the application contains file paths, version and some details.</p>
 <br>
-<p>
-	<h5>app.directory (app.dir)</h5>
-	Returns the path of <b>Shell</b> directory.
-</p>
-<br>
-<p>
+
+<section id="app.directory" class="my-5">
+	<h5>app.directory</h5>
+	<p>Returns the path of <b>Shell</b> directory.</p>
+	<p>Syntax</p>
+	<pre><code>app.directory     // usage in section context
+'@app.directory'  // usage inside quoted-string literals</code></pre>
+</section>
+
+<section id="app.cfg" class="my-5">
 	<h5>app.cfg</h5>
-	Returns the path of the configuration file "shell.shl".
-</p>
-<br>
-<p>
+	<p>Returns the path of the <a href="../syntax/index.html#shell.nss"
+			style="border-bottom: 1px solid currentColor;"><span
+			class="is-family-monospace">configuration file</span></a> <code>shell.nss</code> (or <code>shell.shl</code>
+		in older installations).</p>
+	<p>Syntax</p>
+	<pre><code>app.cfg     // usage in section context
+'@app.cfg'  // usage inside quoted-string literals</code></pre>
+</section>
+
+<section id="app.dll" class="my-5">
 	<h5>app.dll</h5>
-	Returns the path of "shell.dll".
-</p>
-<br>
-<p>
+	<p>Returns the path of <code>shell.dll</code>.</p>
+	<p>Syntax</p>
+	<pre><code>app.dll     // usage in section context
+'@app.dll'  // usage inside quoted-string literals</code></pre>
+</section>
+
+<section id="app.exe" class="my-5">
 	<h5>app.exe</h5>
-	Returns the path of "shell.exe".
-</p>
-<br>
-<p>
+	<p>Returns the path of <code>shell.exe</code>.</p>
+	<p>Syntax</p>
+	<pre><code>app.exe     // usage in section context
+'@app.exe'  // usage inside quoted-string literals</code></pre>
+</section>
+
+<section id="app.name" class="my-5">
 	<h5>app.name</h5>
-	Returns application name.
-</p>
-<br>
-<p>
-	<h5>app.version (app.ver)</h5>
-	Revert <b>Shell</b> version.
-</p>
-<br>
-<p>
+	<p>Returns application name.</p>
+	<p>Syntax</p>
+	<pre><code>app.name     // usage in section context
+'@app.name'  // usage inside quoted-string literals</code></pre>
+</section>
+
+<section id="app.version" class="my-5">
+	<h5>app.version</h5>
+	<p>Returns <b>Shell</b> version.</p>
+	<p>Syntax</p>
+	<pre><code>app.version     // usage in section context
+'@app.version'  // usage inside quoted-string literals</code></pre>
+</section>
+
+<section id="app.is64" class="my-5">
 	<h5>app.is64</h5>
-	Returns the architecture of the application.
-</p>
-<br>
-<p>
+	<p>Returns the architecture of the application.</p>
+	<p>Syntax</p>
+	<pre><code>app.is64     // usage in section context
+'@app.is64'  // usage inside quoted-string literals</code></pre>
+</section>
+
+<section id="app.about" class="my-5">
 	<h5>app.about</h5>
-	Returns <b>Shell</b> information.
-</p>
-<br>
-<p>
+	<p>Returns <b>Shell</b> information.</p>
+	<p>Syntax</p>
+	<pre><code>app.about     // usage in section context
+'@app.about'  // usage inside quoted-string literals</code></pre>
+</section>
+
+<section id="app.reload" class="my-5">
 	<h5>app.reload</h5>
-	Reload the configuration file.
-</p>
-<br>
-<p>
+	<p>Reload the <a href="../syntax/index.html#shell.nss" style="border-bottom: 1px solid currentColor;"><span
+			class="is-family-monospace">configuration file</span></a>.</p>
+	<p>Syntax</p>
+	<pre><code>app.reload     // usage in section context
+'@app.reload'  // usage inside quoted-string literals</code></pre>
+</section>
+
+<section id="app.unload" class="my-5">
 	<h5>app.unload</h5>
-	Unload the configuration file.
-</p>
-<br>
+	<p>Unload the <a href="../syntax/index.html#shell.nss" style="border-bottom: 1px solid currentColor;"><span
+			class="is-family-monospace">configuration file</span></a>.</p>
+	<p>Syntax</p>
+	<pre><code>app.unload     // usage in section context
+'@app.unload'  // usage inside quoted-string literals</code></pre>
+</section>
