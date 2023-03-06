@@ -1,7 +1,7 @@
 ﻿<h5>REG</h5>
-<p>Registary functions</p>
+<p>Registry functions</p>
 <br>
-<section class="my-5">
+<section id="registry-hives" class="my-5">
 	<h5>Registry hive enum</h5>
 	<p>Syntax</p>
 	<pre><code>reg.cr	// HKEY_CLASSES_ROOT
@@ -10,8 +10,8 @@ reg.lm	// HKEY_LOCAL_MACHINE
 reg.u	// HKEY_USERS
 reg.cc	// HKEY_CURRENT_CONFIG</code></pre>
 </section>
-<section class="my-5">
-	<h5>Registry value kind Enum</h5>
+<section id="registry-types" class="my-5">
+	<h5>Registry value type Enum</h5>
 	<p>Syntax</p>
 	<pre><code>reg.none	// No data type
 reg.sz		// REG_SZ
@@ -22,7 +22,7 @@ reg.dword	// REG_DWORD
 reg.qword	// REG_QWORD</code></pre>
 </section>
 
-<section class="my-5">
+<section id="reg-function" class="my-5">
 	<h5>The function of reading from the Registry.</h5>
 	<p>Syntax</p>
 	<code>reg(reg.lm, 'SOFTWARE\Microsoft\Windows NT\CurrentVersion','ProductName')</code><br><br>

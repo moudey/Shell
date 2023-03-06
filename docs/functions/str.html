@@ -1,60 +1,70 @@
 ﻿<h5>STR</h5>
 <br>
-<section class="my-5">
+
+<section id="str.get" class="my-5">
 	<h5>str.get (str.at)</h5>
 	<p>Returns a character from a specific location in the string.</p>
 	<p>Syntax</p>
 	<code>str.get("Hello World!", 7)</code>
 </section>
-<section class="my-5">
+
+<section id="str.set" class="my-5">
 	<h5>str.set</h5>
 	<p>Sets a character with a specific location in the string.</p>
 	<p>Syntax</p>
 	<code>str.set("Hello World!", 6, '-')</code>
 </section>
-<section class="my-5">
+
+<section id="str.contains" class="my-5">
 	<h5>str.contains</h5>
 	<p>Returns a value indicating whether a specified substring occurs within this string.</p>
 	<p>Syntax</p>
 	<code>str.contains("Hello World!", 'World')</code>
 </section>
-<section class="my-5">
+
+<section id="str.empty" class="my-5">
 	<h5>str.empty (str.null)</h5>
 	<p>Tests whether the string contains characters.</p>
 	<p>Syntax</p>
 	<code>str.empty("")</code>
 </section>
-<section class="my-5">
+
+<section id="str.start" class="my-5">
 	<h5>str.start</h5>
 	<p>Checks whether the string starts with the specified prefix.</p>
 	<p>Syntax</p>
 	<code>str.start("Hello World!", "World!")</code>
 </section>
-<section class="my-5">
+
+<section id="str.end" class="my-5">
 	<h5>str.end</h5>
 	<p>Checks whether the string ends with the specified suffix.</p>
 	<p>Syntax</p>
 	<code>str.end("Hello World!", "World!")</code>
 </section>
-<section class="my-5">
+
+<section id="str.equals" class="my-5">
 	<h5>str.equals</h5>
 	<p>Determines whether two String have the same value.</p>
 	<p>Syntax</p>
 	<code>str.equals("Hello World!", "Hello World!")</code>
 </section>
-<section class="my-5">
+
+<section id="str.not" class="my-5">
 	<h5>str.not</h5>
 	<p>Determine if two strings do not have the same value.</p>
 	<p>Syntax</p>
 	<code>str.not("Hello World!", "Hello-World!")</code>
 </section>
-<section class="my-5">
+
+<section id="str.length" class="my-5">
 	<h5>str.length (str.len)</h5>
 	<p>Gets the number of characters in the current string.</p>
 	<p>Syntax</p>
 	<code>str.length("Hello World!")</code>
 </section>
-<section class="my-5">
+
+<section id="str.trim" class="my-5">
 	<h5>str.trim</h5>
 	<p>Returns a new string in which all leading and trailing occurrences of a set of specified characters from the current string are removed.</p>
 	<p>Syntax</p>
@@ -63,7 +73,8 @@
 	<p>Removes all leading and trailing 'H!' characters from the current string.</p>
 	<code>str.trim("Hello World!", "H!")</code>
 </section>
-<section class="my-5">
+
+<section id="str.trimstart" class="my-5">
 	<h5>str.trimstart</h5>
 	<p>Returns a new string in which all leading occurrences of a set of specified characters from the current string are removed.</p>
 	<p>Syntax</p>
@@ -73,7 +84,8 @@
 	<p>Removes all leading 'H' characters from the current string.</p>
 	<code>str.trimstart("Hello World!", "H")</code>
 </section>
-<section class="my-5">
+
+<section id="str.trimend" class="my-5">
 	<h5>str.trimend</h5>
 	<p>Returns a new string in which all trailing occurrences of a set of specified characters from the current string are removed.</p>
 	<p>Syntax</p>
@@ -83,50 +95,58 @@
 	<p>Removes all trailing '!' characters from the current string.</p>
 	<code>str.trimend("Hello World!", "!")</code>
 </section>
-<section class="my-5">
+
+<section id="str.find" class="my-5">
 	<h5>str.find</h5>
 	<p>Searches a string in a forward direction for the first occurrence of a substring that matches a specified sequence of characters.</p>
 	<p>Syntax</p>
 	<code>str.find("Hello World!", "lo")</code>
 </section>
-<section class="my-5">
+
+<section id="str.findlast" class="my-5">
 	<h5>str.findlast</h5>
 	<p>Searches a string in a backward direction for the first occurrence of a substring that matches a specified sequence of characters.</p>
 	<p>Syntax</p>
 	<code>str.findlast("Hello World!", "Wor")</code>
 </section>
-<section class="my-5">
+
+<section id="str.lower" class="my-5">
 	<h5>str.lower</h5>
 	<p>Returns a copy of this string converted to lowercase.</p>
 	<p>Syntax</p>
 	<code>str.lower("Hello World!")</code>
 </section>
-<section class="my-5">
+
+<section id="str.upper" class="my-5">
 	<h5>str.upper</h5>
 	<p>Returns a copy of this string converted to uppercase.</p>
 	<p>Syntax</p>
 	<code>str.upper("Hello World!")</code>
 </section>
-<section class="my-5">
+
+<section id="str.left" class="my-5">
 	<h5>str.left</h5>
 	<p>Extracts the left part of a string.</p>
 	<p>Syntax</p>
 	<code>str.left("Hello World!", 5)</code>
 </section>
-<section class="my-5">
+
+<section id="str.right" class="my-5">
 	<h5>str.right</h5>
 	<p>Extracts the right part of a string.</p>
 	<p>Syntax</p>
 	<code>str.right("Hello World!", 5)</code>
 </section>
-<section class="my-5">
+
+<section id="str.sub" class="my-5">
 	<h5>str.sub</h5>
 	<p>Copies a substring of at most some number of characters from a string beginning from a specified position.</p>
 	<p>Syntax</p>
 	<code>str.sub("Hello World!", 5)</code><br>
 	<code>str.sub("Hello World!", 0, 5)</code>
 </section>
-<section class="my-5">
+
+<section id="str.remove" class="my-5">
 	<h5>str.remove</h5>
 	<p>Removes an element or a range of elements in a string from a specified position.</p>
 	<p>Syntax</p>
@@ -134,28 +154,32 @@
 	<code>str.remove("Hello World!", 5)</code><br>
 	<code>str.remove("Hello World!", 5, 1)</code>
 </section>
-<section class="my-5">
+
+<section id="str.replace" class="my-5">
 	<h5>str.replace</h5>
 	<p>Replace elements in a string at a specified position with specific characters or characters copied from other ranges or strings.</p>
 	<p>Syntax</p>
 	<code>str.replace("Hello World!", "World", "User")</code><br>
 	<code>str.replace("Hello World!", "world", "user", true)</code>
 </section>
-<section class="my-5">
+
+<section id="str.padleft" class="my-5">
 	<h5>str.padleft</h5>
 	<p>Returns a new string of a specified length in which the beginning of the current string is padded with spaces or with a specified character.</p>
 	<p>Syntax</p>
 	<code>str.padleft("Hello World!", "*")</code><br>
 	<code>str.padleft("Hello World!", "*", 3)</code>
 </section>
-<section class="my-5">
+
+<section id="str.padright" class="my-5">
 	<h5>str.padright</h5>
 	<p>Returns a new string of a specified length in which the end of the current string is padded with spaces or with a specified character.</p>
 	<p>Syntax</p>
 	<code>str.padright("Hello World!", "*")</code><br>
 	<code>str.padright("Hello World!", "*", 3)</code>
 </section>
-<section class="my-5">
+
+<section id="str.padding" class="my-5">
 	<h5>str.padding</h5>
 	<p>Returns a new string of a specified length in which the start and end of the current string is padded with spaces or with a specified character.</p>
 	<p>Syntax</p>
@@ -163,7 +187,7 @@
 	<code>str.padding("Hello World!", "*", 3)</code>
 </section>
 
-<section class="my-5">
+<section id="str.guid" class="my-5">
 	<h5>str.guid</h5>
 	<p>Returns a new guid string</p>
 	<p>Syntax</p>
@@ -173,14 +197,14 @@
 	<code>str.guid(3)</code> return (00000000-0000-0000-0000-000000000000) <br>
 </section>
 
-<section class="my-5">
+<section id="str.capitalize" class="my-5">
 	<h5>str.capitalize</h5>
 	<p>Returns a new capitalize string</p>
 	<p>Syntax</p>
 	<code>str.capitalize('hello world')</code> return "Hello World" <br>
 </section>
 
-<section class="my-5">
+<section id="str.res" class="my-5">
 	<h5>str.res</h5>
 	<p>Returns a string resource from the executable file. <em>"shell32.dll" is the default file.</em></p>
 	<p>Syntax</p>

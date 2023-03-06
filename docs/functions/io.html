@@ -1,6 +1,6 @@
 ﻿<h5>IO</h5>
 <br>
-<section class="my-5">
+<section id="io.attribute" class="my-5">
 	<h5>io.attribute enumerations.</h5>
 	<p>Syntax</p>
 	<pre><code>io.attribute.archive
@@ -18,7 +18,8 @@ io.attribute.system
 io.attribute.temporary
 io.attribute.virtual</code></pre>
 </section>
-<section class="my-5">
+
+<section id="io.attributes" class="my-5">
 	<h5>io.attributes</h5>
 	<p>Retrieves file system attributes for a specified path.</p>
 	<p>Syntax</p>
@@ -38,37 +39,43 @@ io.attribute.hidden(atrr)
 // check if attr is directory
 io.attribute.directory(atrr)</code></pre>
 </section>
-<section class="my-5">
+
+<section id="io.copy" class="my-5">
 	<h5>io.copy</h5>
 	<p>Copies an existing file to a new file.</p>
 	<p>Syntax</p>
 	<code>io.copy(pathFrom, pathTo)</code>
 </section>
-<section class="my-5">
+
+<section id="io.move" class="my-5">
 	<h5>io.move</h5>
 	<p>Moves an existing file or a directory, including its children..</p>
 	<p>Syntax</p>
 	<code>io.move(oldPath, newPath)</code>
 </section>
-<section class="my-5">
+
+<section id="io.rename" class="my-5">
 	<h5>io.rename</h5>
 	<p>Rename a file or directory.</p>
 	<p>Syntax</p>
 	<code>io.rename(oldName, newName)</code>
 </section>
-<section class="my-5">
+
+<section id="io.delete" class="my-5">
 	<h5>io.delete</h5>
 	<p>Deletes an existing path.</p>
 	<p>Syntax</p>
 	<code>io.delete(path)</code>
 </section>
-<section class="my-5">
+
+<section id="io.directory.create" class="my-5">
 	<h5>io.directory.create (io.dir.create)</h5>
 	<p>Create new directory.</p>
 	<p>Syntax</p>
 	<code>io.directory.create(path)</code>
 </section>
-<section class="my-5">
+
+<section id="io.directory.exists" class="my-5">
 	<h5>io.directory.exists (io.dir.exists)</h5>
 	<p>Check if one or more directories exists.</p>
 	<p>Syntax</p>
@@ -76,7 +83,8 @@ io.attribute.directory(atrr)</code></pre>
 	<br>
 	<code>io.directory.exists(path1, path2, path3, ...)</code>
 </section>
-<section class="my-5">
+
+<section id="io.directory.empty" class="my-5">
 	<h5>io.directory.empty (io.dir.empty)</h5>
 	<p>Check if one or more directory is empty.</p>
 	<p>Syntax</p>
@@ -84,14 +92,17 @@ io.attribute.directory(atrr)</code></pre>
 	<br>
 	<code>io.directory.empty(path1, path2, path3, ...)</code>
 </section>
-<h5 class="my-5">File functions.</h5>
-<section class="my-5">
+
+<h5 id="file-functions" class="my-5">File functions.</h5>
+
+<section id="io.file.size" class="my-5">
 	<h5>io.file.size</h5>
 	<p>Retrieves the size of the specified file, in bytes.</p>
 	<p>Syntax</p>
 	<code>io.file.size(path)</code>
 </section>
-<section class="my-5">
+
+<section id="io.file.exists" class="my-5">
 	<h5>io.file.exists</h5>
 	<p>Check if one or more files exists.</p>
 	<p>Syntax</p>
@@ -99,27 +110,31 @@ io.attribute.directory(atrr)</code></pre>
 	<br>
 	<code>io.file.exists(path1, path2, path3, ...)</code>
 </section>
-<section class="my-5">
+
+<section id="io.file.read" class="my-5">
 	<h5>io.file.read</h5>
 	<p>Read file contents as text with character count option.</p>
 	<p>Syntax</p>
 	<code>io.file.read(path)</code><br>
 	<code>io.file.read(path, 12)</code>
 </section>
-<section class="my-5">
+
+<section id="io.file.create" class="my-5">
 	<h5>io.file.create</h5>
 	<p>Create new file with content option.</p>
 	<p>Syntax</p>
 	<code>io.file.create(path)</code><br>
 	<code>io.file.create(path, "Hello World!")</code>
 </section>
-<section class="my-5">
+
+<section id="io.file.write" class="my-5">
 	<h5>io.file.write</h5>
 	<p>Writing to a file with new content.</p>
 	<p>Syntax</p>
 	<code>io.file.write(path, "Hello World!")</code>
 </section>
-<section class="my-5">
+
+<section id="io.file.append" class="my-5">
 	<h5>io.file.append</h5>
 	<p>Appends text to an existing file, or to a new file if the specified file does not exist.</p>
 	<p>Syntax</p>
@@ -128,7 +143,7 @@ io.attribute.directory(atrr)</code></pre>
 	<code>io.file.append(path, "World!")</code>
 </section>
 
-<section class="my-5">
+<section id="io.datetime" class="my-5">
 	<h5>io.datetime</h5>
 	<p>Gets or Sets the time of the file.</p>
 	<p>Syntax</p>
