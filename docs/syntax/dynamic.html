@@ -8,14 +8,20 @@
 	<li>One <a href="variables.html" style="border-bottom: 1px solid currentColor;"> <code>var</code> block</a> to
 		define "local" variables.
 	</li>
-	<li>One or more <a href="#item" style="border-bottom: 1px solid currentColor;"><code>item</code> entries</a>. These
-		appear as top-level items in a context menu.
-	</li>
-	<li>One or more <a href="#menu" style="border-bottom: 1px solid currentColor;"><code>menu</code> entries</a>. These
-		appear as top-level sub-menus in a context menu.
-	</li>
-	<li>One or more <a href="#separator" style="border-bottom: 1px solid currentColor;"><code>separator</code>
-		entries</a>. These create a horizontal line between the given entries.
+	<li><span class="is-family-monospace">Menuitems</span>, i.e. one or more of the following:
+		<ul>
+			<li>One or more <a href="#item" style="border-bottom: 1px solid currentColor;"><code>item</code> entries</a>.
+				These
+				appear as top-level items in a context menu.
+			</li>
+			<li>One or more <a href="#menu" style="border-bottom: 1px solid currentColor;"><code>menu</code> entries</a>.
+				These
+				appear as top-level sub-menus in a context menu.
+			</li>
+			<li>One or more <a href="#separator" style="border-bottom: 1px solid currentColor;"><code>separator</code>
+				entries</a>. These create a horizontal line between the given entries.
+			</li>
+		</ul>
 	</li>
 	<li>One or more <code>imports</code>. The content of the given file will be placed in the position of the import.
 	</li>
@@ -42,6 +48,18 @@
         }
     }
 }</code></pre>
+<br/>
+
+<h4 id="menuitem">Menuitems</h4>
+
+<p><span class="is-family-monospace">menuitem</span> is an umbrella term for those entry types, that may appear in a
+	menu. These simply include the following:</p>
+<ul>
+	<li><a href="#item" style="border-bottom: 1px solid currentColor;"><code>item</code></a></li>
+	<li><a href="#menu" style="border-bottom: 1px solid currentColor;"><code>menu</code></a></li>
+	<li><a href="#separator" style="border-bottom: 1px solid currentColor;"><code>separator</code></a></li>
+</ul>
+
 <br/>
 
 <h4 id="item">Items</h4>
@@ -74,12 +92,16 @@
 	<li>One <a href="variables.html" style="border-bottom: 1px solid currentColor;"><code>var</code> block</a> to
 		define "local" variables.
 	</li>
-	<li>One or more <a href="#item" style="border-bottom: 1px solid currentColor;"><code>item</code> entries</a>.
-	</li>
-	<li>One or more sub-<a href="#menu" style="border-bottom: 1px solid currentColor;"><code>menu</code> entries</a>.
-	</li>
-	<li>One or more <a href="#separator" style="border-bottom: 1px solid currentColor;"><code>separator</code>
-		entries</a>. These create a horizontal line between the given entries.
+	<li><span class="is-family-monospace">Menuitems</span>, i.e. one or more of the following:
+		<ul>
+			<li>One or more <a href="#item" style="border-bottom: 1px solid currentColor;"><code>item</code> entries</a>.
+			</li>
+			<li>One or more sub-<a href="#menu" style="border-bottom: 1px solid currentColor;"><code>menu</code> entries</a>.
+			</li>
+			<li>One or more <a href="#separator" style="border-bottom: 1px solid currentColor;"><code>separator</code>
+				entries</a>. These create a horizontal line between the given entries.
+			</li>
+		</ul>
 	</li>
 	<li>One or more <code>imports</code>. The content of the given file will be placed in the position of the import.
 	</li>
