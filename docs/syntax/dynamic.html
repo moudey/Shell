@@ -5,36 +5,33 @@
 <h5 id="dynamic-sub-items">Sub-items</h5>
 <p>The section can have the following entry types, all of which are <strong>optional</strong>:</p>
 <ul>
-	<li>One <a href="variables.html" style="border-bottom: 1px solid currentColor;"> <code>var</code> block</a> to
-		define "local" variables.
+	<li>One <a href="variables.html" class="uline"> <code>var</code> block</a> to define "local" variables.
 	</li>
 	<li><span class="is-family-monospace">Menuitems</span>, i.e. one or more of the following:
 		<ul>
-			<li>One or more <a href="#item" style="border-bottom: 1px solid currentColor;"><code>item</code> entries</a>.
+			<li>One or more <a href="#item" class="uline"><code>item</code> entries</a>.
 				These appear as top-level items in a context menu.
 			</li>
-			<li>One or more <a href="#menu" style="border-bottom: 1px solid currentColor;"><code>menu</code> entries</a>.
+			<li>One or more <a href="#menu" class="uline"><code>menu</code> entries</a>.
 				These appear as top-level sub-menus in a context menu.
 			</li>
-			<li>One or more <a href="#separator" style="border-bottom: 1px solid currentColor;"><code>separator</code>
-				entries</a>. These create a horizontal line between the given entries.
+			<li>One or more <a href="#separator" class="uline"><code>separator</code> entries</a>. These create a
+				horizontal line between the given entries.
 			</li>
 		</ul>
 	</li>
 	<li>One or more <a href="index.html#import"
-			style="border-bottom: 1px solid currentColor;"><code><code>imports</code></code></a>. The content of the
-		given file will be placed in the position of the import.
+			class="uline"><code><code>imports</code></code></a>. The content of the given file will be placed in the
+		position of the import.
 	</li>
 </ul>
 <p>While the <code>var</code> block should be at the top of the section, the other entries can appear in any order.</p>
 
 <h5 id="dynamic-items-examples">Example</h5>
-<p>In the following example, one top-level <a href="#item"
-		style="border-bottom: 1px solid currentColor;"><code>item</code></a> is created, that is separated with a <a
-		href="#separator" style="border-bottom: 1px solid currentColor;">horizontal line</a> from an adjacent sub-<a
-		href="#menu" style="border-bottom: 1px solid currentColor;"><span class="is-family-monospace">menu</span></a>,
-	which in turn has one sub-<a href="#item" style="border-bottom: 1px solid currentColor;"><span
-			class="is-family-monospace">item</span></a>
+<p>In the following example, one top-level <a href="#item" class="uline"><code>item</code></a> is created, that is
+	separated with a <a href="#separator" class="uline">horizontal line</a> from an adjacent sub-<a href="#menu"
+			class="uline"><span class="is-family-monospace">menu</span></a>, which in turn has one sub-<a href="#item"
+			class="uline"><span class="is-family-monospace">item</span></a>
 	on its own:</p>
 <pre><code class="lang-shell">shell 
 {
@@ -55,9 +52,9 @@
 <p><span class="is-family-monospace">menuitem</span> is an umbrella term for those entry types, that may appear in a
 	menu. These simply include the following:</p>
 <ul>
-	<li><a href="#item" style="border-bottom: 1px solid currentColor;"><code>item</code></a></li>
-	<li><a href="#menu" style="border-bottom: 1px solid currentColor;"><code>menu</code></a></li>
-	<li><a href="#separator" style="border-bottom: 1px solid currentColor;"><code>separator</code></a></li>
+	<li><a href="#item" class="uline"><code>item</code></a></li>
+	<li><a href="#menu" class="uline"><code>menu</code></a></li>
+	<li><a href="#separator" class="uline"><code>separator</code></a></li>
 </ul>
 
 <br/>
@@ -67,11 +64,9 @@
 <p><span class="is-family-monospace">item</span>s create a single menu entry.</p>
 
 <h5 id="item-properties">Properties</h5>
-<p>Either a <a href="properties.html#title"
-		style="border-bottom: 1px solid currentColor;"><code>title</code></a> or a <a
-		href="properties.html#image" style="border-bottom: 1px solid currentColor;"><code>image</code></a>
-	property is mandatory (set to a non-null value). For further details, please refer to the <a href="properties.html"
-			style="border-bottom: 1px solid currentColor;">properties section</a> below.</p>
+<p>Either a <a href="properties.html#title" class="uline"><code>title</code></a> or a <a href="properties.html#image"
+		class="uline"><code>image</code></a> property is mandatory (set to a non-null value). For further details,
+	please refer to the <a href="properties.html" class="uline">properties section</a> below.</p>
 
 <h5 id="item-syntax">Syntax</h5>
 <pre><code class="lang-shell">item( title = value [property = value [...] ])</code></pre>
@@ -83,32 +78,26 @@
 	and sub-entries.</p>
 
 <h5 id="menu-properties">Properties</h5>
-<p>Either a <a href="properties.html#title"
-		style="border-bottom: 1px solid currentColor;"><code>title</code></a> or a <a
-		href="properties.html#image" style="border-bottom: 1px solid currentColor;"><code>image</code></a>
-	property is mandatory (set to a non-null value). For further details, please refer to the <a href="properties.html"
-			style="border-bottom: 1px solid currentColor;">properties section</a> below.</p>
+<p>Either a <a href="properties.html#title" class="uline"><code>title</code></a> or a <a href="properties.html#image"
+		class="uline"><code>image</code></a> property is mandatory (set to a non-null value). For further details,
+	please refer to the <a href="properties.html" class="uline">properties section</a> below.</p>
 
 <h5 id="menu-sub-items">Sub-items</h5>
 <p><span class="is-family-monospace">menu</span>s can have the following entry types, all of which are
 	<strong>optional</strong>:</p>
 <ul>
-	<li>One <a href="variables.html" style="border-bottom: 1px solid currentColor;"><code>var</code> block</a> to
-		define "local" variables.
+	<li>One <a href="variables.html" class="uline"><code>var</code> block</a> to define "local" variables.
 	</li>
 	<li><span class="is-family-monospace">Menuitems</span>, i.e. one or more of the following:
 		<ul>
-			<li>One or more <a href="#item" style="border-bottom: 1px solid currentColor;"><code>item</code> entries</a>.
-			</li>
-			<li>One or more sub-<a href="#menu" style="border-bottom: 1px solid currentColor;"><code>menu</code> entries</a>.
-			</li>
-			<li>One or more <a href="#separator" style="border-bottom: 1px solid currentColor;"><code>separator</code>
-				entries</a>. These create a horizontal line between the given entries.
+			<li>One or more <a href="#item" class="uline"><code>item</code> entries</a>.</li>
+			<li>One or more sub-<a href="#menu" class="uline"><code>menu</code> entries</a>.</li>
+			<li>One or more <a href="#separator" class="uline"><code>separator</code> entries</a>. These create a
+				horizontal line between the given entries.
 			</li>
 		</ul>
 	</li>
-	<li>One or more <a href="index.html#import"
-			style="border-bottom: 1px solid currentColor;"><code><code>imports</code></code></a>. The content of the
+	<li>One or more <a href="index.html#import" class="uline"><code><code>imports</code></code></a>. The content of the
 		given file will be placed in the position of the import.
 	</li>
 </ul>
@@ -129,8 +118,7 @@
 
 <h5 id="separator-properties">Properties</h5>
 <p><span class="is-family-monospace">separator</span>s do not have any mandatory properties. Please refer to the <a
-		href="properties.html" style="border-bottom: 1px solid currentColor;">properties section</a> below for further
-	details.</p>
+		href="properties.html" class="uline">properties section</a> below for further details.</p>
 
 <h5 id="separator-syntax">Syntax</h5>
 <pre><code class="lang-shell">separator
