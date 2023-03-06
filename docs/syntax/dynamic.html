@@ -176,12 +176,20 @@ separator( property = value [property = value [...] ])</code></pre>
 	</li>
 </ul>
 
+<h5 id="properties-types">Entry types</h5>
+<p>The <span class="is-family-monospace">Applies</span> column shows, whether the property applies to <a href="#menu"
+		style="border-bottom: 1px solid currentColor;"><span class="is-family-monospace">menu</span>s</a>, <a
+		href="#item" style="border-bottom: 1px solid currentColor;"><span class="is-family-monospace">item</span>s</a>
+	and/or <a href="#separator" style="border-bottom: 1px solid currentColor;"><span class="is-family-monospace">separator</span>s</a>.
+	If set in bold, then the property is mandatory for the given type.</p>
+
 <h5 id="properties-syntax">Syntax</h5>
 <div class="table-responsive">
 	<table class="table">
 		<thead>
 		<tr>
 			<th scope="col">Property</th>
+			<th scope="col" colspan="3">Applies</th>
 			<th scope="col">Summary</th>
 		</tr>
 		</thead>
@@ -189,13 +197,19 @@ separator( property = value [property = value [...] ])</code></pre>
 
 		<tr id="property-where">
 			<td>Where</td>
-			<td>Allow menu item to be passed if a true value is returned<br>
+			<td>M</td>
+			<td></td>
+			<td></td>
+			<td>Allow menu item to be passed if a true value is returned<br/>
 				Default = <span class="syntax-keyword">true</span>
 			</td>
 		</tr>
 
 		<tr id="property-title">
 			<td>Title</td>
+			<td><strong>M</strong></td>
+			<td><strong>I</strong></td>
+			<td></td>
 			<td>Sets a value indicating the caption of the menuitem.<br/>
 				<p class="text-danger">For <a href="#menu" style="border-bottom: 1px solid currentColor;"><span
 						class="is-family-monospace">menu</span></a> and <a href="#menu"
@@ -204,13 +218,15 @@ separator( property = value [property = value [...] ])</code></pre>
 					<a href="#property-image" style="border-bottom: 1px solid currentColor;"><code>image</code>
 						property</a> is defined.</p>
 				Default = <span class="syntax-keyword">null</span>
-				<p class="syntax-prop">Required for menu, item.</p>
 			</td>
 		</tr>
 
 		<tr id="property-mode">
 			<td>Mode</td>
-			<td>Accept item by selections behavior. Value have one of the following parameters:
+			<td>M</td>
+			<td>I</td>
+			<td>S</td>
+			<td>Accept item by type of selections. Value has one of the following parameters:
 				<table class="table">
 					<tr>
 						<td class="syntax-keyword">none</td>
@@ -234,12 +250,14 @@ separator( property = value [property = value [...] ])</code></pre>
 					</tr>
 				</table>
 				Default = <span class="syntax-keyword">single</span>
-				<p class="syntax-prop">Required for menu, item, separator.</p>
 			</td>
 		</tr>
 
 		<tr id="property-type">
 			<td>Type</td>
+			<td>M</td>
+			<td>I</td>
+			<td>S</td>
 			<td>Specify the types of object files allowed for the menu item to appear. The property is assigned to one
 				or more of these parameters and this character <code>|</code> is used to separate types.<br/>
 				Add a character <code>~</code> before single type to exclude.
@@ -320,12 +338,14 @@ separator( property = value [property = value [...] ])</code></pre>
 					</tr>
 				</table>
 				Default = <span class="syntax-keyword">Accepts all types except for the taskbar.</span>
-				<p class="syntax-prop">Required for menu, item, separator.</p>
 			</td>
 		</tr>
 
 		<tr id="property-visibility">
 			<td>Visibility (vis)</td>
+			<td>M</td>
+			<td>I</td>
+			<td>S</td>
 			<td>Visibility of menuitem and can have one of the following parameters:
 				<table class="table">
 					<tr id="property-visibility-hidden">
@@ -350,12 +370,14 @@ separator( property = value [property = value [...] ])</code></pre>
 					</tr>
 				</table>
 				Default = <span class="syntax-keyword">Noraml</span>
-				<p class="syntax-prop">Required for menu, item, separator.</p>
 			</td>
 		</tr>
 
 		<tr id="property-find">
 			<td>Find</td>
+			<td>M</td>
+			<td>I</td>
+			<td>S</td>
 			<td>
 				<p>Accept menuitem when the specified path name or path extension is contains or equal to the current
 					find property.<br/>Use this delimiter <code>|</code> to separate patterns.</p>
@@ -380,6 +402,9 @@ separator( property = value [property = value [...] ])</code></pre>
 
 		<tr id="property-separator">
 			<td>Separator (sep)</td>
+			<td>M</td>
+			<td>I</td>
+			<td></td>
 			<td>Add separator with menuitem position by parameters:
 				<table class="table">
 					<tr id="property-separator-none">
@@ -400,12 +425,14 @@ separator( property = value [property = value [...] ])</code></pre>
 					</tr>
 				</table>
 				Default = <span class="syntax-keyword">none</span>
-				<p class="syntax-prop">Required for menu, item.</p>
 			</td>
 		</tr>
 
 		<tr id="property-position">
 			<td>Position (pos)</td>
+			<td>M</td>
+			<td>I</td>
+			<td>S</td>
 			<td>The position at which a menuitem should be inserted into the <a href="#menu"
 					style="border-bottom: 1px solid currentColor;"><span
 					class="is-family-monospace">menu</span></a>.<br/>Position can have one of the
@@ -442,12 +469,14 @@ separator( property = value [property = value [...] ])</code></pre>
 					</tr>
 				</table>
 				Default = <span class="syntax-keyword">auto</span>
-				<p class="syntax-prop">Required for menu, item, separator.</p>
 			</td>
 		</tr>
 
 		<tr id="property-image">
 			<td>Image, Icon</td>
+			<td>M</td>
+			<td>I</td>
+			<td></td>
 			<td>The icon that appears in a menuitem, This property can be assigned as image files, resource icons, glyph
 				or color. With one of the following parameters
 				<table class="table">
@@ -479,35 +508,44 @@ separator( property = value [property = value [...] ])</code></pre>
 					</tr>
 				</table>
 				Default = <span class="syntax-keyword">null</span>
-				<p class="syntax-prop">Required for menu, item.</p>
 			</td>
 		</tr>
 
 		<tr id="property-parent">
 			<td>Parent, Menu</td>
+			<td>M</td>
+			<td>I</td>
+			<td>S</td>
 			<td><p>Move current item to another menu.</p>
 				Default = <span class="syntax-keyword">null</span></td>
 		</tr>
 
 		<tr id="property-command">
 			<td>Command (cmd)</td>
+			<td></td>
+			<td>I</td>
+			<td></td>
 			<td><p>The command associated with the menuitem. Occurs when the menuitem is clicked or selected using a
 				shortcut key or access key defined for the menuitem.</p>
 				Default = <span class="syntax-keyword">null</span>
-				<p class="syntax-prop">Required for item.</p>
 			</td>
 		</tr>
 
 		<tr id="property-arguments">
 			<td>Arguments (arg, args)</td>
+			<td></td>
+			<td>I</td>
+			<td></td>
 			<td><p>The parameter to pass to the Command property of a menuitem.</p>
 				Default = <span class="syntax-keyword">null</span>
-				<p class="syntax-prop">Required for item.</p>
 			</td>
 		</tr>
 
 		<tr id="property-invoke">
 			<td>Invoke</td>
+			<td></td>
+			<td>I</td>
+			<td></td>
 			<td>Set execution type
 				<table class="table">
 					<tr id="property-invoke-single">
@@ -520,36 +558,45 @@ separator( property = value [property = value [...] ])</code></pre>
 					</tr>
 				</table>
 				Default = <span class="syntax-keyword">0</span>
-				<p class="syntax-prop">Required for item.</p>
 			</td>
 		</tr>
 
 		<tr id="property-window">
 			<td>Window</td>
+			<td></td>
+			<td>I</td>
+			<td></td>
 			<td>Controls how the window is to be shown. can be one of the following parameters:
 				<p class="syntax-keyword">Hidden, Show, Visible, Minimized, Maximized</p>
 				Default = <span class="syntax-keyword">show</span>
-				<p class="syntax-prop">Required for item.</p>
 			</td>
 		</tr>
 
 		<tr id="property-directory">
 			<td>Directory (dir)</td>
+			<td></td>
+			<td>I</td>
+			<td></td>
 			<td><p>Specify the work directory to execute the command.</p>
 				Default = <span class="syntax-keyword">null</span>
-				<p class="syntax-prop">Required for item.</p></td>
+			</td>
 		</tr>
 
 		<tr id="property-admin">
 			<td>Admin</td>
+			<td></td>
+			<td>I</td>
+			<td></td>
 			<td><p>Execute the command with administrative permissions.</p>
 				Default = <span class="syntax-keyword">false</span>
-				<p class="syntax-prop">Required for item.</p>
 			</td>
 		</tr>
 
 		<tr id="property-verb">
 			<td>Verb</td>
+			<td></td>
+			<td>I</td>
+			<td></td>
 			<td>Specifies that the operation is the default for the selected file. value type string and can have one of
 				the following parameters:<br/>
 				<table class="table">
@@ -591,21 +638,25 @@ separator( property = value [property = value [...] ])</code></pre>
 					</tr>
 				</table>
 				Default = <span class="syntax-keyword">open</span>
-				<p class="syntax-prop">Required for item.</p>
 			</td>
 		</tr>
 
 		<tr id="property-wait">
 			<td>Wait</td>
+			<td></td>
+			<td>I</td>
+			<td></td>
 			<td>
 				<p>Waiting Until end of command.</p>
 				Default = <span class="syntax-keyword">false</span>
-				<p class="syntax-prop">Required for item.</p>
 			</td>
 		</tr>
 
 		<tr id="property-checked">
 			<td>Checked</td>
+			<td></td>
+			<td>I</td>
+			<td></td>
 			<td>Value that indicates whether the menuitem checked type:
 				<table class="table">
 					<tr id="property-checked-0">
@@ -622,47 +673,58 @@ separator( property = value [property = value [...] ])</code></pre>
 					</tr>
 				</table>
 				Default = <span class="syntax-keyword">0</span>
-				<p class="syntax-prop">Required for item.</p>
 			</td>
 		</tr>
 
 		<tr id="property-default">
 			<td>Default</td>
+			<td>M</td>
+			<td>I</td>
+			<td></td>
 			<td>
 				<p>Specifies that the menuitem is the default. A <a href="#menu"
 						style="border-bottom: 1px solid currentColor;"><span
 						class="is-family-monospace">menu</span></a> can contain only one default menuitem, which is
 					displayed in bold.</p>
 				Default = <span class="syntax-keyword">false</span>
-				<p class="syntax-prop">Required for item.</p>
 			</td>
 		</tr>
 
 		<tr id="property-expanded">
 			<td>Expanded</td>
+			<td>M</td>
+			<td></td>
+			<td></td>
 			<td>
 				<p>Move items to the parent <a href="#menu" style="border-bottom: 1px solid currentColor;"><span
 						class="is-family-monospace">menu</span></a>.</p>
 				Default = <span class="syntax-keyword">false</span>
-				<p class="syntax-prop">Required for menu.</p>
 			</td>
 		</tr>
 
 		<tr id="property-column">
 			<td>Column(col)</td>
+			<td>M</td>
+			<td>I</td>
+			<td></td>
 			<td><p>Create a new column.</p>
 				Default = <span class="syntax-keyword">true</span>
-				<p class="syntax-prop">Required for item, menu.</p>
 		</tr>
 
 		<tr id="property-keys">
 			<td>Keys</td>
+			<td>M</td>
+			<td>I</td>
+			<td></td>
 			<td><p>Show keyboard shortcuts.</p>
 				Default = <span class="syntax-keyword">null</span></td>
 		</tr>
 
 		<tr id="property-tip">
 			<td>Tip</td>
+			<td>M</td>
+			<td>I</td>
+			<td></td>
 			<td>
 				<p>Show a tip for the current <a href="#menu" style="border-bottom: 1px solid currentColor;"><span
 						class="is-family-monospace">menu</span></a> or <a href="#item"
