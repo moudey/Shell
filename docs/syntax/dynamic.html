@@ -11,12 +11,10 @@
 	<li><span class="is-family-monospace">Menuitems</span>, i.e. one or more of the following:
 		<ul>
 			<li>One or more <a href="#item" style="border-bottom: 1px solid currentColor;"><code>item</code> entries</a>.
-				These
-				appear as top-level items in a context menu.
+				These appear as top-level items in a context menu.
 			</li>
 			<li>One or more <a href="#menu" style="border-bottom: 1px solid currentColor;"><code>menu</code> entries</a>.
-				These
-				appear as top-level sub-menus in a context menu.
+				These appear as top-level sub-menus in a context menu.
 			</li>
 			<li>One or more <a href="#separator" style="border-bottom: 1px solid currentColor;"><code>separator</code>
 				entries</a>. These create a horizontal line between the given entries.
@@ -67,9 +65,10 @@
 <p><span class="is-family-monospace">item</span>s create a single menu entry.</p>
 
 <h5 id="item-properties">Properties</h5>
-<p>Only the <a href="#property-title" style="border-bottom: 1px solid currentColor;"><code>title</code> property</a> is
-	mandatory (set to a non-null value). Please refer to the <a href="#properties"
-			style="border-bottom: 1px solid currentColor;">properties section</a> below for further details.</p>
+<p>Either a <a href="#property-title" style="border-bottom: 1px solid currentColor;"><code>title</code></a> or a <a
+		href="#property-image" style="border-bottom: 1px solid currentColor;"><code>image</code></a> property is
+	mandatory (set to a non-null value). For further details, please refer to the <a href="#properties"
+			style="border-bottom: 1px solid currentColor;">properties section</a> below.</p>
 
 <h5 id="item-syntax">Syntax</h5>
 <pre><code class="lang-shell">item( title = value [property = value [...] ])</code></pre>
@@ -81,9 +80,10 @@
 	and sub-entries.</p>
 
 <h5 id="menu-properties">Properties</h5>
-<p>Only the <a href="#property-title" style="border-bottom: 1px solid currentColor;"><code>title</code> property</a> is
-	mandatory (set to a non-null value). Please refer to the <a href="#properties"
-			style="border-bottom: 1px solid currentColor;">properties section</a> below for further details.</p>
+<p>Either a <a href="#property-title" style="border-bottom: 1px solid currentColor;"><code>title</code></a> or a <a
+		href="#property-image" style="border-bottom: 1px solid currentColor;"><code>image</code></a> property is
+	mandatory (set to a non-null value). For further details, please refer to the <a href="#properties"
+			style="border-bottom: 1px solid currentColor;">properties section</a> below.</p>
 
 <h5 id="menu-sub-items">Sub-items</h5>
 <p><span class="is-family-monospace">menu</span>s can have the following entry types, all of which are
@@ -222,7 +222,10 @@ separator( property = value [property = value [...] ])</code></pre>
 			<td>M</td>
 			<td></td>
 			<td></td>
-			<td>Allow menu item to be passed if a true value is returned<br/>
+			<td>Display menuitem if <code>true</code> is returned. Allows the <strong>evaluation of arbitrary
+				<a href="../expressions/" style="border-bottom: 1px solid currentColor;">expressions</a></strong>, e.g.
+				<a href="../functions/index.html#if"
+						style="border-bottom: 1px solid currentColor;"><code>if</code></a><br/>
 				Default = <span class="syntax-keyword">true</span>
 			</td>
 		</tr>
@@ -232,13 +235,13 @@ separator( property = value [property = value [...] ])</code></pre>
 			<td><strong>M</strong></td>
 			<td><strong>I</strong></td>
 			<td></td>
-			<td>Sets a value indicating the caption of the menuitem.<br/>
-				<p class="text-danger">For <a href="#menu" style="border-bottom: 1px solid currentColor;"><span
+			<td>Sets the <strong>caption</strong> of the menuitem.<br/>
+				<p class="text-danger">It is mandatory for <a href="#menu"
+						style="border-bottom: 1px solid currentColor;"><span
 						class="is-family-monospace">menu</span></a> and <a href="#menu"
 						style="border-bottom: 1px solid currentColor;"><span
-						class="is-family-monospace">item</span></a> entries, this property must be included with if no
-					<a href="#property-image" style="border-bottom: 1px solid currentColor;"><code>image</code>
-						property</a> is defined.</p>
+						class="is-family-monospace">item</span></a> entries, unless a <a href="#property-image"
+						style="border-bottom: 1px solid currentColor;"><code>image</code></a> property is defined.</p>
 				Default = <span class="syntax-keyword">null</span>
 			</td>
 		</tr>
@@ -248,27 +251,33 @@ separator( property = value [property = value [...] ])</code></pre>
 			<td>M</td>
 			<td>I</td>
 			<td>S</td>
-			<td>Accept item by type of selections. Value has one of the following parameters:
+			<td>Display menuitem by <strong>type of selection</strong>. The value has one of the following parameters
+				(of type <a
+						href="../syntax/static.html" style="border-bottom: 1px solid currentColor;"><span
+						class="is-family-monospace">string</span></a>):
 				<table class="table">
 					<tr>
 						<td class="syntax-keyword">none</td>
-						<td>Accept item when there are no selections.</td>
+						<td>Display menuitem when there is no selection.</td>
 					</tr>
 					<tr>
 						<td class="syntax-keyword">single</td>
-						<td>Accept menuitem when there are single selection.</td>
+						<td>Display menuitem when there is a single object selected.</td>
 					</tr>
 					<tr>
 						<td class="syntax-keyword">multi_unique</td>
-						<td>Accept when multiple selections are single type.</td>
+						<td>Display menuitem when multiple objects of the same <a href="#property-type"
+								style="border-bottom: 1px solid currentColor;"><span
+								class="is-family-monospace">type</span></a> are selected.
+						</td>
 					</tr>
 					<tr>
 						<td class="syntax-keyword">multi_single</td>
-						<td>Accept when multiple selections are single file extension.</td>
+						<td>Display menuitem when multiple files with a single file extension are selected.</td>
 					</tr>
 					<tr>
 						<td class="syntax-keyword">multiple</td>
-						<td>Accept all types.</td>
+						<td>Display any type of selection, unless there is none.</td>
 					</tr>
 				</table>
 				Default = <span class="syntax-keyword">single</span>
@@ -280,86 +289,114 @@ separator( property = value [property = value [...] ])</code></pre>
 			<td>M</td>
 			<td>I</td>
 			<td>S</td>
-			<td>Specify the types of object files allowed for the menu item to appear. The property is assigned to one
-				or more of these parameters and this character <code>|</code> is used to separate types.<br/>
-				Add a character <code>~</code> before single type to exclude.
-				<p class="has-text-danger">The property not supported syntax expressions.</p>
+			<td>Specifies the <strong>types of objects</strong> for which the menuitem will be displayed.<br/>
+				Possible values are shown below. Separate multiple types with the pipe character (<code>|</code>), in
+				which case the menuitem is displayed if any of the given types is matched.<br/>
+				To exclude a given type, prefix its value with the tilde character (<code>~</code>).
+				<p class="has-text-danger">Expressions are not supported with this property.</p>
 				<table class="table">
 					<tr id="property-type-asterisks">
 						<td class="syntax-keyword">*</td>
-						<td>Accept menuitem when any type are selected.</td>
+						<td>Display menuitem when any type is selected.</td>
 					</tr>
 					<tr id="property-type-file">
 						<td class="syntax-keyword">File</td>
-						<td>Accept menuitem when file are selected.</td>
+						<td>Display menuitem when files are selected.</td>
 					</tr>
 					<tr id="property-type-directory">
 						<td class="syntax-keyword">Directory(Dir)</td>
-						<td>Accept menuitem when Directory are selected.</td>
+						<td>Display menuitem when directories are selected.</td>
 					</tr>
 					<tr id="property-type-drive">
 						<td class="syntax-keyword">Drive</td>
-						<td>Drive objects</td>
+						<td>Display menuitem when drives are selected.</td>
 					</tr>
 					<tr id="property-type-usb">
 						<td class="syntax-keyword">USB</td>
-						<td>Accept menuitem when USB flash drive are selected.</td>
+						<td>Display menuitem when USB flash-drives are selected.</td>
 					</tr>
 					<tr id="property-type-dvd">
 						<td class="syntax-keyword">DVD</td>
-						<td>The drive is a DVD-ROM drive</td>
+						<td>Display menuitem when DVD-ROM drives are selected.</td>
 					</tr>
 					<tr id="property-type-fixed">
 						<td class="syntax-keyword">Fixed</td>
-						<td>Accept menuitem when Fixed drive are selected. The drive has fixed media; for example, a
-							hard disk drive or flash drive.
+						<td>Display menuitem when fixed drives are selected. Such drives have a fixed media; for
+							example, a hard disk drive or flash drive.
 						</td>
 					</tr>
 					<tr id="property-type-vhd">
 						<td class="syntax-keyword">VHD</td>
-						<td>Accept menuitem when Virtual Hard Disk are selected.</td>
+						<td>Display menuitem when Virtual Hard Disks are selected.</td>
 					</tr>
 					<tr id="property-type-removable">
 						<td class="syntax-keyword">Removable</td>
-						<td>The drive has removable media; for example, a floppy drive, thumb drive, or flash card
+						<td>Display menuitem when the selected drives have removable media; for example, a floppy drive,
+							thumb drive, or flash card
 							reader.
 						</td>
 					</tr>
 					<tr id="property-type-remote">
 						<td class="syntax-keyword">Remote</td>
-						<td>The drive is a remote (network) drive.</td>
+						<td>Display menuitem when the selected remote (network) drives are selected.</td>
 					</tr>
 					<tr id="property-type-back">
 						<td class="syntax-keyword">Back</td>
-						<td>Accept menu item when the background of all types are selected or can specify of this types
-							for the background (back.directory, back.drive[back.fixed, back.usb, back.dvd, back.vhd,
-							back.Removable], back.namespace[back.computer, back.recyclebin])
+						<td>Display menuitem when the background of all types are selected (<code>back</code>). Or
+							specify one of
+							the following more granular types for the background:
+							<ul>
+								<li>
+									<code>back.directory</code>
+								</li>
+								<li>
+									<code>back.drive</code>, including
+									<ul>
+										<li><code>back.fixed</code></li>
+										<li><code>back.usb</code></li>
+										<li><code>back.dvd</code></li>
+										<li><code>back.vhd</code></li>
+										<li><code>back.Removable</code></li>
+									</ul>
+								</li>
+								<li>
+									<code>back.namespace</code>, including
+									<ul>
+										<li><code>back.computer</code></li>
+										<li><code>back.recyclebin</code></li>
+									</ul>
+								</li>
+							</ul>
 						</td>
 					</tr>
 					<tr id="property-type-desktop">
 						<td class="syntax-keyword">Desktop</td>
-						<td>Accept menuitem when the Desktop are selected.</td>
+						<td>Display menuitem when the <span class="is-family-monospace">Desktop</span> is selected.</td>
 					</tr>
 					<tr id="property-type-namespace">
 						<td class="syntax-keyword">Namespace</td>
-						<td>Accept menuitem when Namespace are selected. Can be virtual objects such as the My Network
-							Places and Recycle Bin.
+						<td>Display menuitem when Namespaces are selected. Can be virtual objects such as <span
+								class="is-family-monospace">My Network Places</span> and <span
+								class="is-family-monospace">Recycle Bin</span>.
 						</td>
 					</tr>
 					<tr id="property-type-computer">
 						<td class="syntax-keyword">Computer</td>
-						<td>Accept menuitem when the My Computer are selected.</td>
+						<td>Display menuitem when <span class="is-family-monospace">My Computer</span> is selected.</td>
 					</tr>
 					<tr id="property-type-recyclebin">
 						<td class="syntax-keyword">Recyclebin</td>
-						<td>Accept menuitem when the Recycle bin are selected.</td>
+						<td>Display menuitem when the <span class="is-family-monospace">Recycle bin</span> is selected.
+						</td>
 					</tr>
 					<tr id="property-type-taskbar">
 						<td class="syntax-keyword">Taskbar</td>
-						<td>Accept menuitem when the Taskbar are selected.</td>
+						<td>Display menuitem when the <span class="is-family-monospace">Taskbar</span> is selected.
+						</td>
 					</tr>
 				</table>
-				Default = <span class="syntax-keyword">Accepts all types except for the taskbar.</span>
+				Default = <span class="syntax-keyword">Accepts all types, except for the <span
+						class="is-family-monospace">Taskbar</span>.</span>
 			</td>
 		</tr>
 
@@ -368,7 +405,7 @@ separator( property = value [property = value [...] ])</code></pre>
 			<td>M</td>
 			<td>I</td>
 			<td>S</td>
-			<td>Visibility of menuitem and can have one of the following parameters:
+			<td>Sets the <strong>visibility</strong> of a menuitem. Can have one of the following parameters:
 				<table class="table">
 					<tr id="property-visibility-hidden">
 						<td class="syntax-keyword">Hidden</td>
@@ -384,14 +421,15 @@ separator( property = value [property = value [...] ])</code></pre>
 					</tr>
 					<tr id="property-visibility-static">
 						<td class="syntax-keyword">Static</td>
-						<td>Display item as label with/out an image</td>
+						<td>Display menuitem as label, with or without an <a href="#property-image"
+								style="border-bottom: 1px solid currentColor;"><code>image</code></a></td>
 					</tr>
 					<tr id="property-visibility-label">
 						<td class="syntax-keyword">Label</td>
-						<td>Display item as label without an image</td>
+						<td>Display menuitem as label without an image</td>
 					</tr>
 				</table>
-				Default = <span class="syntax-keyword">Noraml</span>
+				Default = <span class="syntax-keyword">Normal</span>
 			</td>
 		</tr>
 
@@ -401,8 +439,9 @@ separator( property = value [property = value [...] ])</code></pre>
 			<td>I</td>
 			<td>S</td>
 			<td>
-				<p>Accept menuitem when the specified path name or path extension is contains or equal to the current
-					find property.<br/>Use this delimiter <code>|</code> to separate patterns.</p>
+				<p>Display menuitem when the <strong>specified path name or path extension</strong> matches the current
+					find property.<br/>
+					Separate patterns by the pipe delimiter (<code>|</code>).</p>
 				Default = <span class="syntax-keyword">null</span><br/>
 				<strong>Syntax</strong><br/>
 				find = 'exe' Find any word contains "exe"<br/>
@@ -427,7 +466,7 @@ separator( property = value [property = value [...] ])</code></pre>
 			<td>M</td>
 			<td>I</td>
 			<td></td>
-			<td>Add separator with menuitem position by parameters:
+			<td>Add a <strong>separator</strong> to the menuitem:
 				<table class="table">
 					<tr id="property-separator-none">
 						<td class="syntax-keyword">None</td>
@@ -455,10 +494,10 @@ separator( property = value [property = value [...] ])</code></pre>
 			<td>M</td>
 			<td>I</td>
 			<td>S</td>
-			<td>The position at which a menuitem should be inserted into the <a href="#menu"
+			<td>The <strong>position</strong> at which a menuitem should be inserted into the <a href="#menu"
 					style="border-bottom: 1px solid currentColor;"><span
-					class="is-family-monospace">menu</span></a>.<br/>Position can have one of the
-				following parameters:
+					class="is-family-monospace">menu</span></a>.<br/>
+				Position can have one of the following parameters:
 				<table class="table">
 					<tr id="property-position-auto">
 						<td class="syntax-keyword">Auto</td>
@@ -486,8 +525,8 @@ separator( property = value [property = value [...] ])</code></pre>
 						</td>
 					</tr>
 					<tr id="property-position-integer">
-						<td class="syntax-keyword">Number sets</td>
-						<td>Insert the menuitem to a specified position with integer numbers.</td>
+						<td><code>Integer</code></td>
+						<td>Insert the menuitem to a specified position.</td>
 					</tr>
 				</table>
 				Default = <span class="syntax-keyword">auto</span>
@@ -499,7 +538,8 @@ separator( property = value [property = value [...] ])</code></pre>
 			<td>M</td>
 			<td>I</td>
 			<td></td>
-			<td>The icon that appears in a menuitem, This property can be assigned as image files, resource icons, glyph
+			<td>The <strong>icon</strong> that appears in a menuitem. This property can be assigned as image files,
+				resource icons, glyph
 				or color. With one of the following parameters
 				<table class="table">
 					<tr id="property-image-null">
@@ -538,7 +578,9 @@ separator( property = value [property = value [...] ])</code></pre>
 			<td>M</td>
 			<td>I</td>
 			<td>S</td>
-			<td><p>Move current item to another menu.</p>
+			<td><p><strong>Move current menuitem</strong> to another <a href="#menu"
+					style="border-bottom: 1px solid currentColor;"><span
+					class="is-family-monospace">menu</span></a>.</p>
 				Default = <span class="syntax-keyword">null</span></td>
 		</tr>
 
@@ -547,8 +589,8 @@ separator( property = value [property = value [...] ])</code></pre>
 			<td></td>
 			<td>I</td>
 			<td></td>
-			<td><p>The command associated with the menuitem. Occurs when the menuitem is clicked or selected using a
-				shortcut key or access key defined for the menuitem.</p>
+			<td><p>The <strong>command</strong> associated with the menuitem. Occurs when the menuitem is clicked or
+				selected using a shortcut key or access key defined for the menuitem.</p>
 				Default = <span class="syntax-keyword">null</span>
 			</td>
 		</tr>
@@ -558,7 +600,9 @@ separator( property = value [property = value [...] ])</code></pre>
 			<td></td>
 			<td>I</td>
 			<td></td>
-			<td><p>The parameter to pass to the Command property of a menuitem.</p>
+			<td><p>The <strong>command line parameters</strong> to pass to the <a href="#property-command"
+					style="border-bottom: 1px solid currentColor;"><span class="is-family-monospace">command</span></a>
+				property of a menuitem.</p>
 				Default = <span class="syntax-keyword">null</span>
 			</td>
 		</tr>
@@ -568,15 +612,19 @@ separator( property = value [property = value [...] ])</code></pre>
 			<td></td>
 			<td>I</td>
 			<td></td>
-			<td>Set execution type
+			<td>Set <strong>execution type</strong>
 				<table class="table">
 					<tr id="property-invoke-single">
 						<td class="syntax-keyword">0, single</td>
-						<td>execute the command for each file selected</td>
+						<td>execute the <a href="#property-command" style="border-bottom: 1px solid currentColor;"><span
+								class="is-family-monospace">command</span></a> for each selected object
+						</td>
 					</tr>
 					<tr id="property-invoke-multiple">
 						<td class="syntax-keyword">1, multiple</td>
-						<td>execute the command in one process</td>
+						<td>execute the <a href="#property-command" style="border-bottom: 1px solid currentColor;"><span
+								class="is-family-monospace">command</span></a> in one process
+						</td>
 					</tr>
 				</table>
 				Default = <span class="syntax-keyword">0</span>
@@ -588,8 +636,11 @@ separator( property = value [property = value [...] ])</code></pre>
 			<td></td>
 			<td>I</td>
 			<td></td>
-			<td>Controls how the window is to be shown. can be one of the following parameters:
-				<p class="syntax-keyword">Hidden, Show, Visible, Minimized, Maximized</p>
+			<td>Controls how the <strong>window</strong> of the executed <a href="#property-command"
+					style="border-bottom: 1px solid currentColor;"><span class="is-family-monospace">command</span></a>
+				is to be shown. Can be one of the following parameters:
+				<p class="syntax-keyword"><code>Hidden</code>, <code>Show</code>, <code>Visible</code>,
+					<code>Minimized</code>, <code>Maximized</code></p>
 				Default = <span class="syntax-keyword">show</span>
 			</td>
 		</tr>
@@ -599,7 +650,10 @@ separator( property = value [property = value [...] ])</code></pre>
 			<td></td>
 			<td>I</td>
 			<td></td>
-			<td><p>Specify the work directory to execute the command.</p>
+			<td><p>Specifies the <span class="is-family-monospace"><strong>working directory</strong></span> to execute
+				the <a
+						href="#property-command" style="border-bottom: 1px solid currentColor;"><span
+						class="is-family-monospace">command</span></a> in.</p>
 				Default = <span class="syntax-keyword">null</span>
 			</td>
 		</tr>
@@ -609,7 +663,8 @@ separator( property = value [property = value [...] ])</code></pre>
 			<td></td>
 			<td>I</td>
 			<td></td>
-			<td><p>Execute the command with administrative permissions.</p>
+			<td><p>Execute the <a href="#property-command" style="border-bottom: 1px solid currentColor;"><span
+					class="is-family-monospace">command</span></a> with <strong>administrative permissions</strong>.</p>
 				Default = <span class="syntax-keyword">false</span>
 			</td>
 		</tr>
@@ -619,8 +674,10 @@ separator( property = value [property = value [...] ])</code></pre>
 			<td></td>
 			<td>I</td>
 			<td></td>
-			<td>Specifies that the operation is the default for the selected file. value type string and can have one of
-				the following parameters:<br/>
+			<td>Specifies the <strong>default operation</strong> for the selected file. Value type <a
+					href="../syntax/static.html"
+					style="border-bottom: 1px solid currentColor;"><span class="is-family-monospace">string</span></a>
+				and can have one of the following parameters:<br/>
 				<table class="table">
 					<tr id="property-verb-null">
 						<td>null</td>
@@ -628,7 +685,7 @@ separator( property = value [property = value [...] ])</code></pre>
 					</tr>
 					<tr id="property-verb-open">
 						<td>Open</td>
-						<td>Opens a file or a application.</td>
+						<td>Opens a file or an application.</td>
 					</tr>
 					<tr id="property-verb-openas">
 						<td>OpenAs</td>
@@ -669,7 +726,9 @@ separator( property = value [property = value [...] ])</code></pre>
 			<td>I</td>
 			<td></td>
 			<td>
-				<p>Waiting Until end of command.</p>
+				<p><strong>Wait</strong> for the <a href="#property-command"
+						style="border-bottom: 1px solid currentColor;"><span class="is-family-monospace">command</span></a>
+					to complete.</p>
 				Default = <span class="syntax-keyword">false</span>
 			</td>
 		</tr>
@@ -679,7 +738,7 @@ separator( property = value [property = value [...] ])</code></pre>
 			<td></td>
 			<td>I</td>
 			<td></td>
-			<td>Value that indicates whether the menuitem checked type:
+			<td><strong>Type of select option</strong>:
 				<table class="table">
 					<tr id="property-checked-0">
 						<td class="syntax-keyword">0</td>
@@ -687,7 +746,7 @@ separator( property = value [property = value [...] ])</code></pre>
 					</tr>
 					<tr id="property-checked-1">
 						<td class="syntax-keyword">1</td>
-						<td>Display as checked mark.</td>
+						<td>Display as check mark.</td>
 					</tr>
 					<tr id="property-checked-2">
 						<td class="syntax-keyword">2</td>
@@ -704,10 +763,10 @@ separator( property = value [property = value [...] ])</code></pre>
 			<td>I</td>
 			<td></td>
 			<td>
-				<p>Specifies that the menuitem is the default. A <a href="#menu"
-						style="border-bottom: 1px solid currentColor;"><span
-						class="is-family-monospace">menu</span></a> can contain only one default menuitem, which is
-					displayed in bold.</p>
+				<p>Specifies that the <a href="#item" style="border-bottom: 1px solid currentColor;"><span
+						class="is-family-monospace">item</span></a> is the default. A <a href="#menu"
+						style="border-bottom: 1px solid currentColor;"><span class="is-family-monospace">menu</span></a>
+					can contain only one default menuitem, which is <strong>displayed in bold</strong>.</p>
 				Default = <span class="syntax-keyword">false</span>
 			</td>
 		</tr>
@@ -718,7 +777,8 @@ separator( property = value [property = value [...] ])</code></pre>
 			<td></td>
 			<td></td>
 			<td>
-				<p>Move items to the parent <a href="#menu" style="border-bottom: 1px solid currentColor;"><span
+				<p>Move all immediate menuitems to the parent <a href="#menu"
+						style="border-bottom: 1px solid currentColor;"><span
 						class="is-family-monospace">menu</span></a>.</p>
 				Default = <span class="syntax-keyword">false</span>
 			</td>
@@ -729,7 +789,7 @@ separator( property = value [property = value [...] ])</code></pre>
 			<td>M</td>
 			<td>I</td>
 			<td></td>
-			<td><p>Create a new column.</p>
+			<td><p>Create a new <strong>column</strong>.</p>
 				Default = <span class="syntax-keyword">true</span>
 		</tr>
 
@@ -738,7 +798,7 @@ separator( property = value [property = value [...] ])</code></pre>
 			<td>M</td>
 			<td>I</td>
 			<td></td>
-			<td><p>Show keyboard shortcuts.</p>
+			<td><p>Show <strong>keyboard shortcuts</strong>.</p>
 				Default = <span class="syntax-keyword">null</span></td>
 		</tr>
 
@@ -748,9 +808,9 @@ separator( property = value [property = value [...] ])</code></pre>
 			<td>I</td>
 			<td></td>
 			<td>
-				<p>Show a tip for the current <a href="#menu" style="border-bottom: 1px solid currentColor;"><span
-						class="is-family-monospace">menu</span></a> or <a href="#item"
-						style="border-bottom: 1px solid currentColor;"><span class="is-family-monospace">item</span></a>.
+				<p>Show a <strong>tooltip</strong> for the current <a href="#menu"
+						style="border-bottom: 1px solid currentColor;"><span class="is-family-monospace">menu</span></a>
+					or <a href="#item" style="border-bottom: 1px solid currentColor;"><span class="is-family-monospace">item</span></a>.
 				</p>
 				Default = <span class="syntax-keyword">null</span><br/>
 				<strong>Syntax</strong><br/>
