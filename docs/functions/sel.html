@@ -1,194 +1,216 @@
 ﻿<h5>SEL</h5>
 <p>Has many functions to handle selected file system objects.</p>
 <br>
-<p>
-	<h5>sel(quote=<code>false</code>, separator=<code>' '</code>)</h5>
-	<p>Returns all selected items with double quotation mark and custom separator.</p>
-	<pre><code>sel<br>sel(true)<br>sel(true, "\n")</code></pre>
-</p>
-<br>
-<p>
-	<h5>sel.path</h5>
-	Returns the path of the selected item..
-</p>
-<br>
-<p>
-	<h5>sel.path.title</h5>
-	Returns the name without the extension of the selected item.
-</p>
-<br>
-<p>
-	<h5>sel.path.length</h5>
-	Returns the number of characters in the path of the selected item.
-</p>
-<br>
-<p>
-	<h5>sel.path.title</h5>
-	Returns the path title of the selected item..
-</p>
-<br>
-<p>
-	<h5>sel.path.quote</h5>
-	Returns the path of the selected item. with double quotation mark.
-</p>
-<br>
-<p>
-	<h5>sel.short</h5>
-	Returns the short path of the selected item.
-</p>
-<br>
-<p>
-	<h5>sel.short.length</h5>
-	Returns the number of characters in the short path of the selected item.
-</p>
-<br>
-<p>
-	<h5>sel.raw</h5>
-	Returns the path of the selected item in raw format.
-</p>
-<br>
-<p>
-	<h5>sel.raw.length</h5>
-	Returns the number of characters in the raw path of the selected item.
-</p>
-<br>
-<p>
-	<h5>sel.root</h5>
-	Returns the root directory from the path of the selected items.
-</p>
-<br>
-<p>
-	<h5>sel.name</h5>
-	Returns the name and extension of the selected item.
-</p>
-<br>
-<p>
-	<h5>sel.name.length</h5>
-	Returns the number of characters in the name of the selected item.
-</p>
-<br>
-<p>
-	<h5>sel.title</h5>
-	Returns the name without extension of the selected item.
-</p>
-<br>
-<p>
-	<h5>sel.title.length</h5>
-	Returns the number of characters in the name without extension of the selected item.
-</p>
-<br>
-<p>
-	<h5>sel.parent</h5>
-	Returns the directory path for the selected item.
-</p>
-<br>
-<p>
-	<h5>sel.parent.quote</h5>
-	Returns the directory path for the selected item with quotation mark.
-</p>
-<br>
-<p>
-	<h5>sel.parent.raw</h5>
-	Returns the directory path for the selected item in raw format.
-</p>
-<br>
-<p>
-	<h5>sel.parent.name</h5>
-	Returns the name of the parent of the selected item.
-</p>
-<br>
-<p>
-	<h5>sel.parent.length</h5>
-	Returns the number of characters in the parent path of the selected item.
-</p>
-<br>
-<p>
-	<h5>sel.count</h5>
-	 Returns count selected items.
-</p>
-<br>
-<p>
-	<h5>sel.back</h5>
-	Returns whether the selection is in the background.
-</p>
-<br>
-<p>
-	<h5>sel.curdir or sel.workdir</h5>
-	Returns the path of current working directory.
-</p>
-<br>
-<p>
-	<h5>sel.file</h5>
-	Returns the path for the selected item. If it is a file
-</p>
-<br>
-<p>
-	<h5>sel.file.name</h5>
-	Returns the number of characters in the name of the selected item. If it is a file.
-</p>
-<br>
-<p>
-	<h5>sel.file.name.length</h5>
-	Returns the name for the selected item. If it is a file.
-</p>
-<br>
-<p>
-	<h5>sel.file.ext</h5>
-	Returns the extension for the selected item. If it is a file.
-</p>
-<br>
-<p>
-	<h5>sel.file.title</h5>
-	Returns the name without an extension for the selected item. If it is a file.
-</p>
-<br>
-<p>
-	<h5>sel.file.quote</h5>
-	Returns the path for the selected item with quotation mark. If it is a file.
-</p>
-<br>
-<p>
-	<h5>sel.directory</h5>
-	Returns the path for the selected item. If it is a directory.
-</p>
-<br>
-<p>
-	<h5>sel.directory.name</h5>
-	Returns the name for the selected item. If it is a directory.
-</p>
-<br>
-<p>
-	<h5>sel.directory.length</h5>
-	Returns the number of characters in the path of the selected item. If it is a directory.
-</p>
-<br>
-<p>
-	<h5>sel.directory.quote</h5>
-	Returns the path for the selected item with quotation mark. If it is a directory.
-</p>
-<br>
-<p>
-	<h5>sel.get(index=<code>0</code>)</h5>
-	 Returns the path of the selected item by referring to the index number.
-</p>
-<br>
-<p>
-	<h5>sel.raw(index=<code>0</code>)</h5>
-	 Returns the raw path of the selected item by referring to the index number.
-</p>
-<br>
-<p>
-	<h5>sel.length(index=<code>0</code>)</h5>
-	Returns the number of characters in the path of the selected item by referring to the index number.
-</p>
-<br>
-<p>
-	<h5>sel.readonly(index=<code>0</code>)</h5>
-	Returns whether the selected item by referring to the index number is read-only.
-</p>
-<br>
-<p>
-	<h5>sel.hidden(index=<code>0</code>)</h5>
-	Returns whether the selected item by referring to the index number is hidden.
-</p>
 
+<section id="sel" class="my-5">
+	<h5>sel</h5>
+	<p>Returns all selected items with double quotation mark and custom separator.</p>
+	<p>Syntax</p>
+	<code>sel(quote=<span class="syntax-keyword">false</span>, separator=' ')</code>
+	<p>Parameters</p>
+	<dl>
+		<dt>quote</dt>
+		<dd>Sets if the return value shall be quoted.</dd>
+		<dt>separator</dt>
+		<dd>Separator to join the different items from the selection.</dd>
+	</dl>
+	<p>Example</p>
+	<pre><code>sel
+sel(true)
+sel(true, "\n")</code></pre>
+</section>
+
+<section id="sel.path" class="my-5">
+	<h5>sel.path</h5>
+	<p>Returns the path of the selected item..</p>
+</section>
+
+<section id="sel.path.name" class="my-5">
+	<h5>sel.path.name</h5>
+	<p>Returns the name without the extension of the selected item.</p>
+</section>
+
+<section id="sel.path.length" class="my-5">
+	<h5>sel.path.length</h5>
+	<p>Returns the number of characters in the path of the selected item.</p>
+</section>
+
+<section id="sel.path.title" class="my-5">
+	<h5>sel.path.title</h5>
+	<p>Returns the path title of the selected item.</p>
+</section>
+
+<section id="sel.path.quote" class="my-5">
+	<h5>sel.path.quote</h5>
+	<p>Returns the path of the selected item. with double quotation mark.</p>
+</section>
+
+<section id="sel.short" class="my-5">
+	<h5>sel.short</h5>
+	<p>Returns the short path of the selected item.</p>
+</section>
+
+<section id="sel.short.length" class="my-5">
+	<h5>sel.short.length</h5>
+	<p>Returns the number of characters in the short path of the selected item.</p>
+</section>
+
+<section id="sel.raw" class="my-5">
+	<h5>sel.raw</h5>
+	<p>Returns the path of the selected item in raw format.</p>
+</section>
+
+<section id="sel.raw.length" class="my-5">
+	<h5>sel.raw.length</h5>
+	<p>Returns the number of characters in the raw path of the selected item.</p>
+</section>
+
+<section id="sel.root" class="my-5">
+	<h5>sel.root</h5>
+	<p>Returns the root directory from the path of the selected items.</p>
+</section>
+
+<section id="sel.name" class="my-5">
+	<h5>sel.name</h5>
+	<p>Returns the name and extension of the selected item.</p>
+</section>
+
+<section id="sel.name.length" class="my-5">
+	<h5>sel.name.length</h5>
+	<p>Returns the number of characters in the name of the selected item.</p>
+</section>
+
+<section id="sel.title" class="my-5">
+	<h5>sel.title</h5>
+	<p>Returns the name without extension of the selected item.</p>
+</section>
+
+<section id="sel.title.length" class="my-5">
+	<h5>sel.title.length</h5>
+	<p>Returns the number of characters in the name without extension of the selected item.</p>
+</section>
+
+<section id="sel.parent" class="my-5">
+	<h5>sel.parent</h5>
+	<p>Returns the directory path for the selected item.</p>
+</section>
+
+<section id="sel.parent.quote" class="my-5">
+	<h5>sel.parent.quote</h5>
+	<p>Returns the directory path for the selected item with quotation mark.</p>
+</section>
+
+<section id="sel.parent.raw" class="my-5">
+	<h5>sel.parent.raw</h5>
+	<p>Returns the directory path for the selected item in raw format.</p>
+</section>
+
+<section id="sel.parent.name" class="my-5">
+	<h5>sel.parent.name</h5>
+	<p>Returns the name of the parent of the selected item.</p>
+</section>
+
+<section id="sel.parent.length" class="my-5">
+	<h5>sel.parent.length</h5>
+	<p>Returns the number of characters in the parent path of the selected item.</p>
+</section>
+
+<section id="sel.count" class="my-5">
+	<h5>sel.count</h5>
+	<p>Returns count selected items.</p>
+</section>
+
+<section id="sel.back" class="my-5">
+	<h5>sel.back</h5>
+	<p>Returns whether the selection is in the background.</p>
+</section>
+
+<section id="sel.curdir" class="my-5">
+	<h5>sel.curdir or sel.workdir</h5>
+	<p>Returns the path of current working directory.</p>
+</section>
+
+<section id="sel.file" class="my-5">
+	<h5>sel.file</h5>
+	<p>Returns the path for the selected item. If it is a file</p>
+</section>
+
+<section id="sel.file.name" class="my-5">
+	<h5>sel.file.name</h5>
+	<p>Returns the number of characters in the name of the selected item. If it is a file.</p>
+</section>
+
+<section id="sel.file.name.length" class="my-5">
+	<h5>sel.file.name.length</h5>
+	<p>Returns the name for the selected item. If it is a file.</p>
+</section>
+
+<section id="sel.file.ext" class="my-5">
+	<h5>sel.file.ext</h5>
+	<p>Returns the extension for the selected item. If it is a file.</p>
+</section>
+
+<section id="sel.file.title" class="my-5">
+	<h5>sel.file.title</h5>
+	<p>Returns the name without an extension for the selected item. If it is a file.</p>
+</section>
+
+<section id="sel.file.quote" class="my-5">
+	<h5>sel.file.quote</h5>
+	<p>Returns the path for the selected item with quotation mark. If it is a file.</p>
+</section>
+
+<section id="sel.directory" class="my-5">
+	<h5>sel.directory</h5>
+	<p>Returns the path for the selected item. If it is a directory.</p>
+</section>
+
+<section id="sel.directory.name" class="my-5">
+	<h5>sel.directory.name</h5>
+	<p>Returns the name for the selected item. If it is a directory.</p>
+</section>
+
+<section id="sel.directory.length" class="my-5">
+	<h5>sel.directory.length</h5>
+	<p>Returns the number of characters in the path of the selected item. If it is a directory.</p>
+</section>
+
+<section id="sel.directory.quote" class="my-5">
+	<h5>sel.directory.quote</h5>
+	<p>Returns the path for the selected item with quotation mark. If it is a directory.</p>
+</section>
+
+<section id="sel.get" class="my-5">
+	<h5>sel.get</h5>
+	<p>Returns the path of the selected item by referring to the index number.</p>
+	<p>Syntax</p>
+	<code>sel.get(index=<code>0</code>)</code>
+</section>
+
+<section id="sel.path.raw" class="my-5">
+	<h5>sel.path.raw</h5>
+	<p>Returns the raw path of the selected item by referring to the index number.</p>
+	<p>Syntax</p>
+	<code>sel.path.raw(index=<code>0</code>)</code>
+</section>
+
+<section id="sel.length" class="my-5">
+	<h5>sel.length</h5>
+	<p>Returns the number of characters in the path of the selected item by referring to the index number.</p>
+	<p>Syntax</p>
+	<code>sel.length(index=<code>0</code>)</code>
+</section>
+
+<section id="sel.readonly" class="my-5">
+	<h5>sel.readonly</h5>
+	<p>Returns whether the selected item by referring to the index number is read-only.</p>
+	<p>Syntax</p>
+	<code>sel.readonly(index=<code>0</code>)</code>
+</section>
+
+<section id="sel.hidden" class="my-5">
+	<h5>sel.hidden</h5>
+	<p>Returns whether the selected item by referring to the index number is hidden.</p>
+	<p>Syntax</p>
+	<code>sel.hidden(index=<code>0</code>)</code>
+</section>
