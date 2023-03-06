@@ -17,12 +17,9 @@
 				style="border-bottom: 1px solid currentColor;">separate line</a> and must be
 		placed in parentheses <code>( )</code>.
 	</li>
-	<li>variable are optional.</li>
-	<li>default are optional.</li>
-	<li>Static items are optional.</li>
-	<li>Static items have one type: item.</li>
-	<li>Dynamic items are optional.</li>
-	<li>Dynamic items have three types: menu, item, and separator(sep).</li>
+	<li>Other configuration files can be imported using the <a href="#import"
+			style="border-bottom: 1px solid currentColor;"><span class="is-family-monospace">import</span> tag</a>.
+	</li>
 </ul>
 
 <div class="notification is-info is-light">
@@ -148,3 +145,143 @@
 			cmd='cmd.exe')
 	}
 }</code></pre>
+<br>
+
+<h4 id="import"><span class="is-family-monospace">Import</span> tag</h4>
+<p>To better organise the configuration file, parts of the configuration can be saved in separate files. These are then
+	imported using the import tag. With this method, it is also possible to import the same file as a sort of "module"
+	into different parts of the configuration. A convenient way to include the same sub-menu in different
+	locations..</p>
+
+<h5 id="import-syntax">Syntax</h5>
+<p>The general syntax is as follows:</p>
+<pre><code class="lang-shell">shell
+{
+	[ %section% ] import %path%
+}</code></pre>
+<p>Where</p>
+<ul>
+	<li id="import-syntax-section"><code>%section%</code> is the name of a section. Optional. If given, it must be one
+		of
+		<ul>
+			<li>var</li>
+			<li>set</li>
+			<li>images</li>
+			<li>static</li>
+			<li>dynamic</li>
+		</ul>
+		The section name is written literally, without any quotes (or the percent signs).
+	</li>
+	<li id="import-syntax-path"><code>%path%</code> is a <a href="../expressions/string.html"
+			style="border-bottom: 1px solid currentColor;"><span class="is-family-monospace">string</span></a> literal,
+		that returns the path to the config file that shall be imported. This can be a relative path to the location of
+		the file where the <span class="is-family-monospace">import</span> tag is used, or it can be an absolute path.
+		Expressions are supported when using <a href="../expressions/string.html#single-quotes"
+				style="border-bottom: 1px solid currentColor;"><span
+				class="is-family-monospace">single quotes</span></a>.
+	</li>
+</ul>
+
+<p>There are effectively two different ways this tag is applied, depending on whether the optional
+	<code>%section%</code> is given:</p>
+<ul>
+	<li>Import an entire section</li>
+	<li>Import as a partial:</li>
+</ul>
+
+<h5 id="import-section">Import an entire section</h5>
+<pre><code class="lang-shell">shell
+{
+	// import an entire section
+	%section% import %path%
+}</code></pre>
+In this case, the content of the file found at <code>%path%</code> will be imported into <strong>a newly
+	created</strong> <code>section{}</code>.
+The result would then look like so:
+<pre><code class="lang-shell">shell
+{
+	// import an entire section
+	section {
+		/* content of the imported file goes here! Do not include
+		 *
+		 * section {
+		 * }
+		 *
+		 * in your imported file!
+		 */
+	}
+}</code></pre>
+<p>This syntax may be used only in the following places: </p>
+<ul>
+	<li><s>root section <span class="is-family-monospace">shell{}</span>: <code>shell import %path%</code></s>
+	</li>
+	<li>the global sections
+		<ul>
+			<li><span class="is-family-monospace">var{}</span>: <code>var import %path%</code></li>
+			<li><s><span class="is-family-monospace">set{}</span>: <code>set import %path%</code></s></li>
+			<li><span class="is-family-monospace">images{}</span>: <code>images import %path%</code></li>
+			<li><s><span class="is-family-monospace">static{}</span>: <code>static import %path%</code></s></li>
+			<li><s><span class="is-family-monospace">dynamic{}</span>: <code>dynamic import %path%</code></s>
+			</li>
+		</ul>
+	</li>
+	<li>
+		sub-sections of the <span class="is-family-monospace">set{}</span> section:
+		<ul>
+			<li><s><span class="is-family-monospace">set.theme{}</span>: <code>theme import %path%</code></s>
+			</li>
+			<li><s><span class="is-family-monospace">set.theme.background{}</span>: <code>background import
+				%path%</code></s></li>
+			<li><s><span class="is-family-monospace">set.theme.item{}</span>: <code>item import
+				%path%</code></s></li>
+			<li><s><span class="is-family-monospace">set.theme.border{}</span>: <code>border import
+				%path%</code></s></li>
+			<li><s>...</s></li>
+			<li><s><span class="is-family-monospace">set.tip{}</span>: <code>tip import %path%</code></s></li>
+			<li><s><span class="is-family-monospace">set.exclude{}</span>: <code>exclude import
+				%path%</code></s></li>
+			<li><s><span class="is-family-monospace">set.static{}</span>: <code>static import %path%</code></s>
+			</li>
+			<li><s><span class="is-family-monospace">set.dynamic{}</span>: <code>dynamic import
+				%path%</code></s></li>
+		</ul>
+	</li>
+</ul>
+<h5 id="import-partial">Import as a partial</h5>
+<pre><code class="lang-shell">shell
+{
+	section {
+		// come code might go here. Optional.
+
+		// import of a partial section
+		import %path%
+
+		// some more content might go here. Optional.
+	}
+}</code></pre>
+In this case, the content of the file found at <code>%path%</code> will be imported into the <strong>already
+	existing</strong> <code>section{}</code>.
+The result would then look like so:
+<pre><code class="lang-shell">shell
+{
+	section {
+		// come code might go here. Optional.
+
+		// import of a partial section
+		/* content of the imported file goes here! Do not include
+		 *
+		 * section {
+		 * }
+		 *
+		 * in your imported file!
+		 */
+
+		// some more content might go here. Optional.
+	}
+}</code></pre>
+<p>This syntax may be used nearly anywhere: </p>
+<ul>
+	<li>in any section</li>
+	<li>in the body of <a href="dynamic.html#menu" style="border-bottom: 1px solid currentColor;"><span
+			class="is-family-monospace">menu</span> tags</a></li>
+</ul>
