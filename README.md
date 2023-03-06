@@ -70,3 +70,6 @@ Sponsors
 ------------------
 [@SteffanDonal](https://github.com/SteffanDonal), Ousseynou SANKHARE
 
+Contributors
+------------------
+[Martin Rüegg](https://github.com/martin-rueegg), [hiranokite](https://github.com/hiranokite), [Ivan Kalashnikov](https://github.com/Steindvart), [Chris Dailey](https://github.com/nitz), [Hank Morelock](https://github.com/hank-morelock)
