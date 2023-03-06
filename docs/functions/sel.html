@@ -1,13 +1,26 @@
 ﻿<h5>SEL</h5>
 <p>Has many functions to handle selected file system objects.</p>
 <br>
-<p>
-	<h5>sel(quote=<code>false</code>, separator=<code>' '</code>)</h5>
+
+<section id="sel" class="my-5">
+	<h5>sel</h5>
 	<p>Returns all selected items with double quotation mark and custom separator.</p>
-	<pre><code>sel<br>sel(true)<br>sel(true, "\n")</code></pre>
-</p>
-<br>
-<p>
+	<p>Syntax</p>
+	<code>sel(quote=<span class="syntax-keyword">false</span>, separator=' ')</code>
+	<p>Parameters</p>
+	<dl>
+		<dt>quote</dt>
+		<dd>Sets if the return value shall be quoted.</dd>
+		<dt>separator</dt>
+		<dd>Separator to join the different items from the selection.</dd>
+	</dl>
+	<p>Example</p>
+	<pre><code>sel
+sel(true)
+sel(true, "\n")</code></pre>
+</section>
+
+<section id="sel.path" class="my-5">
 	<h5>sel.path</h5>
 	<p>Returns the path of the selected item..</p>
 </section>
@@ -164,31 +177,40 @@
 
 <section id="sel.directory.quote" class="my-5">
 	<h5>sel.directory.quote</h5>
-	Returns the path for the selected item with quotation mark. If it is a directory.
-</p>
-<br>
-<p>
-	<h5>sel.get(index=<code>0</code>)</h5>
-	 Returns the path of the selected item by referring to the index number.
-</p>
-<br>
-<p>
-	<h5>sel.raw(index=<code>0</code>)</h5>
-	 Returns the raw path of the selected item by referring to the index number.
-</p>
-<br>
-<p>
-	<h5>sel.length(index=<code>0</code>)</h5>
-	Returns the number of characters in the path of the selected item by referring to the index number.
-</p>
-<br>
-<p>
-	<h5>sel.readonly(index=<code>0</code>)</h5>
-	Returns whether the selected item by referring to the index number is read-only.
-</p>
-<br>
-<p>
-	<h5>sel.hidden(index=<code>0</code>)</h5>
-	Returns whether the selected item by referring to the index number is hidden.
-</p>
+	<p>Returns the path for the selected item with quotation mark. If it is a directory.</p>
+</section>
 
+<section id="sel.get" class="my-5">
+	<h5>sel.get</h5>
+	<p>Returns the path of the selected item by referring to the index number.</p>
+	<p>Syntax</p>
+	<code>sel.get(index=<code>0</code>)</code>
+</section>
+
+<section id="sel.path.raw" class="my-5">
+	<h5>sel.path.raw</h5>
+	<p>Returns the raw path of the selected item by referring to the index number.</p>
+	<p>Syntax</p>
+	<code>sel.path.raw(index=<code>0</code>)</code>
+</section>
+
+<section id="sel.length" class="my-5">
+	<h5>sel.length</h5>
+	<p>Returns the number of characters in the path of the selected item by referring to the index number.</p>
+	<p>Syntax</p>
+	<code>sel.length(index=<code>0</code>)</code>
+</section>
+
+<section id="sel.readonly" class="my-5">
+	<h5>sel.readonly</h5>
+	<p>Returns whether the selected item by referring to the index number is read-only.</p>
+	<p>Syntax</p>
+	<code>sel.readonly(index=<code>0</code>)</code>
+</section>
+
+<section id="sel.hidden" class="my-5">
+	<h5>sel.hidden</h5>
+	<p>Returns whether the selected item by referring to the index number is hidden.</p>
+	<p>Syntax</p>
+	<code>sel.hidden(index=<code>0</code>)</code>
+</section>

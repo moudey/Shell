@@ -1,58 +1,104 @@
-<h5>APPX</h5>
+<h4>APPX</h4>
 <br>
-<p>
-<h5>appx(packageName) or appx.path(packageName)</h5>
-Returns the path of Package.
-<br/>
-packageName : can be passed in full name or part of name.
-</p>
-<pre><code>appx.path("WindowsTerminal")
-result:
-C:\Program Files\WindowsApps\Microsoft.WindowsTerminal_1.11.3471.0_x64__8wekyb3d8bbwe
+<section id="appx" class="my-5">
+	<h5>appx or appx.path</h5>
+	<p>Returns the path of Package.</p>
+	<p>Syntax</p>
+	<code>appx(packageName)<br/>
+		appx.path(packageName)</code>
+	<p>Parameters</p>
+	<dl>
+		<dt>packageName</dt>
+		<dd>can be passed in full name or part of name.</dd>
+	</dl>
+	<p>Example</p>
+	<pre><code>appx.path("WindowsTerminal")
+// result:
+// C:\Program Files\WindowsApps\Microsoft.WindowsTerminal_1.11.3471.0_x64__8wekyb3d8bbwe
 </code></pre>
-<br>
-<p>
-	<h5>appx.name(packageName)</h5>
-	Returns the display name of the Package.
-</p>
-<pre><code>appx.name("WindowsTerminal")
-result:
-Windows Terminal
+</section>
+
+<section id="appx.name" class="my-5">
+	<h5>appx.name</h5>
+	<p>Returns the display name of the Package.</p>
+	<p>Syntax</p>
+	<code>appx.name(packageName)</code>
+	<p>Parameters</p>
+	<dl>
+		<dt>packageName</dt>
+		<dd>can be passed in full name or part of name.</dd>
+	</dl>
+	<p>Example</p>
+	<pre><code>appx.name("WindowsTerminal")
+// result:
+// Windows Terminal
 </code></pre>
-<br>
-<p>
-	<h5>appx.id((packageName))</h5>
-	Returns the full name of the Package.
-</p>
-<pre><code>appx.id("WindowsTerminal")
-result:
-Microsoft.WindowsTerminal_1.11.3471.0_x64__8wekyb3d8bbwe
+</section>
+
+<section id="appx.id" class="my-5">
+	<h5>appx.id</h5>
+	<p>Returns the full name of the Package.</p>
+	<p>Syntax</p>
+	<code>appx.id(packageName)</code>
+	<p>Parameters</p>
+	<dl>
+		<dt>packageName</dt>
+		<dd>can be passed in full name or part of name.</dd>
+	</dl>
+	<p>Example</p>
+	<pre><code>appx.id("WindowsTerminal")
+// result:
+// Microsoft.WindowsTerminal_1.11.3471.0_x64__8wekyb3d8bbwe
 </code></pre>
-<br>
-<p>
-	<h5>appx.family(packageName)</h5>
-	Returns the family name of the Package.
-</p>
-<pre><code>appx.family("WindowsTerminal")
-result:
-Microsoft.WindowsTerminal_8wekyb3d8bbwe
+</section>
+
+<section id="appx.family" class="my-5">
+	<h5>appx.family</h5>
+	<p>Returns the family name of the Package.</p>
+	<p>Syntax</p>
+	<code>appx.family(packageName)</code>
+	<p>Parameters</p>
+	<dl>
+		<dt>packageName</dt>
+		<dd>can be passed in full name or part of name.</dd>
+	</dl>
+	<p>Example</p>
+	<pre><code>appx.family("WindowsTerminal")
+// result:
+// Microsoft.WindowsTerminal_8wekyb3d8bbwe
 </code></pre>
-<br>
-<p>
-	<h5>appx.version(packageName)</h5>
-	Returns version of the Package.
-</p>
-<pre><code>appx.version("WindowsTerminal")
-result:
-1.11.3471.0
+</section>
+
+<section id="appx.version" class="my-5">
+	<h5>appx.version</h5>
+	<p>Returns version of the Package.</p>
+	<p>Syntax</p>
+	<code>appx.version(packageName)</code>
+	<p>Parameters</p>
+	<dl>
+		<dt>packageName</dt>
+		<dd>can be passed in full name or part of name.</dd>
+	</dl>
+	<p>Example</p>
+	<pre><code>appx.version("WindowsTerminal")
+// result:
+// 1.11.3471.0
 </code></pre>
-<br>
-<p>
-	<h5>appx.shell(packageName)</h5>
-	Return package settings to run.
-</p>
-<pre><code>appx.shell("WindowsTerminal")
-result:
-shell:appsFolder\Microsoft.WindowsTerminal_8wekyb3d8bbwe!App
+</section>
+
+<section id="appx.shell" class="my-5">
+	<h5>appx.shell</h5>
+	<p>Return package settings to run.</p>
+	<p>Syntax</p>
+	<code>appx.shell(packageName)</code>
+	<p>Parameters</p>
+	<dl>
+		<dt>packageName</dt>
+		<dd>can be passed in full name or part of name.</dd>
+	</dl>
+	<p>Example</p>
+	<pre><code>appx.shell("WindowsTerminal")
+// result:
+// shell:appsFolder\Microsoft.WindowsTerminal_8wekyb3d8bbwe!App
 </code></pre>
-<br>
+</section>
