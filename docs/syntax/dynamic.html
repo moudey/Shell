@@ -49,9 +49,9 @@
 <p><span class="is-family-monospace">item</span>s create a single menu entry.</p>
 
 <h5 id="item-properties">Properties</h5>
-<p>Only the <code>title</code> property is mandatory (set to a non-null value). Please refer to the <a
-		href="#properties" style="border-bottom: 1px solid currentColor;">properties section</a> below for further
-	details.</p>
+<p>Only the <a href="#property-title" style="border-bottom: 1px solid currentColor;"><code>title</code> property</a> is
+	mandatory (set to a non-null value). Please refer to the <a href="#properties"
+			style="border-bottom: 1px solid currentColor;">properties section</a> below for further details.</p>
 
 <h5 id="item-syntax">Syntax</h5>
 <pre><code class="lang-shell">item( title = value [property = value [...] ])</code></pre>
@@ -63,9 +63,9 @@
 	and sub-entries.</p>
 
 <h5 id="menu-properties">Properties</h5>
-<p>Only the <code>title</code> property is mandatory (set to a non-null value). Please refer to the <a
-		href="#properties" style="border-bottom: 1px solid currentColor;">properties section</a> below for further
-	details.</p>
+<p>Only the <a href="#property-title" style="border-bottom: 1px solid currentColor;"><code>title</code> property</a> is
+	mandatory (set to a non-null value). Please refer to the <a href="#properties"
+			style="border-bottom: 1px solid currentColor;">properties section</a> below for further details.</p>
 
 <h5 id="menu-sub-items">Sub-items</h5>
 <p><span class="is-family-monospace">menu</span>s can have the following entry types, all of which are
@@ -121,14 +121,14 @@ separator( property = value [property = value [...] ])</code></pre>
 		</thead>
 		<tbody>
 
-		<tr>
+		<tr id="property-where">
 			<td>Where</td>
 			<td>Allow menu item to be passed if a true value is returned<br>
 				Default = <span class="syntax-keyword">true</span>
 			</td>
 		</tr>
 
-		<tr>
+		<tr id="property-title">
 			<td>Title</td>
 			<td>Sets a value indicating the caption of the menuitem.<br/>
 				<p class="text-danger">For <a href="#menu" style="border-bottom: 1px solid currentColor;"><span
@@ -142,7 +142,7 @@ separator( property = value [property = value [...] ])</code></pre>
 			</td>
 		</tr>
 
-		<tr>
+		<tr id="property-mode">
 			<td>Mode</td>
 			<td>Accept item by selections behavior. Value have one of the following parameters:
 				<table class="table">
@@ -172,83 +172,83 @@ separator( property = value [property = value [...] ])</code></pre>
 			</td>
 		</tr>
 
-		<tr>
+		<tr id="property-type">
 			<td>Type</td>
 			<td>Specify the types of object files allowed for the menu item to appear. The property is assigned to one
 				or more of these parameters and this character <code>|</code> is used to separate types.<br/>
 				Add a character <code>~</code> before single type to exclude.
 				<p class="has-text-danger">The property not supported syntax expressions.</p>
 				<table class="table">
-					<tr>
+					<tr id="property-type-asterisks">
 						<td class="syntax-keyword">*</td>
 						<td>Accept menuitem when any type are selected.</td>
 					</tr>
-					<tr>
+					<tr id="property-type-file">
 						<td class="syntax-keyword">File</td>
 						<td>Accept menuitem when file are selected.</td>
 					</tr>
-					<tr>
+					<tr id="property-type-directory">
 						<td class="syntax-keyword">Directory(Dir)</td>
 						<td>Accept menuitem when Directory are selected.</td>
 					</tr>
-					<tr>
+					<tr id="property-type-drive">
 						<td class="syntax-keyword">Drive</td>
 						<td>Drive objects</td>
 					</tr>
-					<tr>
+					<tr id="property-type-usb">
 						<td class="syntax-keyword">USB</td>
 						<td>Accept menuitem when USB flash drive are selected.</td>
 					</tr>
-					<tr>
+					<tr id="property-type-dvd">
 						<td class="syntax-keyword">DVD</td>
 						<td>The drive is a DVD-ROM drive</td>
 					</tr>
-					<tr>
+					<tr id="property-type-fixed">
 						<td class="syntax-keyword">Fixed</td>
 						<td>Accept menuitem when Fixed drive are selected. The drive has fixed media; for example, a
 							hard disk drive or flash drive.
 						</td>
 					</tr>
-					<tr>
+					<tr id="property-type-vhd">
 						<td class="syntax-keyword">VHD</td>
 						<td>Accept menuitem when Virtual Hard Disk are selected.</td>
 					</tr>
-					<tr>
+					<tr id="property-type-removable">
 						<td class="syntax-keyword">Removable</td>
 						<td>The drive has removable media; for example, a floppy drive, thumb drive, or flash card
 							reader.
 						</td>
 					</tr>
-					<tr>
+					<tr id="property-type-remote">
 						<td class="syntax-keyword">Remote</td>
 						<td>The drive is a remote (network) drive.</td>
 					</tr>
-					<tr>
+					<tr id="property-type-back">
 						<td class="syntax-keyword">Back</td>
 						<td>Accept menu item when the background of all types are selected or can specify of this types
 							for the background (back.directory, back.drive[back.fixed, back.usb, back.dvd, back.vhd,
 							back.Removable], back.namespace[back.computer, back.recyclebin])
 						</td>
 					</tr>
-					<tr>
+					<tr id="property-type-desktop">
 						<td class="syntax-keyword">Desktop</td>
 						<td>Accept menuitem when the Desktop are selected.</td>
 					</tr>
-					<tr>
+					<tr id="property-type-namespace">
 						<td class="syntax-keyword">Namespace</td>
 						<td>Accept menuitem when Namespace are selected. Can be virtual objects such as the My Network
 							Places and Recycle Bin.
 						</td>
 					</tr>
-					<tr>
+					<tr id="property-type-computer">
 						<td class="syntax-keyword">Computer</td>
 						<td>Accept menuitem when the My Computer are selected.</td>
 					</tr>
-					<tr>
+					<tr id="property-type-recyclebin">
 						<td class="syntax-keyword">Recyclebin</td>
 						<td>Accept menuitem when the Recycle bin are selected.</td>
 					</tr>
-					<tr>
+					<tr id="property-type-taskbar">
 						<td class="syntax-keyword">Taskbar</td>
 						<td>Accept menuitem when the Taskbar are selected.</td>
 					</tr>
@@ -258,27 +258,27 @@ separator( property = value [property = value [...] ])</code></pre>
 			</td>
 		</tr>
 
-		<tr>
+		<tr id="property-visibility">
 			<td>Visibility (vis)</td>
 			<td>Visibility of menuitem and can have one of the following parameters:
 				<table class="table">
-					<tr>
+					<tr id="property-visibility-hidden">
 						<td class="syntax-keyword">Hidden</td>
 						<td>Them menuitem will not be displayed.</td>
 					</tr>
-					<tr>
+					<tr id="property-visibility-normal">
 						<td class="syntax-keyword">Normal</td>
 						<td>Enabled the menuitem.</td>
 					</tr>
-					<tr>
+					<tr id="property-visibility-disable">
 						<td class="syntax-keyword">Disable</td>
 						<td>Disabled the menuitem.</td>
 					</tr>
-					<tr>
+					<tr id="property-visibility-static">
 						<td class="syntax-keyword">Static</td>
 						<td>Display item as label with/out an image</td>
 					</tr>
-					<tr>
+					<tr id="property-visibility-label">
 						<td class="syntax-keyword">Label</td>
 						<td>Display item as label without an image</td>
 					</tr>
@@ -288,7 +288,7 @@ separator( property = value [property = value [...] ])</code></pre>
 			</td>
 		</tr>
 
-		<tr>
+		<tr id="property-find">
 			<td>Find</td>
 			<td>
 				<p>Accept menuitem when the specified path name or path extension is contains or equal to the current
@@ -312,23 +312,23 @@ separator( property = value [property = value [...] ])</code></pre>
 			</td>
 		</tr>
 
-		<tr>
+		<tr id="property-separator">
 			<td>Separator (sep)</td>
 			<td>Add separator with menuitem position by parameters:
 				<table class="table">
-					<tr>
+					<tr id="property-separator-none">
 						<td class="syntax-keyword">None</td>
 						<td>Not adding a separator with the menuitem.</td>
 					</tr>
-					<tr>
+					<tr id="property-separator-before">
 						<td class="syntax-keyword">Before, Top</td>
 						<td>Add a separator before the menuitem.</td>
 					</tr>
-					<tr>
+					<tr id="property-separator-after">
 						<td class="syntax-keyword">After, Bottom</td>
 						<td>Add a separator after the menuitem.</td>
 					</tr>
-					<tr>
+					<tr id="property-separator-both">
 						<td class="syntax-keyword">Both</td>
 						<td>Add a separator before and after the menuitem.</td>
 					</tr>
@@ -338,39 +338,39 @@ separator( property = value [property = value [...] ])</code></pre>
 			</td>
 		</tr>
 
-		<tr>
+		<tr id="property-position">
 			<td>Position (pos)</td>
 			<td>The position at which a menuitem should be inserted into the <a href="#menu"
 					style="border-bottom: 1px solid currentColor;"><span
 					class="is-family-monospace">menu</span></a>.<br/>Position can have one of the
 				following parameters:
 				<table class="table">
-					<tr>
+					<tr id="property-position-auto">
 						<td class="syntax-keyword">Auto</td>
 						<td>Insert the menuitem to the current position.</td>
 					</tr>
-					<tr>
+					<tr id="property-position-middle">
 						<td class="syntax-keyword">Middle</td>
 						<td>Insert the menuitem to the middle of the <a href="#menu"
 								style="border-bottom: 1px solid currentColor;"><span
 								class="is-family-monospace">menu</span></a>.
 						</td>
 					</tr>
-					<tr>
+					<tr id="property-position-top">
 						<td class="syntax-keyword">Top</td>
 						<td>Insert the menuitem to the top of the <a href="#menu"
 								style="border-bottom: 1px solid currentColor;"><span
 								class="is-family-monospace">menu</span></a>.
 						</td>
 					</tr>
-					<tr>
+					<tr id="property-position-bottom">
 						<td class="syntax-keyword">Bottom</td>
 						<td>Insert the menuitem to the bottom of the <a href="#menu"
 								style="border-bottom: 1px solid currentColor;"><span
 								class="is-family-monospace">menu</span></a>.
 						</td>
 					</tr>
-					<tr>
+					<tr id="property-position-integer">
 						<td class="syntax-keyword">Number sets</td>
 						<td>Insert the menuitem to a specified position with integer numbers.</td>
 					</tr>
@@ -380,34 +380,34 @@ separator( property = value [property = value [...] ])</code></pre>
 			</td>
 		</tr>
 
-		<tr>
+		<tr id="property-image">
 			<td>Image, Icon</td>
 			<td>The icon that appears in a menuitem, This property can be assigned as image files, resource icons, glyph
 				or color. With one of the following parameters
 				<table class="table">
-					<tr>
+					<tr id="property-image-null">
 						<td class="syntax-keyword">null</td>
 						<td>Show menuitem without icon.</td>
 					</tr>
-					<tr>
+					<tr id="property-image-inherit">
 						<td class="syntax-keyword">Inherit</td>
 						<td>@*Inheriting the image from the parent.*@
 							Inherits this property from its parent element.
 						</td>
 					</tr>
-					<tr>
+					<tr id="property-image-cmd">
 						<td class="syntax-keyword">Cmd</td>
 						<td>Assign image from the command property.</td>
 					</tr>
-					<tr>
+					<tr id="property-image-glyph">
 						<td class="syntax-keyword">Glyph</td>
 						<td>Assign image as Glyph.</td>
 					</tr>
-					<tr>
+					<tr id="property-image-color">
 						<td class="syntax-keyword">Color</td>
 						<td>Assign image as color.</td>
 					</tr>
-					<tr>
+					<tr id="property-image-path">
 						<td class="syntax-keyword">Path</td>
 						<td>Assign image from location path or resource icon.</td>
 					</tr>
@@ -417,13 +417,13 @@ separator( property = value [property = value [...] ])</code></pre>
 			</td>
 		</tr>
 
-		<tr>
+		<tr id="property-parent">
 			<td>Parent, Menu</td>
 			<td><p>Move current item to another menu.</p>
 				Default = <span class="syntax-keyword">null</span></td>
 		</tr>
 
-		<tr>
+		<tr id="property-command">
 			<td>Command (cmd)</td>
 			<td><p>The command associated with the menuitem. Occurs when the menuitem is clicked or selected using a
 				shortcut key or access key defined for the menuitem.</p>
@@ -432,7 +432,7 @@ separator( property = value [property = value [...] ])</code></pre>
 			</td>
 		</tr>
 
-		<tr>
+		<tr id="property-arguments">
 			<td>Arguments (arg, args)</td>
 			<td><p>The parameter to pass to the Command property of a menuitem.</p>
 				Default = <span class="syntax-keyword">null</span>
@@ -440,15 +440,15 @@ separator( property = value [property = value [...] ])</code></pre>
 			</td>
 		</tr>
 
-		<tr>
+		<tr id="property-invoke">
 			<td>Invoke</td>
 			<td>Set execution type
 				<table class="table">
-					<tr>
+					<tr id="property-invoke-single">
 						<td class="syntax-keyword">0, single</td>
 						<td>execute the command for each file selected</td>
 					</tr>
-					<tr>
+					<tr id="property-invoke-multiple">
 						<td class="syntax-keyword">1, multiple</td>
 						<td>execute the command in one process</td>
 					</tr>
@@ -458,7 +458,7 @@ separator( property = value [property = value [...] ])</code></pre>
 			</td>
 		</tr>
 
-		<tr>
+		<tr id="property-window">
 			<td>Window</td>
 			<td>Controls how the window is to be shown. can be one of the following parameters:
 				<p class="syntax-keyword">Hidden, Show, Visible, Minimized, Maximized</p>
@@ -467,14 +467,14 @@ separator( property = value [property = value [...] ])</code></pre>
 			</td>
 		</tr>
 
-		<tr>
+		<tr id="property-directory">
 			<td>Directory (dir)</td>
 			<td><p>Specify the work directory to execute the command.</p>
 				Default = <span class="syntax-keyword">null</span>
 				<p class="syntax-prop">Required for item.</p></td>
 		</tr>
 
-		<tr>
+		<tr id="property-admin">
 			<td>Admin</td>
 			<td><p>Execute the command with administrative permissions.</p>
 				Default = <span class="syntax-keyword">false</span>
@@ -482,44 +482,44 @@ separator( property = value [property = value [...] ])</code></pre>
 			</td>
 		</tr>
 
-		<tr>
+		<tr id="property-verb">
 			<td>Verb</td>
 			<td>Specifies that the operation is the default for the selected file. value type string and can have one of
 				the following parameters:<br/>
 				<table class="table">
-					<tr>
+					<tr id="property-verb-null">
 						<td>null</td>
 						<td>Specifies that the operation is the default for the selected file type.</td>
 					</tr>
-					<tr>
+					<tr id="property-verb-open">
 						<td>Open</td>
 						<td>Opens a file or a application.</td>
 					</tr>
-					<tr>
+					<tr id="property-verb-openas">
 						<td>OpenAs</td>
 						<td>Opener dialog when no program is associated to the extension.</td>
 					</tr>
-					<tr>
+					<tr id="property-verb-runas">
 						<td>RunAs</td>
 						<td>In Windows 7 and Vista, opens the UAC dialog andin others, open the Run as... Dialog.</td>
 					</tr>
-					<tr>
+					<tr id="property-verb-edit">
 						<td>Edit</td>
 						<td>Opens the default text editor for the file.</td>
 					</tr>
-					<tr>
+					<tr id="property-verb-explore">
 						<td>Explore</td>
 						<td>Opens the Windows Explorer in the folder specified in Directory.</td>
 					</tr>
-					<tr>
+					<tr id="property-verb-properties">
 						<td>Properties</td>
 						<td>Opens the properties window of the file.</td>
 					</tr>
-					<tr>
+					<tr id="property-verb-print">
 						<td>Print</td>
 						<td>Start printing the file with the default application.</td>
 					</tr>
-					<tr>
+					<tr id="property-verb-find">
 						<td>Find</td>
 						<td>Start a search.</td>
 					</tr>
@@ -529,7 +529,7 @@ separator( property = value [property = value [...] ])</code></pre>
 			</td>
 		</tr>
 
-		<tr>
+		<tr id="property-wait">
 			<td>Wait</td>
 			<td>
 				<p>Waiting Until end of command.</p>
@@ -538,19 +538,19 @@ separator( property = value [property = value [...] ])</code></pre>
 			</td>
 		</tr>
 
-		<tr>
+		<tr id="property-checked">
 			<td>Checked</td>
 			<td>Value that indicates whether the menuitem checked type:
 				<table class="table">
-					<tr>
+					<tr id="property-checked-0">
 						<td class="syntax-keyword">0</td>
 						<td>Not checked</td>
 					</tr>
-					<tr>
+					<tr id="property-checked-1">
 						<td class="syntax-keyword">1</td>
 						<td>Display as checked mark.</td>
 					</tr>
-					<tr>
+					<tr id="property-checked-2">
 						<td class="syntax-keyword">2</td>
 						<td>Display as radio bullet.</td>
 					</tr>
@@ -560,7 +560,7 @@ separator( property = value [property = value [...] ])</code></pre>
 			</td>
 		</tr>
 
-		<tr>
+		<tr id="property-default">
 			<td>Default</td>
 			<td>
 				<p>Specifies that the menuitem is the default. A <a href="#menu"
@@ -572,7 +572,7 @@ separator( property = value [property = value [...] ])</code></pre>
 			</td>
 		</tr>
 
-		<tr>
+		<tr id="property-expanded">
 			<td>Expanded</td>
 			<td>
 				<p>Move items to the parent <a href="#menu" style="border-bottom: 1px solid currentColor;"><span
@@ -582,20 +582,20 @@ separator( property = value [property = value [...] ])</code></pre>
 			</td>
 		</tr>
 
-		<tr>
+		<tr id="property-column">
 			<td>Column(col)</td>
 			<td><p>Create a new column.</p>
 				Default = <span class="syntax-keyword">true</span>
 				<p class="syntax-prop">Required for item, menu.</p>
 		</tr>
 
-		<tr>
+		<tr id="property-keys">
 			<td>Keys</td>
 			<td><p>Show keyboard shortcuts.</p>
 				Default = <span class="syntax-keyword">null</span></td>
 		</tr>
 
-		<tr>
+		<tr id="property-tip">
 			<td>Tip</td>
 			<td>
 				<p>Show a tip for the current <a href="#menu" style="border-bottom: 1px solid currentColor;"><span
