@@ -1,0 +1,245 @@
+@font-face {
+    font-family: 'nilesoft.shell';
+    font-style: normal;
+	font-weight: 400;
+	/*src: url('/assets/font/shell.woff2') format('woff2');*/
+	src:url("../font/shell.eot?#iefix") format("embedded-opentype"),
+		url("../font/shell.woff2") format("woff2"), 
+		url("../font/shell.woff") format("woff"), 
+		url("../font/shell.ttf") format("truetype"), 
+		url("../font/shell.svg#nilesoft-shell") format("svg");
+}
+
+#glyph li {
+	background-color: transparent;
+	color: black;
+	cursor: pointer;
+	float: left;
+	font-size: 32px;
+	font-family: 'nilesoft.shell' !important;
+	text-align: center;
+	height: 64px;
+	width: 64px;
+	padding-top: 6px;
+	margin: 0.5em 0.5em;
+}
+
+#glyph li p {
+	text-align: center;
+	font: bold 9px Arial, sans-serif;
+	width: 100%;
+}
+
+#glyph li:hover {
+	background-color: #000;
+	color: #fff !important;
+}
+
+#glyph a {color: currentColor;}
+#glyph a:hover {color: currentColor;}
+
+.glyph {
+	background-color: transparent;
+	color: black;
+	cursor: pointer;
+	font-size: 256px;
+	font-family: 'nilesoft.shell' !important;
+	text-align: center;
+}
+
+.ig {
+	background-color: transparent;
+	color: black;
+	cursor: pointer;
+	font-family: 'nilesoft.shell' !important;
+	text-align: center;
+}
+
+
+i.g {
+    background-color: transparent;
+    font-family: 'nilesoft.shell' !important;
+    font-style:normal;
+    text-align: center;
+    cursor:default;
+    padding:0;
+    margin:0;
+}
+
+.i {
+  font-family: 'nilesoft.shell' !important;
+  font-weight: 400; }
+
+.i {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 1; }
+
+.i-lg {
+  font-size: 1.33333em;
+  line-height: 0.75em;
+  vertical-align: -.0667em; }
+
+.i-xs {
+  font-size: .75em; }
+
+.i-sm {
+  font-size: .875em; }
+
+.i-1x {
+  font-size: 1em; }
+
+.i-2x {
+  font-size: 2em; }
+
+.i-3x {
+  font-size: 3em; }
+
+.i-4x {
+  font-size: 4em; }
+
+.i-5x {
+  font-size: 5em; }
+
+.i-6x {
+  font-size: 6em; }
+
+.i-7x {
+  font-size: 7em; }
+
+.i-8x {
+  font-size: 8em; }
+
+.i-9x {
+  font-size: 9em; }
+
+.i-10x {
+  font-size: 10em; }
+
+.i-fw {
+  text-align: center;
+  width: 1.25em; }
+
+.i-ul {
+  list-style-type: none;
+  margin-left: 2.5em;
+  padding-left: 0; }
+  .i-ul > li {
+    position: relative; }
+
+.i-li {
+  left: -2em;
+  position: absolute;
+  text-align: center;
+  width: 2em;
+  line-height: inherit; }
+
+.i-border {
+  border: solid 0.08em #eee;
+  border-radius: .1em;
+  padding: .2em .25em .15em; }
+
+.i-pull-left {
+  float: left; }
+
+.i-pull-right {
+  float: right; }
+
+.i.i-pull-left {
+  margin-right: .3em; }
+
+.i.i-pull-right {
+  margin-left: .3em; }
+
+.i-spin {
+  animation: i-spin 2s infinite linear; }
+
+.i-pulse {
+  animation: i-spin 1s infinite steps(8); }
+
+@keyframes i-spin {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+
+.i-rotate-90 {
+  -ms-filter: "progid:DXImageTransform.icrosoft.BasicImage(rotation=1)";
+  transform: rotate(90deg); }
+
+.i-rotate-180 {
+  -ms-filter: "progid:DXImageTransform.icrosoft.BasicImage(rotation=2)";
+  transform: rotate(180deg); }
+
+.i-rotate-270 {
+  -ms-filter: "progid:DXImageTransform.icrosoft.BasicImage(rotation=3)";
+  transform: rotate(270deg); }
+
+.i-flip-horizontal {
+  -ms-filter: "progid:DXImageTransform.icrosoft.BasicImage(rotation=0, mirror=1)";
+  transform: scale(-1, 1); }
+
+.i-flip-vertical {
+  -ms-filter: "progid:DXImageTransform.icrosoft.BasicImage(rotation=2, mirror=1)";
+  transform: scale(1, -1); }
+
+.i-flip-horizontal.i-flip-vertical {
+  -ms-filter: "progid:DXImageTransform.icrosoft.BasicImage(rotation=2, mirror=1)";
+  transform: scale(-1, -1); }
+
+:root .i-rotate-90,
+:root .i-rotate-180,
+:root .i-rotate-270,
+:root .i-flip-horizontal,
+:root .i-flip-vertical {
+  filter: none; }
+
+.i-stack {
+  display: inline-block;
+  height: 2em;
+  line-height: 2em;
+  position: relative;
+  vertical-align: middle;
+  width: 2.5em; }
+
+.i-stack-1x,
+.i-stack-2x {
+  left: 0;
+  position: absolute;
+  text-align: center;
+  width: 100%; }
+
+.i-stack-1x {line-height: inherit; }
+.i-stack-2x {font-size: 2em; }
+.i-inverse {color: #fff; }
+
+.i-comment:before{content:"\E25C";}
+.i-view:before{content:"\E12E";}
+.i-time:before{content:"\E126";}
+.i-edit:before{content:"\E0A1";}
+.i-delete:before{content:"\E0B4";}
+.i-tag:before{content:"\E177";}
+.i-download:before{content:"\E0BC";}
+.i-book:before{content:"\E1C2";}
+.i-facebook:before{content:"\E244";}
+.i-twitter:before{content:"\E242";}
+.i-reddit:before{content:"\E23F";}
+.i-github:before{content:"\E22B";}
+.i-chevron-left:before{content:"\E007";}
+.i-chevron-right:before{content:"\E008";}
+.i-chevron-up:before{content:"\E009";}
+.i-chevron-down:before{content:"\E00a";}
+.i-grid:before{content:"\E097";}
+.i-add:before{content:"\E160";}
+.i-sub:before{content:"\E161";}
+.i-user:before{content:"\E105";}
+.i-user-setting:before{content:"\E0FE";}
+.i-users:before{content:"\E107";}
+.i-notification:before{content:"\E189";}
+.i-email:before{content:"\E115";}
+.i-rss-square:before{content:"\E29B";}
+.i-rss:before{content:"\E29C";}
