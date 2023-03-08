@@ -174,6 +174,31 @@
             <div class="content">
     Hello World
               <hr />
+
+              <pre>
+     appRoot:        <%= appRoot.FullName %>
+     projectRoot:    <%= projectRoot.FullName %>
+     docsRoot:       <%= docsRoot.FullName %>
+     requestUrl:     <%= requestUrl %>
+     requestMap:     <%= requestMap %>
+     requestedFile:  <%= requestedFile.FullName %>
+     exists:         <%= requestedFile.Exists %>
+     modified:       <%= fileModified %>
+     accessed:       <%= Now() %>
+
+     pageName:       <%= pageName %>
+     pageSlug:       <%= pageSlug %>
+
+     rootUrl:        <a href="<%= rootUrl %>"><%= rootUrl %></a>
+     fileUrl:        <a href="<%= fileUrl %>"><%= fileUrl %></a>
+     nilesoftUrl:    <a href="<%= nilesoftUrl %>" target="_blank"><%= nilesoftUrl %></a>
+     gitUrl:         <a href="<%= gitUrl %>" target="_blank"><%= gitUrl %></a>
+
+     SERVER_NAME:     <%= SERVER_NAME %>
+     SERVER_PORT:     <%= SERVER_PORT %>
+     HTTPS:           <%= HTTPS %>
+ </pre>
+
               <div id="improve" class="my-5">
                 <p class="">
                   This page is

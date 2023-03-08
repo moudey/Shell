@@ -14,16 +14,17 @@ Friend Shared   SERVER_PORT     As String
 Friend Shared   HTTPS           As String
 
 Friend Shared   rootUrl         As String       = "http://" & SERVER_NAME
+Friend const    nilesoftRoot    As String       = "https://nilesoft.org"
 Friend const    gitRepo         As String       = "https://github.com/moudey/shell"
 Friend const    gitBranch       As String       = "main"
 Friend const    gitRootUrl      As String       = gitRepo & "/blob/" & "main"
 
+Friend Shared   nilesoftUrl     As String
 Friend Shared   gitUrl          As String
 
 Friend Shared   appRoot         As DirectoryInfo
 Friend Shared   projectRoot     As DirectoryInfo
 Friend Shared   docsRoot        As DirectoryInfo
-Friend Shared   imagesRoot      As DirectoryInfo
 
 Friend Shared   requestType     As String
 Friend Shared   requestUrl      As String
@@ -45,7 +46,6 @@ Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Han
     appRoot             = New DirectoryInfo(HttpRuntime.AppDomainAppPath)
     projectRoot         = appRoot.parent
     docsRoot            = New DirectoryInfo(projectRoot.FullName & "/docs")
-    imagesRoot          = New DirectoryInfo(docsRoot.FullName & "/images")
 
     ''' Get the current requested URL
     requestType          = Request.QueryString("type")
@@ -72,12 +72,11 @@ Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Han
     requestMap    = projectRoot.FullName & requestUrl.replace("/", "\")
     requestedFile = New FileInfo(requestMap)
 
- 
  End Sub
 
 
 ''' this is called from Default.aspx to actually include the requested content
-Protected function includePage(pageFile As FileInfo) As Boolean
+Protected function preparePage(pageFile As FileInfo, ByRef basename As String, ByRef caption As String) As FileInfo
 
     Dim dirInfo         As DirectoryInfo
     Dim suffix          = ""
@@ -97,7 +96,7 @@ Protected function includePage(pageFile As FileInfo) As Boolean
      end if
  
     ''' If the url ends with ".html", we just go for it
-    if Not pageFile.Extension = "html" Then
+    if Not pageFile.Extension.ToLower() = "html" Then
 
         ''' Otherwise try adding ".html" - This would be the case for a file in a directory
         ''' E.g. /docs/installation should really load /docs/installation.html
@@ -125,12 +124,25 @@ Protected function includePage(pageFile As FileInfo) As Boolean
     end if
 
     ''' Create helper urls for the bottom of the page
-    gitUrl  = gitRootUrl & requestUrl & suffix
-    fileUrl = rgxRemoveIndex.Replace(rootUrl & requestUrl, "$1")
+    gitUrl      = gitRootUrl & requestUrl & suffix
+    fileUrl     = rgxRemoveIndex.Replace(rootUrl & requestUrl, "$1")
+    nilesoftUrl = rgxRemoveIndex.Replace(nilesoftRoot & requestUrl, "$1")
 
     if pageFile.Exists Then
         fileModified = File.GetLastWriteTime(pageFile.FullName)
-    else
+    end if
+
+    extractNames(pageFile.Name, basename, caption)
+
+    return pageFile
+
+end function
+
+
+ ''' this is called from Default.aspx to actually include the requested content
+Protected function includePage(pageFile As FileInfo) As Boolean
+
+    if Not pageFile.Exists Then
         return false
     end if
 
@@ -149,8 +161,8 @@ Protected  Function includeImage(imageFile As FileInfo) As Boolean
     if not imageFile.Exists Then
 
         Response.Clear()
-        response.StatusCode = 404
-        response.StatusDescription = "File not found"
+        Response.StatusCode = 404
+        Response.StatusDescription = "File not found"
         Response.Flush()
 
         return false
@@ -283,7 +295,7 @@ Protected function PrintNav(ByVal initial As DirectoryInfo) As XElement
 
 End function
 
-private sub extractNames(ByVal path As String, ByRef basename As String, ByRef caption As String)
+protected sub extractNames(ByVal path As String, ByRef basename As String, ByRef caption As String)
 
     basename = rgxRemoveIndex.Replace(path, "$1")
     caption  = myTI.ToTitleCase(rgxReplaceDash.Replace(basename, " "))
