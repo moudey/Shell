@@ -169,7 +169,16 @@
           <!-- #include file = "_aside.aspx" -->
           <div id="content" class="column">
             <div class="content">
-    Hello World
+<%
+
+If Not includePage(requestedFile) Then
+    Response.StatusCode = 404
+%>
+File Not Found
+<%
+End If
+
+%>
               <hr />
 
               <pre>
