@@ -63,7 +63,7 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Open+Sans"
     />
-    <link rel="stylesheet" href="/assets/lib/bulma/bulma.min.css" />
+    <link rel="stylesheet" href="/assets/lib/bulma/css/bulma.css" />
     <link rel="stylesheet" href="/assets/css/main.css" />
     <link rel="stylesheet" href="/assets/css/glyphs.css" />
 
