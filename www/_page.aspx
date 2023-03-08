@@ -72,11 +72,13 @@
 
     <link rel="stylesheet" href="/assets/css/prism.css" />
 
+    <!--
     <script
       async
       src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2559766466824022"
       crossorigin="anonymous"
     ></script>
+      -->
 
     <script type="application/ld+json">
       {
@@ -142,6 +144,17 @@
           id="ad-responsive-horizontal-728-90"
           class="has-text-centered my-6"
         >
+          <div
+            style="
+              width: 100%;
+              height: 100px;
+              border: 1px solid #0a0a0a;
+              background-color: #808080;
+            "
+          >
+            Advertisement
+          </div>
+          <!--
           <ins
             class="adsbygoogle"
             style="display: inline-block; width: 90%; height: 90px"
@@ -153,6 +166,7 @@
           <script>
             (adsbygoogle = window.adsbygoogle || []).push({});
           </script>
+		-->
         </section>
         <div class="columns">
           <aside id="categories" class="column is-one-quarter px-2">
@@ -253,6 +267,17 @@
                 id="ad-responsive-horizontal"
                 class="has-text-centered my-6"
               >
+                <div
+                  style="
+                    width: 100%;
+                    height: 100px;
+                    border: 1px solid #0a0a0a;
+                    background-color: #808080;
+                  "
+                >
+                  Advertisement
+                </div>
+                <!--
                 <ins
                   class="adsbygoogle"
                   style="display: block"
@@ -264,6 +289,7 @@
                 <script>
                   (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
+                -->
               </section>
             </div>
           </div>
