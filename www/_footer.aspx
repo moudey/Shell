@@ -77,7 +77,7 @@
     </div>
   </div>
 </footer>
-<script src="/assets/lib/jquery/jquery-3.5.1.js"></script>
+<script src="/assets/lib/jquery/jquery.js"></script>
 <script src="/assets/js/main.js"></script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
