@@ -14,20 +14,17 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:site_name" content="Nilesoft" />
-    <meta property="og:title" content="Introduction - Shell" />
+    <meta property="og:title" content="<%= pageName %> - Shell" />
     <meta
       property="og:description"
       content="Shell is a powerful context menu customizer with highly responsive for Windows File Explorer."
     />
-    <meta property="og:url" content="https://nilesoft.org/docs" />
-    <meta
-      property="og:image"
-      content="https://nilesoft.org/images/logo-512.png"
-    />
+    <meta property="og:url" content="<%= fileUrl %>" />
+    <meta property="og:image" content="<%= rootUrl %>/images/logo-512.png" />
     <meta property="og:image:type" content="image/png" />
     <meta name="twitter:site" content="@moudey" />
     <meta name="twitter:creator" content="@moudey" />
-    <meta name="twitter:title" content="Introduction - Shell" />
+    <meta name="twitter:title" content="<%= pageName %> - Shell" />
     <meta
       name="twitter:description"
       content="Shell is a powerful context menu customizer with highly responsive for Windows File Explorer."
@@ -38,12 +35,12 @@
       content="https://nilesoft.org/images/logo-512.png"
     />
 
-    <title>Introduction - Shell</title>
+    <title><%= pageName %> - Shell</title>
     <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
     <link rel="alternate icon" type="image/png" href="/images/favicon.png" />
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
     <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
-    <link rel="canonical" href="https://nilesoft.org/docs" />
+    <link rel="canonical" href="<%= fileUrl %>" />
     <link
       rel="alternate"
       type="application/rss+xml"
@@ -90,7 +87,7 @@
         "fileSize": "3.2MB",
         "operatingSystem": "Windows 7/8/10/11",
         "releaseNotes": "",
-        "screenshot": "https://nilesoft.org/images/screenshots/main.png",
+        "screenshot": "<%= rootUrl %>/images/screenshots/main.png",
         "applicationCategory": "DesktopEnhancementApplication"
       }
     </script>
@@ -206,7 +203,7 @@
                   typo? Or something unclear?
                   <br />
                   <a
-                    href="https://github.com/moudey/shell/blob/main/docs/index.html"
+                    href="<%= gitUrl %>"
                     style="border-bottom: 1px solid currentColor"
                   >
                     Improve this page on GitHub
