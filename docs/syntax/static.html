@@ -1,15 +1,101 @@
-<h4>Static Items</h4>
+<h4 id="_top">Static Items</h4>
 <br>
-<p>This section modifies context menu items added by the system or by a third party. more than one item can be added
-	with some properties to customize the context menu. explained below in more details.<br>The items must have the
-	property <code>find</code>. to search in the titles of the menu items to catches them and customize by other
-	properties such as changing the title, icon, visibility, or moving it to another location.</p>
-<p>In the following example, it shows how to write add an items to static:</p>
+<p>The optional <code>static</code> section contains entries to <strong>modify existing context menu items</strong>,
+	added by the system or by a third party.</p>
+
+<h5 id="sub-items">Sub-items</h5>
+<p>The section can have the following entry types, all of which are <strong>optional</strong>:</p>
+<ul>
+	<li>One <a href="variables.html" class="uline"> <code>var</code> block</a> to define "local" variables.
+	</li>
+	<li>One or more <a href="#item" class="uline"><code>item</code> entries</a>.
+		These contain the instructions on which and how to change existing <a href="dynamic.html#menuitem"
+				class="uline"><span class="is-family-monospace">menuitems</span></a>.
+	</li>
+	<li>One or more <a href="index.html#import" class="uline"><code><code>imports</code></code></a>. The content of the
+		given file will be placed in the position of the import.
+	</li>
+</ul>
+<p>While the <code>var</code> block should be at the top of the section, the other entries can appear in any order.</p>
+
+<h5 id="example">Example</h5>
+<p>In the following example, two instructions are defined:</p>
 <pre><code class="lang-shell">shell 
 {
     static
     {
-        item(find = 'copy'image = #00ff00)
+        item(find = 'copy' image = #00ff00)
         item(find = 'paste' image = #0000ff)
     }
 }</code></pre>
+<br>
+
+<h4 id="item">Item Entries</h4>
+
+<p><code>item</code> entries contain the instructions on how to identify existing <a href="dynamic.html#menuitem"
+		class="uline"><span class="is-family-monospace">menuitems</span></a> (also referred to as <a href="#target"
+		class="uline"><span class="is-family-monospace">Target</span></a>), and when and what changes should be applied
+	to them.</p><p>This is done by matching an existing <a href="dynamic.html#menuitem" class="uline"><span
+		class="is-family-monospace">menuitem</span></a>'s <a href="properties.html#title"
+		class="uline"><code>title</code></a> property against the static item's mandatory <a href="properties.html#find"
+		class="uline"><code>find</code></a> property. If a match is found, the other properties of the static
+	<code>item</code> are applied to the appropriate <a href="dynamic.html#menuitem" class="uline"><span
+			class="is-family-monospace">menuitem</span></a>, such as changing their properties (e.g. <a
+			href="properties.html#title" class="uline"><code>title</code></a>, <a href="properties.html#image"
+			class="uline"><code>icon</code></a>, <a href="properties.html#visibility"
+			class="uline"><code>visibility</code></a>), or moving them to another location.</p>
+
+<h5 id="item-syntax">Syntax</h5>
+<pre><code class="lang-shell">item( title = value [property = value [...] ])</code></pre>
+<br/>
+
+
+<h5 id="item-properties">Properties</h5>
+
+<p><code>item</code> entries can define three different sets of properties:</p>
+<dl>
+	<dt><a href="properties.html#_validation-properties" class="uline">Validation Properties</a></dt>
+	<dd>Determine if a given <code>item</code> entry should be processed when a context menu is displayed. Optional.
+	</dd>
+	<dt><a href="properties.html#_filter-properties" class="uline"><span
+			class="is-family-monospace">Filter Properties:</span></a></dt>
+	<dd>Determine if a given menuitem is a valid <a href="#target" class="uline"><span class="is-family-monospace">target</span></a>
+		for the <a href="#process-instructions" class="uline"><span
+				class="is-family-monospace">process instructions</span></a>
+		<ul>
+			<li><a href="properties.html#find" class="uline"><code>find</code></a> <strong>(mandatory)</strong><br/>
+				Pattern used to identify <a href="#target" class="uline"><span
+						class="is-family-monospace">targets</span></a> by matching against their <a
+						href="properties.html#title" class="uline"><code>title</code></a> property.
+			</li>
+		</ul>
+	</dd>
+	<dt><a href="#process-instructions" class="uline"><span
+			class="is-family-monospace">Process Instructions</span></a></dt>
+	<dd>Define what to do with the target. Optional. However, if there are no <a href="#process-instructions"
+			class="uline"><span
+			class="is-family-monospace">process instruction</span></a> specified, the entry is of no practical use. For
+		further details refer to its separate section
+		<a href="#process-instructions" class="uline">below</a>.
+	</dd>
+</dl>
+
+<p>For a complete overview and further details regarding applicable properties, please refer to the <a
+		href="properties.html"
+		class="uline">properties page</a>.</p>
+
+<h4 id="target">Item Target</h4>
+
+<p>Item <span class="is-family-monospace">targets</span> are <a href="dynamic.html#menuitem" class="uline"><span
+		class="is-family-monospace">menuitems</span></a> of an existing context menu. Their properties or location can
+	be changed by applying the <a href="#process-instructions" class="uline"><span
+			class="is-family-monospace">process instructions</span></a> defined in a <a href="#item"
+			class="uline">static <code>item</code></a>.</p>
+
+<h5 id="process-instructions">Process instructions</h5>
+<p>Instructions that should be applied to the <a href="#target" class="uline"><span
+		class="is-family-monospace">Target</span></a>. Basically they consist of properties from the two property
+	classes <a href="properties.html#_menuitem-properties" class="uline">menuitem properties</a> and <a
+			href="properties.html#_command-properties" class="uline">command properties</a>.</p>
+<p>Once a <code>item</code> is validated and a target identified, then these values are applied to the targeted
+	<a href="dynamic.html#menuitem" class="uline"><span class="is-family-monospace">menuitem</span></a>.</p>
