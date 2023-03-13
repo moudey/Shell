@@ -6,16 +6,16 @@
 <br>
 <p>Shell can be installed in the following ways:</p>
 <ul>
-	<li><a href="#installer"  style="border-bottom: 1px solid currentColor;">Installer</a></li>
-	<li><a href="#portable"   style="border-bottom: 1px solid currentColor;">Portable</a></li>
-	<li><a href="#winget"     style="border-bottom: 1px solid currentColor;">Windows Package Manager</a></li>
-	<li><a href="#scoop"      style="border-bottom: 1px solid currentColor;">Scoop</a></li>
-	<li><a href="#chocolatey" style="border-bottom: 1px solid currentColor;">Chocolatey</a></li>
+	<li><a href="#installer" class="uline">Installer</a></li>
+	<li><a href="#portable" class="uline">Portable</a></li>
+	<li><a href="#winget" class="uline">Windows Package Manager</a></li>
+	<li><a href="#scoop" class="uline">Scoop</a></li>
+	<li><a href="#chocolatey" class="uline">Chocolatey</a></li>
 </ul><br>
 <p>Please also note the following reference sections:</p>
 <ul>
-	<li><a href="#cli"        style="border-bottom: 1px solid currentColor;">Command-Line Help</a></li>
-	<li><a href="#keys"       style="border-bottom: 1px solid currentColor;">Keys to enable/disable Shell functionalities</a></li>
+	<li><a href="#cli" class="uline">Command-Line Help</a></li>
+	<li><a href="#keys" class="uline">Keys to enable/disable Shell functionalities</a></li>
 </ul>
 
 <br>
@@ -24,18 +24,17 @@
 	<h5>Installer version</h5>
 	<div id="installer-install">
 		<h5>Install</h5>
-		<p><a href="https://nilesoft.org/download" style="border-bottom: 1px solid currentColor;">Download</a> the
-			installation file (<span class="is-family-monospace">Installer/Portable</span>),
-			run <code>setup.exe</code>,
-			follow the installation steps,
-			and agree to restart Windows File Explorer.</p>
+		<p><a href="/download" class="uline">Download</a> the installation file (<span class="is-family-monospace">Installer/Portable</span>),
+			run <code>setup.exe</code>, follow the installation steps, and agree to restart Windows File Explorer.</p>
 		<p>The program will be installed to <code>C:\Program Files\Nilesoft Shell\</code>, unless you have chosen
-		a different installation path during the installation steps.</p>
+			a different installation path during the installation steps.</p>
 	</div>
 	<hr>
 	<div id="installer-uninstall">
 		<h5>Uninstall</h5>
-		<p>Inside the Shell program folder (<code>C:\Program Files\Nilesoft Shell\</code> by default), run the <code>unst000.exe</code> or <code>unstall.exe</code> file, then follow the steps, and then agree to restart Windows File Explorer.</p>
+		<p>Inside the Shell program folder (<code>C:\Program Files\Nilesoft Shell\</code> by default), run the <code>unst000.exe</code>
+			or <code>unstall.exe</code> file, then follow the steps, and then agree to restart Windows File Explorer.
+		</p>
 	</div>
 </div>
 
@@ -45,31 +44,30 @@
 	<h5>Portable version</h5>
 	<div id="portable-install">
 		<h5>Install</h5>
-		<p><a href="https://nilesoft.org/download" style="border-bottom: 1px solid currentColor;">Download</a> the
+		<p><a href="/download" class="uline">Download</a> the
 			installation file (<span class="is-family-monospace">Installer/Portable</span>),
 			run <code>setup.exe</code>,
-			click <span class="is-family-monospace">Next</span>, chose the folder you want the program to be extracted to,
-			<strong>Check the option <span class="is-family-monospace">Portable Mode</span></strong>, and click
+			click <span class="is-family-monospace">Next</span>, chose the folder you want the program to be extracted
+			to, <strong>Check the option <span class="is-family-monospace">Portable Mode</span></strong>, and click
 			<span class="is-family-monospace">Extract</span>.</p>
-		<p>Open an <strong>elevated command prompt</strong> (or use <a href="https://github.com/gerardog/gsudo" style="border-bottom: 1px solid currentColor;">gsudo</a>),
-			change to the directory you have extracted the program to,
-			and run</p>
+		<p>Open an <strong>elevated command prompt</strong> (or use <a href="https://github.com/gerardog/gsudo"
+				class="uline">gsudo</a>), change to the directory you have extracted the program to, and run</p>
 		<code>shell -register -restart</code>
-		<p>For further details see the chapter <a href="#cli" style="border-bottom: 1px solid currentColor;">Command-Line Help</a> below.</p>
+		<p>For further details see the chapter <a href="#cli" class="uline">Command-Line Help</a> below.</p>
 	</div>
 	<hr>
 	<div id="portable-uninstall">
 		<h5>Uninstall</h5>
-		<p>Open an <strong>elevated command prompt</strong> (or use <a href="https://github.com/gerardog/gsudo" style="border-bottom: 1px solid currentColor;">gsudo</a>),
-			change to the directory you have extracted the program to,
-			and run</p>
+		<p>Open an <strong>elevated command prompt</strong> (or use <a href="https://github.com/gerardog/gsudo"
+				class="uline">gsudo</a>), change to the directory you have extracted the program to, and run</p>
 		<code>shell -unregister -restart</code>
 		<br>
 		<div class="notification is-info is-light mt-5">
-			<i>Tip:</i> Close all instances of Windows File Explorer before uninstalling to avoid needing a reboot after it (Shell) has been uninstalled.
+			<i>Tip:</i> Close all instances of Windows File Explorer before uninstalling to avoid needing a reboot after
+			it (Shell) has been uninstalled.
 		</div>
 		<br>
-		<p>For further details see the chapter <a href="#cli" style="border-bottom: 1px solid currentColor;">Command-Line Help</a> below.</p>
+		<p>For further details see the chapter <a href="#cli" class="uline">Command-Line Help</a> below.</p>
 	</div>
 </div>
 
@@ -96,7 +94,7 @@
 
 <div id="scoop">
 	<h5>Scoop</h5>
-	<p>Scoop can be installed following the instructions at <a href="https://scoop.sh/" style="border-bottom: 1px solid currentColor;">scoop.sh</a>.</p>
+	<p>Scoop can be installed following the instructions at <a href="https://scoop.sh/" class="uline">scoop.sh</a>.</p>
 	<div id="scoop-install">
 		<h5>Install</h5>
 		<p>Open a command prompt, and run</p>
@@ -108,16 +106,16 @@
 			<code>scoop bucket add extras</code> first.
 		</div>
 		<br>
-		<p>Open an <strong>elevated command prompt</strong> (or use <a href="https://github.com/gerardog/gsudo" style="border-bottom: 1px solid currentColor;">gsudo</a>),
-			and run</p>
+		<p>Open an <strong>elevated command prompt</strong> (or use <a href="https://github.com/gerardog/gsudo"
+				class="uline">gsudo</a>), and run</p>
 		<code>shell -register -restart</code>
-		<p>For further details see the chapter <a href="#cli" style="border-bottom: 1px solid currentColor;">Command-Line Help</a> below.</p>
+		<p>For further details see the chapter <a href="#cli" class="uline">Command-Line Help</a> below.</p>
 	</div>
 	<hr>
 	<div id="scoop-uninstall">
 		<h5>Uninstall</h5>
-		<p>Open an <strong>elevated command prompt</strong> (or use <a href="https://github.com/gerardog/gsudo" style="border-bottom: 1px solid currentColor;">gsudo</a>),
-			and run</p>
+		<p>Open an <strong>elevated command prompt</strong> (or use <a href="https://github.com/gerardog/gsudo"
+				class="uline">gsudo</a>), and run</p>
 		<code>shell -unregister -restart</code>
 		<p>Then run</p>
 		<code>scoop uninstall nilesoft-shell</code>
@@ -128,27 +126,29 @@
 
 <div id="chocolatey">
 	<h5>Chocolatey</h5>
-	<p>Chocolatey can be installed following the instructions at <a href="https://chocolatey.org/install#individual" style="border-bottom: 1px solid currentColor;">chocolatey.org</a>.</p>
+	<p>Chocolatey can be installed following the instructions at <a href="https://chocolatey.org/install#individual"
+			class="uline">chocolatey.org</a>.</p>
 	<div id="chocolatey-install">
 		<h5>Install</h5>
 		<div class="notification is-info is-light mt-5">
-			<i>Notice:</i> Until the package has been moderated, you need to add the specific version string to the installer,
-			adding e.g.<br/>
+			<i>Notice:</i> Until the package has been moderated, you need to add the specific version string to the
+			installer, adding e.g.<br/>
 			<code>choco install nilesoft.shell --version=1.8.1</code><br/>
-			Please find the latest published version at <a href="https://community.chocolatey.org/packages/nilesoft.shell#versionhistory" style="border-bottom: 1px solid currentColor;">
+			Please find the latest published version at <a
+				href="https://community.chocolatey.org/packages/nilesoft.shell#versionhistory" class="uline">
 			Chocolatey's Version History</a> and use the latest version number (replacing <code>1.8.1</code>).
 		</div>
 		<br>
-		<p>Open an <strong>elevated command prompt</strong> (or use <a href="https://github.com/gerardog/gsudo" style="border-bottom: 1px solid currentColor;">gsudo</a>),
-			and run</p>
+		<p>Open an <strong>elevated command prompt</strong> (or use <a href="https://github.com/gerardog/gsudo"
+				class="uline">gsudo</a>), and run</p>
 		<code>choco install nilesoft.shell</code>
 		<p>The program will be installed to <code>C:\Program Files\Nilesoft Shell\</code>.</p>
 	</div>
 	<hr>
 	<div id="chocolatey-uninstall">
 		<h5>Uninstall</h5>
-		<p>Open an <strong>elevated command prompt</strong> (or use <a href="https://github.com/gerardog/gsudo" style="border-bottom: 1px solid currentColor;">gsudo</a>),
-			and run</p>
+		<p>Open an <strong>elevated command prompt</strong> (or use <a href="https://github.com/gerardog/gsudo"
+				class="uline">gsudo</a>), and run</p>
 		<code>choco uninstall nilesoft.shell</code>
 	</div>
 </div>
