@@ -22,7 +22,7 @@
         list-style: none;
     }
 
-	ul.fold > li, #_index-list li {
+    ul.fold > li, #_index-list li {
         display: inline;
     }
 
@@ -166,15 +166,15 @@ Shell supports the following properties classes:
 
 <!--<h5 id="_property-classes">Property Classes</h5>-->
 <h5 id="_validation-properties">Validation Properties</h5>
-		<p>Determine if a given <a href="static.html" class="uline"><span class="is-family-monospace">static</span></a>
-			or <a href="dynamic.html" class="uline"><span class="is-family-monospace">dynamic</span></a> entry should be
-			processed when a context menu is displayed.</p>
+<p>Determine if a given <a href="static.html" class="uline"><span class="is-family-monospace">static</span></a>
+	or <a href="dynamic.html" class="uline"><span class="is-family-monospace">dynamic</span></a> entry should be
+	processed when a context menu is displayed.</p>
 
-		<ul class="fold">
-			<li><a href="#mode" class="uline">Mode</a></li>
-			<li><a href="#type" class="uline">Type</a></li>
-			<li><a href="#where" class="uline">Where</a></li>
-		</ul>
+<ul class="fold">
+	<li><a href="#mode" class="uline">Mode</a></li>
+	<li><a href="#type" class="uline">Type</a></li>
+	<li><a href="#where" class="uline">Where</a></li>
+</ul>
 
 <div id="_validation-syntax" class="table-responsive">
 	<h6>Syntax</h6>
@@ -360,14 +360,14 @@ Shell supports the following properties classes:
 
 <h5 id="_filter-properties">Filter Properties</h5>
 <p>For <a href="static.html" class="uline"><span class="is-family-monospace">static</span></a> entries only,
-		filter properties determine if a given menuitem is a valid <a href="static.html#target"
-				class="uline"><span class="is-family-monospace">target</span></a> for the <a
-				href="static.html#process-instructions" class="uline"><span
-				class="is-family-monospace">process instructions</span></a></p>
+	filter properties determine if a given menuitem is a valid <a href="static.html#target"
+			class="uline"><span class="is-family-monospace">target</span></a> for the <a
+			href="static.html#process-instructions" class="uline"><span
+			class="is-family-monospace">process instructions</span></a></p>
 
-		<ul class="fold">
-			<li><a href="#find" class="uline">Find</a></li>
-		</ul>
+<ul class="fold">
+	<li><a href="#find" class="uline">Find</a></li>
+</ul>
 
 <div id="_filter-syntax" class="table-responsive">
 	<h6>Syntax</h6>
@@ -571,37 +571,37 @@ find = '%pattern%|%pattern%[...]'</code></pre>
 
 
 <h5 id="_menuitem-properties">Menuitem Properties</h5>
-		<p>This set of properties describe the appearance and location of a given menuitem. For static entries, this is
-			the
-			target menuitem. For dynamic entries, this is the newly created menuitem.</p>
+<p>This set of properties describe the appearance and location of a given menuitem. For static entries, this is
+	the
+	target menuitem. For dynamic entries, this is the newly created menuitem.</p>
 
-		<dl>
-			<dt>Appearance</dt>
-			<dd>
-				<ul class="fold">
-					<li><a href="#checked" class="uline">Checked</a></li>
-					<li><a href="#default" class="uline">Default</a></li>
-					<li><a href="#image" class="uline">Image</a></li>
-					<li><a href="#separator" class="uline">Separator</a></li>
-					<li><a href="#tip" class="uline">Tip</a></li>
-					<li><a href="#title" class="uline">Title</a></li>
-					<li><a href="#visibility" class="uline">Visibility</a></li>
-				</ul>
+<dl>
+	<dt>Appearance</dt>
+	<dd>
+		<ul class="fold">
+			<li><a href="#checked" class="uline">Checked</a></li>
+			<li><a href="#default" class="uline">Default</a></li>
+			<li><a href="#image" class="uline">Image</a></li>
+			<li><a href="#separator" class="uline">Separator</a></li>
+			<li><a href="#tip" class="uline">Tip</a></li>
+			<li><a href="#title" class="uline">Title</a></li>
+			<li><a href="#visibility" class="uline">Visibility</a></li>
+		</ul>
 
-			</dd>
-			<dt>Location</dt>
-			<dd>
-				<ul class="fold">
-					<li><a href="#column" class="uline">Column</a></li>
-					<li><a href="#expanded" class="uline">Expanded</a></li>
-					<li><a href="#keys" class="uline">Keys</a></li>
-					<li><a href="#parent" class="uline">Menu</a></li>
-					<li><a href="#parent" class="uline">Parent</a></li>
-					<li><a href="#position" class="uline">Position</a></li>
-				</ul>
+	</dd>
+	<dt>Location</dt>
+	<dd>
+		<ul class="fold">
+			<li><a href="#column" class="uline">Column</a></li>
+			<li><a href="#expanded" class="uline">Expanded</a></li>
+			<li><a href="#keys" class="uline">Keys</a></li>
+			<li><a href="#parent" class="uline">Menu</a></li>
+			<li><a href="#parent" class="uline">Parent</a></li>
+			<li><a href="#position" class="uline">Position</a></li>
+		</ul>
 
-			</dd>
-		</dl>
+	</dd>
+</dl>
 
 <div id="_menuitem-syntax" class="table-responsive">
 	<h6>Syntax</h6>
@@ -873,18 +873,18 @@ tip = ["Lorem Ipsum is simply dummy text.", tip.info, 1.2]
 
 
 <h5 id="_command-properties">Command Properties</h5>
-		<p>This set of properties describe how a command is executed. Only available for dynamic items.</p>
+<p>This set of properties describe how a command is executed. Only available for dynamic items.</p>
 
-		<ul class="fold">
-			<li><a href="#admin" class="uline">Admin</a></li>
-			<li><a href="#arguments" class="uline">Arguments</a></li>
-			<li><a href="#command" class="uline">Command</a></li>
-			<li><a href="#directory" class="uline">Directory</a></li>
-			<li><a href="#invoke" class="uline">Invoke</a></li>
-			<li><a href="#verb" class="uline">Verb</a></li>
-			<li><a href="#wait" class="uline">Wait</a></li>
-			<li><a href="#window" class="uline">Window</a></li>
-		</ul>
+<ul class="fold">
+	<li><a href="#admin" class="uline">Admin</a></li>
+	<li><a href="#arguments" class="uline">Arguments</a></li>
+	<li><a href="#command" class="uline">Command</a></li>
+	<li><a href="#directory" class="uline">Directory</a></li>
+	<li><a href="#invoke" class="uline">Invoke</a></li>
+	<li><a href="#verb" class="uline">Verb</a></li>
+	<li><a href="#wait" class="uline">Wait</a></li>
+	<li><a href="#window" class="uline">Window</a></li>
+</ul>
 
 <div id="_command-syntax" class="table-responsive">
 	<h6>Syntax</h6>
@@ -925,13 +925,17 @@ tip = ["Lorem Ipsum is simply dummy text.", tip.info, 1.2]
 					<tr id="invoke-single">
 						<td class="syntax-keyword">0, single</td>
 						<td>execute the <a href="#command" class="uline"><span
-								class="is-family-monospace">command</span></a> for each selected object
+								class="is-family-monospace">command</span></a> only once in total. The list of selected
+							items can be accessed with <a href="/docs/functions/sel.html#sel" class="uline"><code>'@sel'</code></a>
 						</td>
 					</tr>
 					<tr id="invoke-multiple">
 						<td class="syntax-keyword">1, multiple</td>
-						<td>execute the <a href="#command" class="uline"><span
-								class="is-family-monospace">command</span></a> in one process
+						<td>execute the <a href="#command" class="uline"><code
+								class="is-family-monospace">command</code></a> once for every single item in the current
+							selection. The currently processed item can be accessed with e.g <a
+									href="/docs/functions/sel.html#sel.path.quote"
+									class="uline"><code>'@sel.path.quote'</code></a>
 						</td>
 					</tr>
 				</table>
