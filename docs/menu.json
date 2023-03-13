@@ -1,0 +1,54 @@
+[
+	{"title":"Introduction", "link":"/docs"},
+	{"title":"Installation", "link":"/docs/installation"},
+	{"title":"Get Started", "link":"/docs/get-started"},
+	{
+		"title":"Syntax", "link":"/docs/syntax",
+		"items": [
+			{"title":"Variables", "link":"/docs/syntax/variables"},
+			{"title":"Set", "link":"/docs/syntax/set"},
+			{"title":"Static", "link":"/docs/syntax/static"},
+			{"title":"Dynamic", "link":"/docs/syntax/dynamic"},
+			{"title":"Properties", "link":"/docs/syntax/properties" }
+		]
+	},{
+		"title":"Expressions", "link":"/docs/expressions",
+		"items": [
+			{"title":"Comments", "link":"/docs/expressions/comments"},
+			{"title":"String literal", "link":"/docs/expressions/string"},
+			{"title":"Numeric literal", "link":"/docs/expressions/numeric"},
+			{"title":"Color literal", "link":"/docs/expressions/color"},
+			{"title":"Operators", "link":"/docs/expressions/operators"},
+			{"title":"Identifier", "link":"/docs/expressions/identifier"}
+		]
+	},{
+		"title":"Functions", "link":"/docs/functions",
+		"items": [
+			{"title":"app", "link":"/docs/functions/app"},
+			{"title":"appx", "link":"/docs/functions/appx"},
+			{"title":"color", "link":"/docs/functions/color"},
+			{"title":"command", "link":"/docs/functions/command"},
+			{"title":"id", "link":"/docs/functions/id"},
+			{"title":"image", "link":"/docs/functions/image"},
+			{"title":"io", "link":"/docs/functions/io"},
+			{"title":"key", "link":"/docs/functions/key"},
+			{"title":"msg", "link":"/docs/functions/msg"},
+			{"title":"path", "link":"/docs/functions/path"},
+			{"title":"process", "link":"/docs/functions/process"},
+			{"title":"reg", "link":"/docs/functions/reg"},
+			{"title":"sel", "link":"/docs/functions/sel"},
+			{"title":"str", "link":"/docs/functions/str"},
+			{"title":"sys", "link":"/docs/functions/sys"},
+			{"title":"this", "link":"/docs/functions/this"},
+			{"title":"user", "link":"/docs/functions/user"},
+			{"title":"window", "link":"/docs/functions/window"}
+		]
+	},{
+		"title":"Examples", "link":"/docs/examples",
+		"items": [
+			{"title":"Copy path", "link":"/docs/examples/copy-path"},
+			{"title":"Favorites", "link":"/docs/examples/favorites"},
+			{"title":"Goto", "link":"/docs/examples/goto"}
+		]
+	}
+]
