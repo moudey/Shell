@@ -96,26 +96,24 @@ Protected function preparePage(pageFile As FileInfo, ByRef basename As String, B
      end if
  
     ''' If the url ends with ".html", we just go for it
-    if Not pageFile.Extension.ToLower() = "html" Then
+    if Not pageFile.Extension.ToLower() = ".html" Then
 
         ''' Otherwise try adding ".html" - This would be the case for a file in a directory
         ''' E.g. /docs/installation should really load /docs/installation.html
         suffix          = ".html"
+        dirInfo         = New DirectoryInfo(pageFile.FullName)
         pageFile        = New FileInfo(pageFile.FullName & suffix)
 
-        ''' test, if exists
+        ''' test, if file exists
         if not pageFile.Exists Then
 
             ''' otherwise it could be a directory, and we look for the "index.html"
-
             ''' So test for the directory
-            dirInfo = New DirectoryInfo(pageFile.FullName)
-
             if dirInfo.Exists Then
                 
                 ''' If found, assume the default: index.html
                 suffix  = "index.html"
-                pageFile    = New FileInfo(pageFile.FullName & "\" & suffix)
+                pageFile    = New FileInfo(dirInfo.FullName & "\" & suffix)
                 
             end if
 
