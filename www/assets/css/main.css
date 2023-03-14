@@ -1,15 +1,18 @@
 html, body {
-     font-family: 'Open Sans';
-     color:#000000;
+    font-family: 'Open Sans', sans-serif;
+    color: #000000;
 }
 
 /* footer */
 body {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
 }
-#mst-main { flex:1;}
+
+#mst-main {
+    flex: 1;
+}
 
 #mst-footer {
     color: black;
@@ -17,18 +20,18 @@ body {
 }
 
 ul.is-unstyled {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 ul.is-styled {
-	padding-left:3em;
+    padding-left: 3em;
 }
 
 ul.is-styled-square {
-	list-style-type:square;
-	padding-left:3em;
+    list-style-type: square;
+    padding-left: 3em;
 }
 
 .menu-list a {
@@ -37,98 +40,174 @@ ul.is-styled-square {
 
 .menu-list a:hover {
     color: white;
-    background-color:black;
+    background-color: black;
 }
 
-  .navbar-menu.is-white .navbar-start > a.navbar-item:focus,
-  .navbar-menu.is-white .navbar-start > a.navbar-item:hover,
-  .navbar-menu.is-white .navbar-start > a.navbar-item.is-active,
-  
-  .navbar-menu.is-white .navbar-start .navbar-link:focus,
-  .navbar-menu.is-white .navbar-start .navbar-link:hover,
-  .navbar-menu.is-white .navbar-start .navbar-link.is-active,
-  
-  .navbar-menu.is-white .navbar-end > a.navbar-item:focus,
-  .navbar-menu.is-white .navbar-end > a.navbar-item:hover,
-  .navbar-menu.is-white .navbar-end > a.navbar-item.is-active,
-  
-  .navbar-menu.is-white .navbar-end .navbar-link:focus,
-  .navbar-menu.is-white .navbar-end .navbar-link:hover,
-  .navbar-menu.is-white .navbar-end .navbar-link.is-active {
+.navbar-menu.is-white .navbar-start > a.navbar-item:focus,
+.navbar-menu.is-white .navbar-start > a.navbar-item:hover,
+.navbar-menu.is-white .navbar-start > a.navbar-item.is-active,
+.navbar-menu.is-white .navbar-start .navbar-link:focus,
+.navbar-menu.is-white .navbar-start .navbar-link:hover,
+.navbar-menu.is-white .navbar-start .navbar-link.is-active,
+.navbar-menu.is-white .navbar-end > a.navbar-item:focus,
+.navbar-menu.is-white .navbar-end > a.navbar-item:hover,
+.navbar-menu.is-white .navbar-end > a.navbar-item.is-active,
+.navbar-menu.is-white .navbar-end .navbar-link:focus,
+.navbar-menu.is-white .navbar-end .navbar-link:hover,
+.navbar-menu.is-white .navbar-end .navbar-link.is-active {
     background-color: black;
     color: white;
-  }
-
-a.uline
-{
-	text-decoration: none;
-	border-bottom: 1px solid currentColor;
 }
 
-//a {text-decoration: underline;}
-a.underline {text-decoration: underline;}
+a.uline {
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+}
+
+/*a {text-decoration: underline;}*/
+a.underline {
+    text-decoration: underline;
+}
 
 a.navbar-item.is-active,
 .navbar-link.is-active,
 .menu-list a.is-active {
-	background-color: black;
+    background-color: black;
     color: white;
     border-bottom: 0;
     text-decoration: none;
 }
+
 /*
 .navbar.is-white .navbar-brand .navbar-link::after {
   border-color: #000000;
 }*/
 
-.syntax {color:black; }
-.syntax-comment {color:#00aa00;}
-.syntax-string {color:#A7154F;}
-.syntax-number {color:#FF0080;}
-.syntax-keyword {color:#0000FF;}
-.syntax-code {font-weight:bolder;}
-.syntax-prop {color:#aaa;}
+.syntax {
+    color: black;
+}
+
+.syntax-comment {
+    color: #00aa00;
+}
+
+.syntax-string {
+    color: #A7154F;
+}
+
+.syntax-number {
+    color: #FF0080;
+}
+
+.syntax-keyword {
+    color: #0000FF;
+}
+
+.syntax-code {
+    font-weight: bolder;
+}
+
+.syntax-prop {
+    color: #aaa;
+}
 
 .paypal {
-    font-weight:bolder;
+    font-weight: bolder;
 }
-.paypal i{
+
+.paypal i {
     color: #007bff;
 }
 
 .item-slide {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
-img.is-512{max-width: 512px;max-height: 512px;}
-img.is-256{max-width: 256px;max-height: 256px;}
-img.is-128{	max-width: 128px;max-height: 128px;}
-img.is-100{max-width: 100%;height: auto;}
-img.is-75{max-width: 75%;height: auto;}
-img.is-50{max-width: 50%;height: auto;}
-img.is-25{max-width: 25%; height: auto;}
+img.is-512 {
+    max-width: 512px;
+    max-height: 512px;
+}
 
-.tags a.tag{text-decoration-line:none;background-color:black;color:white;}
-.tags a.tag:hover{text-decoration-line:none;background-color:#808080;}
+img.is-256 {
+    max-width: 256px;
+    max-height: 256px;
+}
+
+img.is-128 {
+    max-width: 128px;
+    max-height: 128px;
+}
+
+img.is-100 {
+    max-width: 100%;
+    height: auto;
+}
+
+img.is-75 {
+    max-width: 75%;
+    height: auto;
+}
+
+img.is-50 {
+    max-width: 50%;
+    height: auto;
+}
+
+img.is-25 {
+    max-width: 25%;
+    height: auto;
+}
+
+.tags a.tag {
+    text-decoration-line: none;
+    background-color: black;
+    color: white;
+}
+
+.tags a.tag:hover {
+    text-decoration-line: none;
+    background-color: #808080;
+}
 
 .modal-content-image {
     overflow: auto;
     position: relative;
     text-align: center;
 }
-.size-32px{height: 32px;width:32px;}
-.h-32px{height: 32px;}
-.w-32px{width:32px;}
 
-.border-left{border-left:1px solid #000;}
-.border-right{border-right:1px solid #000;}
-.border-top{border-top:1px solid #000;}
-.border-bottom{border-bottom:1px solid #000;}
+.size-32px {
+    height: 32px;
+    width: 32px;
+}
+
+.h-32px {
+    height: 32px;
+}
+
+.w-32px {
+    width: 32px;
+}
+
+.border-left {
+    border-left: 1px solid #000;
+}
+
+.border-right {
+    border-right: 1px solid #000;
+}
+
+.border-top {
+    border-top: 1px solid #000;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #000;
+}
 
 .post {
     background-color: #fff;
-    border-radius: 0px;
-    box-shadow: 0 .5em 1em -.125em rgba(10,10,10,.1),0 0 0 1px rgba(10,10,10,.02);
+    border-radius: 0;
+    box-shadow: 0 .5em 1em -.125em rgba(10, 10, 10, .1), 0 0 0 1px rgba(10, 10, 10, .02);
     color: #4a4a4a;
     display: block;
     padding: 0;
@@ -150,14 +229,85 @@ img, video {
 .opacity-25 {
     opacity: 50;
 }
+
 .opacity-50 {
-    opacity:50;
+    opacity: 50;
 }
+
 .opacity-75 {
     opacity: 50;
 }
 
 .modal-background-white {
-    background-color: rgba(255,255,255,.95);
+    background-color: rgba(255, 255, 255, .95);
 }
 
+/**
+ * Generate links to be copied to anchor targets:
+ *
+ * First, make the target stand out to the left a bit, so that hovering gets activated more easily
+ */
+H1[id],
+H2[id],
+H3[id],
+H4[id],
+H5[id],
+H6[id],
+[id] > H1,
+[id] > H2,
+[id] > H3,
+[id] > H4,
+[id] > H5,
+[id] > H6,
+[id].copy-link,
+[id].copy-link-child > :first-child {
+    z-index: 99;
+    margin-left: -1em;
+    padding-left: 1em;
+    position: relative;
+}
+
+/* Then, on hovering, make it go even further to the left, so there is room for the link icon */
+H1[id]:hover,
+H2[id]:hover,
+H3[id]:hover,
+H4[id]:hover,
+H5[id]:hover,
+H6[id]:hover,
+[id] > H1:hover,
+[id] > H2:hover,
+[id] > H3:hover,
+[id] > H4:hover,
+[id] > H5:hover,
+[id] > H6:hover,
+[id].copy-link:hover,
+[id].copy-link-child > :first-child:hover {
+    z-index: 99;
+    margin-left: -2em;
+    padding-left: 0.3em;
+    position: relative;
+}
+
+/* And last, make the link icon appear to the left. */
+H1[id]:hover::before,
+H2[id]:hover::before,
+H3[id]:hover::before,
+H4[id]:hover::before,
+H5[id]:hover::before,
+H6[id]:hover::before,
+[id] > H1:hover::before,
+[id] > H2:hover::before,
+[id] > H3:hover::before,
+[id] > H4:hover::before,
+[id] > H5:hover::before,
+[id] > H6:hover::before,
+[id].copy-link:hover::before,
+[id].copy-link-child > :first-child:hover::before {
+    content: '\01f517 \a0';
+    cursor: pointer;
+}
+
+/* Make the text in the toast align to the left, as it looks more smoothly. */
+.toast > li {
+    text-align: right;
+}
