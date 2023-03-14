@@ -127,7 +127,7 @@ img.is-25{max-width: 25%; height: auto;}
 
 .post {
     background-color: #fff;
-    border-radius: 0px;
+    border-radius: 0;
     box-shadow: 0 .5em 1em -.125em rgba(10,10,10,.1),0 0 0 1px rgba(10,10,10,.02);
     color: #4a4a4a;
     display: block;
