@@ -242,3 +242,72 @@ img, video {
     background-color: rgba(255, 255, 255, .95);
 }
 
+/**
+ * Generate links to be copied to anchor targets:
+ *
+ * First, make the target stand out to the left a bit, so that hovering gets activated more easily
+ */
+H1[id],
+H2[id],
+H3[id],
+H4[id],
+H5[id],
+H6[id],
+[id] > H1,
+[id] > H2,
+[id] > H3,
+[id] > H4,
+[id] > H5,
+[id] > H6,
+[id].copy-link,
+[id].copy-link-child > :first-child {
+    z-index: 99;
+    margin-left: -1em;
+    padding-left: 1em;
+    position: relative;
+}
+
+/* Then, on hovering, make it go even further to the left, so there is room for the link icon */
+H1[id]:hover,
+H2[id]:hover,
+H3[id]:hover,
+H4[id]:hover,
+H5[id]:hover,
+H6[id]:hover,
+[id] > H1:hover,
+[id] > H2:hover,
+[id] > H3:hover,
+[id] > H4:hover,
+[id] > H5:hover,
+[id] > H6:hover,
+[id].copy-link:hover,
+[id].copy-link-child > :first-child:hover {
+    z-index: 99;
+    margin-left: -2em;
+    padding-left: 0.3em;
+    position: relative;
+}
+
+/* And last, make the link icon appear to the left. */
+H1[id]:hover::before,
+H2[id]:hover::before,
+H3[id]:hover::before,
+H4[id]:hover::before,
+H5[id]:hover::before,
+H6[id]:hover::before,
+[id] > H1:hover::before,
+[id] > H2:hover::before,
+[id] > H3:hover::before,
+[id] > H4:hover::before,
+[id] > H5:hover::before,
+[id] > H6:hover::before,
+[id].copy-link:hover::before,
+[id].copy-link-child > :first-child:hover::before {
+    content: '\01f517 \a0';
+    cursor: pointer;
+}
+
+/* Make the text in the toast align to the left, as it looks more smoothly. */
+.toast > li {
+    text-align: right;
+}
