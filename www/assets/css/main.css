@@ -65,7 +65,7 @@ a.uline
 	border-bottom: 1px solid currentColor;
 }
 
-//a {text-decoration: underline;}
+/*a {text-decoration: underline;}*/
 a.underline {text-decoration: underline;}
 
 a.navbar-item.is-active,
