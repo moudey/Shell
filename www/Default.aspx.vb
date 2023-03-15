@@ -2,6 +2,7 @@ Option Strict On
 
 Imports System.IO
 Imports System.Globalization
+Imports System.Text.Json
 Imports System.XML
 Imports System.XML.Linq
 
@@ -192,6 +193,165 @@ End Function
 ''' This is used to automagically create the left-side navigation. It's not perfect, but does the job
 Protected function PrintNav(ByVal initial As DirectoryInfo) As XElement
 
+    ''' create return element
+    Dim xmlRoot         As XElement         = <html/>
+    Dim children        As IEnumerable(Of XElement)
+
+    Dim menuFile        As FileInfo         = New FileInfo(initial.FullName & "\menu.json")
+
+
+    If menuFile.Exists Then
+        PrintNavXmlAppendChildren(xmlRoot, PrintNavJson(menuFile))
+    Else
+        PrintNavXmlAppendChildren(xmlRoot, PrintNavFS(initial))
+    End If
+
+    return xmlRoot
+
+End Function
+
+Protected Function PrintNavXmlMarkActive(ByRef html As XElement, ByVal link As String) As XElement
+
+    ''' If it's the current page, mark it active
+    if link = "/" & requestUrl then
+        html.Descendants("a")(0).Attribute("class").Value = "is-active"
+    end if
+    
+    return html
+    
+End Function
+
+Protected Function PrintNavXmlCreateDir(ByVal caption As String, ByVal link As String) As XElement
+
+    Dim html            As XElement
+
+   ''' Create the html
+    html = _
+    <li>
+        <a href="#" class="" >
+            <div class="icon-text">
+                <span class="icon"><i class="i i-chevron-down i-lg"></i></span>
+                <span class="ml-2"><%= caption %></span>
+            </div>
+        </a>
+    </li>
+
+    ''' Update the href attribute
+    html.Descendants("a")(0).Attribute("href").Value = link
+
+    return PrintNavXmlMarkActive(html, link)
+
+End Function
+
+Protected function PrintNavXmlCreateFile(ByVal caption As String, ByVal link As String) As XElement
+
+    Dim html            As XElement
+
+    ''' create the required html
+    html = _
+    <li>
+        <a href="#" class="" >
+            <span class="ml-5"><%= caption %></span>
+        </a>
+    </li>
+
+    ''' update the href property
+    html.Descendants("a")(0).Attribute("href").Value = link
+
+    return PrintNavXmlMarkActive(html, link)
+
+End Function
+
+Protected function PrintNavXmlAppendChildren(
+    ByRef parentNode As XElement,
+    ByRef childNode As XElement
+    ) As Long
+
+    Dim children        As IEnumerable(Of XElement)
+
+    ''' get files and sub-folders
+    children = childNode.Elements
+    
+    ''' if found any, append them
+    if children.count() > 0 then
+    
+        parentNode.add( <ul/> )
+    
+        parentNode.Descendants("ul")(0).add( children )
+    
+    end if
+    
+    return children.count()
+    
+End Function
+
+Protected function PrintNavJson(ByVal menuFile As FileInfo) As XElement
+
+    Dim jsonString = File.ReadAllText(menuFile.FullName)
+
+    Using document As JsonDocument = JsonDocument.Parse(jsonString)
+
+        Dim root As JsonElement = document.RootElement
+
+        return PrintNavJsonArray(root)
+
+    End Using
+
+End Function
+
+Protected function PrintNavJsonArray(items As JsonElement) AS XElement
+
+    Dim xmlRoot         As XElement         = <html/>
+    Dim count                               = items.GetArrayLength()
+
+    For Each item As JsonElement In items.EnumerateArray()
+
+        ''' Append to the result
+        xmlRoot.Add(PrintNavJsonElement(item))
+
+    Next
+
+    return xmlRoot
+
+End Function
+
+Protected function PrintNavJsonElement(item As JsonElement) AS XElement
+
+    Dim element         As JsonElement = Nothing
+    Dim title           As String = "N/A"
+    Dim link            As String = "#"
+    Dim html            As XElement
+    Dim children        As IEnumerable(Of XElement)
+
+    If item.TryGetProperty("title", element) Then
+        title = element.GetString()
+    End If
+
+    If item.TryGetProperty("link", element) Then
+        link = element.GetString()
+    End If
+
+
+    If item.TryGetProperty("items", element) Then
+
+        html = PrintNavXmlCreateDir(title, link)
+
+        PrintNavXmlAppendChildren(html, PrintNavJsonArray(element))
+
+    Else
+
+        html = PrintNavXmlCreateFile(title, link)
+
+    End If
+
+    return html
+
+End Function
+
+
+''' This is used to automagically create the left-side navigation. It's not perfect, but does the job
+Protected function PrintNavFS(ByVal initial As DirectoryInfo) As XElement
+
     Dim fileName        As FileInfo
     Dim directoryNae    As String           = initial.FullName
     Dim base            As String           = initial.FullName.replace(projectRoot.FullName & "\", "/").replace("\", "/")
@@ -220,20 +380,7 @@ Protected function PrintNav(ByVal initial As DirectoryInfo) As XElement
         link = base & "/" & basename
 
         ''' create the required html
-        html = _
-        <li>
-            <a href="#" class="" >
-                <span class="ml-5"><%= caption %></span>
-            </a>
-        </li>
-
-        ''' update the href property
-        html.Descendants("a")(0).Attribute("href").Value = link
-
-        ''' check if it's the currently requested URL
-        if link = "/" & requestUrl then
-            html.Descendants("a")(0).Attribute("class").Value = "is-active"
-        end if
+        html = PrintNavXmlCreateFile(caption, link)
 
         ''' Append to the result
         xmlRoot.Add(html)
@@ -253,37 +400,14 @@ Protected function PrintNav(ByVal initial As DirectoryInfo) As XElement
                 continue for
             end if
 
+            ''' create the link
+            link =  base & "/" & basename
+
             ''' Create the html
-            html = _
-            <li>
-                <a href="#" class="" >
-                    <div class="icon-text">
-                        <span class="icon"><i class="i i-chevron-down i-lg"></i></span>
-                        <span class="ml-2"><%= caption %></span>
-                    </div>
-                </a>
-            </li>
-
-            ''' Update the href attribute
-            link = base & "/" & basename
-            html.Descendants("a")(0).Attribute("href").Value = link
-
-            ''' If it's the current page, mark it active
-            if link = "/" & requestUrl then
-                html.Descendants("a")(0).Attribute("class").Value = "is-active"
-            end if
+            html =  PrintNavXmlMarkActive(PrintNavXmlCreateDir(caption, link), link)
 
             ''' get files and sub-folders
-            children = PrintNav(directoryName).Elements
-
-            ''' if found any, append them
-            if children.count() > 0 then
-
-                html.add( <ul/> )
-
-                html.Descendants("ul")(0).add( children )
-
-            end if
+            PrintNavXmlAppendChildren(html, PrintNav(directoryName))
 
             ''' add directory to the result
             xmlRoot.Add(html)

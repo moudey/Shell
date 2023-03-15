@@ -4,11 +4,6 @@
   <div class="menu">
     <div class="container">
       <ul class="menu-list">
-        <li>
-          <a href="/docs">
-            <span class="ml-5">Introduction</span>
-          </a>
-        </li>
         <% Response.Write(PrintNav(docsRoot).toString()) %>
       </ul>
     </div>
