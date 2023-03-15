@@ -52,19 +52,19 @@ Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Han
     requestType          = Request.QueryString("type")
 
     ''' sanitize for empty values and the default file
-    if String.IsNullOrEmpty(requestType) then
+    If String.IsNullOrEmpty(requestType) Then
         requestType = "document"
-    end if
+    End If
 
     ''' Get the current requested URL
     requestUrl          = Request.QueryString("path")
 
     ''' sanitize for empty values and the default file
-    if String.IsNullOrEmpty(requestUrl) then
+    If String.IsNullOrEmpty(requestUrl) Then
         requestUrl = "/"
-    else if requestUrl = "default.aspx" then
+    Else If requestUrl = "default.aspx" Then
         requestUrl = "/"
-    end if
+    End If
 
     ''' Evaluate which file is required:
     '''
@@ -77,27 +77,27 @@ Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Han
 
 
 ''' this is called from Default.aspx to actually include the requested content
-Protected function preparePage(pageFile As FileInfo, ByRef basename As String, ByRef caption As String) As FileInfo
+Protected Function preparePage(pageFile As FileInfo, ByRef basename As String, ByRef caption As String) As FileInfo
 
     Dim dirInfo         As DirectoryInfo
     Dim suffix          = ""
     Dim isHTTPS         = false
 
-     ''' Get server information
-     SERVER_NAME         =  Request.ServerVariables.GetValues( "SERVER_NAME")(0)
-     SERVER_PORT         =  Request.ServerVariables.GetValues( "SERVER_PORT")(0)
-     HTTPS               =  Request.ServerVariables.GetValues( "HTTPS")(0)
-     isHTTPS             =  if(HTTPS = "ON", true, false )
- 
-     ''' Build foot URL
-     IF isHTTPS then
-         rootUrl         = "https://" & SERVER_NAME & if(SERVER_PORT = "443", "", ":" & SERVER_PORT)
-     else
-         rootUrl         = "http://" & SERVER_NAME & if(SERVER_PORT = "80", "", ":" & SERVER_PORT)
-     end if
- 
+    ''' Get server information
+    SERVER_NAME         =  Request.ServerVariables.GetValues( "SERVER_NAME")(0)
+    SERVER_PORT         =  Request.ServerVariables.GetValues( "SERVER_PORT")(0)
+    HTTPS               =  Request.ServerVariables.GetValues( "HTTPS")(0)
+    isHTTPS             =  if(HTTPS = "ON", true, false )
+
+    ''' Build foot URL
+    If isHTTPS Then
+        rootUrl         = "https://" & SERVER_NAME & if(SERVER_PORT = "443", "", ":" & SERVER_PORT)
+    Else
+        rootUrl         = "http://" & SERVER_NAME & if(SERVER_PORT = "80", "", ":" & SERVER_PORT)
+    End If
+
     ''' If the url ends with ".html", we just go for it
-    if Not pageFile.Extension.ToLower() = ".html" Then
+    If Not pageFile.Extension.ToLower() = ".html" Then
 
         ''' Otherwise try adding ".html" - This would be the case for a file in a directory
         ''' E.g. /docs/installation should really load /docs/installation.html
@@ -106,58 +106,58 @@ Protected function preparePage(pageFile As FileInfo, ByRef basename As String, B
         pageFile        = New FileInfo(pageFile.FullName & suffix)
 
         ''' test, if file exists
-        if not pageFile.Exists Then
+        If not pageFile.Exists Then
 
             ''' otherwise it could be a directory, and we look for the "index.html"
             ''' So test for the directory
-            if dirInfo.Exists Then
-                
+            If dirInfo.Exists Then
+
                 ''' If found, assume the default: index.html
                 suffix  = "index.html"
                 pageFile    = New FileInfo(dirInfo.FullName & "\" & suffix)
-                
-            end if
 
-        end if
+            End If
 
-    end if
+        End If
+
+    End If
 
     ''' Create helper urls for the bottom of the page
     gitUrl      = gitRootUrl & requestUrl & suffix
     fileUrl     = rgxRemoveIndex.Replace(rootUrl & requestUrl, "$1")
     nilesoftUrl = rgxRemoveIndex.Replace(nilesoftRoot & requestUrl, "$1")
 
-    if pageFile.Exists Then
+    If pageFile.Exists Then
         fileModified = File.GetLastWriteTime(pageFile.FullName)
-    end if
+    End If
 
     extractNames(pageFile.Name, basename, caption)
 
     return pageFile
 
-end function
+End Function
 
 
  ''' this is called from Default.aspx to actually include the requested content
-Protected function includePage(pageFile As FileInfo) As Boolean
+Protected Function includePage(pageFile As FileInfo) As Boolean
 
-    if Not pageFile.Exists Then
+    If Not pageFile.Exists Then
         return false
-    end if
+    End If
 
     ' Open the stream and read it back.
     Dim sr As StreamReader = pageFile.OpenText()
 
     Response.Write( sr.ReadToEnd() )
     sr.Close()
-    
+
     return true
 
-End function
+End Function
 
 Protected  Function includeImage(imageFile As FileInfo) As Boolean
 
-    if not imageFile.Exists Then
+    If not imageFile.Exists Then
 
         Response.Clear()
         Response.StatusCode = 404
@@ -166,19 +166,19 @@ Protected  Function includeImage(imageFile As FileInfo) As Boolean
 
         return false
 
-    end  if
+    End  If
 
-        ''' Set the page's content type ...
+    ''' Set the page's content type ...
     Select Case imageFile.Extension.ToLower()
 
     Case "png"
-    Response.ContentType = "image/png"
+        Response.ContentType = "image/png"
 
     Case "jpg", "jpeg"
-    Response.ContentType = "image/jpeg"
+        Response.ContentType = "image/jpeg"
 
     Case Else
-    Response.ContentType = "application/octet-stream"
+        Response.ContentType = "application/octet-stream"
 
     End Select
 
@@ -187,11 +187,11 @@ Protected  Function includeImage(imageFile As FileInfo) As Boolean
     Response.Flush()
 
     return true
-    
+
 End Function
 
 ''' This is used to automagically create the left-side navigation. It's not perfect, but does the job
-Protected function PrintNav(ByVal initial As DirectoryInfo) As XElement
+Protected Function PrintNav(ByVal initial As DirectoryInfo) As XElement
 
     ''' create return element
     Dim xmlRoot         As XElement         = <html/>
@@ -213,19 +213,19 @@ End Function
 Protected Function PrintNavXmlMarkActive(ByRef html As XElement, ByVal link As String) As XElement
 
     ''' If it's the current page, mark it active
-    if link = "/" & requestUrl then
+    If link = "/" & requestUrl Then
         html.Descendants("a")(0).Attribute("class").Value = "is-active"
-    end if
-    
+    End If
+
     return html
-    
+
 End Function
 
 Protected Function PrintNavXmlCreateDir(ByVal caption As String, ByVal link As String) As XElement
 
     Dim html            As XElement
 
-   ''' Create the html
+    ''' Create the html
     html = _
     <li>
         <a href="#" class="" >
@@ -243,7 +243,7 @@ Protected Function PrintNavXmlCreateDir(ByVal caption As String, ByVal link As S
 
 End Function
 
-Protected function PrintNavXmlCreateFile(ByVal caption As String, ByVal link As String) As XElement
+Protected Function PrintNavXmlCreateFile(ByVal caption As String, ByVal link As String) As XElement
 
     Dim html            As XElement
 
@@ -262,7 +262,7 @@ Protected function PrintNavXmlCreateFile(ByVal caption As String, ByVal link As 
 
 End Function
 
-Protected function PrintNavXmlAppendChildren(
+Protected Function PrintNavXmlAppendChildren(
     ByRef parentNode As XElement,
     ByRef childNode As XElement
     ) As Long
@@ -271,35 +271,35 @@ Protected function PrintNavXmlAppendChildren(
 
     ''' get files and sub-folders
     children = childNode.Elements
-    
+
     ''' if found any, append them
-    if children.count() > 0 then
-    
+    If children.count() > 0 Then
+
         parentNode.add( <ul/> )
-    
+
         parentNode.Descendants("ul")(0).add( children )
-    
-    end if
-    
+
+    End If
+
     return children.count()
-    
+
 End Function
 
-Protected function PrintNavJson(ByVal menuFile As FileInfo) As XElement
+Protected Function PrintNavJson(ByVal menuFile As FileInfo) As XElement
 
     Dim jsonString = File.ReadAllText(menuFile.FullName)
 
     Using document As JsonDocument = JsonDocument.Parse(jsonString)
 
-        Dim root As JsonElement = document.RootElement
+    Dim root As JsonElement = document.RootElement
 
-        return PrintNavJsonArray(root)
+    return PrintNavJsonArray(root)
 
     End Using
 
 End Function
 
-Protected function PrintNavJsonArray(items As JsonElement) AS XElement
+Protected Function PrintNavJsonArray(items As JsonElement) As XElement
 
     Dim xmlRoot         As XElement         = <html/>
     Dim count                               = items.GetArrayLength()
@@ -315,7 +315,7 @@ Protected function PrintNavJsonArray(items As JsonElement) AS XElement
 
 End Function
 
-Protected function PrintNavJsonElement(item As JsonElement) AS XElement
+Protected Function PrintNavJsonElement(item As JsonElement) As XElement
 
     Dim element         As JsonElement = Nothing
     Dim title           As String = "N/A"
@@ -350,7 +350,7 @@ End Function
 
 
 ''' This is used to automagically create the left-side navigation. It's not perfect, but does the job
-Protected function PrintNavFS(ByVal initial As DirectoryInfo) As XElement
+Protected Function PrintNavFS(ByVal initial As DirectoryInfo) As XElement
 
     Dim fileName        As FileInfo
     Dim directoryNae    As String           = initial.FullName
@@ -368,14 +368,14 @@ Protected function PrintNavFS(ByVal initial As DirectoryInfo) As XElement
     For Each fileName In initial.GetFiles()
 
         ''' ignore the index.html, As it was already added As a directory
-        if fileName.Name = "index.html" then
+        If fileName.Name = "index.html" Then
             continue for
-        end if
+        End If
 
         ''' Get the file's basename and convert it from "snake-case" to "Title Case"
         ''' (basename and caption are passed ByRef)
         extractNames(fileName.Name, basename, caption)
-        
+
         ''' create the link
         link = base & "/" & basename
 
@@ -396,9 +396,9 @@ Protected function PrintNavFS(ByVal initial As DirectoryInfo) As XElement
             extractNames(directoryName.Name, basename, caption)
 
             ''' Skip listing all images
-            if basename = "images" then
+            If basename = "images" Then
                 continue for
-            end if
+            End If
 
             ''' create the link
             link =  base & "/" & basename
@@ -417,12 +417,12 @@ Protected function PrintNavFS(ByVal initial As DirectoryInfo) As XElement
 
 End function
 
-protected sub extractNames(ByVal path As String, ByRef basename As String, ByRef caption As String)
+Protected Sub extractNames(ByVal path As String, ByRef basename As String, ByRef caption As String)
 
     basename = rgxRemoveIndex.Replace(path, "$1")
     caption  = myTI.ToTitleCase(rgxReplaceDash.Replace(basename, " "))
 
-end sub
+End Sub
 
 
 End Class
