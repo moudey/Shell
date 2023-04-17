@@ -68,7 +68,7 @@ If you really love Shell and would like to see it continue to improve.
 
 Sponsors
 ------------------
-[@SteffanDonal](https://github.com/SteffanDonal), Ousseynou SANKHARE
+[@SteffanDonal](https://github.com/SteffanDonal), Ousseynou SANKHARE, [hiranokite](https://github.com/hiranokite)
 
 Contributors
 ------------------
