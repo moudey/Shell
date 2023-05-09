@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
+  <metadata>
+    <id>nilesoft-shell</id>
+    <version>1.8.1</version>
+    <title>Nilesoft Shell</title>
+    <authors>Mahmoud Gomaa</authors>
+    <owners>Mahmoud Gomaa</owners>
+    <projectUrl>https://nilesoft.org</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/moudey/Shell/main/packages/assets/logo-256.png</iconUrl>
+    <copyright>2023 Nilesoft Ltd.</copyright>
+    <licenseUrl>https://raw.githubusercontent.com/moudey/Shell/main/LICENSE</licenseUrl>
+    <packageSourceUrl>https://github.com/moudey/Shell/packages/choco</packageSourceUrl>
+    <docsUrl>https://nilesoft.org/docs</docsUrl>
+    <tags>context-menu right-click file-explorer shell-extension</tags>
+    <summary>Powerful context menu manager for Windows File Explorer.</summary>
+    <description>Shell is a context menu extender that lets you handpick the items to integrate into Windows File Explorer context menu, create custom commands to access all your favorite web pages, files, and folders, and launch any application directly from the context menu. It also provides you a convenient solution to modify or remove any context menu item added by the system or third party software.</description>
+    <releaseNotes>- Fixed a keyboard bug when executing a command.
+- Fixed a bug with 'title.xxx' functions.
+- New 'checked' property for static item to change the checked state.
+- New value for 'image.align' option to set priority.</releaseNotes>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+  </files>
+</package>
