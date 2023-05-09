@@ -10,7 +10,7 @@
     <iconUrl>https://raw.githubusercontent.com/moudey/Shell/main/packages/assets/logo-256.png</iconUrl>
     <copyright>2023 Nilesoft Ltd.</copyright>
     <licenseUrl>https://raw.githubusercontent.com/moudey/Shell/main/LICENSE</licenseUrl>
-    <packageSourceUrl>https://github.com/moudey/Shell/packages/choco/nilesoft-shell.nuspec</packageSourceUrl>
+    <packageSourceUrl>https://raw.githubusercontent.com/moudey/Shell/main/packages/choco/nilesoft-shell.nuspec</packageSourceUrl>
     <docsUrl>https://nilesoft.org/docs</docsUrl>
     <tags>context-menu right-click file-explorer shell-extension</tags>
     <summary>Powerful context menu manager for Windows File Explorer.</summary>
