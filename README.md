@@ -7,6 +7,10 @@ Powerful manager for Windows File Explorer context menu.
  <br>
 </p>
 
+This repository is used to [report issues](https://github.com/moudey/shell/issues) and to [discuss](https://github.com/moudey/shell/discussions).<br>
+You're also welcome to join [the Nilesoft Discord channel](https://discord.gg/qM8aAjAX) for a live discussion.
+
+## Details
 <p>
 Shell is a context menu extender that lets you handpick the items to integrate into the Windows File Explorer context menu, create custom commands to access all your favorite web pages, files, and folders, and launch any application directly from the context menu.<br>
 It also provides you a convenient solution to modify or remove any context menu item added by the system or third-party software.
