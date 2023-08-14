@@ -8,6 +8,7 @@ Powerful manager for Windows File Explorer context menu.
 </p>
 
 This repository is used to [report issues](https://github.com/moudey/shell/issues) and to [discuss](https://github.com/moudey/shell/discussions).<br>
+The source code is closed [here is why](https://github.com/moudey/Shell/issues/139).<br>
 You're also welcome to join [the Nilesoft Discord channel](https://discord.gg/5tFXyD6wvb) for a live discussion.
 
 ## Details
