@@ -1,37 +1,27 @@
 ﻿<h5>Favorite applications and directories example</h5>
-<pre><code class="lang-shell">shell 
+<pre><code class="lang-shell">menu(type='desktop|taskbar' title='Favorites' image=#00ff00)
 {
-    dynamic
-    {
-        menu(type='desktop|taskbar' title='Favorites' image=#00ff00)
-        {
-            menu(title='Applications' image=#ff0000)
-            {
-                item(title='Command prompt' image cmd='cmd.exe')
-                item(title='PowerShell' image cmd='powershell.exe')
-                item(title='Registry editor' image cmd='regedit.exe')
-                separator
-                item(title='Paint' image cmd='mspaint.exe')
-                item(title='Notepad' image cmd='notepad.exe')
-            }
-            separator
-            menu(title='Directories' image=#0000ff)
-            {
-                item(title='Downloads' cmd=user.downloads)
-                item(title='Pictures' cmd=user.pictures)
-                item(title='Home' cmd=user.directory)
-                separator
-                item(title='Windows' cmd=sys.directory)
-                item(title='Program files' cmd=sys.prog())
-            }
-        }
-    }
+	menu(title='Applications' image=#ff0000)
+	{
+		item(title='Command prompt' image cmd='cmd.exe')
+		item(title='PowerShell' image cmd='powershell.exe')
+		item(title='Registry editor' image cmd='regedit.exe')
+		separator
+		item(title='Paint' image cmd='mspaint.exe')
+		item(title='Notepad' image cmd='notepad.exe')
+	}
+	separator
+	menu(title='Directories' image=#0000ff)
+	{
+		item(title='Downloads' cmd=user.downloads)
+		item(title='Pictures' cmd=user.pictures)
+		item(title='Home' cmd=user.directory)
+		separator
+		item(title='Windows' cmd=sys.directory)
+		item(title='Program files' cmd=sys.prog())
+	}
 }</code></pre>
-<figure class="has-text-centered my-5">
-	<a class="lightbox">
-		<img class="is-256" src="/images/docs/fav1.png">
-	</a>
-	<a class="lightbox">
-		<img class="is-256" src="/images/docs/fav2.png">
-	</a>
+<figure class="has-text-centered my-5 preview">
+	<img class="is-256" src="/docs/images/fav1.png">
+	<img class="is-256" src="/docs/images/fav2.png">
 </figure>

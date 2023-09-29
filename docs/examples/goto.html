@@ -1,62 +1,53 @@
 ﻿<h5>Goto example</h5>
-<pre><code class="lang-shell">shell
+<pre><code class="lang-shell">menu(mode="multiple" title='Goto' sep="both" image= \uE14A)
 {
-    dynamic
-    {
-		menu(mode="multiple" title='Goto' sep="both" image= \uE14A)
-        {
-			menu(title='Folder' image=\uE1F4)
-			{
-				item(title='Windows' image=inherit cmd=sys.dir)
-				item(title='System' image=inherit cmd=sys.bin)
-				item(title='Program Files' image=inherit cmd=sys.prog)
-				item(title='Program Files x86' image=inherit cmd=sys.prog32)
-				item(title='ProgramData' image=inherit cmd=sys.programdata)
-				item(title='Applications' image=inherit cmd='shell:appsfolder')
-				item(title='Users' image=inherit cmd=sys.users)
-				separator
-				item(title='Desktop' image=inherit cmd=user.desktop)
-				item(title='Downloads' image=inherit cmd=user.downloads)
-				item(title='Pictures' image=inherit cmd=user.pictures)
-				item(title='Documents' image=inherit cmd=user.documents)
-				item(title='Startmenu' image=inherit cmd=user.startmenu)
-				item(title='Profile' image=inherit cmd=user.dir)
-				item(title='AppData' image=inherit cmd=user.appdata)
-				item(title='Temp' image=inherit cmd=user.temp)
-			}
-            
-            item(title=title.control_panel image=\uE0F3 cmd='shell:::{5399E694-6CE5-4D6C-8FCE-1D8870FDCBA0}')
-            item(title='All Control Panel Items' image=\uE0F3 cmd='shell:::{ED7BA470-8E54-465E-825C-99712043E01C}')
-            item(title=title.run image=\uE14B cmd='shell:::{2559a1f3-21d7-11d4-bdaf-00c04f60b9f0}')
-           
-            menu(title=title.settings sep="before" image=id.settings.icon)
-            {
-                // https://docs.microsoft.com/en-us/windows/uwp/launch-resume/launch-settings-app
-                item(title='systeminfo' image=inherit cmd arg='/K systeminfo')
-                item(title='search' cmd='search-ms:' image=inherit)
-                item(title='settings' image=inherit cmd='ms-settings:')
-                item(title='about' image=inherit cmd='ms-settings:about')
-                item(title='usb' image=inherit cmd='ms-settings:usb')
-                item(title='network-status' image=inherit cmd='ms-settings:network-status')
-                item(title='network-ethernet' image=inherit cmd='ms-settings:network-ethernet')
-                item(title='personalization-background' image=inherit cmd='ms-settings:personalization-background')
-                item(title='personalization-colors' image=inherit cmd='ms-settings:colors')
-                item(title='lockscreen' image=\uE0F3 cmd='ms-settings:lockscreen')
-                item(title='personalization-start' image=inherit cmd='ms-settings:personalization-start')
-                item(title='appsfeatures' image=inherit cmd='ms-settings:appsfeatures')
-                item(title='optionalfeatures' image=inherit cmd='ms-settings:optionalfeatures')
-                item(title='defaultapps' image=inherit cmd='ms-settings:defaultapps')
-                item(title='yourinfo' image=inherit cmd='ms-settings:yourinfo')
-                item(title='windowsupdate' image=inherit cmd='ms-settings:windowsupdate')
-                item(title='windowsdefender' image=inherit cmd='ms-settings:windowsdefender')
-                item(title='network connections' image=inherit cmd='shell:::{7007ACC7-3202-11D1-AAD2-00805FC1270E}')
-            }
-        }
-    }
+	menu(title='Folder' image=\uE1F4)
+	{
+		item(title='Windows' image=inherit cmd=sys.dir)
+		item(title='System' image=inherit cmd=sys.bin)
+		item(title='Program Files' image=inherit cmd=sys.prog)
+		item(title='Program Files x86' image=inherit cmd=sys.prog32)
+		item(title='ProgramData' image=inherit cmd=sys.programdata)
+		item(title='Applications' image=inherit cmd='shell:appsfolder')
+		item(title='Users' image=inherit cmd=sys.users)
+		separator
+		item(title='Desktop' image=inherit cmd=user.desktop)
+		item(title='Downloads' image=inherit cmd=user.downloads)
+		item(title='Pictures' image=inherit cmd=user.pictures)
+		item(title='Documents' image=inherit cmd=user.documents)
+		item(title='Startmenu' image=inherit cmd=user.startmenu)
+		item(title='Profile' image=inherit cmd=user.dir)
+		item(title='AppData' image=inherit cmd=user.appdata)
+		item(title='Temp' image=inherit cmd=user.temp)
+	}
+	
+	item(title=title.control_panel image=\uE0F3 cmd='shell:::{5399E694-6CE5-4D6C-8FCE-1D8870FDCBA0}')
+	item(title='All Control Panel Items' image=\uE0F3 cmd='shell:::{ED7BA470-8E54-465E-825C-99712043E01C}')
+	item(title=title.run image=\uE14B cmd='shell:::{2559a1f3-21d7-11d4-bdaf-00c04f60b9f0}')
+   
+	menu(title=title.settings sep="before" image=id.settings.icon)
+	{
+		// https://docs.microsoft.com/en-us/windows/uwp/launch-resume/launch-settings-app
+		item(title='systeminfo' image=inherit cmd arg='/K systeminfo')
+		item(title='search' cmd='search-ms:' image=inherit)
+		item(title='settings' image=inherit cmd='ms-settings:')
+		item(title='about' image=inherit cmd='ms-settings:about')
+		item(title='usb' image=inherit cmd='ms-settings:usb')
+		item(title='network-status' image=inherit cmd='ms-settings:network-status')
+		item(title='network-ethernet' image=inherit cmd='ms-settings:network-ethernet')
+		item(title='personalization-background' image=inherit cmd='ms-settings:personalization-background')
+		item(title='personalization-colors' image=inherit cmd='ms-settings:colors')
+		item(title='lockscreen' image=\uE0F3 cmd='ms-settings:lockscreen')
+		item(title='personalization-start' image=inherit cmd='ms-settings:personalization-start')
+		item(title='appsfeatures' image=inherit cmd='ms-settings:appsfeatures')
+		item(title='optionalfeatures' image=inherit cmd='ms-settings:optionalfeatures')
+		item(title='defaultapps' image=inherit cmd='ms-settings:defaultapps')
+		item(title='yourinfo' image=inherit cmd='ms-settings:yourinfo')
+		item(title='windowsupdate' image=inherit cmd='ms-settings:windowsupdate')
+		item(title='windowsdefender' image=inherit cmd='ms-settings:windowsdefender')
+		item(title='network connections' image=inherit cmd='shell:::{7007ACC7-3202-11D1-AAD2-00805FC1270E}')
+	}
 }</code></pre>
-
 <div class="has-text-centered my-5">
-	<a class="lightbox">
-		<img class="is-256" src="/images/docs/goto.png">
-	</a>
+	<img class="preview is-256" src="/docs/images/goto.png">
 </div>

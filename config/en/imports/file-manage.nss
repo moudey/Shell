@@ -1,6 +1,6 @@
-﻿menu(where=sel.count>0 type='file|dir|drive|namespace|back' mode="multiple" title='File manage' image=\uE253)
+﻿menu(where=sel.count>0 type='file|dir|drive|namespace|back' mode="multiple" title='File Manage' image=\uE253)
 {
-	menu(separator="after" title='Copy Path' image=icon.copy_path)
+	menu(separator="after" title=title.copy_path image=icon.copy_path)
 	{
 		item(where=sel.count > 1 title='Copy (@sel.count) items selected' cmd=command.copy(sel(false, "\n")))
 		item(mode="single" title=@sel.path tip=sel.path cmd=command.copy(sel.path))
@@ -12,6 +12,9 @@
 		item(mode="single" type='file' where=sel.file.len != sel.file.title.len title=@sel.file.title cmd=command.copy(sel.file.title))
 		item(mode="single" type='file' where=sel.file.ext.len>0 title=sel.file.ext cmd=command.copy(sel.file.ext))
 	}
+
+	item(mode="single" type="file" title="Change extension" image=\uE0B5 cmd=if(input("Change extension", "Type extension"), 
+		io.rename(sel.path, path.join(sel.dir, sel.file.title + "." + input.result))))
 	
 	menu(separator="after" image=\uE290 title=title.select)
 	{
@@ -31,7 +34,7 @@
 
 	menu(type='file|dir|back.dir' mode="single" title='Attributes')
 	{
-		var { atrr = io.attributes(sel.path) }
+		$atrr = io.attributes(sel.path)
 		item(title='Hidden' checked=io.attribute.hidden(atrr)
 			cmd args='/c ATTRIB @if(io.attribute.hidden(atrr),"-","+")H "@sel.path"' window=hidden)
 		
@@ -65,7 +68,7 @@
 		
 		menu(title='New File' image=icon.new_file)
 		{
-			var { dt = sys.datetime("ymdHMSs")}
+			$dt = sys.datetime("ymdHMSs")
 			item(title='TXT' cmd=io.file.create('@(dt).txt', 'Hello World!'))
 			item(title='XML' cmd=io.file.create('@(dt).xml', '<root>Hello World!</root>'))
 			item(title='JSON' cmd=io.file.create('@(dt).json', '[]'))

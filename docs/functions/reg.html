@@ -4,11 +4,15 @@
 <section id="registry-hives" class="my-5">
 	<h5>Registry hive enum</h5>
 	<p>Syntax</p>
-	<pre><code>reg.cr	// HKEY_CLASSES_ROOT
-reg.cu	// HKEY_CURRENT_USER
-reg.lm	// HKEY_LOCAL_MACHINE
-reg.u	// HKEY_USERS
-reg.cc	// HKEY_CURRENT_CONFIG</code></pre>
+	<pre><code>HKCU
+HKCR
+HKLM
+HKU
+HKEY_CLASSES_ROOT
+HKEY_CURRENT_USER
+HKEY_LOCAL_MACHINE
+HKEY_USERS
+</code></pre>
 </section>
 <section id="registry-types" class="my-5">
 	<h5>Registry value type Enum</h5>
@@ -27,4 +31,49 @@ reg.qword	// REG_QWORD</code></pre>
 	<p>Syntax</p>
 	<code>reg(reg.lm, 'SOFTWARE\Microsoft\Windows NT\CurrentVersion','ProductName')</code><br><br>
 	<code>reg(reg.cr, 'txtfile\DefaultIcon')</code>
+</section>
+
+<section id="reg.exists" class="my-5">
+	<h5>reg.exists</h5>
+	<p>Check that the key or value name exists</p>
+	<p>Syntax</p>
+	<p>Check that the key exists</p>
+	<code>reg.exists('HKCU\Control Panel\Desktop')</code>
+	<p>Check that the value name exists</p>
+	<code>reg.exists('HKCU\Control Panel\Desktop', "WallPaper")</code>
+</section>
+
+<section id="reg.get" class="my-5">
+	<h5>reg.get</h5>
+	<p>Read data by value name</p>
+	<p>Syntax</p>
+	<pre><code>reg('HKCU\Control Panel\Desktop', "WallPaper")
+reg.get('HKCU\Control Panel\Desktop', "WallPaper")
+reg.get('HKCU\Control Panel\Desktop')</code></pre>
+</section>
+
+<section id="reg.set" class="my-5">
+	<h5>reg.set</h5>
+	<p>Allows creating a subkey with the value name and value data</p>
+	<p>Syntax</p>
+	<p>Create Subkey</p>
+	<pre><code>reg.set('HKCU\Software\Nilesoft\Shell')</pre></code>
+	<p>Create Subkey with value and set value data type.</p>
+	<pre><code>reg.set('HKCU\Software\Nilesoft\Shell', "test-int", 1, reg.dword)
+reg.set('HKCU\Software\Nilesoft\Shell', "test-str", 1, reg.sz)
+reg.set('HKCU\Software\Nilesoft\Shell', "test-str", 'some string', reg.sz)</code></pre>
+
+	<p>Set value data with auto type detection.</p><pre><code>
+reg.set('HKCU\Software\Nilesoft\Shell', 'test-auto-int', 1)
+reg.set('HKCU\Software\Nilesoft\Shell', 'test-auto-str', 'some string')</code></pre>
+</section>
+
+<section id="reg.delete" class="my-5">
+	<h5>reg.delete</h5>
+	<p>Allows deleting a subkey or deleting a value</p>
+	<p>Syntax</p>
+	<p>Delete value name.</p>
+	<pre><code>reg.delete('HKCU\Software\Nilesoft\Shell', 'test-auto')</pre></code>
+	<p>Delete subkey.</p>
+	<pre><code>reg.delete('HKCU\Software\Nilesoft\Shell')</code></pre>
 </section>

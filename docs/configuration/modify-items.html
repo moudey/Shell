@@ -1,0 +1,59 @@
+<h4 id="_top">Modify Items</h4>
+<br>
+<p>The optional <code>modify</code> section contains entries to <strong>modify existing context menu items</strong>,
+	added by the system or by a third party.</p>
+
+<h5 id="sub-items">Sub-items</h5>
+<p>The section can have the following entry types, all of which are <strong>optional</strong>:</p>
+<ul>
+	<li>One or more <a href="#item"><code>item</code> entries</a>.
+		These contain the instructions on which and how to change existing <a href="/docs/configuration/new-items#menuitem">menuitems</a>.
+	</li>
+	<li>One or more <a href="/docs/configuration#import"><code><code>imports</code></code></a>. The content of the
+		given file will be placed in the position of the import.
+	</li>
+</ul>
+<h5 id="example">Example</h5>
+<p>In the following example, two instructions are defined:</p>
+<pre><code class="lang-shell">modify(find = 'copy' image = #00ff00)
+modify(find = 'paste' image = #0000ff)
+remove(find = '"format"')</code></pre>
+<br>
+<h4 id="item">Item Entries</h4>
+<p><code>item</code> entries contain the instructions on how to identify existing <a href="/docs/configuration/new-items#menuitem">menuitems</a> (also referred to as <a href="#target">Target</a>), and when and what changes should be applied
+	to them.</p><p>This is done by matching an existing <a href="/docs/configuration/new-items#menuitem">menuitem</a>'s <a href="/docs/configuration/properties#title"><code>title</code></a> property against the modify item's mandatory <a href="/docs/configuration/properties#find"><code>find</code></a> property. If a match is found, the other properties of the modify
+	<code>item</code> are applied to the appropriate <a href="/docs/configuration/new-items#menuitem">menuitem</a>, such as changing their properties (e.g. <a href="/docs/configuration/properties#title"><code>title</code></a>, <a href="/docs/configuration/properties#image"><code>icon</code></a>, <a href="/docs/configuration/properties#visibility"><code>visibility</code></a>), or moving them to another location.</p>
+
+<h5 id="item-syntax">Syntax</h5>
+<pre><code class="lang-shell">modify( find = value [property = value [...] ])</code></pre>
+<br/>
+<h5 id="item-properties">Properties</h5>
+<p><code>item</code> entries can define three different sets of properties:</p>
+<dl>
+	<dt><a href="/docs/configuration/properties#_validation-properties">Validation Properties</a></dt>
+	<dd>Determine if a given <code>item</code> entry should be processed when a context menu is displayed. Optional.
+	</dd>
+	<dt><a href="/docs/configuration/properties#_filter-properties">Filter Properties:</a></dt>
+	<dd>Determine if a given menuitem is a valid <a href="#target">target</a>
+		for the <a href="#process-instructions">process instructions</a>
+		<ul>
+			<li><a href="/docs/configuration/properties#find"><code>find</code></a> <strong>(mandatory)</strong><br/>
+				Pattern used to identify <a href="#target">targets</a> by matching against their <a href="/docs/configuration/properties#title"><code>title</code></a> property.
+			</li>
+		</ul>
+	</dd>
+	<dt><a href="#process-instructions">Process Instructions</a></dt>
+	<dd>Define what to do with the target. Optional. However, if there are no <a href="#process-instructions>process instruction</a> specified, the entry is of no practical use. For
+		further details refer to its separate section
+		<a href="#process-instructions">below</a>.
+	</dd>
+</dl>
+<p>For a complete overview and further details regarding applicable properties, please refer to the <a href="/docs/configuration/properties">properties page</a>.</p>
+<h4 id="target">Item Target</h4>
+<p>Item targets are <a href="/docs/configuration/new-items#menuitem">menuitems</a> of an existing context menu. Their properties or location can
+	be changed by applying the <a href="#process-instructions">process instructions</a> defined in a <a href=#item">modify <code>item</code></a>.</p>
+<h5 id="process-instructions">Process instructions</h5>
+<p>Instructions that should be applied to the <a href="#target">Target</a>. Basically they consist of properties from the two property
+	classes <a href="/docs/configuration/properties#_menuitem-properties">menuitem properties</a> and <a href="/docs/configuration/properties#_command-properties">command properties</a>.</p>
+<p>Once a <code>item</code> is validated and a target identified, then these values are applied to the targeted
+	<a href="/docs/configuration/new-items#menuitem">menuitem</a>.</p>

@@ -1,1 +1,0 @@
-This folder includes extensions for formatting and highlighting configuration files.

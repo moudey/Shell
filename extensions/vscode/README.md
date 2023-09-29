@@ -1,1 +1,0 @@
-vscode addon for formatting and highlighting .nss files

@@ -7,24 +7,18 @@
 		Any text between <code>//</code> and the end of the line is ignored (will not be executed).
 	</p>
 	<p>This example uses a single-line comment before a line of code:</p>
-	<pre><code class="lang-shell">shell
+	<pre><code class="lang-shell">dynamic 
 {
-    dynamic 
-    {
-        // This is a comment
-        item(title='Hello World!')
-        
-        //item(title='Hello World!')
-    }
+	// This is a comment
+	item(title='Hello World!')
+	
+	//item(title='Hello World!')
 }</code></pre>
 
 	<p>This example uses a single-line comment at the end of a line of code:</p>
-	<pre><code class="lang-shell">shell
+	<pre><code class="lang-shell">dynamic 
 {
-    dynamic 
-    {
-        item(title='Hello World!') // This is a comment
-    }
+    item(title='Hello World!') // This is a comment
 }</code></pre>
 </div>
 <br>
@@ -34,18 +28,14 @@
 		Multi-line comments start with <code>/*</code> and ends with <code>*/</code>.<br>
 		Any text between <code>/*</code> and <code>*/</code> will be ignored.
 	</p>
-<pre><code class="lang-shell">shell
+<pre><code class="lang-shell">dynamic
 {
-    dynamic
-    {
-        item(title='Hello,/* multiple-lines comment inside */ world')
-        
-        /*
-        item(title='test item 1')
-        item(title='test item 2')
-        */
-    }
-
+	item(title='Hello,/* multiple-lines comment inside */ world')
+	
+	/*
+	item(title='test item 1')
+	item(title='test item 2')
+	*/
 }</code></pre>
 	<p>
 		Single or multi-line comments?<br>

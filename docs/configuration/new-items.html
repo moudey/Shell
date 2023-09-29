@@ -1,0 +1,105 @@
+<h4 id="_top">New Items</h4>
+<br/>
+<p>Add <strong>new items</strong> to the context menu.</p>
+<h5 id="sub-items">Sub-items</h5>
+<p>The section can have the following entry types, all of which are <strong>optional</strong>:</p>
+<ul>
+	<li>Menuitems, i.e. one or more of the following:
+		<ul>
+			<li>One or more <a href="#item"><code>item</code> entries</a>.
+				These appear as top-level items in a context menu.
+			</li>
+			<li>One or more <a href="#menu"><code>menu</code> entries</a>.
+				These appear as top-level sub-menus in a context menu.
+			</li>
+			<li>One or more <a href="#separator"><code>separator</code> entries</a>. These create a
+				horizontal line between the given entries.
+			</li>
+		</ul>
+	</li>
+	<li>One or more <a href="/docs/configuration#import"><code><code>imports</code></code></a>. The content of the given file will be placed in the
+		position of the import.
+	</li>
+</ul>
+
+<h5 id="example">Example</h5>
+<p>In the following example, one top-level <a href="#item"><code>item</code></a> is created, that is
+	separated with a <a href="#separator">horizontal line</a> from an adjacent sub-<a href="#menu">menu</a>, which in turn has one sub-<a href="#item">item</a>
+	on its own:</p>
+<pre><code class="lang-shell">item(title = 'Hello, World!')
+separator
+menu(title = 'sub menu' image = #0000ff)
+{
+	item(title = 'test sub-item')
+}</code></pre>
+<br/>
+
+<h4 id="menuitem">Menuitems</h4>
+
+<p>menuitem is an umbrella term for those entry types, that may appear in a
+	menu. These simply include the following:</p>
+<ul>
+	<li><a href="#item"><code>item</code></a></li>
+	<li><a href="#menu"><code>menu</code></a></li>
+	<li><a href="#separator"><code>separator</code></a></li>
+</ul>
+
+<br/>
+<h4 id="item">Items</h4>
+<p>items create a single menu entry.</p>
+
+<h5 id="item-properties">Properties</h5>
+<p>Either a <a href="/docs/configuration/properties#title"><code>title</code></a> or a <a href="/docs/configuration/properties#image"><code>image</code></a> property is mandatory (set to a non-null value). For further details,
+	please refer to the <a href="/docs/configuration/properties">properties page</a>.</p>
+
+<h5 id="item-syntax">Syntax</h5>
+<pre><code class="lang-shell">item( title = value [property = value [...] ])</code></pre>
+<br/>
+
+<h4 id="menu">Menus</h4>
+
+<p>menu entries create a new <strong>sub-menu</strong>. They have properties
+	and sub-entries.</p>
+
+<h5 id="menu-properties">Properties</h5>
+<p>Either a <a href="/docs/configuration/properties#title"><code>title</code></a> or a <a href="/docs/configuration/properties#image"><code>image</code></a> property is mandatory (set to a non-null value). For further details,
+	please refer to the <a href="/docs/configuration/properties">properties page</a>.</p>
+
+<h5 id="menu-sub-items">Sub-items</h5>
+<p>menus can have the following entry types, all of which are
+	<strong>optional</strong>:</p>
+<ul>
+	<li>Menuitems, i.e. one or more of the following:
+		<ul>
+			<li>One or more <a href="#item"><code>item</code> entries</a>.</li>
+			<li>One or more sub-<a href="#menu"><code>menu</code> entries</a>.</li>
+			<li>One or more <a href="#separator"><code>separator</code> entries</a>. These create a
+				horizontal line between the given entries.
+			</li>
+		</ul>
+	</li>
+	<li>One or more <a href="/docs/configuration#import"><code><code>imports</code></code></a>. The content of the
+		given file will be placed in the position of the import.
+	</li>
+</ul>
+
+<h5 id="menu-syntax">Syntax</h5>
+<pre><code class="lang-shell">menu( title = value [property = value [...] ])
+{
+	[ item() [...] ]
+	[ menu(){} [...] ]
+	[ separator [...] ]
+	[ import 'path/to/import.nss' [...] ]
+}</code></pre>
+<br/>
+
+<h4 id="separator">Separators</h4>
+
+<p>separators create a horizontal line.</p>
+
+<h5 id="separator-properties">Properties</h5>
+<p>separators do not have any mandatory properties. Please refer to the <a href="/docs/configuration/properties">properties page</a> for further details.</p>
+
+<h5 id="separator-syntax">Syntax</h5>
+<pre><code class="lang-shell">separator
+separator( property = value [property = value [...] ])</code></pre>

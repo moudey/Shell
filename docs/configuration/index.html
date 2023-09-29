@@ -1,0 +1,202 @@
+﻿<h4>Syntax Rules for Configuration Files</h4>
+<br>
+<p>This chapter describes the syntax rules for the configuration files.</p>
+<p>The main configuration file <a href="#shell.nss"><code>shell.nss</code></a> is located in the installation directory of
+	<strong>Shell</strong>, depending on your <a href="/docs/installation">installation method</a>.
+</p>
+
+<h5 id="syntax-general">General rules</h5>
+<ul>
+	<li>Syntax is case-insensitive.</li>
+	<li>Spaces around the equal (<code>=</code>) sign are optional and are ignored.</li>
+	<li>The properties of <a href="/docs/configuration/modify-items">modify-items</a> and <a href="/docs/configuration/new-items">new-items</a> items are separated
+		by blank spaces or on a <a href="#breaking-long-lines">separate line</a> and must be placed in
+		parentheses <code>( )</code>.
+	</li>
+	<li>Other configuration files can be imported using the <a href="#import">import tag</a>.
+	</li>
+</ul>
+
+<div class="notification is-info">
+	<i>Tip:</i> When there is an error, it is recorded in the log file (<code>shell.log</code>, which is also located in
+	your <a href="/docs/installation">installation directory</a>.).
+</div>
+
+<h5 id="shell.nss">shell.nss structure</h5>
+<p>The global section <code>shell{}</code> may have the following subsections:</p>
+<ul>
+	<li>Section <a href="/docs/configuration/settings">settings{}</a>. Optional.</li>
+	<li>Section <a href="/docs/configuration/modify-items">modify-items</a> with
+		instructions on how to <strong>change existing menuitems</strong>. Optional.
+		<ul>
+			<li>modify-items are only of 2 type: modify and remove.</li>
+		</ul>
+	</li>
+	<li>Section <a href="/docs/configuration/new-items">modify-items</a> with
+		definitions for <strong>new <a href="/docs/configuration/new-items#menuitem">menuitems</a></strong>.
+		Optional.
+		<ul>
+			<li>Dynamic <a href="/docs/configuration/new-items#menuitem">menuitems</a>
+				may have one of three types: <a href="/docs/configuration/new-items#menu">menu</a>, <a href="/docs/configuration/new-items#item">item</a>, or <a href="/docs/configuration/new-items#separator">separator (sep)</a>.
+			</li>
+		</ul>
+	</li>
+</ul>
+<h5 id="syntax-example">Example</h5>
+<pre><code class="lang-shell">// variable declaration
+$variable-name = variable-value
+
+//image declaration
+@image-id = image-value
+	
+settings
+{
+	key-name = key-value
+	key-name = [key-value, key-value, ...]
+	...
+}
+
+theme
+{
+	key-name = key-value
+	...
+}
+
+// modify items
+modify ( property-name = property-value   ... )
+remove ( property-name = property-value   ... )
+
+// new items
+
+item ( property-name = property-value   ... )
+
+separator [( property-name = property-value   ... )]
+
+menu ( property-name = property-value   ... )
+{
+	$variable-name = variable-value
+	
+	item ( property-name = property-value   ... )
+	...
+}</code></pre>
+<br>
+
+<h4 id="breaking-long-lines">Breaking Long Lines</h4>
+<p>For best readability, users often like to avoid lines longer than 80 characters. single
+	quotes also allow break up a line.</p>
+<pre><code class="lang-shell">item(title='Command prompt'
+	cmd='cmd.exe')
+</code></pre>
+<br>
+
+<h4 id="import">Import tag</h4>
+<p>To better organise the configuration file, parts of the configuration can be saved in separate files. These are then
+	imported using the import tag. With this method, it is also possible to import the same file as a sort of "module"
+	into different parts of the configuration. A convenient way to include the same sub-menu in different
+	locations..</p>
+<h5 id="import-syntax">Syntax</h5>
+<p>The general syntax is as follows:</p>
+<pre><code class="lang-shell">import %path%</code></pre>
+<p>Where</p>
+<ul>
+	<li id="import-syntax-section"><code>%section%</code> is the name of a section. Optional. If given, it must be one
+		of
+		<ul>
+			<li>settings</li>
+			<li>themes</li>
+			<li>modify-items</li>
+			<li>new-items</li>
+		</ul>
+		The section name is written literally, without any quotes (or the percent signs).
+	</li>
+	<li id="import-syntax-path"><code>%path%</code> is a <a href="/docs/expressions/string">string</a> literal, that returns the path to the
+		config file that shall be imported. This can be a relative path to the location of the file where the import tag is used, or it can be an absolute path. Expressions are
+		supported when using <a href="/docs/expressions/string#single-quotes">single quotes</a>.
+	</li>
+</ul>
+
+<p>There are effectively two different ways this tag is applied, depending on whether the optional
+	<code>%section%</code> is given:</p>
+<ul>
+	<li>Import an entire section</li>
+	<li>Import as a partial:</li>
+</ul>
+
+<h5 id="import-section">Import an entire section</h5>
+<pre><code class="lang-shell">// import an entire section
+import %path%
+</code></pre>
+In this case, the content of the file found at <code>%path%</code> will be imported into<strong> a newly
+	created</strong> <code>section{}</code>.
+The result would then look like so:
+<pre><code class="lang-shell">// import an entire section
+section {
+	/* content of the imported file goes here! Do not include
+	 *
+	 * section {
+	 * }
+	 *
+	 * in your imported file!
+	 */
+}</code></pre>
+<p>This syntax may be used only in the following places: </p>
+<ul>
+	<li><s>root section shell{}: <code>shell import %path%</code></s>
+	</li>
+	<li>the global sections
+		<ul>
+			<li><s>settings{}: <code>import %path%</code></s></li>
+		</ul>
+	</li>
+	<li>
+		sub-sections of the settings{} section:
+		<ul>
+			<li><s>theme.background{}: <code>background import
+				%path%</code></s></li>
+			<li><s>theme.item{}: <code>item import
+				%path%</code></s></li>
+			<li><s>theme.border{}: <code>border import
+				%path%</code></s></li>
+			<li><s>...</s></li>
+			<li><s>settings.tip{}: <code>tip import %path%</code></s></li>
+			<li><s>settings.exclude{}: <code>exclude import
+				%path%</code></s></li>
+			<li><s>settings.modify{}: <code>static import %path%</code></s>
+			</li>
+			<li><s>settings.new{}: <code>dynamic import
+				%path%</code></s></li>
+		</ul>
+	</li>
+</ul>
+<h5 id="import-partial">Import as a partial</h5>
+<pre><code class="lang-shell">section {
+	// some code might go here. Optional.
+
+	// import of a partial section
+	import %path%
+
+	// some more content might go here. Optional.
+}</code></pre>
+In this case, the content of the file found at <code>%path%</code> will be imported into the <strong>already
+	existing</strong> <code>section{}</code>.
+The result would then look like so:
+<pre><code class="lang-shell">section {
+	// some code might go here. Optional.
+
+	// import of a partial section
+	/* content of the imported file goes here! Do not include
+	 *
+	 * section {
+	 * }
+	 *
+	 * in your imported file!
+	 */
+
+	// some more content might go here. Optional.
+}</code></pre>
+<p>This syntax may be used nearly anywhere: </p>
+<ul>
+	<li>in any section</li>
+	<li>in the body of <a href="/docs/configuration/new-items#menu">menu tags</a>
+	</li>
+</ul>

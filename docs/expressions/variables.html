@@ -1,0 +1,33 @@
+﻿<h4>Variables</h4>
+<br>
+<p>Variables are containers for storing data values.</p>
+<ul>
+	<li>Global and local variables are optional.</li>
+	<li>To declare more than one variable, use a space.</li>
+</ul>
+<p>The general rules for constructing names for variables (unique identifiers) are:</p>
+<ul>
+	<li>Names can contain letters, digits and underscores (<code>_</code>).</li>
+	<li>Names must begin with a letter.</li>
+	<li>Names cannot contain whitespaces or special characters like !, #, %, etc.</li>
+	<li>Reserved words (like keywords, such as null, true, false, etc.) cannot be used as names.</li>
+	<li>Variables can be placed in globle variables, or in the dynamic body section of an menu, or in both.</li>
+</ul>
+<p>
+	All variables must be identified with unique names.<br>
+	These unique names are called identifiers.
+	Identifiers can be short names (like x and y) or more descriptive names (age, sum, totalVolume).
+</p>
+<p><i>Note:</i> It is recommended to use descriptive names in order to create understandable and maintainable code</p>
+<h5 class="mt-5">Example</h5>
+<pre><code class="lang-shell">$hello_world = 'Hello World!'
+$test_add1 = 5 + 6
+
+item(title = hello_world cmd = msg(hello_world))
+
+menu(title = test_add1)
+{
+	$test_sub1 = 11 - 5
+	item(title = test_sub1)
+}</code></pre>
+

@@ -1,30 +1,28 @@
 ﻿<h4>Installation</h4>
 <br>
-<div class="notification is-info is-light mt-5" role="alert">
+<div class="notification is-warning mt-5" role="alert">
 	<i>Info:</i> Administrative permissions are required for installation.
 </div>
 <br>
 <p>Shell can be installed in the following ways:</p>
 <ul>
-	<li><a href="#installer" class="uline">Installer</a></li>
-	<li><a href="#portable" class="uline">Portable</a></li>
-	<li><a href="#winget" class="uline">Windows Package Manager</a></li>
-	<li><a href="#scoop" class="uline">Scoop</a></li>
-	<li><a href="#chocolatey" class="uline">Chocolatey</a></li>
+	<li><a href="#installer">Installer</a></li>
+	<li><a href="#portable">Portable</a></li>
+	<li><a href="#winget">Windows Package Manager</a></li>
+	<li><a href="#scoop">Scoop</a></li>
+	<li><a href="#chocolatey">Chocolatey</a></li>
 </ul><br>
 <p>Please also note the following reference sections:</p>
 <ul>
-	<li><a href="#cli" class="uline">Command-Line Help</a></li>
-	<li><a href="#keys" class="uline">Keys to enable/disable Shell functionalities</a></li>
+	<li><a href="#cli">Command-Line Help</a></li>
+	<li><a href="#keys">Keys to enable/disable Shell functionalities</a></li>
 </ul>
-
 <br>
-
 <div id="installer">
 	<h5>Installer version</h5>
 	<div id="installer-install">
 		<h5>Install</h5>
-		<p><a href="/download" class="uline">Download</a> the installation file (<span class="is-family-monospace">Installer/Portable</span>),
+		<p><a href="/download">Download</a> the installation file (Installer/Portable),
 			run <code>setup.exe</code>, follow the installation steps, and agree to restart Windows File Explorer.</p>
 		<p>The program will be installed to <code>C:\Program Files\Nilesoft Shell\</code>, unless you have chosen
 			a different installation path during the installation steps.</p>
@@ -37,119 +35,141 @@
 		</p>
 	</div>
 </div>
-
 <br/>
-
 <div id="portable">
 	<h5>Portable version</h5>
 	<div id="portable-install">
 		<h5>Install</h5>
-		<p><a href="/download" class="uline">Download</a> the
-			installation file (<span class="is-family-monospace">Installer/Portable</span>),
+		<p><a href="/download">Download</a> the
+			installation file (Installer/Portable),
 			run <code>setup.exe</code>,
-			click <span class="is-family-monospace">Next</span>, chose the folder you want the program to be extracted
-			to, <strong>Check the option <span class="is-family-monospace">Portable Mode</span></strong>, and click
-			<span class="is-family-monospace">Extract</span>.</p>
-		<p>Open an <strong>elevated command prompt</strong> (or use <a href="https://github.com/gerardog/gsudo"
-				class="uline">gsudo</a>), change to the directory you have extracted the program to, and run</p>
-		<code>shell -register -restart</code>
-		<p>For further details see the chapter <a href="#cli" class="uline">Command-Line Help</a> below.</p>
+			click Next, chose the folder you want the program to be extracted
+			to, <strong>Check the option Portable Mode</strong>, and click
+			Extract.</p>
+		<p>Open an <strong>elevated command prompt</strong> (or use <a href="https://github.com/gerardog/gsudo">gsudo</a>), change to the directory you have extracted the program to, and run</p>
+		<div class="console">
+			<div class="console-title">Administrator: Command Prompt</div>
+			<div class="console-body">shell -register -restart</div>
+		</div>
+		<p>For further details see the chapter <a href="#cli">Command-Line Help</a> below.</p>
 	</div>
 	<hr>
 	<div id="portable-uninstall">
 		<h5>Uninstall</h5>
-		<p>Open an <strong>elevated command prompt</strong> (or use <a href="https://github.com/gerardog/gsudo"
-				class="uline">gsudo</a>), change to the directory you have extracted the program to, and run</p>
-		<code>shell -unregister -restart</code>
+		<p>Open an <strong>elevated command prompt</strong> (or use <a href="https://github.com/gerardog/gsudo">gsudo</a>), change to the directory you have extracted the program to, and run</p>
+		<div class="console">
+			<div class="console-title">Administrator: Command Prompt</div>
+			<div class="console-body">shell -unregister -restart</div>
+		</div>
 		<br>
-		<div class="notification is-info is-light mt-5">
+		<div class="notification is-info mt-5">
 			<i>Tip:</i> Close all instances of Windows File Explorer before uninstalling to avoid needing a reboot after
 			it (Shell) has been uninstalled.
 		</div>
 		<br>
-		<p>For further details see the chapter <a href="#cli" class="uline">Command-Line Help</a> below.</p>
+		<p>For further details see the chapter <a href="#cli">Command-Line Help</a> below.</p>
 	</div>
 </div>
-
 <br/>
-
 <div id="winget">
 	<h5>Windows Package Manager</h5>
 	<p>Windows Package Manager is available from Windows 10 version 1809.</p>
 	<div id="winget-install">
 		<h5>Install</h5>
 		<p>Open a command prompt, and run</p>
-		<code>winget install Nilesoft.Shell</code>
+		<div class="console">
+			<div class="console-title">COMMAND PROMPT</div>
+			<div class="console-body">winget install Nilesoft.Shell</div>
+		</div>
 		<p>The program will be installed to <code>C:\Program Files\Nilesoft Shell\</code>.</p>
 	</div>
 	<hr>
 	<div id="winget-uninstall">
 		<h5>Uninstall</h5>
 		<p>Open a command prompt, and run</p>
-		<code>winget uninstall Nilesoft.Shell</code>
+		<div class="console">
+			<div class="console-title">COMMAND PROMPT</div>
+			<div class="console-body">winget uninstall Nilesoft.Shell</div>
+		</div>
 	</div>
 </div>
-
 <br/>
-
 <div id="scoop">
 	<h5>Scoop</h5>
-	<p>Scoop can be installed following the instructions at <a href="https://scoop.sh/" class="uline">scoop.sh</a>.</p>
+	<p>Scoop can be installed following the instructions at <a href="https://scoop.sh/">scoop.sh</a>.</p>
 	<div id="scoop-install">
 		<h5>Install</h5>
 		<p>Open a command prompt, and run</p>
-		<code>scoop install nilesoft-shell</code>
-		<p>The program will be installed to <code>%USERPROFILE%\scoop\apps\nilesoft-shell\current\</code>.</p>
-		<br>
-		<div class="notification is-info is-light mt-5">
-			<i>Tip:</i> If you get the error <code>Couldn't find manifest for 'nilesoft-shell'</code>, please run<br/>
-			<code>scoop bucket add extras</code> first.
+		<div class="console">
+			<div class="console-title">COMMAND PROMPT</div>
+			<div class="console-body">scoop install nilesoft-shell</div>
 		</div>
-		<br>
-		<p>Open an <strong>elevated command prompt</strong> (or use <a href="https://github.com/gerardog/gsudo"
-				class="uline">gsudo</a>), and run</p>
-		<code>shell -register -restart</code>
-		<p>For further details see the chapter <a href="#cli" class="uline">Command-Line Help</a> below.</p>
+		<p>The program will be installed to <code>%USERPROFILE%\scoop\apps\nilesoft-shell\current\</code>.</p>
+		<div class="notification is-info mt-5">
+			<i>Tip:</i> If you get the error <code>Couldn't find manifest for 'nilesoft-shell'</code>, please run first
+			<div class="console">
+				<div class="console-title">COMMAND PROMPT</div>
+				<div class="console-body">scoop bucket add extras</div>
+			</div>
+		</div>
+		<p>Open an <strong>elevated command prompt</strong> (or use <a href="https://github.com/gerardog/gsudo">gsudo</a>), and run</p>
+		<div class="console">
+			<div class="console-title">Administrator: Command Prompt</div>
+			<div class="console-body">shell -register -restart</div>
+		</div>
+		<p>For further details see the chapter <a href="#cli">Command-Line Help</a> below.</p>
 	</div>
 	<hr>
 	<div id="scoop-uninstall">
 		<h5>Uninstall</h5>
-		<p>Open an <strong>elevated command prompt</strong> (or use <a href="https://github.com/gerardog/gsudo"
-				class="uline">gsudo</a>), and run</p>
-		<code>shell -unregister -restart</code>
+		<p>Open an <strong>elevated command prompt</strong> (or use <a href="https://github.com/gerardog/gsudo">gsudo</a>), and run</p>
+		<div class="console">
+			<div class="console-title">Administrator: Command Prompt</div>
+			<div class="console-body">shell -unregister -restart</div>
+		</div>
 		<p>Then run</p>
-		<code>scoop uninstall nilesoft-shell</code>
+		<div class="console">
+			<div class="console-title">Administrator: Command Prompt</div>
+			<div class="console-body">scoop uninstall nilesoft-shell</div>
+		</div>
 	</div>
 </div>
-
 <br/>
-
 <div id="chocolatey">
 	<h5>Chocolatey</h5>
-	<p>Chocolatey can be installed following the instructions at <a href="https://chocolatey.org/install#individual"
-			class="uline">chocolatey.org</a>.</p>
+	<p>Chocolatey can be installed following the instructions at <a href="https://chocolatey.org/install#individual">chocolatey.org</a>.</p>
 	<div id="chocolatey-install">
 		<h5>Install</h5>
-		<div class="notification is-info is-light mt-5">
+		<div class="notification is-info mt-5">
 			<i>Notice:</i> Until the package has been moderated, you need to add the specific version string to the
 			installer, adding e.g.<br/>
-			<code>choco install nilesoft.shell --version=1.8.1</code><br/>
-			Please find the latest published version at <a
-				href="https://community.chocolatey.org/packages/nilesoft-shell#versionhistory" class="uline">
+			<div class="console">
+				<div class="console-title">COMMAND PROMPT</div>
+				<div class="console-body">
+					choco install nilesoft.shell --version=1.8.1
+				</div>
+			</div>
+			Please find the latest published version at <a href="https://community.chocolatey.org/packages/nilesoft.shell#versionhistory">
 			Chocolatey's Version History</a> and use the latest version number (replacing <code>1.8.1</code>).
 		</div>
 		<br>
-		<p>Open an <strong>elevated command prompt</strong> (or use <a href="https://github.com/gerardog/gsudo"
-				class="uline">gsudo</a>), and run</p>
-		<code>choco install nilesoft-shell</code>
+		<p>Open an <strong>elevated command prompt</strong> (or use <a href="https://github.com/gerardog/gsudo">gsudo</a>), and run</p>
+		<div class="console">
+			<div class="console-title">COMMAND PROMPT</div>
+			<div class="console-body">
+				choco install nilesoft.shell
+			</div>
+		</div>
 		<p>The program will be installed to <code>C:\Program Files\Nilesoft Shell\</code>.</p>
 	</div>
 	<hr>
 	<div id="chocolatey-uninstall">
 		<h5>Uninstall</h5>
-		<p>Open an <strong>elevated command prompt</strong> (or use <a href="https://github.com/gerardog/gsudo"
-				class="uline">gsudo</a>), and run</p>
-		<code>choco uninstall nilesoft-shell</code>
+		<p>Open an <strong>elevated command prompt</strong> (or use <a href="https://github.com/gerardog/gsudo">gsudo</a>), and run</p>
+		<div class="console">
+			<div class="console-title">COMMAND PROMPT</div>
+			<div class="console-body">choco uninstall nilesoft.shell</div>
+		</div>
 	</div>
 </div>
 
@@ -187,13 +207,12 @@
 		</tr>
 	</table>
 </div>
-
 <hr>
 <div id="keys">
 	<h5>Use the following keys to enable/disable</h5>
-	<p>These keys are used when you press <code>right-click</code> or press <code>Shift</code>+<code>F10</code> keys</p>
-	<code>CTRL</code> To enable and reload the configuration file <code>shell.nss</code><br/>
-	<code>WIN</code> To make priority to the modern context menu for Windows 11<br>
-	<code>CTRL</code>+<code>WIN</code> To disable Shell and Enable Classic Context Menu<br>
-	<code>RIGHT-CLICK + LEFT-CLICK</code> To reload the configuration file <code>shell.nss</code><br/>
+	<p>These keys are used when you press <kbd>right-click</kbd> or press <kbd>Shift</kbd>+<kbd>F10</kbd> keys</p>
+	<kbd>CTRL</kbd> To enable and reload the configuration file <code>shell.nss</code><br/>
+	<kbd>WIN</kbd> To make priority to the modern context menu for Windows 11<br>
+	<kbd>CTRL</kbd>+<kbd>WIN</kbd> To disable Shell and Enable Classic Context Menu<br>
+	<kbd>RIGHT-CLICK</kbd>+<kbd>LEFT-CLICK</kbd> To reload the configuration file <code>shell.nss</code><br/>
 </div>

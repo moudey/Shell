@@ -3,18 +3,19 @@
 	{"title":"Installation", "link":"/docs/installation"},
 	{"title":"Get Started", "link":"/docs/get-started"},
 	{
-		"title":"Syntax", "link":"/docs/syntax",
+		"title":"Configuration", "link":"/docs/configuration",
 		"items": [
-			{"title":"Variables", "link":"/docs/syntax/variables"},
-			{"title":"Set", "link":"/docs/syntax/set"},
-			{"title":"Static", "link":"/docs/syntax/static"},
-			{"title":"Dynamic", "link":"/docs/syntax/dynamic"},
-			{"title":"Properties", "link":"/docs/syntax/properties" }
+			{"title":"Settings", "link":"/docs/configuration/settings"},
+			{"title":"Themes", "link":"/docs/configuration/themes"},
+			{"title":"Modify items", "link":"/docs/configuration/modify-items"},
+			{"title":"New items", "link":"/docs/configuration/new-items"},
+			{"title":"Properties", "link":"/docs/configuration/properties" }
 		]
 	},{
 		"title":"Expressions", "link":"/docs/expressions",
 		"items": [
 			{"title":"Comments", "link":"/docs/expressions/comments"},
+			{"title":"Variables", "link":"/docs/expressions/variables"},
 			{"title":"String literal", "link":"/docs/expressions/string"},
 			{"title":"Numeric literal", "link":"/docs/expressions/numeric"},
 			{"title":"Color literal", "link":"/docs/expressions/color"},
@@ -41,14 +42,17 @@
 			{"title":"sys", "link":"/docs/functions/sys"},
 			{"title":"this", "link":"/docs/functions/this"},
 			{"title":"user", "link":"/docs/functions/user"},
-			{"title":"window", "link":"/docs/functions/window"}
+			{"title":"window", "link":"/docs/functions/window"},
+			{"title":"clipboard", "link":"/docs/functions/clipboard"},
+			{"title":"input", "link":"/docs/functions/input"},
+			{"title":"ini", "link":"/docs/functions/ini"}
 		]
 	},{
 		"title":"Examples", "link":"/docs/examples",
 		"items": [
 			{"title":"Copy path", "link":"/docs/examples/copy-path"},
 			{"title":"Favorites", "link":"/docs/examples/favorites"},
-			{"title":"Goto", "link":"/docs/examples/goto"}
+			{"title":"Go to", "link":"/docs/examples/goto"}
 		]
 	}
 ]

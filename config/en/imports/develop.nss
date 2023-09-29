@@ -1,4 +1,4 @@
-﻿menu(mode="multiple" title='&Develop' sep=sep.bottom image=\uE26E)
+﻿menu(mode="multiple" title='&Develop' vis=key.shift() sep=sep.bottom image=\uE26E)
 {
 	menu(mode="single" title='editors' image=\uE17A)
 	{
@@ -18,8 +18,8 @@
 
 		menu(mode="multiple" sep="both" title='publish' image=\ue11f)
 		{
-			var { publish='dotnet publish -r win-x64 -c release --output "@sel.parent\publish" /p:CopyOutputSymbolsToPublishDirectory=false' }
-			item(title='publish single file' sep="after" cmd-line='/K @publish -p:PublishSingleFile=true --self-contained false')
+			$publish='dotnet publish -r win-x64 -c release --output publish /*/p:CopyOutputSymbolsToPublishDirectory=false*/'
+			item(title='publish sinale file' sep="after" cmd-line='/K @publish --no-self-contained /p:PublishSingleFile=true')
 			item(title='framework-dependent deployment' cmd-line='/K @publish')
 			item(title='framework-dependent executable' cmd-line='/K @publish --self-contained false')
 			item(title='self-contained deployment' cmd-line='/K @publish --self-contained true')
