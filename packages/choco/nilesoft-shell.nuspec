@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>nilesoft-shell</id>
-    <version>1.8.1</version>
+    <version>1.9</version>
     <title>Nilesoft Shell</title>
     <authors>Mahmoud Gomaa</authors>
     <owners>Mahmoud Gomaa</owners>
@@ -15,10 +15,7 @@
     <tags>context-menu right-click file-explorer shell-extension</tags>
     <summary>Powerful context menu manager for Windows File Explorer.</summary>
     <description>Shell is a context menu extender that lets you handpick the items to integrate into Windows File Explorer context menu, create custom commands to access all your favorite web pages, files, and folders, and launch any application directly from the context menu. It also provides you a convenient solution to modify or remove any context menu item added by the system or third party software.</description>
-    <releaseNotes>- Fixed a keyboard bug when executing a command.
-- Fixed a bug with 'title.xxx' functions.
-- New 'checked' property for static item to change the checked state.
-- New value for 'image.align' option to set priority.</releaseNotes>
+    <releaseNotes>Changes in the configuration file structure, making it more flexible, improving performance, fixing some issues, and adding more helper functions make the Explorer more powerful.</releaseNotes>
   </metadata>
   <files>
     <file src="tools\**" target="tools" />
