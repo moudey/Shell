@@ -2,9 +2,9 @@
 {
 	menu(mode="single" title='editors' image=\uE17A)
 	{
-		item(title='Visual Studio Code' image=[\uE272, #22A7F2] cmd='code' args='"@sel.path"')
+		item(title='Visual Studio Code' image=[\uE272, #22A7F2] cmd='code' args='"@sel.path"' window=hidden)
 		separator
-		item(type='file' mode="single" title='Windows notepad' image cmd='@sys.bin\notepad.exe' args='"@sel.path"')
+		item(type='file' mode="single" title='Windows notepad' admin=key.shift() image cmd='@sys.bin\notepad.exe' args='"@sel.path"')
 	}
 
 	menu(mode="multiple" title='dotnet' image=\uE143)
