@@ -45,7 +45,8 @@
 			{"title":"window", "link":"/docs/functions/window"},
 			{"title":"clipboard", "link":"/docs/functions/clipboard"},
 			{"title":"input", "link":"/docs/functions/input"},
-			{"title":"ini", "link":"/docs/functions/ini"}
+			{"title":"ini", "link":"/docs/functions/ini"},
+			{"title":"regex", "link":"/docs/functions/regex"}
 		]
 	},{
 		"title":"Examples", "link":"/docs/examples",
