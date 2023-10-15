@@ -1,4 +1,4 @@
-﻿<h5>PATH</h5>
+<h5>PATH</h5>
 <br>
 
 <section id="path.combine" class="my-5">
@@ -131,6 +131,25 @@
 	<code>path.file.box('All|*.*|Text|*.txt')</code><br>
 	<code>path.file.box('exe|*.exe', 'c:\windows')</code><br>
 	<code>path.file.box('exe|*.exe', 'c:\windows', 'explorer.exe')</code>
+</section>
+
+<section id="path.files" class="my-5">
+	<h5>path.files</h5>
+	<p>Returns all files with the ability to filter.</p>
+	<p>Syntax</p>
+	<pre><code>path.files(sys.dir, ["*"], flags[2=files | 3=dirs | 5=files+dirs | 8=quots | 16=full path], sep)
+	
+// get all files and dirs
+path.files(sys.dir)
+path.files(sys.dir, "*")
+
+// get all files with .exe
+path.files(sys.dir,"*.exe")
+
+// full path + quots
+path.files(sys.dir, '*', 8|16)
+	</code></pre>
+
 </section>
 
 <section id="path.isabsolute" class="my-5">
