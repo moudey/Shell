@@ -45,6 +45,11 @@ io.attribute.directory(atrr)</code></pre>
 	<p>Copies an existing file to a new file.</p>
 	<p>Syntax</p>
 	<code>io.copy(pathFrom, pathTo)</code>
+	<br>
+	<code>io.copy(pathFrom, pathTo, options)</code>
+	options:<br>
+	1 = skip_existing, 2 = overwrite_existing, 4 = update_existing, 16 = recursive<br>
+default = update_existing | recursive
 </section>
 
 <section id="io.move" class="my-5">
