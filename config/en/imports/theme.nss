@@ -5,8 +5,8 @@
 	background
 	{
 		color=auto
-		opacity=50
-		effect=0
+		opacity=auto
+		effect=auto
 	}
 	image.align=2
 }
