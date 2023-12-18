@@ -1,4 +1,4 @@
-﻿menu(where=sel.count>0 type='file|dir|drive|namespace|back' mode="multiple" title='Gerenciamento de Arquivos' image=\uE253)
+﻿menu(where=sel.count>0 type='file|dir|drive|namespace|back' mode="multiple" title='Gerenciamento de arquivos' image=\uE253)
 {
 	menu(separator="after" title=title.copy_path image=icon.copy_path)
 	{
@@ -20,7 +20,7 @@
 		item(title="Nenhum" image=icon.select_none cmd=command.select_none)
 	}
 
-	item(type='file|dir|back.dir|drive' title='Tornar-se Proprietário' image=[\uE1DE,#f00] admin
+	item(type='file|dir|back.dir|drive' title='Tornar-se proprietário' image=[\uE1DE,#f00] admin
 		cmd args='/K takeown /f "@sel.path" @if(sel.type==1,null,"/r /d y") && icacls "@sel.path" /grant *S-1-5-32-544:F @if(sel.type==1,"/c /l","/t /c /l /q")')
 	separator
 	menu(title="Mostrar/Ocultar" image=icon.show_hidden_files)
