@@ -32,7 +32,7 @@
 		item(title="파일 이름 확장자" image=icon.show_file_extensions cmd='@command.toggleext')
 	}
 
-	menu(type='file|dir|back.dir' mode="single" title='속성')
+	menu(type='file|dir|back.dir' mode="single" title='속성' image=icon.properties)
 	{
 		$atrr = io.attributes(sel.path)
 		item(title='숨김' checked=io.attribute.hidden(atrr)

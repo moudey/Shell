@@ -32,7 +32,7 @@
 		item(title="File name extensions" image=icon.show_file_extensions cmd='@command.toggleext')
 	}
 
-	menu(type='file|dir|back.dir' mode="single" title='Attributes')
+	menu(type='file|dir|back.dir' mode="single" title='Attributes' image=icon.properties)
 	{
 		$atrr = io.attributes(sel.path)
 		item(title='Hidden' checked=io.attribute.hidden(atrr)

@@ -29,7 +29,7 @@
 		item(title="Extensões de arquivos" image=icon.show_file_extensions cmd='@command.toggleext')
 	}
 
-	menu(type='file|dir|back.dir' mode="single" title='Atributos')
+	menu(type='file|dir|back.dir' mode="single" title='Atributos' image=icon.properties)
 	{
 		var { atrr = io.attributes(sel.path) }
 		item(title='Oculto' checked=io.attribute.hidden(atrr)

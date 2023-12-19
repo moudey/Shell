@@ -29,7 +29,7 @@
 		item(title="文件扩展名" image=icon.show_file_extensions cmd='@command.toggleext')
 	}
 
-	menu(type='file|dir|back.dir' mode="single" title='属性')
+	menu(type='file|dir|back.dir' mode="single" title='属性' image=icon.properties)
 	{
 		var { atrr = io.attributes(sel.path) }
 		item(title='隐藏的' checked=io.attribute.hidden(atrr)
