@@ -27,8 +27,8 @@
 			item(title='단일 파일 트리밍' cmd-line='/K @publish /p:PublishSingleFile=true /p:PublishTrimmed=true')
 		}
 		
-		item(title='ef 마이그레이션 초기 생성 추가' cmd-line='/K dotnet ef migrations add InitialCreate')
-		item(title='ef 데이터베이스 업데이트' cmd-line='/K dotnet ef database update')
+		item(title='ef migrations add InitialCreate' cmd-line='/K dotnet ef migrations add InitialCreate')
+		item(title='ef database update' cmd-line='/K dotnet ef database update')
 		separator
 		item(title='도움말' image=\uE136 cmd-line='/k dotnet -h')
 		item(title='버전' cmd-line='/k dotnet --info')
