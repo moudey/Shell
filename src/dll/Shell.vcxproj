@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="release|x64">
+      <Configuration>release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="release|Win32">
+      <Configuration>release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="release|ARM64">
+      <Configuration>release</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="debug|ARM64">
+      <Configuration>debug</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="debug|Win32">
+      <Configuration>debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="debug|x64">
+      <Configuration>debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{BAF011AC-D5E9-42C5-BA26-BA6115A45DAC}</ProjectGuid>
+    <CharacterSet>Unicode</CharacterSet>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <RootNamespace>Shell</RootNamespace>
+    <ProjectName>dll</ProjectName>
+    <TargetName>shell</TargetName>
+    <TargetExt>.dll</TargetExt>
+    <GenerateManifest>false</GenerateManifest>
+    <OutDir>$(SolutionDir)bin\$(Configuration.ToLower())\$(Platform.ToLower().Replace('win32', 'x86'))\</OutDir>
+    <IntDir>$(ProjectDir)obj\$(Configuration.ToLower())\</IntDir>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)'=='debug'" Label="Configuration">
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='release'" Label="Configuration">
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+    <Import Project="..\shared\shared.vcxitems" Label="Shared" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\shared\VC-LTL.props" Condition="'$(Configuration)|$(Platform)'=='release|$(Platform)'" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <LibraryPath>$(SolutionDir)shared\Library;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)src;$(ProjectDir)src\include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='debug'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='release'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Label="Globals">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_WINDOWS;_WINDLL;_USRDLL;Shell_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <CallingConvention>StdCall</CallingConvention>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <CompileAsManaged>false</CompileAsManaged>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
+      <GenerateModuleDependencies>false</GenerateModuleDependencies>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+      <GenerateSourceDependencies>false</GenerateSourceDependencies>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <MinimumRequiredVersion>6.1</MinimumRequiredVersion>
+      <ModuleDefinitionFile>src\$(TargetName).def</ModuleDefinitionFile>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <ProgramDatabaseFile>$(OutDir)$(TargetName)$(TargetExt).pdb</ProgramDatabaseFile>
+      <ProfileGuidedDatabase>$(OutDir)$(TargetName)$(TargetExt).pgd</ProfileGuidedDatabase>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;advapi32.lib;shell32.lib;ole32.lib</AdditionalDependencies>
+    </Link>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <PreprocessorDefinitions>_WINDLL;_WIN64;_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Xdcmake>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt).xml</OutputFile>
+    </Xdcmake>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)'=='debug'">
+    <ClCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <PreBuildEvent>
+      <Command>PowerShell.exe -NoProfile -NonInteractive -NoLogo -ExecutionPolicy Bypass -FILE "$(SolutionDir)tools\version\version.ps1"</Command>
+      <Message>Generating version number...</Message>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)'=='release'">
+    <ClCompile>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <Optimization>MaxSpeed</Optimization>
+      <EnableModules>false</EnableModules>
+      <CreateHotpatchableImage>false</CreateHotpatchableImage>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>false</OptimizeReferences>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
+      <IgnoreEmbeddedIDL>true</IgnoreEmbeddedIDL>
+      <AdditionalOptions>/DEBUG:NONE /EMITPOGOPHASEINFO</AdditionalOptions>
+      <SetChecksum>true</SetChecksum>
+      <IgnoreSpecificDefaultLibraries />
+      <ImageHasSafeExceptionHandlers />
+    </Link>
+    <Xdcmake>
+      <SuppressStartupBanner Condition="'$(Configuration)|$(Platform)'=='release|x64'">false</SuppressStartupBanner>
+    </Xdcmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Platform)'=='ARM64'">
+    <Link>
+      <MinimumRequiredVersion>10.0</MinimumRequiredVersion>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="readme.txt" />
+    <None Include="src\Shell.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Expression\ArrayExpression.h" />
+    <ClInclude Include="src\Expression\Constants.h" />
+    <ClInclude Include="src\Expression\Context.h" />
+    <ClInclude Include="src\Expression\ExpressionType.h" />
+    <ClInclude Include="src\Expression\IdentExpression.h" />
+    <ClInclude Include="src\Expression\OperatorExpression.h" />
+    <ClInclude Include="src\Expression\Scope.h" />
+    <ClInclude Include="src\Expression\StatementExpression.h" />
+    <ClInclude Include="src\Expression\LiteralExpression.h" />
+    <ClInclude Include="src\Expression\Variable.h" />
+    <ClInclude Include="src\Include\Cache.h" />
+    <ClInclude Include="src\Include\RegistryConfig.h" />
+    <ClInclude Include="src\Include\Theme.h" />
+    <ClInclude Include="src\Include\Keyboard.h" />
+    <ClInclude Include="src\Include\Styles.h" />
+    <ClInclude Include="src\Include\Tip.h" />
+    <ClInclude Include="src\Include\UTheme.h" />
+    <ClInclude Include="src\Include\win32_hook.h" />
+    <ClInclude Include="src\Parser\IdentHash.h" />
+    <ClInclude Include="src\Parser\Lexer.h" />
+    <ClInclude Include="src\pch.h" />
+    <ClInclude Include="src\Include\Hooker.h" />
+    <ClInclude Include="src\Include\Initializer.h" />
+    <ClInclude Include="src\Include\Menu.h" />
+    <ClInclude Include="src\Include\MenuItem.h" />
+    <ClInclude Include="src\Include\Selections.h" />
+    <ClInclude Include="src\Include\ContextMenu.h" />
+    <ClInclude Include="src\Parser\Ident.h" />
+    <ClInclude Include="src\Expression\Expression.h" />
+    <ClInclude Include="src\Parser\Parser.h" />
+    <ClInclude Include="src\Parser\Token.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Expression\ArrayExpression.cpp" />
+    <ClCompile Include="src\Expression\Context.cpp" />
+    <ClCompile Include="src\Expression\FuncExpression.cpp" />
+    <ClCompile Include="src\Expression\Expression.cpp" />
+    <ClCompile Include="src\Expression\OperatorExpression.cpp" />
+    <ClCompile Include="src\Expression\Scope.cpp" />
+    <ClInclude Include="src\Include\FindPattern.h" />
+    <ClCompile Include="src\Parser\Lexer.cpp" />
+    <ClCompile Include="src\Parser\Properties.cpp" />
+    <ClCompile Include="src\Parser\Verification.cpp" />
+    <ClCompile Include="src\Parser\Parser.cpp" />
+    <ClCompile Include="src\Selections.cpp" />
+    <ClCompile Include="src\ContextMenu.cpp" />
+    <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\Initializer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\shared\Resource\Shell.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ItemGroup>
+    <None Include="..\shared\VC-LTL.props" />
+  </ItemGroup>
+</Project>

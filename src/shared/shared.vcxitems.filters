@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Manifest Include="$(MSBuildThisFileDirectory)Resource\Shell.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)System\Windows\Registry.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)System\Log.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)FileSystemObjects.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Globals.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Resource.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)System.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)System\Collections\Array.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)System\Collections\List.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)System\Collections\LList.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)System\Collections\StringList.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)System\CommandLine.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)System\Diagnostics\Process.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)System\Diagnostics\Shell.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)System\Diagnostics\Thread.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)System\DLL.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)System\Drawing\Bitmap.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)System\Drawing\Brush.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)System\Drawing\DC.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)System\Drawing\Icon.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)System\Drawing\Image.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)System\Drawing\Utility.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)System\Environment.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)System\Exception.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)System\Int.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)System\IO\File.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)System\IO\IO.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)System\IO\Path.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)System\Log.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)System\MemoryManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)System\Object.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)System\Security\Elevation.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)System\Security\Permission.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)System\Text\Buffer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)System\Text\Char.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)System\Text\Encoding.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)System\Text\Hash.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)System\Text\string.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)System\Text\StringBuffer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)System\Text\Text.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)System\Text\TString.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)System\Windows\Forms\MessageBox.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)System\Windows\Registry.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)System\Windows\Window.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)System\Windows\Windows.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)System\auto_ptr.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)System\Drawing\Drawing.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)System\Drawing\Color.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)System\Drawing\WICImagingFactory.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Library\plutosvg.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Library\plutovg.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)RegistryConfig.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="$(MSBuildThisFileDirectory)Resource\main.ico" />
+  </ItemGroup>
+</Project>

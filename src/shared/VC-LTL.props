@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+	<!--
+Author: mingkuang
+Modification date: 2018-08-14
+
+
+VC-LTL automatic loading configuration, it is recommended that you copy this file to your project and use it. 
+This file can automatically identify whether there is VC-LTL in the current environment and apply it automatically.
+
+Instructions:
+  1. Select all Release configurations in the Property Manager, then right-click and select "Add Existing Property Sheet".
+  2. Make sure that all dependent static libraries are also recompiled with VC-LTL.
+
+
+VC-LTL default search order
+  1. The directory where VC-LTL.props is located, i.e. $(MSBuildThisFileDirectory)
+  2. The current project root directory, i.e. $(ProjectDir)VC-LTL
+  3. The former solution root directory, i.e. $(SolutionDir)VC-LTL
+  4. The current project parent directory, i.e. $(ProjectDir)..\VC-LTL
+  5. The current solution parent directory, i.e. $(SolutionDir)..\VC-LTL
+  6. Registry HKEY_CURRENT_USER\Code\VC-LTL@Root
+
+Just put the VC-LTL in one of these locations, and the VC-LTL will be automatically referenced.
+
+If you are not satisfied with the default search order, you can modify this file. You can also directly specify the $(VC_LTL_Root) macro to load VC-LTL more arbitrarily.
+
+-->
+
+	<!--VC-LTL settings-->
+	<PropertyGroup>
+		<!--<DisableAdvancedSupport>true</DisableAdvancedSupport>-->
+		<!--<SupportWinXP>true</SupportWinXP>-->
+	</PropertyGroup>
+
+
+	<PropertyGroup>
+		<!--Shared.props file root directory exists VC-LTL? -->
+		<VC_LTL_Root Condition=" ('$(VC_LTL_Root)'=='') And (Exists('$(MSBuildThisFileDirectory)_msvcrt.h')) ">$(MSBuildThisFileDirectory)</VC_LTL_Root>
+		<VC_LTL_Root Condition=" ('$(VC_LTL_Root)'=='') And (Exists('$(ProjectDir)VC-LTL\_msvcrt.h')) ">$(ProjectDir)VC-LTL</VC_LTL_Root>
+		<VC_LTL_Root Condition=" ('$(VC_LTL_Root)'=='') And ('$(SolutionDir)'!='') And (Exists('$(SolutionDir)VC-LTL\_msvcrt.h')) ">$(SolutionDir)VC-LTL</VC_LTL_Root>
+		<VC_LTL_Root Condition=" ('$(VC_LTL_Root)'=='') And (Exists('$(ProjectDir)..\VC-LTL\_msvcrt.h')) ">$(ProjectDir)..\VC-LTL</VC_LTL_Root>
+		<VC_LTL_Root Condition=" ('$(VC_LTL_Root)'=='') And ('$(SolutionDir)'!='') And (Exists('$(SolutionDir)..\VC-LTL\_msvcrt.h')) ">$(SolutionDir)..\VC-LTL</VC_LTL_Root>
+		<VC_LTL_Root Condition=" '$(VC_LTL_Root)'=='' ">$(Registry:HKEY_CURRENT_USER\Code\VC-LTL@Root)</VC_LTL_Root>
+	</PropertyGroup>
+
+	<ImportGroup Condition=" '$(VC_LTL_Root)'!=''">
+		<Import Project="$(VC_LTL_Root)\Config\config.props" Condition="Exists('$(VC_LTL_Root)\Config\config.props')"/>
+		<Import Project="$(VC_LTL_Root)\ltlvcrt.props" Condition="(!Exists('$(VC_LTL_Root)\Config\config.props')) And (Exists('$(VC_LTL_Root)\ltlvcrt.props'))"/>
+	</ImportGroup>
+</Project>

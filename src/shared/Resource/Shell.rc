@@ -1,0 +1,114 @@
+//#pragma code_page(65001) // utf-8
+//#pragma code_page(1252) // English
+
+#include <windows.h>
+#include <commctrl.h>
+#include "..\resource.h"
+
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+
+//
+// Version Information resources
+//
+1 VERSIONINFO
+    FILEVERSION     VERSION_MAJOR,VERSION_MINOR,VERSION_BUILD,VERSION_REV
+    PRODUCTVERSION  VERSION_MAJOR,VERSION_MINOR,0,0
+    FILEOS          VOS_NT_WINDOWS32
+    FILESUBTYPE     VFT2_UNKNOWN
+    FILEFLAGSMASK   VS_FFI_FILEFLAGSMASK
+	FILEFLAGS		VS_DEBUG
+	FILETYPE		TFILETYPE
+{
+    BLOCK "StringFileInfo"
+    {
+		//"000004b0"	// Neutral
+        BLOCK "040904b0"
+        {
+			VALUE "CompanyName", APP_COMPANY
+#ifdef APP_CANARY 
+			VALUE "FileDescription", APP_FULLNAME L" " APP_CANARY
+#else
+			VALUE "FileDescription", APP_FULLNAME
+#endif
+			VALUE "FileVersion", APP_VERSION
+			VALUE "InternalName", APP_FILENAME
+			VALUE "LegalCopyright", L"\xA9 Nilesoft Ltd."
+			//VALUE "LegalCopyright", L"\xA9 2023 Nilesoft Ltd."
+			VALUE "OriginalFilename", APP_FILENAME
+			VALUE "ProductName", APP_NAME
+			VALUE "ProductVersion", APP_PRODUCT_VERSION
+        }
+    }
+    BLOCK "VarFileInfo"
+    {
+        VALUE "Translation", 0x0409, 0x04B0
+    }
+}
+
+#ifdef _WINDLL
+
+FONTICON			RCDATA			".\\shell.ttf"
+
+#else
+//
+// Icon resources
+//
+IDI_RPMICON			ICON			".\\main.ico"
+//IDI_LOGO 			PNG				".\\logo.png"
+#endif
+//
+// Manifest resources
+//
+TRT_MANIFEST		RT_MANIFEST		".\\manifest.xml"
+
+//
+// Bitmap resources
+//
+//IDB_BITMAP1        BITMAP         "bitmap1.bmp"
+
+//
+// String Table resources
+//
+STRINGTABLE
+{
+#ifdef _WINDLL
+	IDS_SELECT_FOLDER				L"Please select a folder."
+#endif
+	IDS_REGISTER_SUCCESS			L"Register completed successfully."
+	IDS_UNREGISTER_SUCCESS			L"Unregister completed successfully."
+	IDS_REGISTER_NOT_SUCCESS		L"Register not completed."
+	IDS_UNREGISTER_NOT_SUCCESS		L"Unregister not completed."
+	IDS_ADMIN_PRIVILEGES			L"Missing administrative privileges!"
+	IDS_WINDOWS_COMPATIBILITY		L"Windows Version Not Supported, You need at least Windows 7."
+	IDS_RESTART_EXPLORERQ			L"Restart Windows Explorer?"
+	IDS_RESTART_EXPLORER			L"Restart Explorer."
+}
+
+//
+// Dialog resources
+//
+#ifdef _WINDLL
+
+IDD_INPUTBOX DIALOGEX 0, 0, 300, 60
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_CAPTION | WS_SYSMENU | DS_CENTER
+CAPTION "Shell Input"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+{
+	LTEXT           "Prompt:", IDC_INPUTBOX_PROMPT, 5, 5, 290, 14, SS_NOPREFIX
+	EDITTEXT        IDC_INPUTBOX_EDIT, 5, 20, 290, 14, ES_AUTOHSCROLL
+	DEFPUSHBUTTON   "Ok", IDOK, 245, 40, 50, 14, WS_GROUP
+	PUSHBUTTON      "Cancel", IDCANCEL, 190, 40, 50, 14, WS_GROUP
+}
+
+#else
+
+IDD_CMDLINE DIALOGEX 0, 0, 280, 185
+STYLE DS_SETFONT | DS_CENTER | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Nilesoft Shell"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+{
+	EDITTEXT		IDC_CMDLINE_TEXT, 10, 10, 260, 150, ES_MULTILINE | ES_READONLY | NOT WS_BORDER | WS_VSCROLL | NOT WS_TABSTOP
+	DEFPUSHBUTTON   "OK", IDOK, 220, 165, 50, 15
+}
+
+#endif
