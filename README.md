@@ -8,7 +8,7 @@ Powerful manager for Windows File Explorer context menu.
 </p>
 
 This repository is used to [report issues](https://nilesoft.org/forum/issues).<br>
-You're also welcome to join [the Nilesoft forum](https://nilesoft.org/form) for a discussion.
+You're also welcome to join [the Nilesoft forum](https://nilesoft.org/forum) for a discussion.
 
 ## Details
 <p>
