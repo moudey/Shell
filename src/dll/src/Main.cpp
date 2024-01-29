@@ -518,10 +518,6 @@ BOOL WINAPI TrackPopupMenuExProc(HMENU hMenu, uint32_t uFlags, int x, int y, HWN
 
 BOOL WINAPI NtUserTrackPopupMenu(HMENU hMenu, uint32_t uFlags, int x, int y, HWND hWnd, LPTPMPARAMS lptpm, int tfunc)
 {
-#ifdef _DIJA
-	return (BOOL)XXX::OnContextMenu(hWnd, x, y, hMenu);;
-#endif
-
 	auto result = FALSE;
 	auto invoked = false;
 
