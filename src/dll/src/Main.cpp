@@ -30,7 +30,6 @@ Version Build
 */
 
 //#pragma comment(lib, "mincore.lib")
-//#pragma comment(lib, "shlwapi.lib")
 #pragma comment(lib, "UxTheme.lib")
 #pragma comment(lib, "Comctl32.lib")
 #pragma comment(lib, "dwmapi.lib")
