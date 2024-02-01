@@ -72,8 +72,4 @@ If you really love Shell and would like to see it continue to improve.
 
 Sponsors
 ------------------
-[SteffanDonal](https://github.com/SteffanDonal), Ousseynou SANKHARE, [hiranokite](https://github.com/hiranokite), [RubicBG](https://github.com/RubicBG)
-
-Contributors
-------------------
-[Martin Rüegg](https://github.com/martin-rueegg), [hiranokite](https://github.com/hiranokite), [Ivan Kalashnikov](https://github.com/Steindvart), [Chris Dailey](https://github.com/nitz), [Hank Morelock](https://github.com/hank-morelock)
+[RubicBG](https://github.com/RubicBG), [hiranokite](https://github.com/hiranokite), [SteffanDonal](https://github.com/SteffanDonal), Ousseynou SANKHARE
