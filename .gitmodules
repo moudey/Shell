@@ -1,3 +1,6 @@
 [submodule "src/lib/plutosvg"]
 	path = src/lib/plutosvg
 	url = https://github.com/sammycage/plutosvg.git
+[submodule "src/lib/detours"]
+	path = src/lib/detours
+	url = https://github.com/microsoft/Detours.git
