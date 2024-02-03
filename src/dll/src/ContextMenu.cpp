@@ -131,67 +131,10 @@ struct DWM
 		return ::DwmExtendFrameIntoClientArea(handle, &margins);
 	}
 };
-/*
-enum DWMWINDOWATTRIBUTE2 {
-	DWMWA_USE_HOSTBACKDROPBRUSH,
-	DWMWA_USE_IMMERSIVE_DARK_MODE = 20,
-	DWMWA_WINDOW_CORNER_PREFERENCE = 33,
-	DWMWA_BORDER_COLOR,
-	DWMWA_CAPTION_COLOR,
-	DWMWA_TEXT_COLOR,
-	DWMWA_VISIBLE_FRAME_BORDER_THICKNESS,
-	DWMWA_SYSTEMBACKDROP_TYPE
-};*/
 
 inline HMENU GET_HMENU(HWND hWnd) { return SendMSG<HMENU>(hWnd, MN_GETHMENU, 0, 0); }
 
 auto ver = &Windows::Version::Instance();
-
-BOOL IsMFMWFPWindow(ULONG_PTR uHitArea)
-{
-	switch(uHitArea) {
-		case MFMWFP_OFFMENU:
-		case MFMWFP_NOITEM:
-		case MFMWFP_ALTMENU:
-			return FALSE;
-
-		default:
-			return TRUE;
-	}
-}
-
-// This is a private function used to get the window handle that contains a given hSubMenu.
-HWND GetSubMenuWindow(HMENU hSubMenuToFind)
-{
-	HWND    hwndSubMenu;
-	BOOL    bFound;
-	HMENU   hSubMenuTemp;
-
-	hwndSubMenu = FindWindow(L"#32768", NULL);
-	if(hwndSubMenu == NULL)
-		return (NULL);    // random error condition - shouldn't happen
-
-	if(!IsWindowVisible(hwndSubMenu))
-		return (NULL);
-
-	bFound = FALSE;
-	while(hwndSubMenu)
-	{
-		hSubMenuTemp = (HMENU)SendMessage(hwndSubMenu, MN_GETHMENU, 0, 0);
-		if(hSubMenuTemp == hSubMenuToFind)
-		{
-			bFound = TRUE;
-			break;
-		}
-		hwndSubMenu = FindWindowEx(NULL, hwndSubMenu, L"#32768", NULL);
-	} // end while hwndSubMenu
-
-	if(bFound)
-	{
-		return(hwndSubMenu);
-	}
-	return (NULL);
-}
 
 #pragma endregion
 
@@ -229,7 +172,6 @@ namespace Nilesoft
 			return nullptr;
 		}
 
-		//GetWindowModuleFileNameW
 		ContextMenu::ContextMenu(HWND hWnd, HMENU hMenu, Point const &pt)
 		{
 			//d2d.create_render();
@@ -259,23 +201,6 @@ namespace Nilesoft
 			Initializer::instance->dpi = dpi.val;
 
 			_tip.ctx = this;
-
-			//auto monitor = MonitorFromWindow(hWnd, MONITOR_DEFAULTTONEAREST);
-			//auto x = unsigned{};
-			//auto y = unsigned{};
-
-			//GetDpiForMonitor(monitor, MDT_EFFECTIVE_DPI, &x, &y);
-			//auto x = GetDeviceCaps(dc, LOGPIXELSX);
-			//auto y = GetDeviceCaps(dc, LOGPIXELSY);
-
-/*			NONCLIENTMETRICS ncm{};
-			ncm.cbSize = sizeof(ncm);
-			SystemParametersInfoW(SPI_GETNONCLIENTMETRICS, sizeof(ncm), &ncm, 0);
-			::memcpy(&menuFont, &ncm.lfMenuFont, sizeof(menuFont));
-*/
-
-			//auto r = ::GetAsyncKeyState(VK_SHIFT);
-			//MBF(L"%x, %x", r & 0x8001, r & 0x8000);
 
 			if(keyboard.get_keys_state(true))
 			{
@@ -927,33 +852,6 @@ namespace Nilesoft
 					}
 
 					_this.id = mii->id;
-
-					// fix empty recycle bin state
-					/*if(mii->id == IDENT_ID_EMPTY_RECYCLE_BIN && mii->is_disabled())
-					{
-						SHQUERYRBINFO sqrbi{ sizeof(SHQUERYRBINFO) };
-						DLL::Invoke<HRESULT>(L"shell32.dll", "SHQueryRecycleBinW", nullptr, &sqrbi);
-						//::SHQueryRecycleBinW(nullptr, &sqrbi);
-						if(sqrbi.i64NumItems > 0)
-							mii->fState &= ~MFS_DISABLED;
-					}
-					else if(languageId == 1049)
-					{
-						if(mii->id == IDENT_ID_SEND_TO && !mii->is_popup())
-						{
-							mii->ui = Initializer::get_muid(IDENT_ID_SHARE);
-							if(mii->ui)
-							{
-								mii->is_system = true;
-								mii->id = mii->ui->id;
-								mii->hash = mii->ui->hash;
-								mii->title = mii->ui->title;
-								mii->title.normalize = mii->ui->title_normalize;
-								mii->image.expr = mii->ui->image;
-							}
-						}
-					}*/
-
 					_this.length = mii->length;
 					_this.title = mii->title.text;
 					_this.title_normalize = mii->title.normalize;
@@ -1053,7 +951,6 @@ namespace Nilesoft
 										size.cx = fix_image_size(def_size.cx, size.cx);
 										size.cy = fix_image_size(def_size.cy, size.cy);
 									}
-									//_log.write(L"%d %d, %d %d %s\n", def_size.cx, def_size.cy, size.cx, size.cy, mii->title.text.c_str());
 								}
 							}
 
@@ -1440,8 +1337,6 @@ namespace Nilesoft
 				if(item->is_popup() && MENU::get_count(item->hSubMenu) == 0)
 				{
 					int cp = 0;
-					//for(auto x : _moved_items.statics)
-					//	cp += item->id == x->parent.front();
 
 					for(auto x : __movable_system_items)
 						cp += x->path.equals((item->path + L"/" + item->title.normalize).trim(L'/'));
@@ -1614,20 +1509,7 @@ namespace Nilesoft
 
 			if(menu->draw.height % 2)
 				menu->draw.height++;
-			/*
-			if(menu->is_main && common)
-			{
-				auto mii = _gc.push();
-				mii->dynamic = true;
-				mii->handle = hMenu;
-				mii->fMask = MIIM_FTYPE | MIIM_ID| MIIM_STATE;
-				mii->fType = MFT_OWNERDRAW;
-				mii->fState = MFS_DISABLED;
-				mii->id = 0x5ffffffe;
-				mii->wID = 0x5ffffffe;
-				m.insert(mii, 0, true);
-			}
-			*/
+
 			__trace(L"ContextMenu.InitMenuPopup end");
 
 			return ret;
@@ -1676,120 +1558,8 @@ namespace Nilesoft
 		LRESULT ContextMenu::OnMenuSelect([[maybe_unused]] HMENU hMenu, uint32_t itemId, [[maybe_unused]] uint32_t flags)
 		{
 			//log->info(L"OnMenuSelect");
-			//current.selectitem = nullptr;
-			//auto menu = &_menus[hMenu];
 			current.hMenu = hMenu;
-			//if(flag_has(flags, MF_POPUP)
-
 			_tip.hide();
-
-			/*if(HIWORD(wParam) == 0xFFFF && lParam == 0)
-			{
-				pcmm->m_pStatusBar->HandleStatusBarMenuClose();
-			}
-			else
-			{
-				pcmm->m_pStatusBar->HandleStatusBarMenuOpen();
-
-				UINT uCmd = LOWORD(wParam);
-
-				if(uCmd >= pcmm->m_uMinID && uCmd <= pcmm->m_uMaxID)
-				{
-					TCHAR szHelperText[512];
-
-					HRESULT hr = pcmm->GetMenuHelperText(LOWORD(wParam), szHelperText,
-														 SIZEOF_ARRAY(szHelperText));
-
-					if(hr == S_OK)
-					{
-						pcmm->m_pStatusBar->SetPartText(0, szHelperText);
-						return 0;
-					}
-				}
-			}
-			*/
-			if((flags & 0xFFFF) == 0xFFFF)
-			{
-				//current.selectitem = nullptr;
-				//HideTip();// cancel/hide tip
-				//m_bMouseSelect = FALSE;
-				//m_bSticky = FALSE;
-			}
-			else if(flags & MF_POPUP)
-			{
-				//_tip.hide();// new popup: cancel
-				//m_bSticky = FALSE;
-			}
-			else if(flags & MF_SEPARATOR) {
-				// separator: hide tip but remember sticky state
-				//m_bSticky = m_wndTip.IsWindowVisible();
-				//HideTip();
-				//current.selectitem = nullptr;
-			}
-			else if(itemId && hMenu)
-			{
-				/*if(Keyboard::IsKeyDown(VK_LSHIFT, 0))
-				{
-					MENUITEMINFO mii;
-					mii.cbSize = sizeof mii;
-					mii.fMask = MIIM_STATE;
-
-					if(GetMenuItemInfo(hMenu, itemId, 0, &mii))
-					{
-						if(mii.fState & MFS_DISABLED)
-						{
-							EnableMenuItem(hMenu, itemId, 0);
-						}
-						else
-						{
-							EnableMenuItem(hMenu, itemId, 1);
-						}
-					}
-				}*/
-
-				// if tips already displayed, keep displayed
-				//m_bSticky = IsWindowVisible(_hTip) || m_bSticky;
-
-				// remember if mouse used to invoke menu
-				//m_bMouseSelect = (flags & MF_MOUSESELECT) != 0;
-
-				// get prompt and display tip (with or without timeout)
-				//CString prompt = OnGetCommandPrompt(nItemID);
-				/*if(prompt.IsEmpty())
-					HideTip(); // no prompt: cancel tip
-				else {
-					CRect rc = GetMenuTipRect(hMenu, nItemID);
-					m_wndTip.SetWindowPos(&CWnd::wndTopMost, rc.left, rc.top, rc.Width(), rc.Height(), SWP_NOACTIVATE);
-					m_wndTip.SetWindowText(prompt);
-					m_wndTip.ShowDelayed(m_bSticky ? 0 : m_iDelay);
-				}*/
-			}
-
-			/*	auto item = find_item(itemId, hMenu, _items);
-				if(!item)
-				{
-					if(flags & MF_POPUP)
-					{
-						//log->info(L"%d", id);
-					}
-					item = current.selectitem;
-				}
-				//current.selectitem = item;*/
-
-				/*if(current.selectitem && !current.selectitem->tip.empty())
-				{
-					if(flags & MF_POPUP)
-					{
-						if(current.selectitem->handle == hMenu)
-						{
-						//	if(current.selectitem->rect.left == 0)
-								;
-						}
-					}
-
-					::SetTimer(_hWnd, TIMER_SHOW, TIP_TIMEIN, nullptr);
-				}
-				*/
 			return msg.invoke();
 		}
 
@@ -1839,25 +1609,6 @@ namespace Nilesoft
 			dc->draw_image(pt, size, hbitmap.get());
 		}
 
-		/*void ContextMenu::draw_fill_rect(DC *dc, const Rect &rc, long width, long height, const Color &color, int radius)
-		{
-			PlutoVG pluto(width, height);
-			pluto.rect(0, 0, width, height, radius, radius).fill(color.to_RGB(), color.a);
-			auto_gdi<HBITMAP> hbitmap(pluto.tobitmap());
-			dc->draw_image(rc, hbitmap.get());
-		}*/
-
-		/*
-		SetDCBrushColor(lpnmCD -> hdc, RGB(0, 255, 0));
-		SetDCPenColor(lpnmCD -> hdc, RGB(0, 255, 0));
-		SelectObject(lpnmCD -> hdc, GetStockObject(DC_BRUSH));
-		SelectObject(lpnmCD -> hdc, GetStockObject(DC_PEN));
-
-		RoundRect(lpnmCD -> hdc, lpnmCD -> rc.left + 3,
-			lpnmCD -> rc.top + 3,
-			lpnmCD -> rc.right - 3,
-			lpnmCD -> rc.bottom - 3, 5, 5);
-		*/
 
 		struct DRAWITEMSTATE
 		{
@@ -2122,175 +1873,7 @@ namespace Nilesoft
 			}
 
 			auto has_checked_image = menu->draw.checks && menu->draw.images && (_theme.image.display >= 2);
-			/*
-			if(!is_label)
-			{
-				auto rcchekhed = rcimg;
-				if(has_checked_image)
-				{
-					auto offset = _theme.image.size + _theme.image.gap;
-					rcimg.left += offset;
-					rcimg.right += offset;
-				}
-
-				//Draw custom submenu arrow and checked
-				if(mii->is_popup() || mii->is_checked())
-				{
-					auto sy = mii->is_popup() ? &symbol.chevron : mii->is_radiocheck() ? &symbol.bullet : &symbol.checked;
-					auto hbitmap = state.selected ? sy->select : sy->normal;
-
-					if(state.disabled)
-						hbitmap = state.selected ? sy->select_disabled : sy->normal_disabled;
-
-					if(mii->is_popup())
-					{
-						auto rect = rcblock;
-						auto x = rect.right - (_theme.back.padding.right + symbol.chevron.size.cx);
-						auto y = rcblock.top + ((height - symbol.chevron.size.cy) / 2);
-						dc.draw_image({ x, y }, { symbol.chevron.size.cx, symbol.chevron.size.cy }, hbitmap, state.disabled ? 64 : 255);
-					}
-					else if(mii->is_checked() && (_theme.image.display != 1 || !mii->has_image_or_draw()))
-					{
-						long z = _theme.image.size;
-						//dc.draw_image({ rect.right - z, rcimg.top }, { z,z }, sy->normal, state.disabled ? 64 : 255);
-						dc.draw_image(rcchekhed.point(), { z, z }, hbitmap, state.disabled ? 64 : 255);
-					}
-				}
-
-				auto image = &mii->image;
-
-				if(state.selected && mii->image_select.isvalid())
-					image = &mii->image_select;
-
-				if(image->hbitmap)
-				{
-					DC memDC(::CreateCompatibleDC(dc), 1);
-					if(memDC)
-					{
-						if(memDC.select_bitmap(image->hbitmap))
-						{
-							Rect rcim = { rcimg.left + ((image_size - image->size.cx) / 2),
-								(rcblock.top + (rcblock.bottom - image->size.cy)) / 2,
-								image->size.cx, image->size.cy };
-
-
-							//if(image->bitsPixel < 32)
-							//	dc.bitblt({ rcim.left,rcim.top,size.cx,size.cy }, memDC, 0, 0);
-							//else
-							{
-								bool is_16 = image->size.cx <= dpi(16) && image->size.cy <= dpi(16);
-								if(image->import == ImageImport::SVG && is_16)
-									dc.draw_image(rcim.point(), image->size, memDC, state.disabled ? 48 : 192);
-								dc.draw_image(rcim.point(), image->size, memDC, state.disabled ? 64 : 255);
-							}
-							memDC.reset_bitmap();
-						}
-					}
-				}
-				else if(image->import == ImageImport::Draw)
-				{
-					auto draw = &image->draw;
-					Color clr = text_color;
-					SIZE size{};
-
-					Color color_[2];
-					color_[0] = text_color;
-
-					if(draw->type == draw->DT_SHAPE)
-					{
-						auto shape = &draw->shape;
-						size = shape->size;
-
-						if(size.cx > 0 && size.cy > 0)
-						{
-							clr = shape->color[0];
-
-							if(state.disabled) clr.opacities();
-
-							if(size.cx > image_size) size.cx = image_size;
-							if(size.cy > image_size) size.cy = image_size;
-
-							//dc.select_stock(DC_PEN);
-							//dc.set_pen(clr.to_BGR());
-
-							if(shape->solid)
-							{
-								//dc.select_stock(DC_BRUSH);
-								//dc.set_brush(clr.to_BGR());
-								if(size.cx <= 3) size.cx = size.cx + 2;
-								if(size.cy <= 3) size.cy = size.cy + 2;
-							}
-							else
-							{
-								if(size.cx == 1) size.cx = size.cx + 1;
-								if(size.cy == 1) size.cy = size.cy + 1;
-							}
-
-							long left = rcimg.left + ((image_size - size.cx) / 2);
-							if(mii->cch == 0)
-							{
-								left = rcimg.left + ((width - size.cx) / 2);
-							}
-
-							long top = rcimg.top + ((image_size - size.cy) / 2);
-
-							//dc.draw_rect({ left, top, left + size.cx, top + size.cy });
-							//dc.remove_pen();
-							draw_rect(&dc, { left, top }, size, clr);
-						}
-					}
-					else if(draw->type == draw->DT_GLYPH)
-					{
-						if(mii->cch == 0)
-						{
-							rcimg = *rc;
-							rcimg.left += 3;
-							rcimg.right -= 3;
-						}
-
-						auto g = &draw->glyph;
-						size = { g->size.cx, g->size.cy };
-						if(size.cx > 0 && size.cy > 0 && g->font)
-						{
-							if(size.cx > image_size) size.cx = image_size;
-							if(size.cy > image_size) size.cy = image_size;
-
-							color_[0] = g->color[0];
-							color_[1] = g->color[1];
-							
-							if(!color_[0])
-							{
-								if(_theme.image.color[0])
-									color_[0] = _theme.image.color[0];
-								else
-								{
-									if(state.disabled && (_theme.text.color.nor_dis))
-										color_[0] = _theme.text.color.nor_dis;
-									else
-										color_[0] = text_color;
-								}
-							}
-
-							if(!color_[1])
-								color_[1] = _theme.image.color[0] ? _theme.image.color[1] : text_color;
-
-							if(state.disabled)
-							{
-								color_[0].opacities();
-								color_[1].opacities();
-							}
-
-							auto txtfmt = DT_NOCLIP | DT_SINGLELINE | DT_VCENTER;
-							if(g->code[0])
-								draw_string(dc, g->font, &rcimg, color_[0], &g->code[0], 1, DT_CENTER | txtfmt);
-
-							if(g->code[1])
-								draw_string(dc, g->font, &rcimg, color_[1], &g->code[1], 1, DT_CENTER | txtfmt);
-						}
-					}
-				}
-			}
-			*/
+			
 			if(!mii->title.empty())
 			{
 				Color clrtext = text_color;
@@ -2475,25 +2058,6 @@ namespace Nilesoft
 
 			if(!mii || (mii->title.empty() && !ident.equals(mii->wID)))
 			{
-				/*
-				// Get the Device Context of the WorkerW
-				auto dc = GetDCEx(workerw, IntPtr.Zero, 0x403);
-				if(dc)
-				{
-					// Create a Graphics instance from the Device Context
-					using (Graphics g = Graphics.FromHdc(dc))
-					{
-						// Use the Graphics instance to draw a white rectangle in the upper 
-						// left corner. In case you have more than one monitor think of the 
-						// drawing area as a rectangle that spans across all monitors, and 
-						// the 0,0 coordinate being in the upper left corner.
-						g.FillRectangle(new SolidBrush(Color.White), 0, 0, 500, 500);
-					}
-					// make sure to release the device context after use.
-					W32.ReleaseDC(workerw, dc);
-				}
-				*/
-
 				if(auto_gdi<HBITMAP> hbitmap(dc.createbitmap(rc->width(), rc->height())); hbitmap)
 				{
 					DC dcmem(dc.CreateCompatibleDC(), 1);
@@ -2526,15 +2090,6 @@ namespace Nilesoft
 					::SetDIBits(dcmem, hbitmap.get(), 0, rc->height(), &pixels[0], (LPBITMAPINFO)&bmpInfo, DIB_RGB_COLORS);
 					dc.draw_image(rc->point(), rc->size(), dcmem);
 
-					/*
-					D2D d2;
-					d2.begin(di->hDC, *rc);
-					d2.render->Clear({ 0.f, 0.f, 0.f, 1.f });
-					auto bm = WIC::ToD2D1Bitmap(hbitmap.get(), d2.render);
-					D2D1_RECT_F rf = { 0.f,0.f,(float)rc->width(),(float)rc->height() };
-					d2.render->DrawBitmap(bm, rf, 1.f, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, rf);
-					d2.end();
-					*/
 					return lret;
 				}
 
@@ -2985,30 +2540,12 @@ namespace Nilesoft
 			Selections::point = { 0, 0 };
 			//InvokeCommand(selectid);
 			current.zero();
-			/*
-			// restor system menu items
-			for(auto &menu : _menus)
-			{
-				auto mt = &menu.second;
-				MENU m = mt->handle;
-				if(mt->type == mt->MFT_SYSTEM)
-				{
-					for(auto mii : mt->statics)
-					{
-						m.insert(mii, mii->wID, false);
-					}
-				}
-				else 
-				{
-					if(mt->destory) m.destroy();
-				}
-			}*/
 
 			__trace(L"ContextMenu.End");
 
 			auto ret = msg.invoke();
 			_menus.clear();
-			//::RemoveWindowSubclass(GetActiveWindow(), MenuSubClassProc2, 0);
+
 			return ret;
 		}
 
@@ -4105,36 +3642,7 @@ theme.system_mode
 				long scale = ((dpi.val + 24) * dwTextScaleFactor) / 100;
 				_theme.font.lfHeight = 12 * scale / 100;
 			}
-			
-			/*
-			double scMon = 1.0;
-HWND activeWindow = ::GetActiveWindow();
-HMONITOR monitor = MonitorFromWindow(activeWindow, MONITOR_DEFAULTTONEAREST);
-UINT x, y;
-if (SUCCEEDED(GetDpiForMonitor(monitor, MDT_EFFECTIVE_DPI, &x, &y)) && (x > 0) && (y > 0))
-  scMon = 1.0 * x / USER_DEFAULT_SCREEN_DPI;           // 1.25
-  // scMon = MulDiv(100, x, USER_DEFAULT_SCREEN_DPI);  // 125
-			POINT pt;
-			GetCursorPos(&pt);
-			if(auto hMonitor = ::MonitorFromPoint(pt, MONITOR_DEFAULTTONEAREST); hMonitor)
-			{
-				DEVICE_SCALE_FACTOR  dsf = DEVICE_SCALE_FACTOR_INVALID;
-				if(S_OK == DLL::Invoke<HRESULT>(L"Shcore.dll", "GetScaleFactorForMonitor", hMonitor, &dsf))
-				{
-					MBF(L"%d", dsf);
-				}
-			}
-			*/
-			//HKEY_CURRENT_USER\Software\Microsoft\Accessibility\TextScaleFactor
-			//GetScaleFactorForMonitor
-			//_theme.font.lfHeight = long(double(dpi.val / 96.0) * (double)std::abs(_theme.font.lfHeight));
-			//_theme.font.lfHeight = dpi.valuexx<long>(std::abs(_theme.font.lfHeight));
-			//MBF(L"%d, %d", dpi.val, _theme.font.lfHeight);
-			//_theme.font.lfHeight = 21;
-
-			//auto fh = std::abs(_theme.font.lfHeight);
-			//MBF(L"%d, %d", dpi.val, fh);
-			
+					
 			if(__font.name.is_string())
 			{
 				string value = __font.name.to_string().trim().move();
@@ -4878,24 +4386,6 @@ if (SUCCEEDED(GetDpiForMonitor(monitor, MDT_EFFECTIVE_DPI, &x, &y)) && (x > 0) &
 				if(_settings.modify_items.enabled)
 					build_main_system_menuitems(__system_menu_tree, true);
 
-				/*
-				auto *_f = new ForStatement;
-				auto _i = new VarExpression(0xffff00);
-				_i->Value = new NumberExpression(0);
-
-				auto b = new BinaryExpression(OperatorType::LessThan, _i, new NumberExpression(5));
-				_f->Condition = b;
-
-				_f->Body = new StatementExpression();
-				_f->Body->push_back(L"test");
-
-				for(int i = _i->Eval(&_context);_context.Eval(_f->Condition).to_bool(); i++)
-				{
-					MBF(L"%d %d", i, 0);
-					delete _i->Value;
-					_i->Value = new NumberExpression(i);
-				}
-				*/
 				return true;
 			}
 			catch(...)
@@ -4981,11 +4471,6 @@ if (SUCCEEDED(GetDpiForMonitor(monitor, MDT_EFFECTIVE_DPI, &x, &y)) && (x > 0) &
 			}
 			return result;
 		}
-
-		/*
-		const bool shiftIsDown = (1 << 15) & (GetAsyncKeyState(VK_SHIFT));
-				const wchar_t* verb = shiftIsDown ? L"runAs" : L"open";
-		*/
 
 		int ContextMenu::InvokeCommand(int id)
 		{
@@ -5219,56 +4704,7 @@ if (SUCCEEDED(GetDpiForMonitor(monitor, MDT_EFFECTIVE_DPI, &x, &y)) && (x > 0) &
 			}
 			return FALSE;
 		}
-		/*
-				void __stdcall Invoke0(ContextMenu *cm)
-				{
-					auto ctx = &cm->_context;
-					try
-					{
-						auto menu = cm->invoke_item->native;
-						ctx->Selections = &cm->Selected;
-						ctx->RuntimeVariables = &menu->owner->variables;
-						auto foreach = false;
-						for(auto cmd_prop : menu->commands)
-						{
-							cm->Selected.Index = 0;
-							try
-							{
-								foreach = menu->parse_foreach(cmd_prop, &cm->_context);
-								if(foreach)
-								{
-									for(size_t i = 0; i < ctx->Selections->Items.size(); i++)
-									{
-										ctx->Selections->Index = i;
-										auto ret = cm->invoke(cmd_prop);
-										if(ret == 2) goto end;
-									}
-								}
-								else
-								{
-									auto ret = cm->invoke(cmd_prop);
-									if(ret == 2) break;
-								}
-							}
-							catch(...)
-							{
-		#ifdef _DEBUG
-								Logger::Exception(__func__);
-		#endif
-							}
-						}
-					}
-					catch(...)
-					{
-		#ifdef _DEBUG
-						Logger::Exception(__func__);
-		#endif
-					}
-				end:
-					//Logger::Instance().close();
-					delete cm;
-				}*/
-
+		
 		bool Tip::show()
 		{
 			if(handle && enabled)
@@ -5330,12 +4766,6 @@ if (SUCCEEDED(GetDpiForMonitor(monitor, MDT_EFFECTIVE_DPI, &x, &y)) && (x > 0) &
 					{
 						::KillTimer(hWnd, Tip::IDT_SHOW);
 
-						/*time = ctx->_theme.tip.time;
-						Menu::eval_tip(ctx->_context, e, text, type, time);
-
-						if(time == UINT16_MAX)
-							time = ctx ? ctx->_theme.tip.time : TIMEIN;
-							*/
 						if(!text.empty())
 						{
 							auto theme = &ctx->_theme;
@@ -5460,11 +4890,7 @@ if (SUCCEEDED(GetDpiForMonitor(monitor, MDT_EFFECTIVE_DPI, &x, &y)) && (x > 0) &
 		WND *ContextMenu::OnMenuCreate(HWND hWnd)
 		{
 			auto wnd = &_map[hWnd];
-			/*
-			_log.info(L"%d, %s, %s", _level.size(), 
-					  Window::class_name(GetParent(hWnd)).c_str(),
-					  Window::class_name(GetCapture()).c_str());
-			*/
+
 			wnd->ctx = this;
 			wnd->handle = hWnd;
 			wnd->set_prop();
@@ -5823,54 +5249,6 @@ if (SUCCEEDED(GetDpiForMonitor(monitor, MDT_EFFECTIVE_DPI, &x, &y)) && (x > 0) &
 				}
 			}
 
-			/*
-			pluto.rect(back_rect.left, back_rect.top, back_rect.right, back_rect.bottom, radius)
-				.fill(_theme.background.color.to_RGB(), 65);
-
-			pluto.rect(back_rect.left + 1, back_rect.top + 1, back_rect.right - 2, back_rect.bottom - 2, radius).clear();
-
-			pluto.rect(back_rect.left, back_rect.top + 8, back_rect.right, back_rect.bottom - 16, 0).clear();
-			pluto.rect(back_rect.left+8, back_rect.top, back_rect.right-16, back_rect.bottom).clear();
-			*/
-			/*
-			pluto.set_pixel(margin + 8, margin, 0xff2b2b2b);
-			pluto.set_pixel(margin + 7, margin, 0x802b2b2b);
-			pluto.set_pixel(margin + 6, margin, 0x402b2b2b);
-
-			pluto.set_pixel(margin, margin + 8, 0xff2b2b2b);
-			pluto.set_pixel(margin, margin + 7, 0x802b2b2b);
-			pluto.set_pixel(margin, margin + 6, 0x402b2b2b);
-			*/
-			/*auto dd = (uint32_t*)pluto.data();
-			for(int x = 0; x < (pluto.width() * pluto.height()) / 2; x++)
-			{
-				Color c = *dd;
-				if(c.A() > 0)
-				{
-					c.B(128);
-					*dd++ = c;
-				}
-			}*/
-			/*
-						if(radius > 0)
-						{
-							// Smoothing the edge of the window
-							//pluto.rect(x, y, w, h, radius)
-							//	.fill(theme->background.toRGBA(), ctx->_theme.transparency.opacity);
-							// or by strokes
-							auto path = path_add_round_rect(x + 1, y + 1, w - 2, h - 2, radius - (radius > 4 ? 2 : 1));
-							pluto.path_add(path)
-								.stroke_width(2)
-								.stroke_fill(Color::ToRGB(theme->frame.background), 255);
-							pluto.path_destroy(path);
-						}
-						else
-						{
-							pluto.rect(x, y, w, h)
-								.fill(theme->background.toRGBA(), ctx->_theme.transparency.opacity);
-						}
-						*/
-						//pluto.luminance();
 			wnd->layer.hbitmap = pluto.tobitmap();
 			return wnd->layer.hbitmap;
 		}
@@ -5891,20 +5269,7 @@ if (SUCCEEDED(GetDpiForMonitor(monitor, MDT_EFFECTIVE_DPI, &x, &y)) && (x > 0) &
 				DC dc = wnd->layer.handle;
 				DC dc_layer(dc.CreateCompatibleDC(), 1);
 				dc_layer.select_bitmap(wnd->layer.hbitmap);
-				//	if(!_theme.background.image.empty())
-				//	{
-				//		std::string vutf8 = std::move(string::ToUTF8(_theme.background.image, _theme.background.image.length<int>()));
-				//		PlutoVG pluto;
-				//		pluto.load_from_file(vutf8.c_str(), wnd->width, wnd->height);
-				//		//pluto.rect(0, 0, wnd->width, wnd->height).clear(1, plutovg_operator_dst_out);
-				//		auto_gdi<HBITMAP> hb(pluto.tobitmap());
-				//		if(hb)
-				//		{
-				//			dc_layer.draw_image({ 50 + 1, 50 + 1, wnd->width + 50 - 1, wnd->height + 50 - 1 }, 
-				//								hb.get(), 
-				//								{ 0,0, wnd->width, wnd->height }, 64);
-				//		}
-				//	}
+
 				POINT ptZero{ };
 				// use the source image's alpha channel for blending
 				BLENDFUNCTION blend{ AC_SRC_OVER , 0, 0xFF, AC_SRC_ALPHA };
@@ -6012,15 +5377,6 @@ if (SUCCEEDED(GetDpiForMonitor(monitor, MDT_EFFECTIVE_DPI, &x, &y)) && (x > 0) &
 			UpdateLayered(wnd, false);
 			return wnd->show_layers();
 		}
-
-		// Menu commands
-		//#define MENUBIT             (0x8000)
-		//#define MENUUP              (0x8000 | VK_UP)
-		//#define MENUDOWN            (0x8000 | VK_DOWN)
-		//#define MENULEFT            (0x8000 | VK_LEFT)
-		//#define MENURIGHT           (0x8000 | VK_RIGHT)
-		//#define MENUEXECUTE         TEXT('\r')      eturn character
-		//MenuWindowProc
 
 		struct ooo
 		{
@@ -6162,8 +5518,6 @@ if (SUCCEEDED(GetDpiForMonitor(monitor, MDT_EFFECTIVE_DPI, &x, &y)) && (x > 0) &
 					return defSubclassProc();
 			}
 
-			bool common = 0;// ctx->common &&ctx->_level.size() == 1;
-
 			auto wnd = WND::get_prop(hWnd);
 			if(!wnd)
 				return defSubclassProc();
@@ -6189,16 +5543,6 @@ if (SUCCEEDED(GetDpiForMonitor(monitor, MDT_EFFECTIVE_DPI, &x, &y)) && (x > 0) &
 				}
 				case WM_NCDESTROY:
 				{
-					if(common)
-					{
-						if(m_hHook && ctx->_level.size() == 1)
-						{
-							::UnhookWindowsHookEx(m_hHook);
-							for(int i = 0; i < 6; i++)
-								__o[i].sel = 0;
-						}
-					}
-
 					wnd->destroy();
 					ctx->_map.erase(hWnd);
 					if(!ctx->_level.empty())
@@ -6219,42 +5563,10 @@ if (SUCCEEDED(GetDpiForMonitor(monitor, MDT_EFFECTIVE_DPI, &x, &y)) && (x > 0) &
 						wParam &= ~MNSW_DRAWFRAME;
 					
 					lret = defSubclassProc();
-
-					if(wParam != 0)
-					{
-						/*if(wnd->hMenu)
-						{
-							auto __xx = ::CreateWindowExW(WS_EX_TRANSPARENT|WS_EX_COMPOSITED, WC_Shell_Window, nullptr, WS_CHILD | WS_VISIBLE,
-														1, 1,
-														wnd->width - 2, wnd->height - 2,
-														hWnd, nullptr, Path::GetCurrentModule(), nullptr);
-							SetPropW(hWnd, L"DC", __xx);
-							//UpdateWindow(__xx);
-							POINT ptt = { wnd->x, wnd->y };
-							MapWindowPoints(hWnd, __xx, &ptt, 1);
-							ctx->map_menu_wnd[wnd->hMenu] = { wnd->hMenu, hWnd, __xx };
-							//InvalidateRect()
-						}*/
-
-						//_log.info(L"%d, %d", cx,cy);
-						// Bind the DC to the DC render target.
-						//d2d.bind(wnd->hdc, { 0,0, wnd->width, wnd->height });
-						
-						//wParam & MNSW_SIZE
-						//MAKELONG(cx, cy);
-						//auto cx = GET_X_LPARAM(lret);
-						//auto cy = GET_Y_LPARAM(lret);
-						/*if(!wnd->hMenu)
-						{
-							wnd->hMenu = (HMENU)::SendMessageW(hWnd, MN_GETHMENU, 0, 0);
-							ctx->map_menu_wnd[wnd->hMenu] = { wnd->hMenu, hWnd,  __xxx };
-						}*/
-					}
 					return lret;
 				}
 				case MN_GETHMENU:
 				{
-					//return (LRESULT)PtoH(pmenu);
 					// returns the hmenu associated with this menu window.
 					lret = defSubclassProc();
 					if(!wnd->hMenu)
@@ -6290,21 +5602,6 @@ if (SUCCEEDED(GetDpiForMonitor(monitor, MDT_EFFECTIVE_DPI, &x, &y)) && (x > 0) &
 							nc->rgrc[0].bottom += theme->border.size + theme->border.padding.bottom;
 							if(wnd->has_scroll)
 								nc->rgrc[0].top += 20;
-
-							if(common)
-							{
-								nc->rgrc[0].top += 50;
-							}
-
-							//MBF(L"%d %d", nc->lppos->cy, ctx->_rcMonitor.bottom);
-							//lret = WVR_VREDRAW;
-							/*Rect rc = ::GetDesktopWindow();
-							if(wnd->height == rc.height())
-							{
-								nc->rgrc[0].top += ctx->dpi(16);
-								nc->rgrc[0].bottom -= ctx->dpi(16);
-								//_log.info(L"%d %d", wnd->height, rc.height());
-							}*/
 						}
 					//	return WVR_VALIDRECTS;
 					}
@@ -6364,25 +5661,6 @@ if (SUCCEEDED(GetDpiForMonitor(monitor, MDT_EFFECTIVE_DPI, &x, &y)) && (x > 0) &
 								wp->cy += 40;
 							}
 
-							if(common) 
-							{
-								//m_hHook = SetWindowsHookEx(WH_MSGFILTER, &MessageProc, NULL, GetWindowThreadProcessId(hWnd,0));
-
-								wp->cy += 50;
-								//	if(wp->cx < 260)
-							//		wp->cx = 260;
-
-								long cx = 28, cy = 28;
-								long x = 10, y = 10;
-
-								__o[0].rc = { x, y, x + cx, y + cy };
-								__o[1].rc = { __o[0].rc.right + 10, y, __o[0].rc.right + cx + 10, y + cy };
-								__o[2].rc = { __o[1].rc.right + 10, y, __o[1].rc.right + cx + 10, y + cy };
-								__o[3].rc = { __o[2].rc.right + 10, y, __o[2].rc.right + cx + 10, y + cy };
-								__o[4].rc = { __o[3].rc.right + 10, y, __o[3].rc.right + cx + 10, y + cy };
-								__o[5].rc = { __o[4].rc.right + 10, y, __o[4].rc.right + cx + 10, y + cy };
-							}
-							
 							auto old_height = wnd->height;
 							//auto old_y = wnd->y;
 
@@ -6402,32 +5680,6 @@ if (SUCCEEDED(GetDpiForMonitor(monitor, MDT_EFFECTIVE_DPI, &x, &y)) && (x > 0) &
 							{
 								wp->x += 1;
 								wp->y += 1;
-
-								if(common)
-								{
-									//wp->y += 50;
-								}
-
-								/*if(ctx->Selected.is_taskbar())
-								{
-									Rect rc = ctx->hwnd.owner;
-									Rect rcs;
-									Monitor monitor(ctx->hwnd.owner);
-
-									if(monitor.info())
-										rcs = monitor.rcMonitor;
-									else
-										rcs = ::GetDesktopWindow();
-
-									if(rc.bottom == rcs.bottom)
-										wp->y = rc.top - wnd->height;
-									else if(rc.top == rcs.top)
-										wp->y = rc.bottom + 1;
-									else if(rc.left == rcs.left)
-										wp->x = rc.right + 1;
-									else if(rc.right == rcs.right)
-										wp->x = rc.left + 1;
-								}*/
 							}
 							else
 							{
@@ -6464,13 +5716,6 @@ if (SUCCEEDED(GetDpiForMonitor(monitor, MDT_EFFECTIVE_DPI, &x, &y)) && (x > 0) &
 								}
 							}
 
-							if(common && ctx->_level.size() == 2)
-							{
-								wp->y += 50;
-								//	if(wp->cx < 260)
-								//		wp->cx = 260;
-							}
-
 							wnd->x = wp->x;
 							wnd->y = wp->y;
 
@@ -6495,35 +5740,6 @@ if (SUCCEEDED(GetDpiForMonitor(monitor, MDT_EFFECTIVE_DPI, &x, &y)) && (x > 0) &
 								//if(IsWindowVisible(hWnd))
 								// load layer when window is not visible
 								ctx->CreateLayer(wnd);
-								
-								/*if(common) 
-								{
-									std::thread([=] {
-										auto handle = ::CreateWindowExW(WS_EX_TOPMOST | WS_EX_TOOLWINDOW | WS_EX_NOACTIVATE | WS_EX_COMPOSITED,
-										WC_Shell_Window, nullptr, WS_POPUP,
-										wnd->x, wnd->y,
-										wnd->width, 50,
-										0, nullptr, Path::GetCurrentModule(), nullptr);
-
-									SetWindowSubclass(handle, window_Subclass, 0, (DWORD_PTR)ctx);
-									ShowWindow(handle, SW_SHOWNOACTIVATE);
-
-									MSG msg{};
-									while(::GetMessage(&msg, nullptr, 0, 0))
-									{
-										::TranslateMessage(&msg);
-										::DispatchMessage(&msg);
-									}
-									}).detach();
-								}*/
-								/*	
-									auto handle = ::CreateWindowExW(WS_EX_TOPMOST | WS_EX_TOOLWINDOW | WS_EX_TRANSPARENT | WS_EX_NOACTIVATE,
-									WC_Shell_Window, nullptr, WS_POPUP,
-									0, 0,
-									500, 50,
-									0, nullptr, Path::GetCurrentModule(), nullptr);
-									ShowWindow(handle, SW_SHOWNOACTIVATE);
-								*/
 							}
 						}
 					}
@@ -6577,45 +5793,6 @@ if (SUCCEEDED(GetDpiForMonitor(monitor, MDT_EFFECTIVE_DPI, &x, &y)) && (x > 0) &
 						::FillRect(wnd->hdc, rc, hbcolor.get());
 					}
 
-					if(common)
-					{
-						//if(xx++==0)
-						{
-							auto_gdi<HBRUSH> hbcolor(::CreateSolidBrush(0x303030));
-							auto_gdi<HBRUSH> hbcolor_h(::CreateSolidBrush(0x0000ff));
-
-							for(int i = 0; i < 6; i++)
-							{
-								::FillRect(wnd->hdc, __o[i].rc, __sel==i ? hbcolor_h.get() : hbcolor.get());
-							}
-
-
-							/*for(int i = 0; i < 6; i++)
-							{
-								if(PtInRect(&__rc[i], __pt))
-								{
-									::FillRect(wnd->hdc, __rc[i], hbcolor_h.get());
-								}
-							}*/
-
-							//Rect rr = { 0,0, 300, 30 };
-							//if(PtInRect(&rr, __pt))
-							/*{
-								for(int i = 0; i < 6; i++)
-								{
-									if(PtInRect(&__rc[i], __pt))
-									{
-										//beep;
-										::FillRect(wnd->hdc, __rc[i], hbcolor_h.get());
-									}
-									else
-									{
-									//	::FillRect(wnd->hdc, __rc[i], hbcolor.get());
-									}
-								}
-							}*/
-						}
-					}
 					// exlude menu item rectangle to prevent drawing by windows after us
 					//dc.exclude_clip_rect(*rc);
 					return lret;
@@ -6641,49 +5818,8 @@ if (SUCCEEDED(GetDpiForMonitor(monitor, MDT_EFFECTIVE_DPI, &x, &y)) && (x > 0) &
 						{
 							d2d.render->SetAntialiasMode(D2D1_ANTIALIAS_MODE_PER_PRIMITIVE);
 							auto radius = float(theme->border.radius);
-							/*	Rect internalRectangle = new Rect(
-									(borderThickness + borderRadius), 
-									(borderThickness + borderRadius), 
-									width - 2 * (borderThickness + borderRadius), 
-									height - 2 * (borderThickness + borderRadius)
-								);
-							
-							
-\
-							d2d.brush->SetColor(theme->border.color);
-							d2d.render->DrawRoundedRectangle({ rect, radius, radius }, d2d.brush, z);
-							
 							d2d.brush->SetColor(theme->background.color);
-							rect.left = z + float(theme->border.radius);
-							rect.top = z + float(theme->border.radius);
 							d2d.render->FillRoundedRectangle({ rect, radius, radius }, d2d.brush);
-							*/
-		
-							//d2d.brush->SetColor(theme->border.color);
-							//d2d.render->FillRoundedRectangle({ rect, radius, radius }, d2d.brush);
-							
-							//d2d.brush->SetColor(D2D1::ColorF(0.f, 0.f, 0.0f));
-
-							d2d.brush->SetColor(theme->background.color);
-							//d2d.render->PushAxisAlignedClip({ z,z, float(r.width()) - z, float(r.height()) - z }, D2D1_ANTIALIAS_MODE_ALIASED);
-							d2d.render->FillRoundedRectangle({ rect, radius, radius }, d2d.brush);
-							//d2d.render->PopAxisAlignedClip();
-							//rect = { z, z, float(r.width()) - z, float(r.height()) - z };
-							//d2d.brush->SetColor(theme->background.color);
-							//d2d.render->FillRoundedRectangle({ rect, radius, radius }, d2d.brush);
-							
-							/*
-							ID2D1RoundedRectangleGeometry *roundedRectangleGeometry;
-
-							D2D1_ROUNDED_RECT r = { rect , radius , radius };
-							d2d.D2D1Factory->CreateRoundedRectangleGeometry(r, &roundedRectangleGeometry);
-
-							d2d.brush->SetColor(theme->background.color);
-							d2d.render->FillGeometry(roundedRectangleGeometry, d2d.brush);
-
-							d2d.brush->SetColor(theme->border.color);
-							d2d.render->DrawGeometry(roundedRectangleGeometry, d2d.brush, z);
-							*/
 						}
 						else
 						{
@@ -6692,55 +5828,7 @@ if (SUCCEEDED(GetDpiForMonitor(monitor, MDT_EFFECTIVE_DPI, &x, &y)) && (x > 0) &
 						}
 						d2d.end(true);
 					}
-					/*Rect r = {0,0, wnd->width, wnd->height};
-					// Bind the DC to the DC render target.
-					d2d.begin();
-					//d2d->render->SetDpi(ctx->dpi.val, ctx->dpi.val);
-					//d2d->render->SetTransform(D2D1::Matrix3x2F::Identity());
-					//d2d.render->Clear(D2D1::ColorF(0.0f, 0.0f, 0.0f, 0.f));
-					D2D1_ROUNDED_RECT rect = { { 0,0, float(r.width()), float(r.height()) }, 25.f, 25.f };
-					d2d.brush->SetColor(D2D1::ColorF(0.1687f, 0.1687f, 0.1687f, 1.f));
-					d2d.render->SetAntialiasMode(D2D1_ANTIALIAS_MODE_PER_PRIMITIVE);
-					d2d.render->FillRoundedRectangle(rect, d2d.brush);
-					d2d.end(true);
-					*/
-					/*auto d2d = &wnd->d2d;
-					Rect r = hWnd;
-					//r.GetClientRect(hWnd);
-					d2d->create_render(hWnd, r.width(), r.height());
-					d2d->create_res();
-					d2d->begin();
-					//d2d->render->SetDpi(ctx->dpi.val, ctx->dpi.val);
-					//d2d->render->SetTransform(D2D1::Matrix3x2F::Identity());
-					d2d->render->Clear(D2D1::ColorF(0.0f, 0.0f, 0.0f, 0.f));
-					D2D1_ROUNDED_RECT rect = { { 0,0, float(r.width()), float(r.height()) }, 20.f, 20.f };
-					d2d->brush->SetColor(D2D1::ColorF(0.1687f, 0.1687f, 0.1687f, 1.f));
-					d2d->render->SetAntialiasMode(D2D1_ANTIALIAS_MODE_PER_PRIMITIVE);
-					d2d->render->FillRoundedRectangle(rect, d2d->brush);
-					d2d->end(true);
-					*/
-					
 					lret = TRUE;
-					/*auto hdc = reinterpret_cast<HDC>(wParam);
-					if(ctx->composition)
-					{
-						::BitBlt(hdc, 0, 0, wnd->width, wnd->height, nullptr, 0, 0, BLACKNESS);
-						return lret;
-					}
-
-					DC dc = hWnd;
-					Rect rc = { 0, 0, wnd->width, wnd->height };
-
-					//if(ver->IsWindows8OrGreater())
-					//	dc.fill_rect(rc, ctx->_hbackground);
-					//else
-					{
-						auto b = theme->border.size + 1;
-						auto p = &theme->border.padding;
-						dc.fill_rect({ 0, 0, wnd->width, b + p->top }, ctx->_hbackground);
-						dc.fill_rect({ 0, 0, b + p->left, wnd->height }, ctx->_hbackground);
-						::FillRect(hdc, rc, ctx->_hbackground);
-					}*/
 					//lret = ::DefSubclassProc(hWnd, uMsg, wParam, lParam);
 					return lret;
 				}
@@ -6764,31 +5852,6 @@ if (SUCCEEDED(GetDpiForMonitor(monitor, MDT_EFFECTIVE_DPI, &x, &y)) && (x > 0) &
 
 							//_log.info(L"### %d %x", cmdItem, lParam);
 						}
-
-						/*if(common)
-						{
-							xx++;
-							__pt.GetCursorPos();
-							__pt.ScreenToClient(hWnd);
-
-							__pt.x = std::abs(__pt.x);
-							__pt.y = std::abs(__pt.y);
-
-							for(int i = 0; i < 6; i++)
-							{
-								if(PtInRect(&__rc[i], __pt))
-								{
-									auto_gdi<HBRUSH> hbcolor(::CreateSolidBrush(0x0000ff));
-									::FillRect(wnd->hdc, __rc[i], hbcolor.get());
-								//	Sleep(150);
-								}
-								else
-								{
-									auto_gdi<HBRUSH> hbcolor(::CreateSolidBrush(0x303030));
-									::FillRect(wnd->hdc, __rc[i], hbcolor.get());
-								}
-							}
-						}*/
 					}
 					else {
 						__sel = -1;
@@ -6797,17 +5860,6 @@ if (SUCCEEDED(GetDpiForMonitor(monitor, MDT_EFFECTIVE_DPI, &x, &y)) && (x > 0) &
 					ctx->current.hWnd = hWnd;
 					ctx->current.selectitem_pos = cmdItem;
 					lret = defSubclassProc();
-
-					// ^ desktop handle ^ POINT structures that is one RECT
-			/*
-			 * wParam - the item to select. Must be a valid index or MFMWFP_NOITEM
-			 * Returns the item flags of the wParam (0 if failure)
-
-					if((wParam >= ppopupmenu->spmenu->cItems) && (wParam != MFMWFP_NOITEM)) {
-						UserAssert(FALSE  Bad wParam for MN_SELECTITEM );
-						return 0;
-					}
-			*/
 				//cmdLast
 					if(cmdItem != MFMWFP_NOITEM)
 					{
@@ -6896,15 +5948,6 @@ if (SUCCEEDED(GetDpiForMonitor(monitor, MDT_EFFECTIVE_DPI, &x, &y)) && (x > 0) &
 					if(lParam == 0 && ctx)
 					{
 						ctx->mouse_button = (::GetAsyncKeyState(VK_RBUTTON) & 0x8000) == 0x8000 ? VK_RBUTTON : VK_LBUTTON;
-					//	int c = ::GetMenuItemCount(_this->current.hMenu);
-						//wParam is position (index) of item the button was clicked on. Must be a valid
-						/*if((wParam >= (WPARAM)c) && (wParam < MFMWFP_MINVALID)) {
-							// Bad wParam %x for MN_BUTTONDOWN"
-						}
-						else {
-
-							//xxxMNButtonDown(ppopupmenu, pMenuState, (UINT)wParam, TRUE);
-						}*/
 					}
 					break;
 				}
@@ -6919,20 +5962,6 @@ if (SUCCEEDED(GetDpiForMonitor(monitor, MDT_EFFECTIVE_DPI, &x, &y)) && (x > 0) &
 						{
 							ctx->selectid = mii.wID;
 							ctx->current.selectid = mii.wID;
-						}
-					}
-					else if(common)
-					{
-						Point pt; pt.GetCursorPos();
-						pt.ScreenToClient(hWnd);
-						pt.y = std::abs(pt.y);
-						for(int i = 0; i < 6; i++)
-						{
-							if(pt.in(__o[i].rc))
-							{
-								//MBF(L"%d", i);
-								break;
-							}
 						}
 					}
 
@@ -6954,28 +5983,6 @@ if (SUCCEEDED(GetDpiForMonitor(monitor, MDT_EFFECTIVE_DPI, &x, &y)) && (x > 0) &
 					::SystemParametersInfoW(SPI_SETSELECTIONFADE, 0, (PVOID)TRUE, 0);
 					return lret;
 				}
-				/*
-		 * wParam is position (index) of item the button was clicked on.
-		 * Must be a valid index or MFMWFP_NOITEM
-
-				if((wParam >= ppopupmenu->spmenu->cItems) && (wParam != MFMWFP_NOITEM)) {
-					UserAssert(FALSE  Bad wParam for MN_BUTTONDOWN );
-					return 0;
-				}*/
-				//wParam=menupos
-				//return FALSE;
-				/*MENUITEMINFO mii;
-				::ZeroMemory(&mii, sizeof(MENUITEMINFO));
-				mii.cbSize = sizeof(MENUITEMINFO);
-				mii.fMask = MIIM_ID;
-				if(0 == ::GetMenuItemInfo(m_hMenu_current, wParam, MF_BYPOSITION, &mii))
-				{
-					return ::DefSubclassProc(hWnd, uMsg, wParam, lParam);
-				}
-				else {
-					auto *pUDMI = reinterpret_cast<UAHMENU *>(lParam);
-					MBF(L"%x, %x", m_hMenu_current, pUDMI->hmenu);
-				}*/
 				break;
 				case MN_DBLCLK:
 					//return FALSE;
@@ -7045,46 +6052,6 @@ if (SUCCEEDED(GetDpiForMonitor(monitor, MDT_EFFECTIVE_DPI, &x, &y)) && (x > 0) &
 				case MN_SETHMENU:
 					break;
 					//mouse
-				case WM_MOUSEMOVE:
-				{
-					//__sel = -1;
-					//_log.info(L"### WM_MOUSEMOVE %x %x", WM_MOUSEMOVE, wParam, lParam);
-					if(common && __sel ==-1)
-					{
-						__pt.GetCursorPos();
-						Rect rrr = hWnd;
-						
-						if(PtInRect(&rrr, __pt))
-						{
-							__pt.ScreenToClient(hWnd);
-
-							__pt.x = std::abs(__pt.x);
-							__pt.y = std::abs(__pt.y);
-
-							Rect rr = { 0,0, wnd->width, 20 };
-							if(PtInRect(&rr, __pt))
-							{
-								for(int i = 0; i < 6; i++)
-								{
-									if(PtInRect(&__o[i].rc, __pt))
-									{
-										__sel = i; 
-										InvalidateRect(hWnd, &__o[i].rc, 0);
-										//SendMessageW(hWnd, MN_SELECTITEM, -1, i+1);
-										break;
-									}
-									//__o[i].sel = PtInRect(&__o[i].rc, __pt);
-								}
-								//InvalidateRect(hWnd, &__o[i].rc, 0);
-							}
-						}
-					}
-					return 0;
-				}
-				/*case WM_CAPTURECHANGED:
-					_log.info(L"%0.4x", uMsg);
-					break;
-					*/
 				case MN_MOUSEMOVE:
 					break;
 				case WM_MOUSEACTIVATE:
@@ -7162,41 +6129,8 @@ if (SUCCEEDED(GetDpiForMonitor(monitor, MDT_EFFECTIVE_DPI, &x, &y)) && (x > 0) &
 						return TRUE;
 					}, 0);
 				}
-
-				// WM_KEYUP
-				/*uint8_t KeyState[256]{};
-				if(GetKeyboardState(KeyState))
-				{
-					int x = 0;
-					for(auto i : KeyState)
-					{
-						if(x == VK_SHIFT || x == VK_CONTROL || x == VK_MENU)
-						{
-						}
-						else if(i & 0x80)
-							_log.write(L"%x, %0.2x\n", x, i);
-						x++;
-					}
-
-				}*/
 			}
 
-			switch(wParam)
-			{
-				case VK_APPS:
-					//case VK_DOWN:
-				{
-					/*auto p = (PKBDLLHOOKSTRUCT)lParam;
-					if(fEatKeystroke = (p->vkCode == 0x41))
-					{     //redirect a to b
-						//printf("Hello a\n");
-						//keybd_event('B', 0, 0, 0);
-						//keybd_event('B', 0, KEYEVENTF_KEYUP, 0);
-						break;
-					}*/
-					break;
-				}
-			}
 		skip:
 			// NOTE: The first parameter is always ignored
 			return WindowsHook::CallNext(nullptr, nCode, wParam, lParam);
@@ -7226,6 +6160,7 @@ if (SUCCEEDED(GetDpiForMonitor(monitor, MDT_EFFECTIVE_DPI, &x, &y)) && (x > 0) &
 				}
 			}
 		}
+
 
 #pragma endregion
 
