@@ -1,3 +1,5 @@
+[![Ceasefire Now](https://badge.techforpalestine.org/default)](https://techforpalestine.org/learn-more)
+
 # [Shell](https://nilesoft.org)
 Powerful manager for Windows File Explorer context menu.
 
