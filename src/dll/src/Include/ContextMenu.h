@@ -175,6 +175,7 @@ namespace Nilesoft
 			long height{};
 			bool visible = true;
 			bool has_scroll = false;
+			bool scrolled = false;
 			bool de = true;
 			HBITMAP hbitmap{};
 			ContextMenu *ctx{};
@@ -351,7 +352,7 @@ plutovg_move_to(pluto, start.x, start.y);
 				bool has_col{};
 				HWND wnd{};
 				MenuItemInfo *owner{};
-
+				long popup_height{};
 				string path;
 
 				std::vector<MenuItemInfo *> statics;
@@ -556,7 +557,7 @@ plutovg_move_to(pluto, start.x, start.y);
 				HBITMAP normal_disabled{};
 				HBITMAP select{};
 				HBITMAP select_disabled{};
-				
+
 				~symbole_tag()
 				{
 					if(normal) ::DeleteObject(normal);
@@ -758,7 +759,7 @@ plutovg_move_to(pluto, start.x, start.y);
 				return static_cast<long>(std::rint(value * double(_dpi) / double(_odpi)));
 			}
 			*/
-			void draw_string(HDC hdc, HFONT hFont, const Rect *rc, const Color &color, const wchar_t *text, int length = -1, DWORD format = 0);
+			void draw_string(HDC hdc, HFONT hFont, const Rect *rc, const Color &color, const wchar_t *text, int length = -1, DWORD format = 0, bool disable_BufferedPaint = false);
 
 		public:
 			// static variables

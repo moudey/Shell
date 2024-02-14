@@ -1087,29 +1087,6 @@ namespace Nilesoft
 
 		//	_log.info(L"init %d %x", parent_level.size(), menu->id);
 
-			MENUINFO mi = { sizeof(mi), MIM_STYLE | MIM_BACKGROUND | MIM_MAXHEIGHT };
-			if(m.get(&mi))
-			{
-				if(mi.hbrBack)
-				{
-					if(hMenu == _hMenu)
-						mi.hbrBack = _hbackground0;
-					else
-						::DeleteObject(mi.hbrBack);
-				}
-				
-				//mi.cyMax = 500;
-				//if(mi.cyMax != 0)
-				mi.cyMax = 0;
-
-				Flag<uint32_t> style(mi.dwStyle);
-				style.add(MNS_CHECKORBMP);
-				style.add(MNS_NOCHECK);
-
-				mi.hbrBack = composition ? GetStockBrush(BLACK_BRUSH) : ::CreateSolidBrush(_theme.background.color.to_BGR());
-				m.set(&mi);
-			}
-
 			std::vector<MenuItemInfo *> items;
 			items.reserve(100);
 
@@ -1396,7 +1373,6 @@ namespace Nilesoft
 			long max_text_len = 0;
 			int col = 0;
 
-			
 			// insert items to native menu
 			int i = 0, x = 0;
 			for(auto item : items)
@@ -1418,7 +1394,13 @@ namespace Nilesoft
 				
 				if(auto res = m.insert(item, i, true, x++); res)
 				{
-					if(!item->is_separator())
+					if(item->is_separator())
+					{
+						menu->popup_height += item->size.cy +
+							_theme.separator.margin.top + _theme.separator.margin.bottom +
+							_theme.separator.size;
+					}
+					else
 					{
 						if(item->is_column() > 0)
 						{
@@ -1479,6 +1461,10 @@ namespace Nilesoft
 								menu->draw.height = rc.bottom;
 						}
 
+						menu->popup_height += item->size.cy +
+							_theme.back.padding.top + _theme.back.padding.bottom + 
+							_theme.back.margin.top + _theme.back.margin.bottom;
+
 						_items.push_back(item);
 					}
 
@@ -1509,6 +1495,44 @@ namespace Nilesoft
 
 			if(menu->draw.height % 2)
 				menu->draw.height++;
+
+			menu->popup_height += _theme.border.padding.top + _theme.border.padding.bottom + _theme.border.size + _theme.border.size;
+			
+
+			MENUINFO mi = { sizeof(mi), MIM_STYLE | MIM_BACKGROUND | MIM_MAXHEIGHT };
+			if(m.get(&mi))
+			{
+				if(mi.hbrBack)
+				{
+					if(hMenu == _hMenu)
+						mi.hbrBack = _hbackground0;
+					else
+						::DeleteObject(mi.hbrBack);
+				}
+
+				Flag<uint32_t> style(mi.dwStyle);
+				style.add(MNS_CHECKORBMP);
+				style.add(MNS_NOCHECK);
+
+				menu->popup_height += 100;
+				auto h = _rcMonitor.height();
+				if(menu->popup_height >= h)
+				{
+					menu->popup_height = 0;
+					if(menu->is_main)
+					{
+						//mi.cyMax = h - 100;
+						//style.add(MIM_MAXHEIGHT);
+						//menu->popup_height = mi.cyMax;
+					}
+				}
+				else {
+					menu->popup_height = 0;
+				}
+
+				mi.hbrBack = composition ? GetStockBrush(BLACK_BRUSH) : ::CreateSolidBrush(_theme.background.color.to_BGR());
+				m.set(&mi);
+			}
 
 			__trace(L"ContextMenu.InitMenuPopup end");
 
@@ -1555,7 +1579,7 @@ namespace Nilesoft
 		}
 
 		//VirtualFolder
-		LRESULT ContextMenu::OnMenuSelect([[maybe_unused]] HMENU hMenu, uint32_t itemId, [[maybe_unused]] uint32_t flags)
+		LRESULT ContextMenu::OnMenuSelect([[maybe_unused]] HMENU hMenu, [[maybe_unused]] uint32_t itemId, [[maybe_unused]] uint32_t flags)
 		{
 			//log->info(L"OnMenuSelect");
 			current.hMenu = hMenu;
@@ -1564,13 +1588,13 @@ namespace Nilesoft
 		}
 
 		//
-		void ContextMenu::draw_string(HDC hdc, HFONT hFont, const Rect *rc, const Color &color, const wchar_t *text, int length, DWORD format)
+		void ContextMenu::draw_string(HDC hdc, HFONT hFont, const Rect *rc, const Color &color, const wchar_t *text, int length, DWORD format, bool disable_BufferedPaint)
 		{
 			if(color.a == 0)
 				return;
 
 			BufferedPaint bp(hdc, rc);
-			auto hdcPaint = bp.begin(color.a);
+			HDC hdcPaint = disable_BufferedPaint ? nullptr : bp.begin(color.a);
 
 			if(!hdcPaint)
 				hdcPaint = hdc;
@@ -3799,11 +3823,12 @@ theme.system_mode
 				"M2.68 11.06C2.56 10.94 2.5 10.79 2.5 10.62C2.5 10.45 2.56 10.30 2.68 10.18C2.80 10.06 2.95 10 3.12 10C3.29 10 3.44 10.06 3.56 10.18L7.5 14.11L16.43 5.18C16.55 5.06 16.70 5 16.87 5C17.04 5 17.19 5.06 17.31 5.18C17.43 5.30 17.5 5.45 17.5 5.62C17.5 5.79 17.43 5.94 17.31 6.06L7.93 15.43C7.81 15.56 7.66 15.62 7.5 15.62C7.33 15.62 7.18 15.56 7.06 15.43Z",
 				// Radio Bullet
 				"M6.62 10L6.62 9.93C6.62 9.47 6.71 9.04 6.89 8.64C7.07 8.24 7.32 7.89 7.63 7.59C7.94 7.29 8.31 7.05 8.72 6.87C9.13 6.70 9.55 6.62 10 6.62C10.46 6.62 10.90 6.70 11.31 6.88C11.72 7.06 12.08 7.30 12.39 7.60C12.69 7.91 12.93 8.27 13.11 8.68C13.29 9.09 13.37 9.53 13.37 10C13.37 10.46 13.29 10.90 13.11 11.31C12.93 11.72 12.69 12.08 12.39 12.39C12.08 12.69 11.72 12.93 11.31 13.11C10.90 13.29 10.46 13.37 10 13.37C9.53 13.37 9.09 13.29 8.68 13.11C8.27 12.93 7.91 12.69 7.60 12.39C7.30 12.08 7.06 11.72 6.88 11.31C6.70 10.90 6.62 10.46 6.62 10Z"
+			
 			};
 
 			std::string svg_begin = "<svg viewBox='0 0 20 20'><path d='";
 
-			auto esvg = [=](std::string *data, Theme::state_t const &st, symbole_tag &sy)
+			auto esvg = [=](std::string *data, Theme::state_t const &st, symbole_tag &sy, bool normal_only = false)
 			{
 				char fmt[30]{};
 				::StringCchPrintfA(fmt, 30, "' fill='#%0.6x'/></svg>", st.nor.to_RGB());
@@ -3811,9 +3836,12 @@ theme.system_mode
 				if(PlutoVG plutovg(sr.c_str(), (int)sr.length(), _theme.image.size, _theme.image.size, dpi.val); plutovg)
 				{
 					sy.normal= plutovg.tobitmap();
-					sy.select = plutovg.tobitmap(st.sel);
-					sy.normal_disabled = plutovg.tobitmap(st.nor_dis);
-					sy.select_disabled = plutovg.tobitmap(st.sel_dis);
+					if(!normal_only)
+					{
+						sy.select = plutovg.tobitmap(st.sel);
+						sy.normal_disabled = plutovg.tobitmap(st.nor_dis);
+						sy.select_disabled = plutovg.tobitmap(st.sel_dis);
+					}
 				}
 			};
 
@@ -5583,7 +5611,7 @@ theme.system_mode
 				{
 					//_log.info(L"WM_NCCALCSIZE %x", wParam);
 					xx = 0;
-					__pt ={ -1,-1 };
+					__pt = { -1,-1 };
 					//pncc->rgrc[0] is the new rectangle
 					//pncc->rgrc[1] is the old rectangle
 					//pncc->rgrc[2] is the client rectangle
@@ -5601,7 +5629,10 @@ theme.system_mode
 							nc->rgrc[0].right += theme->border.size + theme->border.padding.right;
 							nc->rgrc[0].bottom += theme->border.size + theme->border.padding.bottom;
 							if(wnd->has_scroll)
-								nc->rgrc[0].top += 20;
+							{
+								nc->rgrc[0].top += ctx->dpi(10);
+								nc->rgrc[0].bottom -= ctx->dpi(10);
+							}
 						}
 					//	return WVR_VALIDRECTS;
 					}
@@ -5629,7 +5660,7 @@ theme.system_mode
 					{
 						if(!flags.has(SWP_NOMOVE))
 						{
-							if(wnd->y == wnd->y && wnd->y > 0)
+							if(wnd->y == wp->y && wnd->y > 0)
 							{
 								if(wnd->height > wp->cy)
 								{
@@ -5655,12 +5686,23 @@ theme.system_mode
 							wp->cx += bz + theme->border.padding.width();
 							wp->cy += bz + theme->border.padding.height();
 
-							if(wp->cy > (ctx->_rcMonitor.height() - ctx->dpi(100)))
+							if((wp->cy + 100) > ctx->_rcMonitor.height())
 							{
 								wnd->has_scroll = true;
-								wp->cy += 40;
+								wp->cy -= ctx->dpi(10);
 							}
-
+							/*else
+							{
+								auto hMenu = (HMENU)::SendMessageW(hWnd, MN_GETHMENU, 0, 0);
+								if(::IsMenu(hMenu))
+								{
+									auto menu = ctx->_menus[hMenu];
+									if(menu.popup_height)
+									{
+										wnd->has_scroll = true;
+									}
+								}
+							}*/
 							auto old_height = wnd->height;
 							//auto old_y = wnd->y;
 
@@ -5715,6 +5757,23 @@ theme.system_mode
 										wp->x -= fr;
 								}
 							}
+
+							if(wnd->has_scroll)
+							{
+								wp->y = (ctx->_rcMonitor.height() - wnd->height) / 2;
+							}
+							else if((wnd->height + 100) > (ctx->_rcMonitor.height() / 2))
+							{
+								//wp->y -= 50;
+							}
+							else if((wp->y + wnd->height) > (ctx->_rcMonitor.height() - ctx->dpi(40)))
+							{
+								//wp->y -= ctx->dpi(40);
+								//wp->y /= 2;
+								//(y(237)+ cy(1227)) /2
+							}
+
+							//_log.write(L"y(%d), cy(%d)\r\n", wp->y , wnd->height);
 
 							wnd->x = wp->x;
 							wnd->y = wp->y;
@@ -5777,20 +5836,24 @@ theme.system_mode
 					if(wnd->has_scroll)
 					{
 						auto_gdi<HBRUSH> hbblack(CreateSolidBrush(0x000000));
-						auto_gdi<HBRUSH> hbcolor(CreateSolidBrush(0x444444));
 
-						auto o = wnd->width / 4;
-						Rect rc = { 0, 0, wnd->width, 20 };
+						int h = ctx->dpi(14);
+						Rect rc = { 0, 0, wnd->width, h };
 						::FillRect(wnd->hdc, rc, hbblack.get());
 						
-						rc = { 0, wnd->height - 30, wnd->width, wnd->height };
+						rc = { 0, wnd->height - h, wnd->width, wnd->height };
 						::FillRect(wnd->hdc, rc, hbblack.get());
+						
+						auto txtfmt = DT_NOCLIP | DT_SINGLELINE | DT_VCENTER| DT_CENTER;
 
-						rc = { o, 15, wnd->width - o, 10 };
-						::FillRect(wnd->hdc, rc, hbcolor.get());
+						rc = { 0, 0, wnd->width, h };
+						ctx->draw_string(wnd->hdc, ctx->font.icon, &rc, ctx->_theme.symbols.chevron.nor, L"\uE009", 1, txtfmt);
 
-						rc = { o, wnd->height - 15, wnd->width - o, wnd->height - 10 };
-						::FillRect(wnd->hdc, rc, hbcolor.get());
+						rc = { 0, wnd->height - h, wnd->width, wnd->height };
+						ctx->draw_string(wnd->hdc, ctx->font.icon, &rc, ctx->_theme.symbols.chevron.nor, L"\uE00A", 1, txtfmt);
+
+						//::ExcludeClipRect(wnd->hdc, 0, 0, wnd->width, 20);
+						//::ExcludeClipRect(wnd->hdc, 0, wnd->height - 20, wnd->width, wnd->height);
 					}
 
 					// exlude menu item rectangle to prevent drawing by windows after us
@@ -5798,6 +5861,7 @@ theme.system_mode
 					return lret;
 				}
 				case WM_NCPAINT:
+					//lret = defSubclassProc();
 					return lret;
 				case WM_ERASEBKGND:
 				{
@@ -5895,6 +5959,7 @@ theme.system_mode
 				}
 				case WM_PRINT:
 				case WM_PRINTCLIENT: //mouse
+					//lret = defSubclassProc();
 					return lret;
 					/*
 					 * wParam - the item to select. Must be a valid index or MFMWFP_NOITEM
@@ -5966,7 +6031,7 @@ theme.system_mode
 					}
 
 					int pvParam{};
-					SystemParametersInfoW(SPI_GETSELECTIONFADE, 0, &pvParam, 0);
+					::SystemParametersInfoW(SPI_GETSELECTIONFADE, 0, &pvParam, 0);
 					if(!pvParam)
 					{
 						// Fade out animation is disabled system-wide
@@ -6036,6 +6101,7 @@ theme.system_mode
 						case IDSYS_MNUP:
 							break;
 						case IDSYS_MNDOWN:
+							wnd->scrolled = true;
 							//if(pMenuState->fButtonDown) {
 							//	xxxMNDoScroll(ppopupmenu, (UINT)wParam, FALSE);
 							//}

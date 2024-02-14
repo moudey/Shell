@@ -510,7 +510,7 @@ namespace Nilesoft
 			auto _array = new Object[list.size() + 1]{};
 			_array[0] = (uint32_t)list.size();
 			
-			for(auto i = 0; i< list.size(); i++)
+			for(auto i = 0u; i< list.size(); i++)
 			{
 				try {
 					_array[i + 1] = list[i];
