@@ -6,14 +6,14 @@ modify(mode=mode.multiple
 
 modify(type="recyclebin" where=window.is_desktop and this.id==id.empty_recycle_bin pos=1 sep)
 
-modify(find="unpin*" pos="bottom" menu="Pin/Unpin")
-modify(find="pin*" pos="top" menu="Pin/Unpin")
+modify(find="unpin*" pos="bottom" menu="고정/고정 해제")
+modify(find="pin*" pos="top" menu="고정/고정 해제")
 
-modify(where=this.id==id.copy_as_path menu="file manage")
-modify(type="dir.back|drive.back" where=this.id==id.customize_this_folder pos=1 sep="top" menu="file manage")
+modify(where=this.id==id.copy_as_path menu="파일 관리")
+modify(type="dir.back|drive.back" where=this.id==id.customize_this_folder pos=1 sep="top" menu="파일 관리")
 
-modify(where=str.equals(this.name, ["open in terminal", "open linux shell here"]) || this.id==id.open_powershell_window_here
-	pos="bottom" menu="Terminal")
+modify(where=str.equals(this.name, ["터미널에서 열기", "여기서 리눅스 셸 열기"]) || this.id==id.open_powershell_window_here
+	pos="bottom" menu="터미널")
 
 modify(mode=mode.multiple
 	where=this.id(
