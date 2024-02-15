@@ -1,4 +1,4 @@
-﻿menu(mode="multiple" title='개발(&D)' vis=key.shift() sep=sep.bottom image=\uE26E)
+menu(mode="multiple" title='개발(&D)' vis=key.shift() sep=sep.bottom image=\uE26E)
 {
 	menu(mode="single" title='편집기' image=\uE17A)
 	{
@@ -16,10 +16,10 @@
 		item(title='빌드 디버그' cmd-line='/K dotnet build')
 		item(title='빌드 릴리즈' cmd-line='/K dotnet build -c release /p:DebugType=None')
 
-		menu(mode="multiple" sep="both" title='publish' image=\ue11f)
+		menu(mode="multiple" sep=sep.both title='publish' image=\ue11f)
 		{
 			$publish='dotnet publish -r win-x64 -c release --output publish /*/p:CopyOutputSymbolsToPublishDirectory=false*/'
-			item(title='sinale 파일 게시' sep="after" cmd-line='/K @publish --no-self-contained /p:PublishSingleFile=true')
+			item(title='단일 파일 게시' sep=sep.bottom cmd-line='/K @publish --no-self-contained /p:PublishSingleFile=true')
 			item(title='프레임워크 종속 배포' cmd-line='/K @publish')
 			item(title='프레임워크 종속 실행 파일' cmd-line='/K @publish --self-contained false')
 			item(title='독립형 배포' cmd-line='/K @publish --self-contained true')
