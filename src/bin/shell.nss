@@ -13,7 +13,7 @@ import 'imports/images.nss'
 
 import 'imports/modify.nss'
 
-menu(mode="multiple" title="Pin/Unpin" image=icon.pin)
+menu(mode="multiple" title="Sabitle/Kaldır" image=icon.pin)
 {
 }
 
