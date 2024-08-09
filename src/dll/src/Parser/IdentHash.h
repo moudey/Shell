@@ -806,7 +806,6 @@ namespace Nilesoft
 		constexpr auto IDENT_COMMAND_COPY = 0x7C954020U;
 		constexpr auto IDENT_COMMAND_TOGGLEEXT = 0x1BD84D58U;
 		constexpr auto IDENT_COMMAND_TOGGLEHIDDEN = 0xDD2A6973U;
-		constexpr auto IDENT_COMMAND_RANDOM = 0x18E46F26U;
 		constexpr auto IDENT_COMMAND_SLEEP = 0x105CF61EU;
 		constexpr auto IDENT_COMMAND_RESTART_EXPLORER = 0x846E0BBAU;
 
@@ -814,6 +813,8 @@ namespace Nilesoft
 		constexpr auto IDENT_COMMAND_GOBACK = 0x0032646CU;
 		constexpr auto IDENT_COMMAND_GOFORWARD = 0xF7ABF890U;
 		constexpr auto IDENT_COMMAND_GOHOME = 0x0035EB84U;
+
+		constexpr auto IDENT_RANDOM = 0x18E46F26U;
 
 		constexpr auto IDENT_REGEX = 0x10470F80U;
 		constexpr auto IDENT_REGEX_MATCH = 0x0FEA9A72U;

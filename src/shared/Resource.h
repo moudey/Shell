@@ -2,9 +2,9 @@
 
 #define VERSION_MAJOR			1
 #define VERSION_MINOR			9
-#define VERSION_BUILD			13
+#define VERSION_BUILD			17
 #define VERSION_REV				0
-#define VERSION_YEAR			2023
+#define VERSION_YEAR			2024
 
 #define IDI_LOGO				1100;
 #define IDI_IMAGES 				1101;
@@ -22,7 +22,7 @@ namespace Nilesoft
 #endif
 
 //#define APP_IS_CANARY			1
-#define APP_CANARY				L"Canary"
+//#define APP_CANARY				L"Canary"
 
 #define APP_COMPANY				L"Nilesoft"
 #define APP_COMPANYLTD			APP_COMPANY L" Ltd"
@@ -33,8 +33,8 @@ namespace Nilesoft
 #define APP_FILENAME_TITLE		L"shell"
 
 #define	APP_PRODUCT_VERSION		L"1.9"
-#define	APP_VERSION				L"1.9.13"
-//#define APP_VERSION_FULL		L"1.9 build 13"
+#define	APP_VERSION				L"1.9.17"
+//#define APP_VERSION_FULL		L"1.9 build 17"
 
 constexpr auto APP_EMAIL		= L"support@nilesoft.org";
 constexpr auto APP_WEBSITE		= L"www.nilesoft.org";

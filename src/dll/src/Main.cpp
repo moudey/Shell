@@ -6,6 +6,9 @@
 using namespace Nilesoft::Shell;
 using namespace Diagnostics;
 
+//MS also offers EV Code Certificates, which enable immediate acceptance by SmartScreeen of Windows Defender
+//https://blogs.msdn.microsoft.com/ie/2012/08/14/microsoft-smartscreen-extended-validation-ev-code-signing-certificates/
+
 #ifdef _DEBUG
 #include <crtdbg.h>
 #endif
@@ -30,6 +33,7 @@ Version Build
 */
 
 //#pragma comment(lib, "mincore.lib")
+//#pragma comment(lib, "shlwapi.lib")
 #pragma comment(lib, "UxTheme.lib")
 #pragma comment(lib, "Comctl32.lib")
 #pragma comment(lib, "dwmapi.lib")
@@ -63,7 +67,6 @@ Version Build
 #pragma comment(linker, "/export:DllCanUnloadNow=__DllCanUnloadNow@0")
 #endif
 */
-
 
 #ifdef _DEBUG
 
@@ -517,6 +520,10 @@ BOOL WINAPI TrackPopupMenuExProc(HMENU hMenu, uint32_t uFlags, int x, int y, HWN
 
 BOOL WINAPI NtUserTrackPopupMenu(HMENU hMenu, uint32_t uFlags, int x, int y, HWND hWnd, LPTPMPARAMS lptpm, int tfunc)
 {
+#ifdef _DIJA
+	return (BOOL)XXX::OnContextMenu(hWnd, x, y, hMenu);;
+#endif
+
 	auto result = FALSE;
 	auto invoked = false;
 

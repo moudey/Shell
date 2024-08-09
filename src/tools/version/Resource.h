@@ -22,7 +22,7 @@ namespace Nilesoft
 #endif
 
 //#define APP_IS_CANARY			1
-#define APP_CANARY				L"Canary"
+//#define APP_CANARY				L"Canary"
 
 #define APP_COMPANY				L"Nilesoft"
 #define APP_COMPANYLTD			APP_COMPANY L" Ltd"

@@ -11,7 +11,6 @@
 
 //#include <filesystem>
 
-
 namespace Nilesoft
 {
 	namespace Shell
@@ -815,6 +814,7 @@ namespace Nilesoft
 
 					input_param.title = eval_arg(0).to_string().move();
 					input_param.prompt = eval_arg(1).to_string().move();
+					input_param.result = eval_arg(2).to_string().move();
 
 					auto hWnd = ::CreateDialogParamW(Path::GetCurrentModule(), MAKEINTRESOURCEW(IDD_INPUTBOX), NULL, 
 													 [](HWND hDlg, UINT Msg, WPARAM wParam, LPARAM lParam)->INT_PTR
@@ -831,6 +831,8 @@ namespace Nilesoft
 									::SetWindowTextW(hDlg, input_param->title);
 								if(!input_param->prompt.empty())
 									::SetDlgItemTextW(hDlg, IDC_INPUTBOX_PROMPT, input_param->prompt);
+								if(!input_param->result.empty())
+									::SetDlgItemTextW(hDlg, IDC_INPUTBOX_EDIT, input_param->result);
 								return TRUE;
 							}
 							case WM_COMMAND:
@@ -1642,10 +1644,13 @@ namespace Nilesoft
 							if(WebBrowser())
 							{
 								auto bstrFile = ::SysAllocString(url);
-								VARIANT empty{};
-								empty.vt = VT_EMPTY;
-								webBrowser->Navigate(bstrFile, &empty, &empty, &empty, &empty);
-								::SysFreeString(bstrFile);
+								if(bstrFile)
+								{
+									VARIANT empty{};
+									empty.vt = VT_EMPTY;
+									webBrowser->Navigate(bstrFile, &empty, &empty, &empty, &empty);
+									::SysFreeString(bstrFile);
+								}
 							}
 							break;
 						}
@@ -1695,8 +1700,7 @@ namespace Nilesoft
 							//	shellDisp->RefreshMenu();
 							SendCommand(28931);
 							// press DOWN "Alt-Tab"
-							
-							
+
 							//Sendkey(VK_F5);
 							//MB(Window::class_name(context->wnd.active));
 							//::PostMessageW(context->wnd.owner, WM_KEYDOWN, VK_F5, 0);
@@ -1726,9 +1730,6 @@ namespace Nilesoft
 								::Sleep(exp.to_number<uint32_t>());
 							break;
 						}
-						case IDENT_COMMAND_RANDOM:
-							_result = Environment::RandomNumber(eval_arg(0), eval_arg(1));
-							break;
 						case IDENT_COPY:
 						case IDENT_COMMAND_COPY_TO_CLIPBOARD:
 							Text::Clipboard::Set(eval_arg(0).to_string());
@@ -2017,6 +2018,7 @@ namespace Nilesoft
 					break;
 				}
 				case IDENT_QUOTE:
+				{
 					if(argc == 0)
 						_result = L"\"";
 					else
@@ -2028,6 +2030,10 @@ namespace Nilesoft
 							_result = (L'\'' + eval_arg(0).to_string() + L'\'').move();
 						}
 					}
+					break;
+				}
+				case IDENT_RANDOM:
+					_result = Environment::RandomNumber(eval_arg(0), eval_arg(1));
 					break;
 				case IDENT_HIDDEN:
 					_result = IDENT_HIDDEN;
@@ -3497,22 +3503,27 @@ namespace Nilesoft
 				}
 				case IDENT_REFRESH:
 				{
-					::PathMakeSystemFolderW(arg0.c_str());
-					//system("ie4uinit.exe -ClearIconCache");
-					SHFOLDERCUSTOMSETTINGS pfcs = { sizeof(SHFOLDERCUSTOMSETTINGS) };
-					pfcs.dwMask = FCSM_FLAGS;
+					::SHChangeNotify(SHCNE_UPDATEITEM, SHCNF_PATH, arg0.c_str(), nullptr);
+					/*
+					INPUT inputs[4] = {};
+					ZeroMemory(inputs, sizeof(inputs));
 
-					//pfcs.dwMask = FCSM_ICONFILE;
-					//WCHAR iconPath[MAX_PATH] = { 0 };
-					//pfcs.pszIconFile = iconPath;
-					//pfcs.cchIconFile = MAX_PATH;
-					auto hr = SHGetSetFolderCustomSettings(&pfcs, arg0.c_str(), FCS_FORCEWRITE);
-					if(FAILED(hr))
-					{
-					//	hr = SHGetSetFolderCustomSettings(&pfcs, arg0.c_str(), FCS_READ);
-					}
-					//MBF(L"%x, %d, %s", hr, pfcs.iIconIndex, pfcs.pszIconFile);
-					//::SHChangeNotify(SHCNE_RENAMEFOLDER, SHCNF_PATH, arg0.c_str(), arg0.c_str());
+					inputs[0].type = INPUT_KEYBOARD;
+					inputs[0].ki.wVk = VK_CONTROL;
+
+					inputs[1].type = INPUT_KEYBOARD;
+					inputs[1].ki.wVk = 'T';
+
+					inputs[2].type = INPUT_KEYBOARD;
+					inputs[2].ki.wVk = 'T';
+					inputs[2].ki.dwFlags = KEYEVENTF_KEYUP;
+
+					inputs[3].type = INPUT_KEYBOARD;
+					inputs[3].ki.wVk = VK_CONTROL;
+					inputs[3].ki.dwFlags = KEYEVENTF_KEYUP;
+
+					SendInput(ARRAYSIZE(inputs), inputs, sizeof(INPUT));
+					*/
 				}
 			}
 		}
@@ -4284,11 +4295,13 @@ namespace Nilesoft
 						}
 						return;
 					}
+
 					if(Id[1] == IDENT_VER)
 						_result = ver->BuildStr;
 					else
 						_result = ver->BuildNumber;
-					return;
+
+					break;
 				}
 				case IDENT_DARK:
 					_result = context->theme->system.mode;
@@ -5559,13 +5572,8 @@ namespace Nilesoft
 			}
 			else if(Id[1] == IDENT_COLOR_RANDOM)
 			{
-				uint8_t min = 0, max = 255;
-
-				if(argc >= 1)
-					min = eval_arg(0).to_number<uint8_t>();
-
-				if(Arguments.size() == 2)
-					max = eval_arg(1).to_number<uint8_t>();
+				uint8_t min = argc == 1 ? 0 : eval_arg(0).to_number<uint8_t>();
+				uint8_t max = eval_arg(argc == 1 ? 0 : 1).to_number<uint8_t>();
 
 				auto r = Environment::RandomNumber(min, max);
 				auto g = Environment::RandomNumber(min, max);

@@ -1892,7 +1892,6 @@ namespace Nilesoft
 						d2d2.render->SetAntialiasMode(D2D1_ANTIALIAS_MODE_PER_PRIMITIVE);
 						d2d2.render->FillRoundedRectangle({ rectF,radius, radius }, d2d2.brush);
 					}
-
 				}
 			}
 
@@ -2604,24 +2603,20 @@ namespace Nilesoft
 			bool systemUsesLightTheme = true;
 			bool appsUseLightTheme = true;
 
-			if(!isHighContrast)
+			if(isHighContrast)
+				_theme.system.mode = 2;
+			else
+			{
 				Theme::Personalize(&systemUsesLightTheme, &appsUseLightTheme, &enableTransparency);
+				_theme.system.mode = systemUsesLightTheme ? 0 : 1;
+			}
 
 			_theme.enableTransparency = enableTransparency;
 			_theme.systemUsesLightTheme = systemUsesLightTheme;
 			_theme.appsUseLightTheme = appsUseLightTheme;
 			_theme.isHighContrast = isHighContrast;
-/*
-_theme.sys.usesLightTheme= systemUsesLightTheme;
-_theme.appsUseLightTheme = appsUseLightTheme;
-_theme.isHighContrast = isHighContrast;
-theme.mode = light | dark | highcontrast
-_theme.enable_transparency
-theme.transparency.sys
-theme.system_transparency
-theme.system_mode
+			
 
-*/ 
 			auto is_sys_dark = Selected.Window.isTaskbar() ? !systemUsesLightTheme : !appsUseLightTheme;// Theme::IsDarkMode(Selected.Window.isTaskbar());
 
 			_theme.mode = is_sys_dark;
@@ -3823,7 +3818,6 @@ theme.system_mode
 				"M2.68 11.06C2.56 10.94 2.5 10.79 2.5 10.62C2.5 10.45 2.56 10.30 2.68 10.18C2.80 10.06 2.95 10 3.12 10C3.29 10 3.44 10.06 3.56 10.18L7.5 14.11L16.43 5.18C16.55 5.06 16.70 5 16.87 5C17.04 5 17.19 5.06 17.31 5.18C17.43 5.30 17.5 5.45 17.5 5.62C17.5 5.79 17.43 5.94 17.31 6.06L7.93 15.43C7.81 15.56 7.66 15.62 7.5 15.62C7.33 15.62 7.18 15.56 7.06 15.43Z",
 				// Radio Bullet
 				"M6.62 10L6.62 9.93C6.62 9.47 6.71 9.04 6.89 8.64C7.07 8.24 7.32 7.89 7.63 7.59C7.94 7.29 8.31 7.05 8.72 6.87C9.13 6.70 9.55 6.62 10 6.62C10.46 6.62 10.90 6.70 11.31 6.88C11.72 7.06 12.08 7.30 12.39 7.60C12.69 7.91 12.93 8.27 13.11 8.68C13.29 9.09 13.37 9.53 13.37 10C13.37 10.46 13.29 10.90 13.11 11.31C12.93 11.72 12.69 12.08 12.39 12.39C12.08 12.69 11.72 12.93 11.31 13.11C10.90 13.29 10.46 13.37 10 13.37C9.53 13.37 9.09 13.29 8.68 13.11C8.27 12.93 7.91 12.69 7.60 12.39C7.30 12.08 7.06 11.72 6.88 11.31C6.70 10.90 6.62 10.46 6.62 10Z"
-			
 			};
 
 			std::string svg_begin = "<svg viewBox='0 0 20 20'><path d='";
@@ -4080,7 +4074,7 @@ theme.system_mode
 									if(!find_pattern.split(pattern, L'|') && !where_defined)
 										goto skip;
 
-									if(!find_pattern(&item->name))
+									if(!find_pattern.find(&item->name))
 										goto skip;
 								}
 							}

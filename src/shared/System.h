@@ -34,6 +34,99 @@
 #include <random>
 #include<appmodel.h>
 //#include <commoncontrols.h>
+/*
+#include <exception>
+#include <typeinfo>
+#include <stdexcept>
+*/
+
+//_WIN64 || _AMD64_ || _M_X64
+//_WIN32 || _M_IX86 || _X86_
+/*
+_M_IX86 Defined for x86 processors.
+_M_X64 Defined for x64 processors.
+_WIN64 Defined for applications for Win64.
+*/
+
+/*struct hresult
+{
+	HRESULT _value = S_FALSE;
+public:
+	hresult() = default;
+	hresult(HRESULT result) : _value(result) {};
+	operator HRESULT() const { return _value; }
+	explicit operator bool() const { return  _value >= 0; } // SUCCEEDED(_value)
+	bool ok() const { return _value == 0; }
+	bool failed() const { return _value < 0; }              // FAILED(_value)
+	HRESULT get() const { return _value; }
+};
+
+struct lresult
+{
+	LRESULT _value = S_FALSE;
+public:
+	lresult() = default;
+	lresult(LRESULT result) : _value(result) {};
+	operator LRESULT() const { return _value; }
+	explicit operator bool() const { return  ok(); }
+	bool ok() const { return _value == 0L; }
+	bool failed() const { return !ok(); }
+	LRESULT get() const { return _value; }
+};
+
+struct lstatus
+{
+	LSTATUS _value = S_FALSE;
+public:
+	lstatus() = default;
+	lstatus(LSTATUS result) : _value(result) {};
+	operator LSTATUS() const { return _value; }
+	explicit operator bool() const { return  ok(); }
+	bool ok() const { return _value == 0; }
+	bool failed() const { return !ok(); }
+	LSTATUS get() const { return _value; }
+};
+*/
+/*
+struct DPI
+{
+	static constexpr double X = 96.0;
+	static constexpr double Y = 96.0;
+
+	double _dpix{ X };
+	double _dpiy{ Y };
+
+	DPI(double dpix = X, double dpiy = Y) : _dpix{ dpix }, _dpiy{ dpiy } { }
+	
+	template<typename T = long>
+	T operator ()(auto value) const {
+		return calc<T>(value);
+	}
+
+	template<typename T = long>
+	T calc(auto value) const { return Value<T>(value, _dpix); }
+
+	template<typename T = long>
+	static T Value(double value, double dpi = 96)
+	{
+		return static_cast<T>(std::rint((value * dpi / 96.0)));
+	}
+};
+*/
+
+/*
+std::round(context->theme->dpi->scale() * 100.0) / 100.0
+
+
+round_to(10.0078, 0.001) = 10.008
+round_to(10.0078, 0.01) = 10.01
+round_to(10.0078, 0.1) = 10
+round_to(10.0078, 1) = 10
+round_to(10.0078, 2) = 10
+round_to(10.0078, 3) = 9
+round_to(10.0078, 4) = 12
+
+*/ 
 
 template<typename T = long>
 struct TResult
@@ -158,6 +251,85 @@ struct handle_deleter {
 template<typename T = HANDLE>
 using unique_handle = std::unique_ptr<T, handle_deleter<T>>;
 
+
+/*
+struct hwnd_deleter {
+	using pointer = HWND;
+	auto operator()(HWND handle) const -> void {
+		::DestroyWindow(handle);
+	}
+};
+
+using unique_hwnd = std::unique_ptr<HWND, hwnd_deleter>;
+*/
+/*
+
+std::wstring Exception::GetWideMessage() const
+{
+	using std::tr1::shared_ptr;
+	shared_ptr<void> buff;
+	LPWSTR buffPtr;
+	DWORD bufferLength = FormatMessageW(
+		FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_IGNORE_INSERTS,
+		NULL,
+		GetErrorCode(),
+		0,
+		reinterpret_cast<LPWSTR>(&buffPtr),
+		0,
+		NULL);
+	buff.reset(buffPtr, LocalFreeHelper());
+	return std::wstring(buffPtr, bufferLength);
+}
+
+/////////////////////////////
+// ComException
+
+CString FormatMessage(HRESULT result)
+{
+	CString strMessage;
+	WORD facility = HRESULT_FACILITY(result);
+	CComPtr<IErrorInfo> iei;
+	if (S_OK == GetErrorInfo(0, &iei) && iei)
+	{
+		// get the error description from the IErrorInfo
+		BSTR bstr = NULL;
+		if (SUCCEEDED(iei->GetDescription(&bstr)))
+		{
+			// append the description to our label
+			strMessage.Append(bstr);
+
+			// done with BSTR, do manual cleanup
+			SysFreeString(bstr);
+		}
+	}
+	else if (facility == FACILITY_ITF)
+	{
+		// interface specific - no standard mapping available
+		strMessage.Append(_T("FACILITY_ITF - This error is interface specific.  No further information is available."));
+	}
+	else
+	{
+		// attempt to treat as a standard, system error, and ask FormatMessage to explain it
+		CString error;
+		CErrorMessage::FormatMessage(error, result); // <- This is just a wrapper for ::FormatMessage, left to reader as an exercise :)
+		if (!error.IsEmpty())
+			strMessage.Append(error);
+	}
+	return strMessage;
+}
+
+struct hresult : public TResult<HRESULT>
+{
+public:
+	hresult(HRESULT hr = S_FALSE) { _value = hr; }
+	explicit operator bool() const override { return  _value >= 0; } // SUCCEEDED(_value)
+	bool failed() const override { return _value < 0; } // FAILED(_value)
+};
+
+struct lresult : public TResult<LRESULT> { lresult(LRESULT lr = S_FALSE) { _value = lr; } };
+struct lstatus : public TResult<LSTATUS> { lstatus(LSTATUS ls = S_FALSE) { _value = ls; } };
+*/
+
 namespace System
 {
 	namespace Math
@@ -173,6 +345,30 @@ namespace System
 		{
 			return (a < b) ? b : a;
 		}
+
+		/*uint32_t number_size(uint32_t value)
+		{
+			if(value == 0.00)
+				return 1u;
+
+			unsigned ret;
+			double dval;
+			if(value > 0) 
+			{
+				ret = 0;
+				dval = value;
+			}
+			else 
+			{
+				// Make room for the minus sign, and proceed as if positive.
+				ret = 1;
+				dval = -double(value);
+			}
+
+			ret +=std::ceil(std::log10(dval + 1.0));
+
+			return ret;
+		}*/
 	}
 }
 namespace Nilesoft
@@ -210,6 +406,173 @@ namespace Nilesoft
 		long height() const { return top + bottom; }
 		long width() const { return left + right; }
 	};
+/*
+	template <typename Traits>
+	class unique_handle
+	{
+		using pointer = typename Traits::pointer;
+
+		pointer m_value;
+
+		auto close() throw() -> void
+		{
+			if(*this)
+			{
+				Traits::close(m_value);
+			}
+		}
+
+	public:
+
+		unique_handle(unique_handle const &) = delete;
+		auto operator=(unique_handle const &)->unique_handle & = delete;
+
+		explicit unique_handle(pointer value = Traits::invalid()) throw() :
+			m_value{ value }
+		{
+		}
+
+		unique_handle(unique_handle &&other) throw() :
+			m_value{ other.release() }
+		{
+		}
+
+		auto operator=(unique_handle &&other) throw() -> unique_handle &
+		{
+			if(this != &other)
+			{
+				reset(other.release());
+			}
+
+			return *this;
+		}
+
+		~unique_handle() throw()
+		{
+			close();
+		}
+
+		explicit operator bool() const throw()
+		{
+			return m_value != Traits::invalid();
+		}
+
+		auto get() const throw() -> pointer
+		{
+			return m_value;
+		}
+
+		auto get_address_of() throw() -> pointer *
+		{
+			return &m_value;
+		}
+
+		auto release() throw() -> pointer
+		{
+			auto value = m_value;
+			m_value = Traits::invalid();
+			return value;
+		}
+
+		auto reset(pointer value = Traits::invalid()) throw() -> bool
+		{
+			if(m_value != value)
+			{
+				close();
+				m_value = value;
+			}
+
+			return static_cast<bool>(*this);
+		}
+
+		auto swap(unique_handle<Traits> &other) throw() -> void
+		{
+			std::swap(m_value, other.m_value);
+		}
+	};
+
+	template <typename Traits>
+	auto swap(unique_handle<Traits> &left,
+			  unique_handle<Traits> &right) throw() -> void
+	{
+		left.swap(right);
+	}
+
+	template <typename Traits>
+	auto operator==(unique_handle<Traits> const &left,
+					unique_handle<Traits> const &right) throw() -> bool
+	{
+		return left.get() == right.get();
+	}
+
+	template <typename Traits>
+	auto operator!=(unique_handle<Traits> const &left,
+					unique_handle<Traits> const &right) throw() -> bool
+	{
+		return left.get() != right.get();
+	}
+
+	template <typename Traits>
+	auto operator<(unique_handle<Traits> const &left,
+				   unique_handle<Traits> const &right) throw() -> bool
+	{
+		return left.get() < right.get();
+	}
+
+	template <typename Traits>
+	auto operator>=(unique_handle<Traits> const &left,
+					unique_handle<Traits> const &right) throw() -> bool
+	{
+		return left.get() >= right.get();
+	}
+
+	template <typename Traits>
+	auto operator>(unique_handle<Traits> const &left,
+				   unique_handle<Traits> const &right) throw() -> bool
+	{
+		return left.get() > right.get();
+	}
+
+	template <typename Traits>
+	auto operator<=(unique_handle<Traits> const &left,
+					unique_handle<Traits> const &right) throw() -> bool
+	{
+		return left.get() <= right.get();
+	}
+
+	struct null_handle_traits
+	{
+		using pointer = HANDLE;
+
+		static auto invalid() throw() -> pointer
+		{
+			return nullptr;
+		}
+
+		static auto close(pointer value) throw() -> void
+		{
+			::CloseHandle(value);
+		}
+	};
+
+	struct invalid_handle_traits
+	{
+		using pointer = HANDLE;
+
+		static auto invalid() throw() -> pointer
+		{
+			return INVALID_HANDLE_VALUE;
+		}
+
+		static auto close(pointer value) throw() -> void
+		{
+			::CloseHandle(value);
+		}
+	};
+
+	using null_handle = unique_handle<null_handle_traits>;
+	using invalid_handle = unique_handle<invalid_handle_traits>;
+*/
 
 	// retrieve the HINSTANCE for the current DLL or EXE using this symbol that
 	// the linker provides for every module, avoids the need for a global HINSTANCE variable
@@ -218,8 +581,67 @@ namespace Nilesoft
 	const auto CurrentModule = reinterpret_cast<HMODULE>(&__ImageBase);
 	//__inline HMODULE GetCurrentModule() { return reinterpret_cast<HMODULE>(&__ImageBase); }
 	
+/*
+	__inline const HMODULE GetCurrentModule()
+	{
+#if _MSC_VER < 1300    // earlier than .NET compiler (VC 6.0)
+
+		// Here's a trick that will get you the handle of the module
+		// you're running in without any a-priori knowledge:
+		// http://www.dotnet247.com/247reference/msgs/13/65259.aspx
+		MEMORY_BASIC_INFORMATION mbi{};
+		//static int dummy;
+		//VirtualQuery(&dummy, &mbi, sizeof(mbi));
+		::VirtualQuery(GetCurrentModule, &mbi, sizeof(mbi));
+		return  reinterpret_cast<HMODULE>(mbi.AllocationBase);
+#else    // VC 7.0
+
+		// from ATL 7.0 sources
+		return reinterpret_cast<HMODULE>(&__ImageBase);
+#endif
+	}
+*/
 
 #define maximum_path 32767
+
+/*
+	using TCHAR = TCHAR;
+	using byte = unsigned char;
+	using sbyte = signed char;
+
+	using achar_t = char;
+	using wchar = wchar_t;
+	using uchar = unsigned char;
+	using ubyte = unsigned char;
+	using ushort = unsigned short;
+	using uint = unsigned int;
+	using ulong = unsigned long;
+
+	using dword = unsigned long;
+	using word = unsigned short;
+
+	using int8 = __int8;
+	using int16 = __int16;
+	using int32 = __int32;
+	using int64 = __int64;
+
+	using uint8 = unsigned __int8;
+	using uint16 = unsigned __int16;
+	using uint32 = unsigned __int32;
+	using uint64 = unsigned __int64;
+
+#ifdef _M_X64
+	using intptr = __int64;
+	using uintptr = unsigned __int64;
+	using longptr = long long;
+	using ulongptr = unsigned long long;
+#else
+	using intptr = int;
+	using uintptr = unsigned int;
+	using longptr = long;
+	using ulongptr = unsigned long;
+#endif
+*/
 
 	class CriticalSection
 	{
@@ -237,6 +659,61 @@ namespace Nilesoft
 		virtual bool trylock() { return TryEnterCriticalSection(&_cs); }
 		operator CRITICAL_SECTION() { return _cs; };
 	};
+
+	/*class CriticalSection
+	{
+	public:
+		CriticalSection() { ::InitializeCriticalSection(&_cs); }
+		CriticalSection(const CRITICAL_SECTION &section)
+			: _cs{ section } {
+			::InitializeCriticalSection(&this->_cs);
+		}
+		// Release resources used by the critical section object.
+		virtual ~CriticalSection() { ::DeleteCriticalSection(&_cs); }
+		// Request ownership of the critical section.
+		void Lock() { ::EnterCriticalSection(&_cs); }
+		// Release ownership of the critical section.
+		void Unlock() { ::LeaveCriticalSection(&_cs); }
+		operator CRITICAL_SECTION() { return _cs; };
+
+	protected:
+		CRITICAL_SECTION _cs;
+	};*/
+
+	//#define flag_has(f, v) ((f) & (v)) == (v)
+	/*
+	inline bool flag_has(auto f, auto v)
+	{
+		return intptr_t(intptr_t(f) & intptr_t(v)) == intptr_t(v);
+	}
+
+	template<typename T>
+	inline bool flag_has(auto f, std::initializer_list<T> values)
+	{
+		for(auto v : values)
+		{
+			if((f & v) == v)
+				return true;
+		}
+		return false;
+	}
+
+	template<typename T>
+	inline auto flag_remove(auto &f, T v)
+	{
+		if(flag_has(f, v))
+			f &= ~v;
+		return f;
+	}
+
+	template<typename T>
+	inline auto flag_add(auto &f, T v)
+	{
+		if(!flag_has(f, v))
+			f |= v;
+		return f;
+	}
+	*/
 
 	template<typename T = uint32_t>
 	struct Flag
@@ -495,6 +972,306 @@ namespace Nilesoft
 		bool _running = false;
 	};
 
+	/*class GC
+	{
+	protected:
+		struct Node
+		{
+			void *object = nullptr;
+			bool array = false;
+			Node *prev = nullptr;
+			Node *next = nullptr;
+
+			Node(void *object, bool array, Node *next = nullptr, Node *prev = nullptr)
+				noexcept : object(object), array(array), next(next), prev(prev)
+			{
+			}
+
+			~Node()
+			{
+				if(array)
+					delete[] object;
+				else
+					delete object;
+
+				object = nullptr;
+				next = nullptr;
+				prev = nullptr;
+			}
+		};
+
+		Node *_head, *_tail;
+		size_t _count = 0;
+
+	protected:
+
+		template<typename T>
+		T *push_back(T *object, bool array = false)
+		{
+			auto n = new Node(object, array);
+			if(_head == nullptr)
+			{
+				_head = n;
+			}
+			else
+			{
+				n->prev = tail;
+				_tail->next = n;
+			}
+			_tail = n;
+			count++;
+			return object;
+		}
+
+		template<typename T>
+		void pop_back()
+		{
+			if(_tail)
+			{
+				auto n = _tail;
+				if(_tail->prev)
+				{
+					_tail = _tail->prev;
+					_tail->next = nullptr;
+				}
+				delete n;
+				_count--;
+			}
+		}
+
+		template<typename T>
+		T *remove(T *object, bool delete_ = true)
+		{
+			auto n = find(object);
+			if(n != nullptr)
+			{
+				if(n->prev)
+					n->prev->next = n->next;
+				else
+					_head = n->next;
+
+				if(delete_)
+					delete n;
+				_count--;
+			}
+			return nullptr;
+		}
+
+		template<typename T>
+		Node *find(T *object)
+		{
+			for(auto n = _head; n != nullptr;
+				n = n->next)
+			{
+				if(n->object == object)
+					return n;
+			}
+			return nullptr;
+		}
+
+	public:
+
+		GC() noexcept
+			: _head(nullptr), _tail(nullptr), _count(0)
+		{
+		}
+
+		~GC()
+		{
+			clean();
+		}
+
+
+		bool empty()const { return _head == nullptr; }
+		bool size() const { return _count; }
+
+		void clean()
+		{
+			if(_head != nullptr)
+			{
+				auto n = _head;
+				while(n != nullptr)
+				{
+					auto curr = n;
+					n = n->next;
+					delete curr;
+				}
+				_head = nullptr;
+			}
+			_tail = nullptr;
+			_count = 0;
+		}
+
+		template<typename T>
+		T *alloc()
+		{
+			return push_back(new T{}, false);
+		}
+
+		template<typename T>
+		T *alloc(size_t size)
+		{
+			return push_back(new T[size]{}, true);
+		}
+
+		template<typename T>
+		T *alloc(T *object, bool array = false)
+		{
+			return push_back(object, array);
+		}
+
+		template<typename T>
+		T *attach(T *object, bool array = false)
+		{
+			return push_back(object, array);
+		}
+
+		template<typename T>
+		T *detach(T *object)
+		{
+			return remove(object, false);
+		}
+
+		template<typename T>
+		T *Free(T *&object)
+		{
+			return object = remove(object);
+		}
+	};*/
+
+	// Garbage Collection
+	/*class GC
+	{
+		struct Node
+		{
+			void *data;
+			Node *next;
+			Node(void *data) : data{ data }, next{ nullptr } {}
+			~Node() { if(data) delete data; }
+		};
+
+	private:
+
+		Node *head;
+		size_t count;
+
+	public:
+
+		GC() noexcept : head{ nullptr }, count{ 0 } {};
+		~GC() noexcept { clean(); }
+
+		void clean()
+		{
+			while(head)
+			{
+				auto temp = head;
+				head = head->next;
+				delete temp;
+				count--;
+			}
+			head = nullptr;
+			count = 0;
+		}
+
+		size_t size() const { return count; }
+		bool empty() const { return head == nullptr; }
+
+		void pop()
+		{
+			if(head)
+			{
+				auto temp = head;
+				head = temp->next;
+				delete temp;
+				count--;
+			}
+		}
+
+		template<class T>
+		auto push(T *data)
+		{
+			auto temp = new Node(reinterpret_cast<void *>(data));
+			if(head)
+			{
+				temp->next = head;
+				head = temp;
+			}
+			else
+			{
+				head = temp;
+			}
+			count++;
+			return data;
+		}
+
+		template<class T>
+		auto push_back(T *data)
+		{
+			auto temp = new Node(reinterpret_cast<void *>(data));
+			if(head == nullptr)
+			{
+				head = temp;
+			}
+			else
+			{
+				auto cur = head;
+				while(cur)
+				{
+					if(cur->next == nullptr)
+					{
+						cur->next = temp;
+						break;
+					}
+					cur = cur->next;
+				}
+			}
+			count++;
+			return data;
+		}
+
+		void reverse()
+		{
+			if(head)
+			{
+				auto parent = head;
+				auto me = parent->next;
+				auto child = me->next;
+				// make parent as tail
+				parent->next = nullptr;
+				while(child)
+				{
+					me->next = parent;
+					parent = me;
+					me = child;
+					child = child->next;
+				}
+				me->next = parent;
+				head = me;
+			}
+		}
+
+		template<class T>
+		T *get(size_t index)
+		{
+			auto currunt = head;
+			size_t i = 0;
+			while(currunt)
+			{
+				if(i++ == index)
+					return (T *)currunt->data;
+				currunt = currunt->next;
+			}
+			return nullptr;
+		}
+
+		template<class T>
+		T *peek()
+		{
+			return head ? reinterpret_cast<T*>(head->data) : nullptr;
+		}
+	};
+	*/
+
 	// Garbage Collection
 	template<typename T = void>
 	class GC
@@ -738,6 +1515,261 @@ namespace Nilesoft
 		}
 	};
 
+namespace wrt
+{
+	/*
+	//#include <winrt/base.h>
+	template <typename T>
+	struct com_ptr
+	{
+		using type = impl::abi_t<T>;
+
+		com_ptr(std::nullptr_t = nullptr) noexcept {}
+
+		com_ptr(void *ptr, take_ownership_from_abi_t) noexcept : m_ptr(static_cast<type *>(ptr))
+		{
+		}
+
+		com_ptr(com_ptr const &other) noexcept : m_ptr(other.m_ptr)
+		{
+			add_ref();
+		}
+
+		template <typename U>
+		com_ptr(com_ptr<U> const &other) noexcept : m_ptr(other.m_ptr)
+		{
+			add_ref();
+		}
+
+		template <typename U>
+		com_ptr(com_ptr<U> &&other) noexcept : m_ptr(std::exchange(other.m_ptr, {}))
+		{
+		}
+
+		~com_ptr() noexcept
+		{
+			release_ref();
+		}
+
+		com_ptr &operator=(com_ptr const &other) noexcept
+		{
+			copy_ref(other.m_ptr);
+			return*this;
+		}
+
+		com_ptr &operator=(com_ptr &&other) noexcept
+		{
+			if(this != &other)
+			{
+				release_ref();
+				m_ptr = std::exchange(other.m_ptr, {});
+			}
+
+			return*this;
+		}
+
+		template <typename U>
+		com_ptr &operator=(com_ptr<U> const &other) noexcept
+		{
+			copy_ref(other.m_ptr);
+			return*this;
+		}
+
+		template <typename U>
+		com_ptr &operator=(com_ptr<U> &&other) noexcept
+		{
+			release_ref();
+			m_ptr = std::exchange(other.m_ptr, {});
+			return*this;
+		}
+
+		explicit operator bool() const noexcept
+		{
+			return m_ptr != nullptr;
+		}
+
+		auto operator->() const noexcept
+		{
+			return m_ptr;
+		}
+
+		T &operator*() const noexcept
+		{
+			return *m_ptr;
+		}
+
+		T *get() const noexcept
+		{
+			return m_ptr;
+		}
+
+		T **put() noexcept
+		{
+			return &m_ptr;
+		}
+
+		void **put_void() noexcept
+		{
+			return reinterpret_cast<void **>(put());
+		}
+
+		void attach(type *value) noexcept
+		{
+			release_ref();
+			*put() = value;
+		}
+
+		type *detach() noexcept
+		{
+			return std::exchange(m_ptr, {});
+		}
+
+		friend void swap(com_ptr &left, com_ptr &right) noexcept
+		{
+			std::swap(left.m_ptr, right.m_ptr);
+		}
+
+		template <typename To>
+		auto as() const
+		{
+			return impl::as<To>(m_ptr);
+		}
+
+		template <typename To>
+		auto try_as() const noexcept
+		{
+			return impl::try_as<To>(m_ptr);
+		}
+
+		template <typename To>
+		void as(To &to) const
+		{
+			to = as<impl::wrapped_type_t<To>>();
+		}
+
+		hresult as(guid const &id, void **result) const noexcept
+		{
+			return m_ptr->QueryInterface(id, result);
+		}
+
+	private:
+
+		void copy_ref(type *other) noexcept
+		{
+			if(m_ptr != other)
+			{
+				release_ref();
+				m_ptr = other;
+				add_ref();
+			}
+		}
+
+		void add_ref() const noexcept
+		{
+			if(m_ptr)
+			{
+				const_cast<std::remove_const_t<type> *>(m_ptr)->AddRef();
+			}
+		}
+
+		void release_ref() noexcept
+		{
+			if(m_ptr)
+			{
+				unconditional_release_ref();
+			}
+		}
+
+		__declspec(noinline) void unconditional_release_ref() noexcept
+		{
+			std::exchange(m_ptr, {})->Release();
+		}
+
+		template <typename U>
+		friend struct com_ptr;
+
+		type *m_ptr{};
+	};
+*/
+/*
+	template <typename T>
+	auto get_abi(com_ptr<T> const &object) noexcept
+	{
+		return object.get();
+	}
+
+	template <typename T>
+	auto put_abi(com_ptr<T> &object) noexcept
+	{
+		return object.put_void();
+	}
+
+	template <typename T>
+	auto detach_abi(com_ptr<T> &object) noexcept
+	{
+		return object.detach();
+	}
+
+	template <typename T>
+	bool operator==(com_ptr<T> const &left, com_ptr<T> const &right) noexcept
+	{
+		return get_abi(left) == get_abi(right);
+	}
+
+	template <typename T>
+	bool operator==(com_ptr<T> const &left, std::nullptr_t) noexcept
+	{
+		return get_abi(left) == nullptr;
+	}
+
+	template <typename T>
+	bool operator==(std::nullptr_t, com_ptr<T> const &right) noexcept
+	{
+		return nullptr == get_abi(right);
+	}
+
+	template <typename T>
+	bool operator!=(com_ptr<T> const &left, com_ptr<T> const &right) noexcept
+	{
+		return !(left == right);
+	}
+
+	template <typename T>
+	bool operator!=(com_ptr<T> const &left, std::nullptr_t) noexcept
+	{
+		return !(left == nullptr);
+	}
+
+	template <typename T>
+	bool operator!=(std::nullptr_t, com_ptr<T> const &right) noexcept
+	{
+		return !(nullptr == right);
+	}
+
+	template <typename T>
+	bool operator<(com_ptr<T> const &left, com_ptr<T> const &right) noexcept
+	{
+		return get_abi(left) < get_abi(right);
+	}
+
+	template <typename T>
+	bool operator>(com_ptr<T> const &left, com_ptr<T> const &right) noexcept
+	{
+		return right < left;
+	}
+
+	template <typename T>
+	bool operator<=(com_ptr<T> const &left, com_ptr<T> const &right) noexcept
+	{
+		return !(right < left);
+	}
+
+	template <typename T>
+	bool operator>=(com_ptr<T> const &left, com_ptr<T> const &right) noexcept
+	{
+		return !(left < right);
+	}*/
+}
 	template<class T>
 	class IComPtr
 	{
@@ -1133,6 +2165,29 @@ namespace Nilesoft
 	static const auto typeid_double = typeid(double).hash_code();
 	static const auto typeid_long_double = typeid(long double).hash_code();
 }
+
+
+//template <class T>
+//constexpr bool is_numeric = (std::is_integral_v<T> || std::is_floating_point_v<T>) && !(std::is_same<char, T>::value || std::is_same<wchar_t, T>::value);
+
+/*
+				template<typename T>
+	Object(T const &obj) noexcept
+	{
+		if constexpr(std::is_null_pointer_v<T>)
+			Value.Type = PrimitiveType::Null;
+		else if constexpr(is_string_w_type_v<T> || is_char_type_v<T>)
+			assign((string)obj);
+		else if constexpr(is_string_a_type_v<T>)
+			assign(((string)Unicode::FromAnsi(obj)).move());
+		else if constexpr(is_numeric<T>)
+			assign((double)obj);
+		else if constexpr(std::is_pointer_v<T>)
+			*this = (Object *)obj;
+		else
+			assign((string)obj);
+	}
+*/
 
 template<typename T = LRESULT>
 inline static auto SendMSG(HWND hWnd, uint32_t msg, auto wparam, auto lparam)

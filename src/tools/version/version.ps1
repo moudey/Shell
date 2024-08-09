@@ -78,7 +78,7 @@ try
 	$ChangeBuild	= 1
 	$ChangeRevis	= 0
 	
-	$___Build__	= 13	# auto increase
+	$___Build__	= 17	# auto increase
 	$___Revis__	= 0	# auto increase
 	
 	$AppCompany		= "Nilesoft"

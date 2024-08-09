@@ -1810,11 +1810,11 @@ namespace Nilesoft
 						case IDENT_COMMAND_SLEEP:
 						case IDENT_COMMAND_NAVIGATE:
 							return check(argc == 1, 1);
-						case IDENT_COMMAND_RANDOM:
-							return check(argc <= 2, 1);
 					}
 					return error_at(0);
 				}
+				case IDENT_RANDOM:
+					return check(argc <= 2);
 				case IDENT_REGEX:
 				{
 					switch(id[1])

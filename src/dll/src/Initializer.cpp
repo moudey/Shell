@@ -233,146 +233,8 @@ namespace Nilesoft
 			return false;
 		}
 
-		/*
-		static bool isWhiteSpace(wchar_t ch) {
-			// this is surprisingly faster than the equivalent if statement
-			switch(ch) {
-				case L'\u0009': case L'\u000A': case L'\u000B': case L'\u000C': case L'\u000D':
-				case L'\u0020': case L'\u0085': case L'\u00A0': case L'\u1680': case L'\u2000':
-				case L'\u2001': case L'\u2002': case L'\u2003': case L'\u2004': case L'\u2005':
-				case L'\u2006': case L'\u2007': case L'\u2008': case L'\u2009': case L'\u200A':
-				case L'\u2028': case L'\u2029': case L'\u202F': case L'\u205F': case L'\u3000':
-					return true;
-				default:
-					return false;
-			}
-		}
-
-		static string TrimAllWithLexerLoop(const string &s) 
-		{
-			auto length = s.length();
-			auto buffer = s;
-			size_t dstIdx = 0;
-			for(int index = 0; index < s.length(); index++) 
-			{
-				auto ch = s[index];
-				switch(ch) 
-				{
-					case L'\u0009': case L'\u000A': case L'\u000B': case L'\u000C': case L'\u000D':
-					case L'\u0020': case L'\u0085': case L'\u00A0': case L'\u1680': case L'\u2000':
-					case L'\u2001': case L'\u2002': case L'\u2003': case L'\u2004': case L'\u2005':
-					case L'\u2006': case L'\u2007': case L'\u2008': case L'\u2009': case L'\u200A':
-					case L'\u2028': case L'\u2029': case L'\u202F': case L'\u205F': case L'\u3000':
-						length--;
-						continue;
-					default:
-						break;
-				}
-				buffer[dstIdx++] = ch;
-			}
-			buffer.release(length);
-			return buffer.move();
-		}
-
-
-		static string TrimControlCharacter(const string &s)
-		{
-			auto length = s.length();
-			auto buffer = s;
-			size_t dstIdx = 0;
-			for(int i = 0; i < s.length(); i++)
-			{
-				auto c = s[i];
-				if(std::iswcntrl(c))
-					length--;
-				else
-					buffer[dstIdx++] = c;
-			}
-			buffer.release(length);
-			return buffer.move();
-		}
-void remove_control_characters(std::string& s) {
-	s.erase(std::remove_if(s.begin(), s.end(), [](char c) { return std::iscntrl(c); }), s.end());
-}
-		*/
-		/*
-		static uint32_t hashing(const string &value, uint32_t hash = 0)
-		{
-			if(value.empty())
-				return 0;
-
-			Hash h(hash == 0 ? Hash::offset_basis : hash);
-			wchar_t c = 0;
-			string tmp = value;
-			//tmp.trim_end(L'.').trim_cntrl();
-
-			for(auto i = 0u; i < tmp.length(); i++)
-			{
-				c = tmp[i];
-				if(c == 0 or c == L'\t' or c == L'\b')
-					break;
-				else if(c == L'&')
-				{
-					if(tmp[i + 1] == L'&')
-						i++;
-					else continue;
-				}
-
-				h.hash(c == L' ' ? L'_' : c);
-			}
-			return h;
-		}
-		*/
 		void Initializer::load_mui()
 		{
-			/*
-			string nn0 = L"Очистить &корзину";
-			string nn, xx;
-			auto hModule = ::LoadLibraryExW(L"C:\\Windows\\System32\\ru-RU\\shell32.dll.mui", nullptr, LOAD_LIBRARY_AS_DATAFILE | LOAD_LIBRARY_AS_IMAGE_RESOURCE);
-			auto len = ::LoadStringW(hModule, 10564, nn.buffer(MAX_PATH), MAX_PATH);
-			if(len > 0)
-			{
-				nn.release(len);
-				string dd = nn0;
-				auto h = MenuItemInfo::normalize(nn0, &xx);
-				MBF(L"%X\n%d\n%d", h, xx.length(), dd.trim_cntrl().length());
-			}
-			*/
-
-			/*auto hh = ::LoadLibraryExW(L"D:\\mui\\w11\\ru-RU\\AppResolver.dll.mui", nullptr, LOAD_LIBRARY_AS_IMAGE_RESOURCE);
-			if(hh)
-			{
-				string title;
-				auto len = ::LoadString(hh, 8505, title.buffer(MAX_PATH), MAX_PATH);
-				if(len > 0)
-				{
-					string ss = L"Перейти к расположению файла"; // 30064DE5
-					//string m;
-					//for(auto i = 0u; i < ss.length(); i++) m.append_format(L"%0.6X ", ss[i]);
-					
-					title.release(len);
-					MB(title);
-				//	auto hash = hashing(title);
-				//	auto hash2 = hashing(ss);
-				//	MBF(L"30064DE5\n%X\n%X\n%d", title);
-					//	Logger::Log(L"%d\t\t%X\t[%s]\t\t[%s]\n", item->res_id, item->hash, item->title.c_str(), item->title_normalize.c_str());
-					//get_image(item);
-				}
-			}*/
-			
-			/*auto get_image = [=](IDMUI *ui)
-			{
-				for(auto &i : cache->images)
-				{
-					//auto id = ui->hash == 0 ? ui->id : ui->hash;
-					if(i.first == ui->id)
-					{
-						ui->image = i.second;
-						break;
-					}
-				}
-			};*/
-
 			auto ldstr = [&, this](const wchar_t *dll,
 								std::initializer_list<MUID> list)
 			{
@@ -437,7 +299,13 @@ void remove_control_characters(std::string& s) {
 								{
 									uid->title.release(mii.cch);
 									uid->set_hash();
+
 									//get_image(uid);
+								}
+								else if(it.title_fallback.length() > 0)
+								{
+									uid->title = it.title_fallback;
+									uid->set_hash();
 								}
 							}
 						}
@@ -447,6 +315,8 @@ void remove_control_characters(std::string& s) {
 					{
 						auto uid = &MAP_MUID[it.id];
 						*uid = it;
+						//uid->title = it.title_fallback;
+					//	uid->set_hash();
 						//get_image(uid);
 					}
 				}
@@ -454,6 +324,8 @@ void remove_control_characters(std::string& s) {
 				{
 					auto uid = &MAP_MUID[it.id];
 					*uid = it;
+				//	uid->title = it.title_fallback;
+				//	uid->set_hash();
 					//get_image(uid);
 				}
 			};
@@ -678,30 +550,30 @@ void remove_control_characters(std::string& s) {
 
 			ldmenu2(explorer, {
 				{ 205,{
-					{IDENT_ID_ADJUST_DATE_TIME, 408, {L'\uE1F2'}},
-					{IDENT_ID_CUSTOMIZE_NOTIFICATION_ICONS, 421, {L'\uE190'}},
-					{IDENT_ID_CORTANA,445, {L'\ue170'}},
-					{IDENT_ID_NEWS_AND_INTERESTS,621},
-					{IDENT_ID_SHOW_CORTANA_BUTTON ,449, {L'\ue170'}},
-					{IDENT_ID_SHOW_TASK_VIEW_BUTTON,430, {L'\uE204'}},
-					{IDENT_ID_SHOW_PEOPLE_ON_THE_TASKBAR,435, {L'\uE106'}},
-					{IDENT_ID_SHOW_PEN_BUTTON,437},
-					{IDENT_ID_SHOW_TOUCH_KEYBOARD_BUTTON,436, {L'\ue18c'}},
-					{IDENT_ID_SHOW_TOUCHPAD_BUTTON,438, {L'\uE1EB'}},
-					{IDENT_ID_CASCADE_WINDOWS,403},
-					{IDENT_ID_SHOW_WINDOWS_STACKED,405},
-					{IDENT_ID_SHOW_WINDOWS_SIDE_BY_SIDE,404},
-					{IDENT_ID_SHOW_THE_DESKTOP,407, {0, 0}},
-					{IDENT_ID_TASK_MANAGER,420},
-					{IDENT_ID_LOCK_THE_TASKBAR,424},
-					{IDENT_ID_LOCK_ALL_TASKBARS,425},
-					{IDENT_ID_TASKBAR_SETTINGS, 413},
-					{IDENT_ID_EXIT_EXPLORER, 518, {L'\uE0D0'}}
+					{IDENT_ID_ADJUST_DATE_TIME, 408, {L'\uE1F2'}, {},L"&Adjust date/time"},
+					{IDENT_ID_CUSTOMIZE_NOTIFICATION_ICONS, 421, {L'\uE190'}, {},L"&Customize notification icons"},
+					{IDENT_ID_CORTANA,445, {L'\ue170'}, {},L"Cortana"},
+					{IDENT_ID_SHOW_CORTANA_BUTTON ,449, {L'\ue170'}, {},L"Show Cortana button"},
+					{IDENT_ID_NEWS_AND_INTERESTS,621, {}, {},L"&News and interests"},
+					{IDENT_ID_SHOW_TASK_VIEW_BUTTON,430, {L'\uE204'}, {},L"Show Task &View button"},
+					{IDENT_ID_SHOW_PEOPLE_ON_THE_TASKBAR,435, {L'\uE106'}, {},L"Show &People on the taskbar"},
+					{IDENT_ID_SHOW_PEN_BUTTON,437, {}, {},L"Show Pen button"},
+					{IDENT_ID_SHOW_TOUCH_KEYBOARD_BUTTON,436, {L'\ue18c'}, {},L"Show touch ke&yboard button"},
+					{IDENT_ID_SHOW_TOUCHPAD_BUTTON,438, {L'\uE1EB'}, {},L"Show touch&pad button"},
+					{IDENT_ID_CASCADE_WINDOWS,403, {}, {},L"Casca&de windows"},
+					{IDENT_ID_SHOW_WINDOWS_STACKED,405, {},{}, L"Show windows stack&ed"},
+					{IDENT_ID_SHOW_WINDOWS_SIDE_BY_SIDE,404, {}, {},L"Show windows s&ide by side" },
+					{IDENT_ID_SHOW_THE_DESKTOP,407, {}, {},L"&Show the desktop"},
+					{IDENT_ID_TASK_MANAGER,420, {}, {},L"Tas&k Manager"},
+					{IDENT_ID_LOCK_THE_TASKBAR,424, {}, {},L"&Lock the taskbar"},
+					{IDENT_ID_LOCK_ALL_TASKBARS,425, {}, {},L"&Lock all taskbars"},
+					{IDENT_ID_TASKBAR_SETTINGS, 413, {},{}, L"Taskbar se&ttings"},
+					{IDENT_ID_EXIT_EXPLORER, 518, {L'\uE0D0'},{}, L"E&xit Explorer"}
 				}},
 				{12000,{
-					{IDENT_ID_RESTORE_ALL_WINDOWS, 65493},
-					{IDENT_ID_MINIMIZE_ALL_WINDOWS, 65492},
-					{IDENT_ID_CLOSE_ALL_WINDOWS, 65491},
+					{IDENT_ID_RESTORE_ALL_WINDOWS, 65493, {}, {}, L"&Restore all windows"},
+					{IDENT_ID_MINIMIZE_ALL_WINDOWS, 65492,{}, {}, L"&Minimize all windows"},
+					{IDENT_ID_CLOSE_ALL_WINDOWS, 65491, {}, {}, L"&Close all windows"},
 				}}
 			});
 
@@ -885,7 +757,7 @@ void remove_control_characters(std::string& s) {
 
 			ldstr(explorer, {
 				{IDENT_ID_WINDOWS_TERMINAL, 22016, {}, {}, L"Windows Terminal"},
-				{IDENT_ID_WINDOWS, 11104},
+				{IDENT_ID_WINDOWS, 11104, {}, {}, L"Windows"},
 				{IDENT_ID_TASKBAR, 518},
 				{IDENT_ID_FILE_EXPLORER, 6020},
 				{IDENT_ID_SHOW_OPEN_WINDOWS, 850},
@@ -902,42 +774,7 @@ void remove_control_characters(std::string& s) {
 				{ IDENT_ID_MAKE_AVAILABLE_ONLINE, 0},
 				{ IDENT_ID_SHIELD, 0,}
 			});
-
-			//select id.windows_terminal
-			//terminal
 		}
-
-		/*HRESULT Initializer::Modern(int enabled)
-		{
-			return S_FALSE;
-
-			if(!ver->IsWindows11OrGreater())
-				return S_FALSE;
-
-			IID treatAs{};
-
-			//REGDB_E_READREGDB
-			auto hres = ::CoGetTreatAsClass(IID_FileExplorerContextMenu, &treatAs);
-
-			if(enabled == 1)
-			{
-				if(treatAs != IID_ContextMenu)
-					hres = ::CoTreatAsClass(IID_FileExplorerContextMenu, IID_ContextMenu);
-			}
-			else if(enabled == 2)
-			{
-				if(treatAs != IID_FileExplorerContextMenu)
-					hres = ::CoTreatAsClass(IID_FileExplorerContextMenu, IID_FileExplorerContextMenu);
-			}
-			else if(S_OK == hres)
-			{
-				if(((treatAs == IID_ContextMenu) || (treatAs == IID_FileExplorerContextMenu)))
-					hres = ::CoTreatAsClass(IID_FileExplorerContextMenu, GUID_NULL);
-			}
-
-			return hres;
-		}*/
-
 
 		// enabled/reload
 		// disabled
@@ -1018,332 +855,3 @@ void remove_control_characters(std::string& s) {
 		}
 	}
 }
-
-/* explorer.exe
-
-535, 	"Cascade all windows"
-536, 	"Show all windows side by side"
-537, 	"Minimize all windows"
-538, 	"Show all windows stacked"
-850, 	"&Show open windows"
-25000, 	"News and interests"
-*/
-
-/* user32.dll
-710, 	"Windows"
-800, 	"OK"
-801, 	"Cancel"
-802, 	"&Abort"
-803, 	"&Retry"
-804, 	"&Ignore"
-805, 	"&Yes"
-806, 	"&No"
-807, 	"&Close"
-808, 	"Help"
-809, 	"&Try Again"
-810, 	"&Continue"
-*/
-
-/* shell32.dll
-1361, 	"Start menu"
-518, 	"Taskbar"
-578, 	"Start"
-511, 	"Pin to %1"
-1362, 	"Unpin from %1"
-
-22000, 	"Desktop"
-22001, 	"Task Manager"
-22002, 	"Disk Management"
-22016, 	"Windows Terminal
-602, 	"Power"
-850, 	"&Show open windows"
-857, 	"Show desktop"
-10113, 	"Show desktop"
-900, 	"Task View"
-11107, 	"Close"
-11104, 	"Windows"
-
-4145, 	"Move"
-4146, 	"Copy"
-4147, 	"Delete"
-4148, 	"Rename"
-4149, 	"Link"
-4150, 	"Apply Properties"
-4151, 	"New"
-4153, 	"Shortcut"
-4161, 	"Control Panel"
-4162, 	"Desktop"
-4163, 	"Undo %s"
-4164, 	"&Undo %s\tCtrl+Z"
-4165, 	"&Undo\tCtrl+Z"
-4166, 	" Search Control Panel"
-4167, 	"Normal window"
-4168, 	"Minimized"
-4169, 	"Maximized"
-4170, 	"&Redo\tCtrl+Y"
-4191, 	"&Redo %s\tCtrl+Y"
-4219, 	"Microsoft Windows"
-4233, 	"Application"
-4249, 	"&More..."
-4640, 	"Runs the selected command with elevation."
-5376, 	"Open wit&h"
-5377, 	"Open wit&h..."
-5378, 	"&Choose another app"
-5381, 	"&Choose default app"
-5382, 	"&Search the Microsoft Store"
-5384, 	"Adds this item to the Start Menu"
-5385, 	"Removes this item from the Start Menu"
-5386, 	"Pin to tas&kbar"
-5387, 	"Unpin from tas&kbar"
-5388, 	"Pins this application to the taskbar."
-5389, 	"Unpins this application from the taskbar."
-5953, 	"Moving..."
-5954, 	"Copying..."
-8506, 	"Open command &window here"
-8507, 	"Open AutoPla&y..."
-8508, 	"Open Power&Shell window here"
-8518, 	"Open in new &process"
-8768, 	"Read-only"
-8769, 	"Hidden"
-8770, 	"System"
-8771, 	"Compressed"
-8772, 	"Encrypted"
-8773, 	"Offline"
-8997, 	"Application"
-9015, 	"Browse"
-9016, 	"Open with..."
-9338, 	"Folders"
-9740, 	"Close"
-10208, 	"Open with Control Panel"
-10209, 	"C&onfigure"
-10210, 	"&Install"
-10530, 	"..."
-10564, 	"Empty Recycle &Bin"
-12352, 	"File Explorer"
-12389, 	"(Empty)"
-12390, 	"More"
-12560, 	"Burn to Disc"
-12708, 	"Search"
-12710, 	"Run"
-12850, 	"Open"
-12851, 	"Close"
-12852, 	"Execute"
-12853, 	"Application"
-16532, 	"General"
-16534, 	"Properties"
-16857, 	"New File"
-16859, 	"New Folder"
-17536, 	"Microsoft Windows"
-21763, 	"Administrator"
-21782, 	"Programs"
-24225, 	"Device Manager"
-24743, 	"Task Manager"
-29697, 	"&Copy here"
-29698, 	"&Move here"
-29699, 	"Create &shortcuts here"
-30304, 	"Copy To &folder..."
-30305, 	"Mo&ve To folder..."
-30312, 	"Se&nd to"
-30315, 	"Ne&w"
-30316, 	"New %s"
-30317, 	"&Folder"
-30318, 	"&Shortcut"
-30328, 	"Copy &as path"
-30329, 	"Copy path"
-30339, 	"Copy to"
-30340, 	"Move to"
-30381, 	"&Copy"
-30382, 	"&Move"
-30396, 	"New folder"
-30397, 	"New shortcut"
-30464, 	"Start menu"
-30608, 	"Pin to Start list"
-30609, 	"Control Panel"
-31153, 	"More options"
-31236, 	"New folder"
-31242, 	"Rename"
-31244, 	"Cut"
-31246, 	"Copy"
-31250, 	"Print"
-31252, 	"Delete"
-31254, 	"Remove properties"
-31259, 	"Properties"
-31261, 	"Undo"
-31263, 	"Redo"
-31276, 	"Select all"
-31278, 	"Play all"
-31283, 	"Play"
-31355, 	"Burn to disc"
-31359, 	"Erase this disc"
-31380, 	"Paste"
-31382, 	"Eject"
-31384, 	"AutoPlay"
-31389, 	"Close session"
-31456, 	"New library"
-31472, 	"Mount"
-32788, 	"Expand Folders"
-32789, 	"Collapse Folders"
-33010, 	"Computer"
-33011, 	"Share"
-33224, 	"&Yes"
-33225, 	"OK"
-33226, 	"&Skip"
-33228, 	"Cancel"
-33229, 	"&Continue"
-33230, 	"&Delete"
-33231, 	"T&ry Again"
-33232, 	"&No"
-33248, 	"Programs and Features"
-33280, 	"Shutdown"
-33281, 	"Restart"
-33553, 	"Delete"
-33555, 	"Properties"
-33560, 	"Cut"
-33561, 	"Copy"
-33562, 	"Paste"
-33563, 	"Undo"
-33568, 	"Redo"
-34593, 	"&Include in library"
-34645, 	"&Restore default libraries"
-37376, 	"Paste shortcut"
-37378, 	"Select none"
-37380, 	"Invert selection"
-37392, 	"Delete"
-37398, 	"Edit"
-37400, 	"New item"
-37394, 	"Permanently delete"
-37408, 	"&Add to favorites"
-37411, 	"Open &new window"
-37413, 	"Open new window in new &process"
-37415, 	"Open command &prompt"
-37417, 	"Run as administrator"
-37419, 	"Run as another user"
-37423, 	"Pin to taskbar"
-37425, 	"Troubleshoot compatibility"
-37427, 	"Add to playlist"
-37444, 	"Open command prompt as &administrator"
-37446, 	"Open Windows Powe&rShell"
-37448, 	"Open Windows PowerShell as &administrator"
-37459, 	"Options"
-37460, 	"Sort by"
-37462, 	"Group by"
-37468, 	"Ascending"
-37470, 	"Descending"
-37472, 	"Open location"
-37488, 	"Format"
-37490, 	"Optimize"
-37494, 	"Cleanup"
-37514, 	"Extract all"
-37516, 	"Extract to"
-37584, 	"Show all folders"
-37586, 	"Expand to open folder"
-37590, 	"Show libraries"
-37592, 	"Always show availability status"
-37594, 	"Show This PC"
-37596, 	"Show Network"
-37602, 	"Manage"
-37610, 	"Rotate left"
-37612, 	"Rotate right"
-37616, 	"Open new &tab"
-38240, "Show more details..."
-38325, 	"Add to Favorites"
-49917, 	"Show Folders"
-49918, 	"Show Libraries"
-50944, 	"Run as di&fferent user"
-51201, 	"&Pin to Start"
-51260, 	"Preview"
-51377, 	"Pin to Quick access"
-51378, 	"Quick access"
-51379, 	"Unpin from Quick access"
-51381, 	"Remove from Quick access"
-51384, 	"Pinned"
-51388, 	"Pin current folder to Quick access"
-51394, 	"Un&pin from Start"
-51395, 	"Pin to Start &list"
-51396, 	"Unpin from Start &list"
-51729, 	"Theme"
-51730, 	"Light"
-51731, 	"Dark"
-51732, 	"Windows Default"
-51523, 	"Sign out"
-61954, 	"&Shut Down"
-61955, 	"Cancel"
-61958, 	"&Sign out now"
-61959, 	"Sign out &later"
-61963, 	"&Restart Now"
-61964, 	"Restart &Later"
-*/
-
-/*
-//explorerframe.dll
-41220, 	"Expand Group"
-41221, 	"Collapse Group"
-14416, "Set as background
-49921, 	"Home"
-49922, 	"Clipboard"
-49927, 	"Select"
-49929, 	"Send"
-49926, 	"Open"
-49945, 	"System"
-49937, 	"Show/hide"
-49947, 	"Manage"
-49951, 	"Search"
-49942, 	"Computer
-49954, 	"Options"
-49960, 	"Extract"
-49986, 	"Run"
-50003, 	"File Explorer"
-50195, 	"New"
-50215, 	"Extract To"
-50217, 	"Cut (Ctrl+X)"
-50218, 	"Paste (Ctrl+V)"
-50219, 	"Copy (Ctrl+C)"
-50220, 	"Rename (F2)"
-50221, 	"New folder (Ctrl+Shift+N)"
-50222, 	"Properties (Alt+Enter)"
-50223, 	"Select all (Ctrl+A)"
-50228, 	"Delete (Ctrl+D)"
-50229, 	"Undo (Ctrl+Z)"
-50230, 	"Redo (Ctrl+Y)"
-50231, 	"Permanently Delete (Shift+Delete)"
-50232, 	"Open New Window (Ctrl+N)"
-50292, 	"All File Types"
-50290, 	"Filter"
-50291, 	"Filters"
-*/
-
-/* windows.storage.dll
-51378, 	"Quick access"
-4130, 	"File"
-4131, 	"Folder"
-4144, 	"Operation"
-4145, 	"Move"
-4146, 	"Copy"
-4147, 	"Delete"
-4148, 	"Rename"
-4151, 	"New"
-4161, 	"Control Panel"
-4163, 	"Undo %s"
-4164, 	"&Undo %s\tCtrl+Z"
-4188, 	"Redo %s"
-4191, 	"&Redo %s\tCtrl+Y"
-8496, 	"&Open"
-8497, 	"&Print"
-8498, 	"P&lay"
-8499, 	"P&review"
-8502, 	"E&xplore"
-8503, 	"S&earch..."
-8505, 	"Run as &administrator"
-8516, 	"&Edit"
-8517, 	"Op&en in new window"
-8519, 	"Open in new ta&b"
-8768, 	"Read-only"
-8769, 	"Hidden"
-8770, 	"System"
-8771, 	"Compressed"
-8772, 	"Encrypted"
-8773, 	"Offline"
-8774, 	"Pinned"
-8775, 	"Unpinned"
-9012, 	"Computer"
-*/

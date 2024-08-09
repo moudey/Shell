@@ -30,9 +30,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ReadMe.txt">
-      <Filter>Others Files</Filter>
-    </None>
     <None Include="src\Shell.def">
       <Filter>Others Files</Filter>
     </None>
