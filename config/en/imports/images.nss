@@ -74,7 +74,7 @@ $svg_window_template='<path fill="@image.color1" d="M3.453 15C3.12 15 2.805 14.9
   @clipPath
 </svg>'
 
-@run_as_different_user='<svg fill="none" viewBox="0 0 16 16">
+@run_as_different_user, run_as_another_user='<svg fill="none" viewBox="0 0 16 16">
 	<path fill="@image.color1" d="M6.9 14C7 14 7.2 15 7.4 15L3.9 15C3.6 15 3.2 15 2.8 15C2.8 15 2.5 15 2.1 14C2.1 14 1.9 14 1.6 14C1.6 14 1.4 14 1.2 13C1.2 13 1.1 13 1 12L1 3.9C1 3.5 1.1 3.2 1.2 2.8C1.2 2.8 1.4 2.5 1.6 2.1C1.6 2.1 1.9 1.9 2.1 1.6C2.1 1.6 2.5 1.4 2.8 1.2C2.8 1.2 3.2 1.1 3.6 1L12 1C12 1 13 1.1 13 1.2C13 1.2 14 1.4 14 1.6C14 1.6 14 1.9 14 2.1C14 2.1 15 2.5 15 2.8C15 2.8 15 3.2 15 3.5L15 5.2C15 5.1 15 4.9 15 4.8C15 4.8 14 4.6 14 4.5L14 4C14 3.7 14 3.5 14 3.2C14 3.2 14 3 14 2.8C14 2.8 13 2.6 13 2.4C13 2.4 13 2.3 13 2.2C13 2.2 13 2 12 2L4 2C3.7 2 3.4 2 3.2 2.2C3.2 2.2 3 2.3 2.8 2.4C2.8 2.4 2.6 2.6 2.4 2.8C2.4 2.8 2.3 3 2.2 3.2C2.2 3.2 2 3.5 2 3.7L11 4C10 4.2 9.6 4.5 9.2 5L2 5L2 12C2 12 2 13 2.2 13C2.2 13 2.3 13 2.4 13C2.4 13 2.6 13 2.8 14C2.8 14 3 14 3.2 14C3.2 14 3.5 14 3.7 14Z"/>
 	<path fill="@image.color2" d="M14 7.5C14 7.9 14 8.2 14 8.5C14 8.5 14 8.8 14 9.1C14 9.1 14 9.3 14 9.5C14 9.5 13 9.7 13 9.8C13 9.8 13 9.9 12 10C12 10 11 9.9 11 9.8C11 9.8 11 9.7 10 9.5C10 9.5 10 9.3 10 9C10 9 9.8 8.8 9.7 8.5C9.7 8.5 9.6 8.2 9.5 7.8C9.5 7.2 9.6 6.8 9.7 6.5C9.7 6.5 9.8 6.2 10 6C10 6 10 5.7 10 5.5C10 5.5 11 5.3 11 5.2C11 5.2 11 5.1 12 5C12 5 13 5.1 13 5.2C13 5.2 13 5.3 14 5.5C14 5.5 14 5.7 14 6C14 6 14 6.2 14 6.5C14 6.5 14 6.9 14 7.2Z"/>
 	<path fill="@image.color2" d="M16 13C16 13 16 14 16 14C16 14 16 14 16 14C16 14 15 15 15 15C15 15 15 15 15 15C15 15 14 15 14 16C14 16 14 16 14 16C14 16 13 16 13 16C13 16 13 16 12 16C12 16 11 16 11 16C11 16 11 16 11 16C11 16 10 16 9.9 16C9.9 16 9.7 15 9.4 15C9.4 15 9.1 15 8.9 15C8.9 15 8.7 15 8.5 14C8.5 14 8.3 14 8.2 14C8.2 14 8.1 14 8 13L8 13C8 12 8 12 8.1 12C8.1 12 8.2 12 8.3 12C8.3 12 8.5 11 8.6 11C8.6 11 8.8 11 9 11C9 11 9.2 11 9.4 11L14 11C15 11 15 11 15 11C15 11 15 11 15 11C15 11 16 11 16 12C16 12 16 12 16 12C16 12 16 12 16 12Z"/>
@@ -397,7 +397,7 @@ $svg_window_template='<path fill="@image.color1" d="M3.453 15C3.12 15 2.805 14.9
   @clipPath
 </svg>'
 
-@undo, undo_copy,undo_delete, undo_rename, undo_new, undo_move='<svg fill="none" viewBox="0 0 16 16">
+@undo, undo_copy, undo_move, undo_delete, undo_rename, undo_new, undo_apply_properties='<svg fill="none" viewBox="0 0 16 16">
   <g clip-path="url(#clip0)">
     <path fill="@image.color2" d="M2.5 0a.5.5 0 01.5.5V5h4.5a.5.5 0 010 1h-5a.5.5 0 01-.5-.5v-5a.5.5 0 01.5-.5z"/>
     <path fill="@image.color2" d="M8.51.22A5 5 0 0113.2 8.84l-8.37 7.04a.5.5 0 11-.64-.76l8.37-7.04.00-.00A4 4 0 007.44 1.92L2.94 5.67a.5.5 0 01-.64-.76L6.8 1.15A5.00 5.00 0 018.51.22z"/>
@@ -405,7 +405,7 @@ $svg_window_template='<path fill="@image.color1" d="M3.453 15C3.12 15 2.805 14.9
   @clipPath
 </svg>'
 
-@redo, redo_delete, redo_rename, redo_new, redo_move='<svg fill="none" viewBox="0 0 16 16">
+@redo, redo_copy, redo_move, redo_delete, redo_rename, redo_new, redo_apply_properties='<svg fill="none" viewBox="0 0 16 16">
   <g clip-path="url(#clip0)">
     <path fill="@image.color2" d="M13.5 0a.5.5 0 01.5.5v5a.5.5 0 01-.5.5h-5a.5.5 0 010-1H13V.5a.5.5 0 01.5-.5z"/>
     <path fill="@image.color2" d="M7.18 1.18a4.00 4.00 0 011.37.74l4.49 3.74a.5.5 0 00.64-.76L9.2 1.15A5 5 0 002.8 8.84h.00l8.37 7.04a.5.5 0 10.64-.76l-8.38-7.04-.00-.00A4 4 0 017.18 1.18z"/>
@@ -528,7 +528,7 @@ $svg_window_template='<path fill="@image.color1" d="M3.453 15C3.12 15 2.805 14.9
   @clipPath
 </svg>'
 
-@move_to, move_here,move_to_folder, extract_all, extract_to='<svg fill="none" viewBox="0 0 16 16">
+@move, move_to, move_here,move_to_folder, extract_all, extract_to='<svg fill="none" viewBox="0 0 16 16">
   <path fill="@if(theme.islight,'#fff','none')" d="M2.5 1.5h3a2 2 0 011.6.8L8 3.5h4.5a2 2 0 012 2 .87.87 0 01.86.99l-.09.66A5.75 5.75 0 006.59 14.5H2.5a2 2 0 01-2-2v-9a2 2 0 012-2z"/>
   <path fill="@image.color1" d="M2.5 1A2.5 2.5 0 000 3.5v9A2.5 2.5 0 002.5 15h4.43a5.75 5.75 0 01-.61-1H2.5c-.25 0-.49-.06-.70-.17l1.44-7.02A1 1 0 014.22 6h5.59a5.75 5.75 0 011.68-.25c.58 0 1.15.08 1.68.25h.59a1 1 0 01.97.75c.35.24.67.52.96.83l.04-.31a1.99 1.99 0 00-.76-1.86A2.5 2.5 0 0012.5 3H8.25L7.5 2a2.5 2.5 0 00-2-1h-3zm10 3a1.5 1.5 0 011.41 1.00A2.04 2.04 0 0013.77 5H4.22a2 2 0 00-1.96 1.59l-1.25 6.08c-.00-.06-.01-.12-.01-.18v-9A1.5 1.5 0 012.5 2h3a1.5 1.5 0 011.2.6l.9 1.2.15.2h4.75z"/>
   <path fill="@image.color2" d="M11.5 7a4.5 4.5 0 110 9 4.5 4.5 0 010-9z"/>
