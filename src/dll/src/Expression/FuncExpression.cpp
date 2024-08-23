@@ -4238,34 +4238,34 @@ namespace Nilesoft
 					break;
 				}
 				case IDENT_IS7ORGREATER:
-					_result = ver->Major >= 6 && ver->Minor >= 1;
+					_result = ver->Major > 6 || (ver->Major == 6 && ver->Minor >= 1);
 					break;
 				case IDENT_IS8ORGREATER:
-					_result = ver->Major >= 6 && ver->Minor >= 2;
+					_result = ver->Major > 6 || (ver->Major == 6 && ver->Minor >= 2);
 					break;
 				case IDENT_IS81ORGREATER:
-					_result = ver->Major >= 6 && ver->Minor >= 3;
+					_result = ver->Major > 6 || (ver->Major == 6 && ver->Minor >= 3);
 					break;
 				case IDENT_IS10ORGREATER:
 					_result = ver->Major >= 10;
 					break;
 				case IDENT_S11ORGREATER:
-					_result = ver->Major >= 10 && ver->Build >= 22000;
+					_result = ver->Major >10 || (ver->Major == 10 && ver->Build >= 22000);
 					break;
 				case IDENT_IS7OREARLIER:
-					_result = ver->Major <= 6 && ver->Minor <= 1;
+					_result = ver->Major < 6 || (ver->Major == 6 && ver->Minor <= 1);
 					break;
 				case IDENT_IS8OREARLIER:
-					_result = ver->Major <= 6 && ver->Minor <= 2;
+					_result = ver->Major < 6 || (ver->Major == 6 && ver->Minor <= 2);
 					break;
 				case IDENT_IS81OREARLIER:
-					_result = ver->Major <= 6 && ver->Minor <= 3;
+					_result = ver->Major < 6 || (ver->Major == 6 && ver->Minor <= 3);
 					break;
 				case IDENT_IS10OREARLIER:
-					_result = ver->Major <= 10 && ver->Build < 22000;
+					_result = ver->Major < 10 || (ver->Major == 10 && ver->Build < 22000);
 					break;
 				case IDENT_IS11OREARLIER:
-					_result = ver->Major <= 10 && ver->Build <= 22000;
+					_result = ver->Major < 10 || (ver->Major == 10 && ver->Build <= 22000);
 					break;
 				case IDENT_IS_PRIMARY_MONITOR:
 					_result = context->helper.is_primary_monitor;
