@@ -49,43 +49,63 @@ sys.version.type</code></pre>
 </section>
 
 <section id="sys.datetime" class="my-5">
-	<h5>sys.datetime</h5>
+	<h5>sys.datetime (system.datetime)</h5>
 	<p>Date and time format</p>
 	<p>Syntax</p>
-	<pre><code>sys.datetime
-sys.datetime.date
-sys.datetime.date_day
-sys.datetime.date_dayofweek
-sys.datetime.date_month
-sys.datetime.date_y
-sys.datetime.date_year
-sys.datetime.date_yy
-sys.datetime.short
-sys.datetime.time
-sys.datetime.time_hour
-sys.datetime.time_milliseconds
-sys.datetime.time_min
-sys.datetime.time_minute
-sys.datetime.time_ms
-sys.datetime.time_pm
-sys.datetime.time_second</code></pre>
+	<pre><code>sys.datetime                                   // the date and time in a short format (Format: YYYY.MM.DD-HH.MM.SS).
+sys.datetime.short                             // the date and time in a short format (Format: YYYY.MM.DD-HH.MM.SS).
+sys.datetime.dayofweek (sys.datetime.dw)       // the day of the week as a number (Sunday as 1)
+
+sys.datetime.date                              // the full date in a long format (Format: YYYY.MM.DD).
+sys.datetime.yy                                // the year part of the current date as a two-digit number.
+sys.datetime.year (sys.datetime.y)             // the year part of the current date as a four-digit number.
+sys.datetime.month (sys.datetime.m)            // the month part of the current date.
+sys.datetime.day (sys.datetime.d)              // the day part of the current date.
+
+sys.datetime.time                              // the full time in hours, minutes, and seconds (Format: HH.MM.SS).
+sys.datetime.pm                                // "AM" or "PM" based on the current time.
+sys.datetime.hour (sys.datetime.h)             // the hour part of the current time (24-hour format).
+sys.datetime.minute (sys.datetime.min)         // the minutes part of the current time.
+sys.datetime.second (sys.datetime.s)           // the seconds part of the current time.
+sys.datetime.milliseconds (sys.datetime.ms)    // the milliseconds part of the current time as a three-digit number.
+
+sys.datetime("D")                              // the full date in a short format (Format: DD/MM/YYYY).
+sys.datetime("Y")                              // the year part of the current date as a four-digit number.
+sys.datetime("y")                              // the year part of the current date as a two-digit number.
+sys.datetime("m")                              // the month part of the current date as a two-digit number.
+sys.datetime("d")                              // the day part of the current date as a two-digit number.
+sys.datetime("P") (sys.datetime("p"))          // "AM" or "PM" based on the current time.
+sys.datetime("h")                              // the hour part of the current time as a two-digit number (12-hour format).
+sys.datetime("H")                              // the hour part of the current time as a two-digit number (24-hour format).
+sys.datetime("M")                              // the minute part of the current time as a two-digit number.
+sys.datetime("S")                              // the second part of the current time as a two-digit number.
+sys.datetime("s")                              // the milliseconds part of the current time as a three-digit number.
+
+datetime("y/m/d")                              // the date in a short format (Format: YYYY/MM/DD).
+datetime("h:M P")                              // the time in a short format (Format: HH:MM AM/PM).
+datetime("H.M.S.s")                            // the time in a long format (Format: HH.MM.SS.MS).</code></pre>
 </section>
 
 <section id="sys.paths" class="my-5">
 	<h5>Windows paths</h5>
-	<pre><code>sys.appdata
-sys.bin
+	<pre><code>sys                                            // %WINDIR%
+
+sys.root                                       // %SYSTEMDRIVE%
+
+sys.programdata                                // %PROGRAMDATA%
+sys.prog                                       // %PROGRAMFILES%
+sys.prog32                                     // %PROGRAMFILES(x86)%
+sys.templates
+
+sys.users
+sys.appdata                                    // %APPDATA%
+sys.temp                                       // %TEMP%
+
+sys.directory (sys.dir)                        // %WINDIR%
+sys.path                                       // %WINDIR%
+sys.bin                                        // %WINDIR%\system32
 sys.bin32
 sys.bin64
-sys.directory (sys.dir)
-sys.path
-sys.prog
-sys.prog32
-sys.programdata
-sys.root
-sys.temp
-sys.templates
-sys.users
 sys.wow</code></pre>
 </section>
 
@@ -94,4 +114,53 @@ sys.wow</code></pre>
 	<p>Returns true if the current monitor is the primary</p>
 	<p>Syntax</p>
 	<code>sys.is_primary_monitor</code><br>
+</section>
+
+<section id="sys.langid" class="my-5">
+	<h5>sys.langid</h5>
+	<p>Returns the language ID</p>
+	<p>Syntax</p>
+	<code>sys.langid</code><br>
+</section>
+
+<section id="sys.extended" class="my-5">
+	<h5>sys.extended</h5>
+	<p>Returns whether the Shift key is currently pressed</p>
+	<p>Syntax</p>
+	<code>sys.extended</code><br>
+</section>
+
+<section id="sys.is11" class="my-5">
+	<h5>sys.is11</h5>
+	<p>Returns whether the Windows version is 11</p>
+	<p>Syntax</p>
+	<code>sys.is11</code><br>
+</section>
+
+<section id="sys.is10" class="my-5">
+	<h5>sys.is10</h5>
+	<p>Returns whether the Windows version is 10</p>
+	<p>Syntax</p>
+	<code>sys.is10</code><br>
+</section>
+
+<section id="sys.is81" class="my-5">
+	<h5>sys.is81</h5>
+	<p>Returns whether the Windows version is 8.1</p>
+	<p>Syntax</p>
+	<code>sys.is81</code><br>
+</section>
+
+<section id="sys.is8" class="my-5">
+	<h5>sys.is8</h5>
+	<p>Returns whether the Windows version is 8</p>
+	<p>Syntax</p>
+	<code>sys.is8</code><br>
+</section>
+
+<section id="sys.is7" class="my-5">
+	<h5>sys.is7</h5>
+	<p>Returns whether the Windows version is 7</p>
+	<p>Syntax</p>
+	<code>sys.is7</code><br>
 </section>
