@@ -163,6 +163,7 @@ namespace Nilesoft
 				eval_app();
 				break;
 			case IDENT_SYS:
+			case IDENT_SYSTEM:
 				eval_sys();
 				break;
 			case IDENT_STR:
@@ -4366,62 +4367,60 @@ namespace Nilesoft
 
 					if(Id.length() == 3)
 					{
-						WORD t = 0;
 						switch(Id[2])
 						{
 							case IDENT_TIME_PM:
 								_result = (lt.wHour >= 12 ? L"PM" : L"AM");
-								return;
+								break;
 							case IDENT_DATE_YY:
-								t = lt.wYear % 100;
+								_result = lt.wYear % 100;
 								break;
 							case IDENT_DATE_Y:
 							case IDENT_DATE_YEAR:
-								t = lt.wYear;
+								_result = lt.wYear;
 								break;
 							case IDENT_DATE_M:
 							case IDENT_DATE_MONTH:
-								t = lt.wMonth;
+								_result = lt.wMonth;
 								break;
 							case IDENT_DATE_DW:
 							case IDENT_DATE_DAYOFWEEK:
-								t = lt.wDayOfWeek + 1;
+								_result = lt.wDayOfWeek + 1;
 								break;
 							case IDENT_DATE_D:
 							case IDENT_DATE_DAY:
-								t = lt.wDay;
+								_result = lt.wDay;
 								break;
 							case IDENT_TIME_H:
 							case IDENT_TIME_HOUR:
-								t = lt.wHour;
+								_result = lt.wHour;
 								break;
 							case IDENT_TIME_MIN:
 							case IDENT_TIME_MINUTE:
-								t = lt.wMinute;
+								_result = lt.wMinute;
 								break;
 							case IDENT_TIME_S:
 							case IDENT_TIME_SECOND:
-								t = lt.wSecond;
+								_result = lt.wSecond;
 								break;
 							case IDENT_TIME_MS:
 							case IDENT_TIME_MILLISECONDS:
-								t = lt.wMilliseconds;
+								_result = lt.wMilliseconds;
 								break;
 							case IDENT_DATE:
 								_result = string::TimeFormat(&lt, L"y.m.d").move();
 								break;
 							case IDENT_TIME:
-								_result = string::TimeFormat(&lt, L"H.M.S").move();
+								_result = string::TimeFormat(&lt, L"H:M:S").move();
 								break;
 							case IDENT_SHORT:
-								_result = string::TimeFormat(&lt, L"y.m.d-H.M.S").move();
+								_result = string::TimeFormat(&lt, L"y.m.d-H:M:S").move();
 								break;
 						}
-						_result = t;
 					}
 					else if(Arguments.size() == 0)
 					{
-						_result = string::TimeFormat(&lt, L"y.m.d-H.M.S").move();
+						_result = string::TimeFormat(&lt, L"y.m.d-H:M:S").move();
 					}
 					else
 					{
