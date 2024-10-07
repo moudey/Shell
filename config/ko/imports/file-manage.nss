@@ -2,7 +2,7 @@ menu(where=sel.count>0 type='file|dir|drive|namespace|back' mode="multiple" titl
 {
 	menu(separator="after" title=title.copy_path image=icon.copy_path)
 	{
-		item(where=sel.count > 1 title='선택한 항목 복사(@sel.count)' cmd=command.copy(sel(false, "\n")))
+		item(where=sel.count > 1 title='선택한 (@sel.count) 항목 복사' cmd=command.copy(sel(false, "\n")))
 		item(mode="single" title=@sel.path tip=sel.path cmd=command.copy(sel.path))
 		item(mode="single" type='file' separator="before" find='.lnk' title='파일 위치 열기')
 		separator
