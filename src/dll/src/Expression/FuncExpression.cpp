@@ -5541,8 +5541,8 @@ namespace Nilesoft
 					uint8_t r = eval_arg(0);
 					uint8_t g = eval_arg(1);
 					uint8_t b = eval_arg(2);
-					uint8_t a = argc == 4 ? 0xff : eval_arg(3).to_number<uint8_t>();
-					color = Color(r, g, b, a).to_ARGB();
+					uint8_t a = argc == 3 ? 0xff : eval_arg(3).to_number<uint8_t>();
+					color = Color(r, g, b, a).to_ABGR();
 				}
 				return color.inner(PrimitiveType::Color).move();
 			}

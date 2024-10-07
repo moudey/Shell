@@ -700,13 +700,18 @@ namespace Nilesoft
 							{
 								case IDENT_TIME_MS:
 								case IDENT_TIME_MILLISECONDS:
+								case IDENT_TIME_S:
 								case IDENT_TIME_SECOND:
 								case IDENT_TIME_MIN:
 								case IDENT_TIME_MINUTE:
+								case IDENT_TIME_H:
 								case IDENT_TIME_HOUR:
 								case IDENT_TIME_PM:
+								case IDENT_DATE_D:
 								case IDENT_DATE_DAY:
+								case IDENT_DATE_DW:
 								case IDENT_DATE_DAYOFWEEK:
+								case IDENT_DATE_M:
 								case IDENT_DATE_MONTH:
 								case IDENT_DATE_Y:
 								case IDENT_DATE_YEAR:
@@ -1814,7 +1819,7 @@ namespace Nilesoft
 					return error_at(0);
 				}
 				case IDENT_RANDOM:
-					return check(argc <= 2);
+					return check(argc <= 2, 1);
 				case IDENT_REGEX:
 				{
 					switch(id[1])
