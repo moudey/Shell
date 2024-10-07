@@ -34,7 +34,7 @@ menu(where=sel.count>0 type='file|dir|drive|namespace|back' mode="multiple" titl
 
 	menu(type='file|dir|back.dir' mode="single" title='속성')
 	{
-		$atrr = io.attributes(sel.path)
+		var { atrr = io.attributes(sel.path) }
 		item(title='숨김' checked=io.attribute.hidden(atrr)
 			cmd args='/c ATTRIB @if(io.attribute.hidden(atrr),"-","+")H "@sel.path"' window=hidden)
 		
