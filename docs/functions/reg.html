@@ -29,8 +29,8 @@ reg.qword	// REG_QWORD</code></pre>
 <section id="reg-function" class="my-5">
 	<h5>The function of reading from the Registry.</h5>
 	<p>Syntax</p>
-	<code>reg(reg.lm, 'SOFTWARE\Microsoft\Windows NT\CurrentVersion','ProductName')</code><br><br>
-	<code>reg(reg.cr, 'txtfile\DefaultIcon')</code>
+	<code>reg('HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion','ProductName')</code><br><br>
+	<code>reg('HKEY_CURRENT_USER\txtfile\DefaultIcon')</code>
 </section>
 
 <section id="reg.exists" class="my-5">

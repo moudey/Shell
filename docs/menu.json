@@ -25,6 +25,8 @@
 	},{
 		"title":"Functions", "link":"/docs/functions",
 		"items": [
+			{"title":"Enums", "link":"/docs/functions/enums"},
+			{"title":"Unsorted", "link":"/docs/functions/unsorted"},
 			{"title":"app", "link":"/docs/functions/app"},
 			{"title":"appx", "link":"/docs/functions/appx"},
 			{"title":"color", "link":"/docs/functions/color"},
