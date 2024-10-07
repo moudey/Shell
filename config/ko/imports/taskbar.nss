@@ -1,11 +1,11 @@
-﻿menu(type="taskbar" vis=key.shift() or key.lbutton() pos=0 title=app.name image=\uE249)
+menu(type="taskbar" vis=key.shift() or key.lbutton() pos=0 title=app.name image=\uE249)
 {
 	item(title="구성" image=\uE10A cmd='"@app.cfg"')
 	item(title="관리" image=\uE0F3 admin cmd='"@app.exe"')
 	item(title="디렉터리" image=\uE0E8 cmd='"@app.dir"')
 	item(title="버전\t"+@app.ver vis=label col=1)
 	item(title="문서" image=\uE1C4 cmd='https://nilesoft.org/docs')
-	item(title="기부" image=\uE1A7 cmd='https://nilesoft.org/donate')
+	item(title="기부하기" image=\uE1A7 cmd='https://nilesoft.org/donate')
 }
 menu(where=@(this.count == 0) type='taskbar' image=icon.settings expanded=true)
 {
