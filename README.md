@@ -1,5 +1,9 @@
 [![Ceasefire Now](https://badge.techforpalestine.org/default)](https://techforpalestine.org/learn-more)
 
+[![Build artifacts from master branch with MSBuild](../../actions/workflows/msbuild.yml/badge.svg)](../../actions/workflows/msbuild.yml)
+
+[![Latest nightly build](https://img.shields.io/badge/download%20latest%20nightly%20build-nightly.link-purple)](https://nightly.link/moudey/Shell/workflows/msbuild/main)
+
 # [Shell](https://nilesoft.org)
 Powerful manager for Windows File Explorer context menu.
 
