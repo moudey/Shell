@@ -49,6 +49,7 @@ jobs:
           ${{env.BIN_PATH}}\*
           !${{env.BIN_PATH}}\${{matrix.platform}}\*.lib
           !${{env.BIN_PATH}}\${{matrix.platform}}\*.exp
+          !${{env.BIN_PATH}}\${{matrix.platform}}\ca.dll
           !${{env.BIN_PATH}}\*.wixpdb
         if-no-files-found: warn
         retention-days: 0
