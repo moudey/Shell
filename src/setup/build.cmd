@@ -3,6 +3,7 @@
 echo build setup...
 echo.
 
+cd wix
 set arch=%~1
 set bin=..\..\bin
 

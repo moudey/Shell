@@ -9,7 +9,7 @@ set MM=%date:~4,2%
 set DD=%date:~7,2%
 set YYYY=%date:~10,4%
 
-set PLATFORM=release\x64
+set PLATFORM=x64
 
 set dt=%YYYY%%MM%%DD%%TH%%TM%%TS%
 set build=%YYYY%%MM%%DD%
@@ -20,7 +20,7 @@ set build=%YYYY%%MM%%DD%
 :: Unregistering the Shell Extension.
 ::echo Proceeding with the Shell Extension unregistration.
 echo.
-echo Shell version 1.9 build 18	%date% %time%
+echo Shell version 1.9 build 19	%date% %time%
 echo.
 
 cd /d %~dp0

@@ -2,14 +2,17 @@
 
 namespace Nilesoft
 {
-	static const auto REG_REGISTER			= 0x01;
-	static const auto REG_UNREGISTER		= 0x02;
-	static const auto REG_TREAT				= 0x04;
-	static const auto REG_CONTEXTMENU		= 0x08;
-	static const auto REG_FOLDEREXTENSIONS	= 0x16;
-	static const auto REG_ICONOVERLAY		= 0x32;
-	static const auto REG_RESTART			= 0x64;
-	static const auto REG_SILENT			= 0x128;
+	struct REGOP
+	{
+		bool REGISTER;
+		bool UNREGISTER;
+		bool TREAT;
+		bool CONTEXTMENU;
+		bool FOLDEREXTENSIONS;
+		bool ICONOVERLAY;
+		bool RESTART;
+		bool SILENT;
+	};
 
 	class RegistryConfig
 	{
@@ -98,7 +101,7 @@ namespace Nilesoft
 			}
 
 			// Require admininstrator's rights!
-			static bool Register(const wchar_t *dllPath, int fReg = REG_REGISTER | REG_CONTEXTMENU)
+			static bool Register(const wchar_t *dllPath, REGOP reg)
 			{
 				if(!dllPath || !dllPath[0])
 					return false;
@@ -108,7 +111,7 @@ namespace Nilesoft
 
 				int ret = 0;
 
-				if(fReg & REG_FOLDEREXTENSIONS)
+				if(reg.FOLDEREXTENSIONS)
 				{
 					if(RegisterInprocServer(dllPath, CLS_FolderExtensions, APP_COMP_NAME))
 					{
@@ -128,7 +131,7 @@ namespace Nilesoft
 					}
 				}
 				
-				if(fReg & REG_ICONOVERLAY)
+				if(reg.ICONOVERLAY)
 				{
 					// register COM-object for overlay icon handler
 					if(RegisterInprocServer(dllPath, CLS_IconOverlay, APP_COMP_NAME))
@@ -138,7 +141,7 @@ namespace Nilesoft
 					}
 				}
 
-				if(fReg & REG_CONTEXTMENU)
+				if(reg.CONTEXTMENU)
 				{
 					// register COM-object for shortcut menu handler
 					if(RegisterInprocServer(dllPath, CLS_ContextMenu, APP_COMP_NAME))

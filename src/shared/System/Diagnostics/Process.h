@@ -86,43 +86,63 @@ namespace Nilesoft
 				}
 			}
 
-			static BOOL Start(const wchar_t* application, const wchar_t* parameters,
-							  const wchar_t* directory, int showCmd, bool /*wait*/,
-							  LPPROCESS_INFORMATION processInfo)
+			static BOOL Start(const wchar_t *commandLine, const wchar_t *directory = nullptr, bool wait = false, int showCmd = SW_SHOWNORMAL)
 			{
+				PROCESS_INFORMATION processInfo = { };
+				auto result = Start(nullptr, commandLine, directory, showCmd, &processInfo);
+				if(!result)
+					return FALSE;
 
-				STARTUPINFOW startupInfo = { 0 };
-				startupInfo.cb = sizeof(STARTUPINFOW);
-				startupInfo.wShowWindow = (WORD)showCmd;
+				// Wait until child process exits.
+				if(wait && processInfo.hProcess)
+					::WaitForSingleObject(processInfo.hProcess, INFINITE);
 
-				string commandLine;
-				if(parameters)
-				{
-					commandLine.format(L"\"%s\" %s", application, parameters);
-				}
-				const BOOL result = ::CreateProcessW(application,
-													 commandLine, nullptr, nullptr, FALSE,
-													 NORMAL_PRIORITY_CLASS,
-													 nullptr, directory,
-													 &startupInfo, processInfo);
-			//	if(result && wait)
-			//		::WaitForSingleObject(processInfo->hProcess, INFINITE);
+				if(processInfo.hThread)
+					::CloseHandle(processInfo.hThread);
+				if(processInfo.hProcess)
+					::CloseHandle(processInfo.hProcess);
 
-				return result != 0;
+				return result;
 			}
 
 			static BOOL Start(const wchar_t* application, const wchar_t* parameters,
-							  const wchar_t* directory = nullptr, bool wait = false, int showCmd = SW_SHOWNORMAL)
+							  const wchar_t* directory, bool wait, int showCmd)
 			{
-				PROCESS_INFORMATION process = { 0 };
-				if(!Start(application, parameters, directory, showCmd, wait, &process))
+				PROCESS_INFORMATION processInfo = { };
+				if(!Start(application, parameters, directory, showCmd, &processInfo))
 					return FALSE;
+				// Wait until child process exits.
+				if(wait && processInfo.hProcess)
+					::WaitForSingleObject(processInfo.hProcess, INFINITE);
+
 				// Close process and thread handles. 
-				if(process.hThread != nullptr)
-					::CloseHandle(process.hThread);
-				if(process.hProcess != nullptr)
-					::CloseHandle(process.hProcess);
+				if(processInfo.hThread)
+					::CloseHandle(processInfo.hThread);
+				if(processInfo.hProcess)
+					::CloseHandle(processInfo.hProcess);
+
 				return TRUE;
+			}
+
+			static BOOL Start(const wchar_t *application, const wchar_t *parameters,
+							  const wchar_t *directory, int showCmd,
+							  LPPROCESS_INFORMATION processInfo)
+			{
+
+				STARTUPINFOW startupInfo = { };
+				startupInfo.cb = sizeof(STARTUPINFOW);
+				startupInfo.wShowWindow = (WORD)showCmd;
+				startupInfo.dwFlags = STARTF_USESHOWWINDOW;
+				string commandLine = parameters;
+				/*
+				if(application && parameters)
+					commandLine.format(L"\"%s\" %s", application, parameters);
+				*/
+				return ::CreateProcessW(application,
+										commandLine, nullptr, nullptr, FALSE,
+										NORMAL_PRIORITY_CLASS,
+										nullptr, directory,
+										&startupInfo, processInfo);
 			}
 
 			static uint32_t EnumId(std::vector<DWORD> *lphProcesses)

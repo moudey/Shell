@@ -1,0 +1,4 @@
+<Include xmlns='http://wixtoolset.org/schemas/v4/wxs'>
+<?define Version = '1.9.19' ?>
+<?define ProductCode = '{7BCA6512-254B-456F-8F08-AAD7508BEE77}' ?>
+</Include>

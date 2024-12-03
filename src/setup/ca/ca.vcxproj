@@ -17,12 +17,12 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F72D34CA-48DA-4DFD-91A9-A0C78BEF6981}</ProjectGuid>
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <TargetName>ca_$(Platform.ToLower().Replace('win32', 'x86'))</TargetName>
+    <TargetName>ca</TargetName>
     <CharacterSet>Unicode</CharacterSet>
     <ProjectModuleDefinitionFile>ca.def</ProjectModuleDefinitionFile>
     <Description>WiX Toolset CustomAction</Description>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <OutDir>$(SolutionDir)bin\</OutDir>
+    <OutDir>$(SolutionDir)bin\$(Platform.ToLower().Replace('win32', 'x86'))\</OutDir>
     <IntDir>$(ProjectDir)obj\$(Configuration.ToLower())\</IntDir>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

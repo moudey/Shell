@@ -75,10 +75,10 @@ function update-regex($content, $key, $val)
 
 try 
 {
-	$ChangeBuild	= 1
+	$ChangeBuild	= 0
 	$ChangeRevis	= 0
 	
-	$___Build__	= 17	# auto increase
+	$___Build__	= 19	# auto increase
 	$___Revis__	= 0	# auto increase
 	
 	$AppCompany		= "Nilesoft"
@@ -118,6 +118,7 @@ try
 	#update "Shell.rc" "..\..\shared\Resource\Shell.rc";
 	update "manifest.xml" "..\..\shared\Resource\manifest.xml";
 	update "Shell.def" "..\..\dll\src\Shell.def";
+	update "var.wxi" "..\..\setup\wix\var.wxi";
 	update "debug.cmd" "..\..\bin\debug.cmd";
 	
 	$content = (Get-Content $ScriptPath)

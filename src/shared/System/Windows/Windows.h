@@ -335,6 +335,13 @@ namespace Nilesoft
 				::SendInput(1, &ip, sizeof(INPUT));
 			}
 
+			// https://stackoverflow.com/questions/5689904/gracefully-exit-explorer-programmatically
+			static BOOL Exit()
+			{
+				auto hWndTray = ::FindWindowExW(nullptr, nullptr, L"Shell_TrayWnd", nullptr);
+				return hWndTray ? ::PostMessageW(hWndTray, 0x5B4, 0, 0) : FALSE;
+			}
+
 			static void Refresh(bool all_windows = false)
 			{
 				//PostMessageW(::GetActiveWindow(), WM_KEYDOWN, VK_F5, NULL);
@@ -366,18 +373,18 @@ namespace Nilesoft
 					string params, cmd = sys_path;
 					cmd +=  L"\\cmd.exe";
 					params.format(L"/c taskkill /f /im explorer.exe && start %s\\explorer", win_path);
-					::ShellExecute(nullptr, nullptr, cmd, params, nullptr, SW_HIDE);
+					::ShellExecuteW(nullptr, nullptr, cmd, params, nullptr, SW_HIDE);
 					//WinExec("taskkill /f /im explorer.exe && start explorer.exe", SW_HIDE);
 					return res > 0;
 				}
-				
+
 				for(auto &process : Nilesoft::Diagnostics::Process::EnumInfo())
 				{
-					if(process.th32ProcessID != 0)
+					if(process.th32ProcessID)
 					{
 						if(string::Equals(process.szExeFile, L"explorer.exe"))
 						{
-							if(auto hProcess = ::OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ | PROCESS_TERMINATE, FALSE,
+							if(auto hProcess = ::OpenProcess(PROCESS_TERMINATE, FALSE,
 															 process.th32ProcessID); hProcess)
 							{
 								res += ::TerminateProcess(hProcess, 0);
@@ -387,6 +394,22 @@ namespace Nilesoft
 					}
 				}
 				return res > 0;
+			}
+
+			static bool Restart0()
+			{
+				if(auto hShell_TrayWnd = Window::FindTaskbar(); hShell_TrayWnd)
+				{
+					DWORD dwProcessId = 0;
+					if(::GetWindowThreadProcessId(hShell_TrayWnd, &dwProcessId) && dwProcessId)
+					{
+						if(auto hProcess = ::OpenProcess(PROCESS_TERMINATE, FALSE, dwProcessId); hProcess)
+						{
+							return ::TerminateProcess(hProcess, 0);
+						}
+					}
+				}
+				return false;
 			}
 
 			static bool Restart1()
@@ -400,7 +423,6 @@ namespace Nilesoft
 					{
 						if(::TerminateProcess(hProcess, 0))
 						{
-
 							/*::Sleep(2000);
 							hShell_TrayWnd =  Window::FindTaskbar();
 							if(!hShell_TrayWnd)
