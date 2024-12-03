@@ -8,7 +8,7 @@ on:
 
 
 permissions:
-  contents: read
+  contents: write-all
 
 jobs:
   build:
