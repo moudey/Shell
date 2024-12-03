@@ -1,10 +1,11 @@
 [![Ceasefire Now](https://badge.techforpalestine.org/default)](https://techforpalestine.org/learn-more)
 
-[![Build](../../actions/workflows/msbuild.yml/badge.svg)](../../actions/workflows/msbuild.yml)
-[![Nightly](https://img.shields.io/badge/Nightly-nightly.link-purple)](https://nightly.link/moudey/Shell/workflows/msbuild/main)
+[![Build](../../actions/workflows/build.yml/badge.svg)](../../actions/workflows/build.yml)
+[![Nightly](https://img.shields.io/badge/Nightly-nightly.link-purple)](https://nightly.link/moudey/Shell/workflows/build/main)
 
 # [Shell](https://nilesoft.org)
 Powerful manager for Windows File Explorer context menu.
+<br>
 
 <p align="center">
  <img src="https://www.nilesoft.org/images/logo-256.png">
