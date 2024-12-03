@@ -46,7 +46,7 @@
 		<Binary Id='WixUI_Bmp_New' SourceFile='res\WixUI_Bmp_New.bmp' />
 		<Binary Id='WixUI_Ico_Exclam' SourceFile='res\WixUI_Ico_Exclam.ico' />
 		<Binary Id='WixUI_Ico_Info' SourceFile='res\WixUI_Ico_Info.ico' />
-		<Binary Id='CA' SourceFile='$(var.bin)\$(var.Platform)\ca.dll' />
+		<Binary Id='CA' SourceFile='$(var.bin)\ca.dll' />
 
 		<Property Id='WIXUI_INSTALLDIR' Value='INSTALLFOLDER' />
 		<Property Id='WixUIRMOption' Value='UseRM' />
