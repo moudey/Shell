@@ -8,7 +8,6 @@
 <?define FullName = '$(var.Manufacturer) $(var.Name)' ?>
 <?define Info = 'Powerful context menu manager for Windows File Explorer' ?>
 <?define bin = '..\..\bin' ?>
-<?define release = '$(var.bin)\$(var.Platform)' ?>
 <?define PlatformProgramFilesFolder = 'ProgramFiles6432Folder' ?>
 
 <!--
@@ -84,8 +83,8 @@
 				</Directory>
 					<Component Id='APPLICATION' Guid='{ED9EFE4B-E83D-42BB-8938-F72B13A2FAD2}'>
 					<CreateFolder Directory='INSTALLFOLDER' />
-					<File Id='shell.exe' Checksum='yes' Name='shell.exe' KeyPath='yes' Source='$(var.release)\shell.exe' />
-					<File Id='shell.dll' Checksum='yes' Name='shell.dll' Source='$(var.release)\shell.dll' />
+					<File Id='shell.exe' Checksum='yes' Name='shell.exe' KeyPath='yes' Source='$(var.bin)\shell.exe' />
+					<File Id='shell.dll' Checksum='yes' Name='shell.dll' Source='$(var.bin)\shell.dll' />
 					<File Id='readme.txt' Name='readme.txt' Source='$(var.bin)\readme.txt' />
 					<File Id='license.txt' Name='LICENSE' Source='$(var.bin)\license.txt' />
 				</Component>

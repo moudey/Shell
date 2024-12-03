@@ -22,7 +22,7 @@
     <ProjectModuleDefinitionFile>ca.def</ProjectModuleDefinitionFile>
     <Description>WiX Toolset CustomAction</Description>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <OutDir>$(SolutionDir)bin\$(Platform.ToLower().Replace('win32', 'x86'))\</OutDir>
+    <OutDir>$(SolutionDir)bin\\</OutDir>
     <IntDir>$(ProjectDir)obj\$(Configuration.ToLower())\</IntDir>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

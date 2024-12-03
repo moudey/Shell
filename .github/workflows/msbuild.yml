@@ -6,7 +6,6 @@ on:
   pull_request:
     branches: [ "main" ]
 
-
 permissions:
   contents: read
 
@@ -47,11 +46,10 @@ jobs:
         name: shell-${{matrix.platform}}
         path: |
           ${{env.BIN_PATH}}\*
-          !${{env.BIN_PATH}}\${{matrix.platform}}\*.lib
-          !${{env.BIN_PATH}}\${{matrix.platform}}\*.exp
-          !${{env.BIN_PATH}}\${{matrix.platform}}\ca.dll
+          !${{env.BIN_PATH}}\*.lib
+          !${{env.BIN_PATH}}\*.exp
           !${{env.BIN_PATH}}\*.wixpdb
-          !${{env.BIN_PATH}}\debug.cmd
+          !${{env.BIN_PATH}}\ca.dll
         if-no-files-found: warn
         retention-days: 0
         compression-level: 6

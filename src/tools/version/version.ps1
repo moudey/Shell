@@ -119,7 +119,6 @@ try
 	update "manifest.xml" "..\..\shared\Resource\manifest.xml";
 	update "Shell.def" "..\..\dll\src\Shell.def";
 	update "var.wxi" "..\..\setup\wix\var.wxi";
-	update "debug.cmd" "..\..\bin\debug.cmd";
 	
 	$content = (Get-Content $ScriptPath)
 	
