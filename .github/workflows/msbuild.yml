@@ -46,7 +46,7 @@ jobs:
       with:
         name: shell-${{matrix.platform}}
         path: |
-          *
+          ${{env.BIN_PATH}}\*
           !${{env.BIN_PATH}}\${{matrix.platform}}\*.lib
           !${{env.BIN_PATH}}\${{matrix.platform}}\*.exp
           !${{env.BIN_PATH}}\*.wixpdb
