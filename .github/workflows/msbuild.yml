@@ -24,7 +24,7 @@ jobs:
       SOLUTION_FILE_PATH: src/Shell.sln
       BUILD_CONFIGURATION: ${{matrix.configuration}}
       BUILD_PLATFORM: ${{matrix.platform}}
-
+      BIN_PATH: D:\a\Shell\Shell\src\bin
     runs-on: windows-latest
 
     steps:
@@ -42,15 +42,14 @@ jobs:
       run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} /p:Platform=${{env.BUILD_PLATFORM}} ${{env.SOLUTION_FILE_PATH}}
     
     - name: Upload artifacts
-      working-directory: D:\a\Shell\Shell\src\bin\
       uses: actions/upload-artifact@v4
       with:
         name: shell-${{matrix.platform}}
         path: |
           *
-          !${{matrix.platform}}\*.lib
-          !${{matrix.platform}}\*.exp
-          !*.wixpdb
+          !${{env.BIN_PATH}}\${{matrix.platform}}\*.lib
+          !${{env.BIN_PATH}}\${{matrix.platform}}\*.exp
+          !${{env.BIN_PATH}}\*.wixpdb
         if-no-files-found: warn
         retention-days: 0
         compression-level: 6
