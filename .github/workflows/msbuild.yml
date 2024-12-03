@@ -40,17 +40,20 @@ jobs:
     - name: Build
       working-directory: ${{env.GITHUB_WORKSPACE}}
       run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} /p:Platform=${{env.BUILD_PLATFORM}} ${{env.SOLUTION_FILE_PATH}}
-    
+
+    - name: Cleanup
+      run: |
+       copy /Y "${{env.BIN_PATH}}\${{matrix.platform}}\shell.exe" "${{env.BIN_PATH}}\shell.exe"
+       copy /Y "${{env.BIN_PATH}}\${{matrix.platform}}\shell.dll" "${{env.BIN_PATH}}\shell.dll"
+       del /Q "${{env.BIN_PATH}}\${{matrix.platform}}"
+       del /Q ${{env.BIN_PATH}}\*.wixpdb
+       del /Q ${{env.BIN_PATH}}\debug.cmd
+       
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
         name: shell-${{matrix.platform}}
-        path: |
-          ${{env.BIN_PATH}}\*
-          !${{env.BIN_PATH}}\${{matrix.platform}}\*.lib
-          !${{env.BIN_PATH}}\${{matrix.platform}}\*.exp
-          !${{env.BIN_PATH}}\${{matrix.platform}}\ca.dll
-          !${{env.BIN_PATH}}\*.wixpdb
+        path: ${{env.BIN_PATH}}\*
         if-no-files-found: warn
         retention-days: 0
         compression-level: 6
