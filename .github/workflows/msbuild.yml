@@ -8,7 +8,7 @@ on:
 
 
 permissions:
-  contents: write-all
+  contents: read
 
 jobs:
   build:
@@ -43,8 +43,8 @@ jobs:
 
     - name: Cleanup
       run: |
-       copy "${{env.BIN_PATH}}\${{matrix.platform}}\shell.exe" "${{env.BIN_PATH}}\shell.exe"
-       copy "${{env.BIN_PATH}}\${{matrix.platform}}\shell.dll" "${{env.BIN_PATH}}\shell.dll"
+       xcopy "${{env.BIN_PATH}}\${{matrix.platform}}\shell.exe" "${{env.BIN_PATH}}\shell.exe"
+       xcopy "${{env.BIN_PATH}}\${{matrix.platform}}\shell.dll" "${{env.BIN_PATH}}\shell.dll"
        del "${{env.BIN_PATH}}\${{matrix.platform}}"
        del ${{env.BIN_PATH}}\*.wixpdb
        del ${{env.BIN_PATH}}\debug.cmd
