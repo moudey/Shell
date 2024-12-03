@@ -43,11 +43,11 @@ jobs:
 
     - name: Cleanup
       run: |
-       copy /Y "${{env.BIN_PATH}}\${{matrix.platform}}\shell.exe" "${{env.BIN_PATH}}\shell.exe"
-       copy /Y "${{env.BIN_PATH}}\${{matrix.platform}}\shell.dll" "${{env.BIN_PATH}}\shell.dll"
-       del /Q "${{env.BIN_PATH}}\${{matrix.platform}}"
-       del /Q ${{env.BIN_PATH}}\*.wixpdb
-       del /Q ${{env.BIN_PATH}}\debug.cmd
+       copy "${{env.BIN_PATH}}\${{matrix.platform}}\shell.exe" "${{env.BIN_PATH}}\shell.exe"
+       copy "${{env.BIN_PATH}}\${{matrix.platform}}\shell.dll" "${{env.BIN_PATH}}\shell.dll"
+       del "${{env.BIN_PATH}}\${{matrix.platform}}"
+       del ${{env.BIN_PATH}}\*.wixpdb
+       del ${{env.BIN_PATH}}\debug.cmd
        
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
