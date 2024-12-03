@@ -9,7 +9,14 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dll", "dll\Shell.vcxproj", 
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "exe", "exe\exe.vcxproj", "{FFFD0DDB-48FB-4681-A3B6-8E787FA98C98}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "setup-ca", "setup\ca\ca.vcxproj", "{F72D34CA-48DA-4DFD-91A9-A0C78BEF6981}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ca", "setup\ca\ca.vcxproj", "{F72D34CA-48DA-4DFD-91A9-A0C78BEF6981}"
+EndProject
+Project("{B7DD6F7E-DEF8-4E67-B5B7-07EF123DB6F0}") = "setup", "setup\wix\setup.wixproj", "{F8A8D368-F53D-4EA1-9E17-404DA0CC89CD}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BAF011AC-D5E9-42C5-BA26-BA6115A45DAC} = {BAF011AC-D5E9-42C5-BA26-BA6115A45DAC}
+		{F72D34CA-48DA-4DFD-91A9-A0C78BEF6981} = {F72D34CA-48DA-4DFD-91A9-A0C78BEF6981}
+		{FFFD0DDB-48FB-4681-A3B6-8E787FA98C98} = {FFFD0DDB-48FB-4681-A3B6-8E787FA98C98}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +43,12 @@ Global
 		{F72D34CA-48DA-4DFD-91A9-A0C78BEF6981}.release|x64.Build.0 = release|x64
 		{F72D34CA-48DA-4DFD-91A9-A0C78BEF6981}.release|x86.ActiveCfg = release|Win32
 		{F72D34CA-48DA-4DFD-91A9-A0C78BEF6981}.release|x86.Build.0 = release|Win32
+		{F8A8D368-F53D-4EA1-9E17-404DA0CC89CD}.release|ARM64.ActiveCfg = Release|ARM64
+		{F8A8D368-F53D-4EA1-9E17-404DA0CC89CD}.release|ARM64.Build.0 = Release|ARM64
+		{F8A8D368-F53D-4EA1-9E17-404DA0CC89CD}.release|x64.ActiveCfg = Release|x64
+		{F8A8D368-F53D-4EA1-9E17-404DA0CC89CD}.release|x64.Build.0 = Release|x64
+		{F8A8D368-F53D-4EA1-9E17-404DA0CC89CD}.release|x86.ActiveCfg = Release|x86
+		{F8A8D368-F53D-4EA1-9E17-404DA0CC89CD}.release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
