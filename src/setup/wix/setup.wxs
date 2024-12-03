@@ -1,0 +1,152 @@
+﻿
+<?define Version = '1.9.18' ?>
+<?define UpgradeCode = '{7BCA6512-254B-456F-8F08-AAD7508BEE00}' ?>
+<?define Platform = '$(sys.BUILDARCH)' ?>
+<?define Name = 'Shell' ?>
+<?define Manufacturer = 'Nilesoft' ?>
+<?define FullName = '$(var.Manufacturer) $(var.Name)' ?>
+<?define Info = 'Powerful context menu manager for Windows File Explorer' ?>
+
+<?define bin = '..\..\bin' ?>
+<?define release = '$(var.bin)\release\$(var.Platform)' ?>
+<?define config = '$(var.bin)' ?>
+<?define PlatformProgramFilesFolder = 'ProgramFiles6432Folder' ?>
+
+<!--
+<?if $(var.Platform) = x64 ?>
+	<?define PlatformProgramFilesFolder = 'ProgramFiles64Folder' ?>
+<?elseif $(var.Platform) = arm64 ?>
+	<?define PlatformProgramFilesFolder = 'ProgramFiles64Folder' ?>
+<?else ?>
+	<?define PlatformProgramFilesFolder = 'ProgramFilesFolder' ?>
+<?endif ?>
+-->
+
+<Wix xmlns='http://wixtoolset.org/schemas/v4/wxs'>
+	<Package
+		Language='1033'
+		Codepage='65001'
+		InstallerVersion='500'
+		Compressed='yes'
+		Scope='perMachine'
+		ProductCode='{3025C475-D665-4288-99A8-3382654F7E11}'
+		UpgradeCode='$(var.UpgradeCode)'
+		Manufacturer='$(var.Manufacturer)'
+		Name='$(var.FullName)'
+		Version='$(var.Version)'>
+
+		<SummaryInformation
+			Comments='$(var.FullName)'
+			Description='$(var.FullName) $(var.Version) $(var.Platform) Setup'
+			Keywords='context-menu, right-click, file-explorer' />
+
+		<Media Id='1' EmbedCab='yes' Cabinet='main.cab' CompressionLevel='high' />
+
+		<Binary Id='WixUI_Banner' SourceFile='res\WixUI_Banner.png' />
+		<Binary Id='WixUI_Dialog' SourceFile='res\WixUI_Dialog.png' />
+		<Binary Id='WixUI_Bmp_Up' SourceFile='res\WixUI_Bmp_Up.bmp' />
+		<Binary Id='WixUI_Bmp_New' SourceFile='res\WixUI_Bmp_New.bmp' />
+		<Binary Id='WixUI_Ico_Exclam' SourceFile='res\WixUI_Ico_Exclam.ico' />
+		<Binary Id='WixUI_Ico_Info' SourceFile='res\WixUI_Ico_Info.ico' />
+		<Binary Id='CA' SourceFile='$(var.bin)\ca_$(var.Platform).dll' />
+
+		<Property Id='WIXUI_INSTALLDIR' Value='INSTALLFOLDER' />
+		<Property Id='WixUIRMOption' Value='UseRM' />
+		<Property Id='MSIRESTARTMANAGERCONTROL' Value='Disable' />
+		<Property Id='DefaultUIFont' Value='WixUI_Font_Normal' />
+		<Property Id='ErrorDialog' Value='ErrorDlg' />
+		<Property Id='ARPURLINFOABOUT' Value='https://nilesoft.org/' />
+		<Property Id='ARPHELPLINK' Value='https://nilesoft.org/docs/' />
+		<Property Id='ARPNOMODIFY' Value='1' Secure='yes' />
+		<Property Id='ARPNOREPAIR' Value='1' Secure='yes' />
+		<Property Id='BURNMSIMODIFY' Value='0' Secure='yes' />
+		<Property Id='BURNMSIREPAIR' Value='0' Secure='yes' />
+		<Property Id='BURNMSIUNINSTALL' Value='1' Secure='yes' />
+		
+		<StandardDirectory Id='$(var.PlatformProgramFilesFolder)'>
+			<Directory Id='INSTALLFOLDER' Name='$(var.FullName)'>
+				<Directory Id='IMPORTS' Name='imports'>
+					<Component Id='IMPORTS' Guid='{FF987BEA-6195-4C05-8523-00936A1BD0E2}' NeverOverwrite='yes'>
+						<File Id='theme.nss' Source='$(var.config)\imports\theme.nss' />
+						<File Id='goto.nss' KeyPath='yes' Source='$(var.config)\imports\goto.nss' />
+						<File Id='modify.nss' Source='$(var.config)\imports\modify.nss' />
+						<File Id='images.nss' Source='$(var.config)\imports\images.nss' />
+						<File Id='taskbar.nss' Source='$(var.config)\imports\taskbar.nss' />
+						<File Id='develop.nss' Source='$(var.config)\imports\develop.nss' />
+						<File Id='file_manage.nss' Source='$(var.config)\imports\file-manage.nss' />
+						<File Id='terminal.nss' Source='$(var.config)\imports\terminal.nss' />
+					</Component>
+				</Directory>
+				<Component Id='APPLICATION' Guid='{ED9EFE4B-E83D-42BB-8938-F72B13A2FAD2}'>
+					<CreateFolder Directory='INSTALLFOLDER' />
+					<File Id='shell.exe' Checksum='yes' Name='shell.exe' KeyPath='yes' Source='$(var.release)\shell.exe' />
+					<File Id='shell.dll' Checksum='yes' Name='shell.dll' Source='$(var.release)\shell.dll' />
+					<File Id='readme.txt' Name='readme.txt' Source='$(var.config)\readme.txt' />
+					<File Id='LICENSE' Name='LICENSE' Source='$(var.config)\LICENSE' />
+				</Component>
+				<Component Id='CONFIG' Guid='{BEC55C6A-30C7-4E1F-B64D-8636AB379E31}' NeverOverwrite='yes'>
+					<File Id='shell.nss' Name='shell.nss' KeyPath='yes' Source='$(var.config)\shell.nss' />
+				</Component>
+				<Component Id='CLEANUP' Guid='{838501CD-485B-4587-9195-6CFB416202B9}' KeyPath='yes'>
+					<RemoveFile Id='PurgeAppFiles' Name='*.*' On='uninstall' Directory='INSTALLFOLDER' />
+					<RemoveFolder Id='PurgeAppFolder' On='uninstall' Directory='INSTALLFOLDER' />
+				</Component>
+				<Component Id='DisplayIcon' Guid='{69292D86-8518-4C68-867C-192767154C54}'>
+					<RegistryValue Id='DisplayIcon' Key='SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\[ProductCode]'
+						Name='DisplayIcon' Root='HKLM' Type='string' Value='[!shell.exe]' KeyPath='yes'/>
+				</Component>
+			</Directory>
+		</StandardDirectory>
+		<StandardDirectory Id='ProgramMenuFolder'>
+			<Component Id='StartMenuShortcut' Guid='{41AFAF39-4B3F-4D1E-800E-DD3231C004C9}'>
+				<Shortcut Id='StartMenuShortcut' Directory='ProgramMenuFolder' Description='$(var.Info)'
+					WorkingDirectory='INSTALLFOLDER' Name='$(var.FullName)' Target='[!shell.exe]' />
+				<RegistryValue Key='Software\Nilesoft\Shell' Root='HKCU' Type='string' Value='' KeyPath='yes' />
+			</Component>
+		</StandardDirectory>
+<!--
+		<ComponentGroup Id="IMPORTFiles" Directory="IMPORTS">
+			<Files Include="$(var.config)\imports\*.nss" />
+		</ComponentGroup>
+-->
+		<Feature Id='APPLICATION' Title='$(var.FullName)' Level='1'>
+			<ComponentRef Id='APPLICATION' />
+			<ComponentRef Id='CONFIG' />
+			<ComponentRef Id='IMPORTS' />
+			<ComponentRef Id='CLEANUP' />
+			<ComponentRef Id='StartMenuShortcut' />
+			<ComponentRef Id='DisplayIcon' />
+			<!--<ComponentGroupRef Id="IMPORTSFiles"/>-->
+		</Feature>
+		
+		<!-- Upgrade -->
+		<Property Id='NEWPRODUCTFOUND' Secure='yes' />
+		<Property Id='UPGRADEFOUND' Secure='yes' />
+		
+		<CustomAction Id='OnDowngrading' Error='A newer version of [ProductName] is already installed. Setup will now exit.' />
+		
+		<Upgrade Id='$(var.UpgradeCode)'>
+			<UpgradeVersion Property='NEWPRODUCTFOUND' Minimum='$(var.Version)' OnlyDetect='yes' />
+			<UpgradeVersion Property='UPGRADEFOUND' Minimum='1.0.0' Maximum='$(var.Version)' IncludeMinimum='yes' />
+		</Upgrade>
+		
+		<InstallUISequence>
+			<Custom Action='OnDowngrading' After='FindRelatedProducts' Condition='NEWPRODUCTFOUND' />
+		</InstallUISequence>
+		<!-- End Upgrade -->
+		
+		<CustomAction Id='OnUpdate' Return='ignore' BinaryRef='CA' DllEntry='Update' />
+		<CustomAction Id='OnInstall' Return='ignore' BinaryRef='CA' DllEntry='Install' />
+		<CustomAction Id='OnUninstall' Execute='firstSequence' Return='asyncWait' BinaryRef='CA' DllEntry='Uninstall' />
+		
+		<InstallExecuteSequence>
+			<Custom Action='OnDowngrading' After='FindRelatedProducts' Condition='NEWPRODUCTFOUND' />
+			<Custom Action='OnUninstall' After='FindRelatedProducts' Condition='(REMOVE ="ALL") AND (NOT UPGRADINGPRODUCTCODE)' />
+			<Custom Action='OnUpdate' After='FindRelatedProducts' Condition='(NOT INSTALLED) AND (NOT REMOVE)' />
+			<Custom Action='OnInstall' After='InstallFinalize' Condition='(NOT INSTALLED) AND (NOT REMOVE)' />
+			<RemoveExistingProducts After='InstallFinalize' />
+		</InstallExecuteSequence>
+
+		<?include ui.wxi ?>
+	</Package>
+</Wix>

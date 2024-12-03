@@ -1264,8 +1264,10 @@ HRESULT Register(bool reg)
 		if(reg)
 		{
 			//_log.create();
+			REGOP regop;
+			regop.REGISTER = regop.CONTEXTMENU = regop.ICONOVERLAY = true;
 
-			if(!RegistryConfig::Register(path, REG_REGISTER | REG_CONTEXTMENU | REG_ICONOVERLAY))
+			if(!RegistryConfig::Register(path, regop))
 			{
 				msg = string::Extract(_hInstance, IDS_REGISTER_NOT_SUCCESS).move();
 				_log.error(L"%s", msg.c_str());

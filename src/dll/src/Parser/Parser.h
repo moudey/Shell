@@ -100,7 +100,7 @@ namespace Nilesoft
 			bool parse_ident(Ident &id, bool allow_dash = false);
 			uint32_t parse_ident(bool multiple = true);
 
-			bool parse_variable(Scope *variables);
+			bool parse_variable(Scope *variables, bool has_sign = true);
 			int load_import(size_t line, size_t col, bool ignore_failed = true, bool parse_import = false);
 
 			void parse_modify_items(uint32_t action = 0);
@@ -111,6 +111,8 @@ namespace Nilesoft
 			bool parse_menu_item(NativeMenu *menu, uint32_t type);
 			void parse_menu(NativeMenu *menu, bool has_curly = true);
 			bool parse_modify_properties(NativeMenu *item, uint32_t action = 0);
+
+			void parse_loc(bool has_curly = false);
 
 			void parse_settings(std::vector<struct SETTING> *settings, const Ident &id, bool imported = false);
 			void parse_settings(struct SETTING *setting, const Ident &id = 0, bool imported = false);

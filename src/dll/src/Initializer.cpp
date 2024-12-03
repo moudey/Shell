@@ -808,7 +808,7 @@ namespace Nilesoft
 
 			if(count == 1)
 			{
-				if(kctrl || kb.is_lbutton()) // reload/enabled shell
+				if(kctrl || kb.is_lbutton() || kb.key(VK_F5)) // reload/enabled shell
 				{
 					//Modern(1);
 					Status.Disabled = false;

@@ -1,4 +1,4 @@
-name: Build artifacts from main branch with MSBuild
+name: MSBuild
 
 on:
   push:

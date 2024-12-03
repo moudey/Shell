@@ -359,6 +359,10 @@ namespace Nilesoft
 		constexpr auto IDENT_MENU = 0x7C9A911AU;
 		constexpr auto IDENT_PARALLEL = 0x1455E3F2U;
 
+		constexpr auto IDENT_LOC = 0x0B888D03U;
+		constexpr auto IDENT_LANG = 0x7C99F3A7U;
+		constexpr auto IDENT_COUNTRY = 0xD3F53B19U;
+
 		constexpr auto IDENT_THEME = 0x106CDE18U;
 		constexpr auto IDENT_THEME_AUTO = 0x7C94415EU;
 		constexpr auto IDENT_THEME_HIGHCONTRAST = 0xA855C1B3U;
@@ -553,7 +557,6 @@ namespace Nilesoft
 		constexpr auto IDENT_LIBRARIES = 0x866F7922U;
 		constexpr auto IDENT_DOCUMENTSLIBRARY = 0x102BD54CU;
 		constexpr auto IDENT_TEMPLATES = 0xC41FE294U;
-		constexpr auto IDENT_LANGID = 0x0AE58754U;
 		constexpr auto IDENT_QUICKLAUNCH = 0xF64BA4FDU;
 		constexpr auto IDENT_PACKAGE = 0x9ABA6791U;
 		constexpr auto IDENT_UWP = 0x0B88B461U;

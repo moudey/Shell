@@ -20,7 +20,7 @@ set build=%YYYY%%MM%%DD%
 :: Unregistering the Shell Extension.
 ::echo Proceeding with the Shell Extension unregistration.
 echo.
-echo Shell version 1.9 build 13	%date% %time%
+echo Shell version 1.9 build 18	%date% %time%
 echo.
 
 cd /d %~dp0

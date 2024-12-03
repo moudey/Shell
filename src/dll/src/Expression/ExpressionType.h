@@ -25,7 +25,7 @@ namespace Nilesoft
 			For,
 			ForEach,
 			Assign,			//An assignment operation, such as (a = b).
-			StringExt,
+			StringExt
 			/*
 			Constant,		//A constant value.
 			Add,			//An addition operation, such as a + b, without overflow checking, for numeric operands.

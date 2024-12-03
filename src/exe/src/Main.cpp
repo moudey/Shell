@@ -20,8 +20,8 @@
 
 #if defined(_M_ARM64)
 	#pragma comment(lib, "plutosvg-arm64.lib")
-#elif defined(_M_ARM)
-	#pragma comment(lib, "plutosvg-arm.lib")
+//#elif defined(_M_ARM)
+//	#pragma comment(lib, "plutosvg-arm.lib")
 #elif defined(_M_X64)
 	#pragma comment(lib, "plutosvg-x64.lib")
 #else
@@ -32,10 +32,7 @@ using namespace Nilesoft;
 using namespace Nilesoft::Windows::Forms;
 using namespace Nilesoft::Shell;
 
-//constexpr const char _DllGetClassObject[] = { 'D','l','l','G','e','t','C','l','a','s','s','O','b','j','e','c','t' };
 constexpr const wchar_t dll_name[] = L"shell.dll";
-
-//typedef HRESULT (__stdcall *fDllGetClassObject)(_In_ REFCLSID rclsid, _In_ REFIID riid, _Outptr_ LPVOID FAR *ppv);
 
 BOOL CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
 
@@ -51,15 +48,12 @@ BOOL CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
 #define ID_WEB 0x006
 #define ID_DONATE 0x007
 #define ID_EMAIL 0x008
-#define ID_BUG 0x009
-#define ID_REDDIT 0x00a
-#define ID_TWITTER 0x00b
-#define ID_FACEBOOK 0x00c
+#define ID_GITHUB 0x009
 #define ID_DOCS 0x00d
 
 /////////
-#define SetWindowStyle(hwnd, style)	 ::SetWindowLong((hwnd), GWL_STYLE, (style))
-#define SetWindowExStyle(hwnd, style)	::SetWindowLong((hwnd), GWL_EXSTYLE, (style))
+#define SetWindowStyle(hwnd, style)	 ::SetWindowLongW((hwnd), GWL_STYLE, (style))
+#define SetWindowExStyle(hwnd, style)	::SetWindowLongW((hwnd), GWL_EXSTYLE, (style))
 
 #define GET_X_LPARAM(lp)    ((int)(short)LOWORD(lp))  // windowsx.h
 #define GET_Y_LPARAM(lp)    ((int)(short)HIWORD(lp))  // windowsx.h
@@ -76,162 +70,18 @@ Logger *_log;
 HANDLE _fonthandle = nullptr;
 HFONT _hfont_icon = nullptr;
 HFONT _hfont_icon2 = nullptr;
-
 UINT _dpi = 96;
-/*
- if (m_hwnd)
-        {
-            // Because the SetWindowPos function takes its size in pixels, we
-            // obtain the window's DPI, and use it to scale the window size.
-            float dpi = GetDpiForWindow(m_hwnd);
-
-            SetWindowPos(
-                m_hwnd,
-                NULL,
-                NULL,
-                NULL,
-                static_cast<int>(ceil(640.f * dpi / 96.f)),
-                static_cast<int>(ceil(480.f * dpi / 96.f)),
-                SWP_NOMOVE);
-            ShowWindow(m_hwnd, SW_SHOWNORMAL);
-            UpdateWindow(m_hwnd);
-        }
-*/
-
-// https://stackoverflow.com/questions/5689904/gracefully-exit-explorer-programmatically
-BOOL ExitExplorer()
-{
-	auto hWndTray = ::FindWindowExW(nullptr, nullptr, L"Shell_TrayWnd", nullptr);
-	return hWndTray ? ::PostMessageW(hWndTray, 0x5B4, 0, 0) : FALSE;
-}
-
-template<typename T = long>
-T dpi(auto value) { return static_cast<T>((value * _dpi) / 96); }
-
-void DrawPng(HDC hdc, HBITMAP hbitmap, int x, int y, int size = 16, int sx = 0, int sy = 0, int alpha = 255)
-{
-	if(hdc && hbitmap)
-	{
-		auto memDC = ::CreateCompatibleDC(hdc);
-		if(memDC)
-		{
-			auto prev_bitmap = ::SelectObject(memDC, hbitmap);
-			BLENDFUNCTION bf{};
-			bf.BlendOp = AC_SRC_OVER;
-			bf.BlendFlags = 0;
-			bf.SourceConstantAlpha = (byte)alpha;
-			bf.AlphaFormat = AC_SRC_ALPHA;
-			::GdiAlphaBlend(hdc, x, y, size, size, memDC, sx, sy, size, size, bf);
-			// Clean up
-			::SelectObject(memDC, prev_bitmap);
-			::DeleteDC(memDC);
-		}
-	}
-}
-
-bool IsKeyDown(int key)
-{
-    return (((::GetKeyState(key) >> 8) & 0xff) != 0);
-}
-
-bool IsAsyncKeyDown(int key)
-{
-    return (((::GetAsyncKeyState(key) >> 8) & 0xff) != 0);
-}
-
-bool KeyboardIsKeyDown(int key) noexcept
-{
-    // the return value is a SHORT (16 bits), not a 32 bit value
-    // (in other words, 0x80000000 is not a valid bit mask)
-    return (::GetKeyState(key) & 0x8000) != 0;
-}
-
-void ColorToHtmlCode(COLORREF rgb, LPWSTR strg, size_t count)
-{
-    StringCchPrintf(strg, count, L"#%02X%02X%02X", (int)GetRValue(rgb), (int)GetGValue(rgb), (int)GetBValue(rgb));
-}
-
-void GetCurrentMonitorResolution(HWND hwnd, int *pCXScreen, int *pCYScreen)
-{
-    HMONITOR const hMonitor = ::MonitorFromWindow(hwnd, MONITOR_DEFAULTTONEAREST);
-    MONITORINFO mi = { sizeof(MONITORINFO) };
-    ::GetMonitorInfoW(hMonitor, &mi);
-    *pCXScreen = (mi.rcMonitor.right - mi.rcMonitor.left);
-    *pCYScreen = (mi.rcMonitor.bottom - mi.rcMonitor.top);
-}
-
-// FullHD? =>   0:'==',   -1:'<',   +1:'>'
-inline int IsFullHD(HWND hwnd, int resX, int resY)
-{
-	int cxScreen{}, cyScreen{};
-	GetCurrentMonitorResolution(hwnd, &cxScreen, &cyScreen);
-    if(resX <= 0)
-        resX = cxScreen;
-    if(resY <= 0)
-        resY = cyScreen;
-    return ((resX == 1920) && (resY == 1080)) ? 0 : (((resX < 1920) || (resY < 1080)) ? -1 : +1);
-}
-
-/*int PointSizeToFontHeight(const float fPtHeight, const HDC hdc)
-{
-    return -MulDiv(float2int(fPtHeight * 100.0f), GetDeviceCaps(hdc, LOGPIXELSY), 72 * SC_FONT_SIZE_MULTIPLIER);
-}*/
-
-inline void StrReplChrW(WCHAR *pStrg, const WCHAR chSearch, const WCHAR chReplace)
-{
-    while(pStrg && *pStrg)
-    {
-        if(*pStrg == chSearch)
-            *pStrg = chReplace;
-        ++pStrg;
-    }
-}
-
-/*Routine Description: This routine returns TRUE if the caller's
-process is a member of the Administrators local group. Caller is NOT
-expected to be impersonating anyone and is expected to be able to
-open its own process and process token.
-Arguments: None.
-Return Value:
-   TRUE - Caller has Administrators local group.
-   FALSE - Caller does not have Administrators local group. --
-*/
-BOOL IsUserAdmin()
-{
-	BOOL b;
-	SID_IDENTIFIER_AUTHORITY NtAuthority = SECURITY_NT_AUTHORITY;
-	PSID AdministratorsGroup;
-	b = ::AllocateAndInitializeSid(
-		&NtAuthority,
-		2,
-		SECURITY_BUILTIN_DOMAIN_RID,
-		DOMAIN_ALIAS_RID_ADMINS,
-		0, 0, 0, 0, 0, 0,
-		&AdministratorsGroup);
-
-	if(b)
-	{
-		if(!::CheckTokenMembership(NULL, AdministratorsGroup, &b))
-		{
-			b = FALSE;
-		}
-		::FreeSid(AdministratorsGroup);
-	}
-
-	return(b);
-}
-
 RECT rc_window{};
 RECT rc_reg{};
 RECT rc_unreg{};
-
 POINT p{};
-
 UI::Window *main_window = nullptr;
 HBITMAP hbitmap_logo = nullptr;
 //0xAA0000FF
 COLORREF color_background = 0xffffff;
 
+template<typename T = long>
+T dpi(auto value) { return static_cast<T>((value * _dpi) / 96); }
 
 string loadstring(UINT id, HMODULE hmodule = nullptr)
 {
@@ -243,6 +93,7 @@ string loadstring(UINT id, HMODULE hmodule = nullptr)
 	}
 	return str.release(size).move();
 }
+
 
 BOOL EnablePrivilege()
 {
@@ -338,7 +189,7 @@ bool SetPermissions(HKEY root, const wchar_t *subkey, REGSAM reg_view = KEY_WOW6
 void disable_modern(bool _register)
 {
 	string k;
-	k.format(L"CLSID\\%s",string::ToString(IID_FileExplorerContextMenu, 2).c_str());
+	k.format(L"CLSID\\%s", string::ToString(IID_FileExplorerContextMenu, 2).c_str());
 	auto setval = [=](auto reg)->LSTATUS
 	{
 		auto_regkey key{};
@@ -384,33 +235,26 @@ void disable_modern(bool _register)
 }
 
 //printf("Please wait shell we'll process your command \n");
-// r	register
-// u	unregister
-// s	silent
-// i	init
-// re	restart restart explorer
+// r		register
+// u		unregister
+// s		silent
+// restart	restart explorer
 // shx	cmh integrated Shell Extensions ContextMenuHandlers
 // Register the COM server and the context menu handler.
-bool Registration(int freg)
+bool Registration(REGOP reg)
 {
 	auto ver = &Windows::Version::Instance();
 
 	try
 	{
-		bool _register = freg & REG_REGISTER;
-		bool _unregister = freg & REG_UNREGISTER;
-		bool _treat = freg & REG_TREAT;
-		bool _silent = freg & REG_SILENT;
-		bool _restart = freg & REG_RESTART;
-
-		//string dir = IO::Path::Parent(IO::Path::Module(_hInstance));
-		//string dll_path = IO::Path::Combine(dir, dll_name).move();
+		string dir = IO::Path::Parent(IO::Path::Module(_hInstance));
+		string dll_path = IO::Path::Combine(dir, dll_name).move();
 
 		string path = IO::Path::Module(_hInstance).move();
-		
-		if(_register)
+		//string dir = IO::Path::Parent(path).move();
+
+		if(reg.REGISTER)
 		{
-			string dir = IO::Path::Parent(path).move();
 			if(!dir.empty())
 			{
 				Security::Permission::SetFile(dir.c_str());
@@ -419,7 +263,6 @@ bool Registration(int freg)
 			_log->close();
 			//logger->reset();
 			//IO::Path::Delete(logger->path());
-
 		}
 
 		if(!ver->IsWindows7OrGreater())
@@ -431,14 +274,14 @@ bool Registration(int freg)
 
 		string msg;
 
-		if(_register || _unregister)
+		if(reg.REGISTER || reg.UNREGISTER)
 		{
 			if(!is_elevated)
 			{
 				// Missing administrative privileges!
 				msg = string::Extract(IDS_ADMIN_PRIVILEGES).move();
 				_log->warning(msg);
-				if(!_silent)
+				if(!reg.SILENT)
 				{
 					//You will need to provide administrator permission to run this Shell
 					MessageBox::Show(msg, APP_FULLNAME, MessageBoxIcon::Warning);
@@ -446,18 +289,18 @@ bool Registration(int freg)
 				return false;
 			}
 
-			if(_register)
+			if(reg.REGISTER)
 			{
 				//logger->create();
 
-				if(path.length() > 3)
-					path.remove_left(3).append(L"dll");
+				REGOP regop;
+				regop.CONTEXTMENU = regop.ICONOVERLAY = true;
 
-				if(!RegistryConfig::Register(path, freg | REG_CONTEXTMENU | REG_ICONOVERLAY))
+				if(!RegistryConfig::Register(dll_path, regop))
 				{
 					msg = string::Extract(IDS_REGISTER_NOT_SUCCESS).move();
 					_log->error(msg);
-					if(!_silent)
+					if(!reg.SILENT)
 					{
 						MessageBox::Show(msg, APP_FULLNAME,
 										 MessageBoxIcon::Error, MessageBoxButtons::OK);
@@ -468,7 +311,7 @@ bool Registration(int freg)
 // HKEY_CLASSES_ROOT\LibraryFolder\ShellEx\ContextMenuHandlers
 // HKEY_CLASSES_ROOT\LibraryFolder\background\shellex\ContextMenuHandlers
 				// is windows 11 or later
-				if(ver->IsWindows11OrGreater() && _treat)
+				if(ver->IsWindows11OrGreater() && reg.TREAT)
 				{
 					//SOFTWARE\\Classes\\CLSID"
 					disable_modern(true);
@@ -485,7 +328,7 @@ bool Registration(int freg)
 				{
 					msg = string::Extract(IDS_UNREGISTER_NOT_SUCCESS).move();
 					_log->error(msg);
-					if(!_silent)
+					if(!reg.SILENT)
 					{
 						MessageBox::Show(msg, APP_FULLNAME,
 										 MessageBoxIcon::Error, MessageBoxButtons::OK);
@@ -494,7 +337,7 @@ bool Registration(int freg)
 				}
 
 				// is windows 11 or later
-				if(ver->IsWindows11OrGreater() && _treat)
+				if(ver->IsWindows11OrGreater() && reg.TREAT)
 					disable_modern(false);
 
 				msg = string::Extract(IDS_UNREGISTER_SUCCESS).move();
@@ -503,23 +346,25 @@ bool Registration(int freg)
 			if(ver->IsWindows8OrGreater())
 				_log->info(msg);
 
-			if(_restart)
+			if(reg.RESTART)
 			{
-				if(!_silent)
+				if(!reg.SILENT)
 				{
 					msg += L"\n\n";
 					msg += string::Extract(IDS_RESTART_EXPLORERQ).move();
-					_restart = MessageBox::Show(msg, APP_FULLNAME,
+					reg.RESTART = MessageBox::Show(msg, APP_FULLNAME,
 											   MessageBoxIcon::Information,
 											   MessageBoxButtons::OKCancel) == DialogResult::OK;
 				}
 			}
 
-			if(_restart)
+			if(reg.RESTART)
 			{
 				if(ver->IsWindows8OrGreater())
 					_log->info(string::Extract(IDS_RESTART_EXPLORER).move());
-				Windows::Explorer::Restart();
+
+				if(Windows::Explorer::Restart())
+					::Sleep(1000);
 			}
 			else
 			{
@@ -530,7 +375,7 @@ bool Registration(int freg)
 			}
 			return true;
 		}
-		else if(_restart)
+		else if(reg.RESTART)
 		{
 			if(ver->IsWindows8OrGreater())
 				_log->info(string::Extract(IDS_RESTART_EXPLORER).move());
@@ -546,35 +391,43 @@ bool Registration(int freg)
 	return false;
 }
 
-bool Register(int freg, HWND hwnd = nullptr)
+bool Register(REGOP reg, HWND hwnd = nullptr)
 {
 	string path = IO::Path::Combine(IO::Path::Parent(IO::Path::Module(nullptr)), dll_name).move();
 	DLL dll(path, true);
 
-	if((freg & REG_REGISTER) || (freg & REG_UNREGISTER))
+	if(reg.REGISTER || reg.UNREGISTER)
 	{
 		if(!is_elevated)
 		{
 			// Missing administrative privileges!
 			string msg = loadstring(IDS_ADMIN_PRIVILEGES, dll).move();
-			//You will need to provide administrator permission to run this Shell
-			::MessageBoxW(hwnd, msg, APP_FULLNAME, MB_ICONWARNING);
+			_log->error(msg);
+			if(!reg.SILENT)
+			{
+				//You will need to provide administrator permission to run this Shell
+				::MessageBoxW(hwnd, msg, APP_FULLNAME, MB_ICONWARNING);
+			}
 			return false;
 		}
 	}
 	
 	if(!dll)
 	{
-		MessageBox::Show(L"shell.dll not found.", APP_FULLNAME, MessageBoxIcon::Warning);
+		auto ernf = L"shell.dll not found.";
+		_log->error(ernf);
+		if(!reg.SILENT)
+			MessageBox::Show(ernf, APP_FULLNAME, MessageBoxIcon::Warning);
 		return false;
 	}
 
-	auto ret = Registration(freg);
+	auto ret = Registration(reg);
 	_log->close();
 
 	return ret;
 }
 
+/*
 class Console
 {
 	FILE *_handle = nullptr;
@@ -628,7 +481,7 @@ public:
 void check()
 {
 	Console c;
-	c.writel(L"\n\nNilesoft Shell version 1.8.1\n");
+	c.writel(L"\n\nNilesoft Shell\n");
 
 	_log->info(L"BEGIN CHECK");
 
@@ -681,17 +534,7 @@ void check()
 	
 	_log->info(L"END CHECK");
 }
-
-/*
-BLENDFUNCTION func={AC_SRC_OVER,0,(BYTE)alpha,AC_SRC_ALPHA};
-
-	HDC hSrc=CreateCompatibleDC(NULL);
-	HGDIOBJ bmp0=SelectObject(hSrc,m_Bitmap);
-	POINT srcPos={0,0};
-	UpdateLayeredWindow(m_hWnd,NULL,NULL,&m_Size,hSrc,&srcPos,0,&func,ULW_ALPHA);
-	SelectObject(hSrc,bmp0);
-	DeleteDC(hSrc);
-*/ 
+*/
 
 struct Theme
 {
@@ -732,15 +575,13 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ LPWSTR,
 	COM_INITIALIZER com_initializer(true);
 
     CommandLine cmdline;
-    int freg{};
+	REGOP reg{};
 
 	_hInstance = hInstance;
 	_log = &Logger::Instance();
 
 	if(cmdline.ShowHelp)
 	{
-		//-config:register
-	   // MessageBox::Show(usage, APP_NAME, MessageBoxIcon::Information);
 		//::DialogBoxParamW(hInstance, MAKEINTRESOURCEW(IDD_CMDLINE), nullptr, (DLGPROC)WndProc, 0);
 		auto hWnd = ::CreateDialogParamW(_hInstance, MAKEINTRESOURCEW(IDD_CMDLINE), NULL, (DLGPROC)WndProc, 0);
 		if(hWnd)
@@ -750,7 +591,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ LPWSTR,
 
 			MSG msg;
 			BOOL bRet;
-			while((bRet = ::GetMessageW(&msg, NULL, 0, 0)) != 0)
+			while((bRet = ::GetMessageW(&msg, nullptr, 0, 0)) != 0)
 			{
 				if(bRet == -1)
 				{
@@ -786,11 +627,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ LPWSTR,
 		else
 			_dpi = 96;// DC(GetDesktopWindow()).GetDeviceCapsY();
 
-		//_dpi = ::GetSystemDpiForProcess(::GetCurrentProcess());
-
 		_hTheme = ::OpenThemeData(nullptr, L"MENU");
-	//	RunGlyphs();
-		//return 0;
+
+
         UI::App app(_hInstance, WindowProc, m_theme.frame.color,
                     LoadIcon(_hInstance, MAKEINTRESOURCE(IDI_RPMICON)), CS_HREDRAW | CS_VREDRAW);
 
@@ -879,21 +718,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ LPWSTR,
         auto btn_email = new UI::Button(L"\uE115", { tl, tt, btn_h, btn_h }, ID_EMAIL, main_window, BS_OWNERDRAW, _hfont_icon, L"Email Ctrl+E");
        
         tl += btn_h + offset_2;
-        auto btn_bug = new UI::Button(L"\uE0D4", { tl, tt, btn_h, btn_h }, ID_BUG, main_window, BS_OWNERDRAW, _hfont_icon, L"Bugs Ctrl+B");
+        auto btn_bug = new UI::Button(L"\uE22B", { tl, tt, btn_h, btn_h }, ID_GITHUB, main_window, BS_OWNERDRAW, _hfont_icon, L"Github Ctrl+G");
 
-		tl += (dpi(50) - btn_h) + btn_h + dpi(12);
+		//tl += (dpi(50) - btn_h) + btn_h + dpi(12);
+		tl += btn_h + offset_2;
         auto btn_donate = new UI::Button(L"\uE1A8", { tl, tt, btn_h, btn_h }, ID_DONATE, main_window, BS_OWNERDRAW, _hfont_icon, L"Donate Ctrl+D");
 
-		tl += btn_h + offset_2;
-		auto btn_reddit = new UI::Button(L"\uE23F", { tl, tt, btn_h, btn_h }, ID_REDDIT, main_window, BS_OWNERDRAW, _hfont_icon, L"Reddit Ctrl+I");
 
-		tl += btn_h + offset_2;
-		auto btn_t = new UI::Button(L"\uE242", { tl, tt, btn_h, btn_h }, ID_TWITTER, main_window, BS_OWNERDRAW, _hfont_icon, L"Twitter Ctrl+T");
-
-        tl += btn_h + offset_2;
-        auto btn_f = new UI::Button(L"\uE244", { tl, tt, btn_h, btn_h }, ID_FACEBOOK, main_window, BS_OWNERDRAW, _hfont_icon, L"Facebook Ctrl+F");
-
-        main_window->SetColor({ btn_reg, btn_unreg,btn_restart,btn_donate,btn_web,btn_email,btn_bug, btn_f, btn_t , btn_reddit }, 
+        main_window->SetColor({ btn_reg, btn_unreg,btn_restart,btn_donate,btn_web,btn_email,btn_bug }, 
 							  m_theme.text.nor, m_theme.back.nor, m_theme.text.sel, m_theme.back.sel);//0xeeeee0
         main_window->SetColor({ btn_close }, 0xFFFFFF, m_theme.back.nor, m_theme.text.nor, 0x2311E8);//E81123
 
@@ -904,9 +736,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ LPWSTR,
 		delete main_window; 
 		_log->close();
 
-
 		if(_hfont_icon)
-			DeleteObject(_hfont_icon);
+			::DeleteObject(_hfont_icon);
 
 		if(_fonthandle)
 			::RemoveFontMemResourceEx(_fonthandle);
@@ -935,27 +766,27 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ LPWSTR,
 				}
 				else  if(op->has_name({ L"r", L"register", L"e", L"enable" }))
 				{
-                    freg |= REG_REGISTER;
+					reg.REGISTER = true;;
                 }
                 else if(op->has_name({ L"u", L"unregister", L"d", L"disable" }))
                 {
-					freg |= REG_UNREGISTER;
+					reg.UNREGISTER = true;
                 }
                 else if(op->has_name({ L"t", L"treat" }))
                 {
-					freg |= REG_TREAT;
+					reg.TREAT = true;
                 }
 				else if(op->has_name({ L"f", L"force" }))
 				{
-					freg |= REG_FOLDEREXTENSIONS;
+					reg.FOLDEREXTENSIONS=true;
 				}
                 else if(op->has_name({ L"s", L"silent" }))
                 {
-					freg |= REG_SILENT;
+					reg.SILENT=true;
                 }
-                else if(op->has_name({ L"re",  L"restart" }))
+                else if(op->has_name(L"restart"))
                 {
-					freg |= REG_RESTART;
+					reg.RESTART = true;
                 }
                 else if(op->has_name(L"cmd"))
                 {
@@ -970,31 +801,25 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ LPWSTR,
 
 		if(_check)
 		{
-			check();
+			//check();
 			return 0;
 		}
 
-		/*if(runglyphs)
+		if(reg.REGISTER || reg.UNREGISTER || reg.RESTART || reg.FOLDEREXTENSIONS)
 		{
-			RunGlyphs();
-			return FALSE;
-		}*/
-
-		if((freg & REG_REGISTER) || (freg & REG_UNREGISTER) || (freg & REG_RESTART) || (freg & REG_FOLDEREXTENSIONS))
-		{
-			return Register(freg);
+			return Register(reg);
 		}
         else
         {
             if(!cmd.empty())
             {
-                int sw = 1;
-                if(auto o = cmdline[L"wd"])
-                    sw = (int)string::ToInt(o);
-
                 int run = 1;
                 if(auto o = cmdline[L"runas"])
                     run = (int)string::ToInt(o);
+
+				int sw = SW_SHOWNORMAL;
+				if(auto o = cmdline[L"show"])
+					sw = (int)string::ToInt(o);
 
                 string verb = L"open";
                 if(run > 1)
@@ -1005,7 +830,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ LPWSTR,
                                 cmd,
                                 cmdline[L"args"],
                                 cmdline[L"wd"],
-                                SW_SHOWNORMAL);
+								sw);
             }
         }
     }
@@ -1032,6 +857,26 @@ HFONT FontSize(HFONT hFont, int size, int weight = 0, byte quality= ANTIALIASED_
 bool hover = false;
 using namespace Nilesoft::Drawing;
 
+void DrawPng(HDC hdc, HBITMAP hbitmap, int x, int y, int size = 16, int sx = 0, int sy = 0, int alpha = 255)
+{
+	if(hdc && hbitmap)
+	{
+		auto memDC = ::CreateCompatibleDC(hdc);
+		if(memDC)
+		{
+			auto prev_bitmap = ::SelectObject(memDC, hbitmap);
+			BLENDFUNCTION bf{};
+			bf.BlendOp = AC_SRC_OVER;
+			bf.BlendFlags = 0;
+			bf.SourceConstantAlpha = (byte)alpha;
+			bf.AlphaFormat = AC_SRC_ALPHA;
+			::GdiAlphaBlend(hdc, x, y, size, size, memDC, sx, sy, size, size, bf);
+			// Clean up
+			::SelectObject(memDC, prev_bitmap);
+			::DeleteDC(memDC);
+		}
+	}
+}
 
 void DrawString(HDC hdc, HFONT hFont, RECT *rc, COLORREF color, const wchar_t *text, int length, DWORD format, uint8_t opacity)
 {
@@ -1130,17 +975,6 @@ void Open(HWND hWnd, const wchar_t* cmd)
 	::ShellExecuteW(hWnd, L"open", cmd, nullptr, nullptr, SW_NORMAL);
 }
 
-//https://www.nilesoft.org/download/update/?version=1.1.0.0
-/*
-The latest Shell version is 1.1.0.0. You are using version 1.1.0.0. [Click here to download the latest version][https://www.nilesoft.org/download].
-
-Found a bug or have a suggestion? Please report it here on the official Shell GitHub page.
-
-//https://www.nilesoft.org/download/update/
-The latest Notepad3 version is 5.21.227.1. You are using version Unknown. Click here to download the latest version.
-*/ 
-//hWindow
-
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch(message)
@@ -1188,15 +1022,10 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
 
 				DrawString(dc, cfont, &rect, 0x808080, text, text.length<int>(), DT_CENTER, 255);
 
-				//dc.draw_text(text, text.length<int>(), rect, DT_CENTER);
 				text.format(L"\xA9 %d %s", VERSION_YEAR, APP_COMPANY);
 				rect = { 0, dpi(150 + 30), dpi(150), dpi(25 + 128 + 32 + 15) };
-				//dc.set_text(0x808080);
-				//dc.draw_text(text, text.length<int>(), rect, DT_CENTER);
 				DrawString(dc, cfont, &rect, 0x808080, text, text.length<int>(), DT_CENTER, 255);
-
 				::DeleteObject(::SelectObject(dc, ofont));
-				//DrawPng(hdc, hbitmap_res, 38, 25 + 128 + 32 + 5, 16, 16 * 13, 0, 128);
 			}
             ::EndPaint(hWnd, &ps);
             return TRUE;
@@ -1228,104 +1057,23 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
                 case ID_EMAIL:
 					Open(hWnd, L"mailto:support@nilesoft.org");
                     break;
-                case ID_BUG:
-					Open(hWnd, L"https://nilesoft.org/bugs");
-                    break;
-				case ID_REDDIT:
-					Open(hWnd, L"https://reddit.com/u/moudeygo");
-					break;
-				case ID_TWITTER:
-					Open(hWnd, L"https://twitter.com/moudey");
-					break;
-                case ID_FACEBOOK:
-					Open(hWnd, L"https://facebook.com/moudeygo");
+                case ID_GITHUB:
+					Open(hWnd, L"https://github.com/moudey/shell");
                     break;
 				case ID_RESTART:
-				{
 					Windows::Explorer::Restart();
-					//for(auto &process : Diagnostics::Process::EnumInfo())
-					//{
-					//	auto hProcess = ::OpenProcess(PROCESS_ALL_ACCESS, FALSE, process.th32ProcessID);
-					//	if(hProcess)
-					//	{
-					//		if(string::Equals(process.szExeFile, "explorer.exe")) continue;
-					//		//if(process.szExeFile Diagnostics::Process::ModuleBaseName("explorer.exe"))
-					//		//MB(process.szExeFile);
-					//		for(auto &module : Diagnostics::Process::Modules(hProcess))
-					//		{
-					//			string dll = Diagnostics::Process::ModuleBaseName(hProcess, module).move();
-					//			if(dll.equals(L"shell.dll"))
-					//			{
-					//				DWORD dwNewThreadId;
-					//				LPVOID freeLibrary= FreeLibraryAndExitThread;
-					//				HANDLE hRemoteThread = CreateRemoteThread(hProcess, nullptr, 0, (LPTHREAD_START_ROUTINE)freeLibrary, module, 0, nullptr);
-					//				if(hRemoteThread)
-					//				{
-					//					/*WaitForSingleObject(hRemoteThread, INFINITE);
-					//					DWORD lpExitCode = 0;
-					//					::GetExitCodeThread(hRemoteThread, &lpExitCode);
-					//					CloseHandle(hRemoteThread);*/
-					//				}
-					//				else {
-					//					::MessageBox(0, L"Fail to build the remote thread \"FreeLibraryAndExitThread\"", L"Error during injection", MB_ICONERROR);
-					//				}
-
-					//				/*LPVOID dllPathAddressInRemoteMemory =
-					//					::VirtualAllocEx(hProcess, NULL, sizeof module, MEM_RESERVE | MEM_COMMIT, PAGE_EXECUTE_READWRITE);
-					//				
-					//				if(dllPathAddressInRemoteMemory)
-					//				{
-					//					BOOL succeededWriting =
-					//						::WriteProcessMemory(hProcess, dllPathAddressInRemoteMemory, module, sizeof module, NULL);
-					//					
-					//					if(succeededWriting)
-					//					{
-					//						LPVOID freeLibraryAndExitThreadAddress =
-					//							(LPVOID)GetProcAddress(GetModuleHandleW(L"kernel32.dll"), "FreeLibraryAndExitThread");
-					//						if(freeLibraryAndExitThreadAddress)
-					//						{
-					//							HANDLE remoteThread =
-					//								CreateRemoteThread(hProcess, NULL, NULL, (LPTHREAD_START_ROUTINE)freeLibraryAndExitThreadAddress, module, NULL, NULL);
-
-					//							if(remoteThread)
-					//							{
-					//								WaitForSingleObject(remoteThread, INFINITE);
-					//								CloseHandle(remoteThread);
-					//								MB(process.szExeFile);
-					//							}
-					//						}
-					//					}
-					//					else {
-					//						MBF(L"not succeededWriting '%s'", process.szExeFile);
-					//					}
-					//					VirtualFreeEx(hProcess, dllPathAddressInRemoteMemory, sizeof module, MEM_RELEASE);
-					//						
-					//				}
-					//				*/
-					//				//MB(Diagnostics::Process::ModuleFileName(hProcess).c_str());
-					//				//proc.append_format(L"%d %s\n", process.th32ProcessID, Diagnostics::Process::ModuleFileName(hProcess).c_str());
-					//				break;
-					//			}
-					//		}
-					//		::CloseHandle(hProcess);
-					//	}
-					//}
-					//Windows::Explorer::Restart();
-					//ExitExplorer();
 					break;
-				}
                 case ID_REG:
 				case ID_UNREG:
-			//	case ID_RESTART:
 				{
-					int freg = 0;
+					REGOP reg{};
+					reg.RESTART = true;
+					reg.TREAT = true;
 					if(wParam == ID_REG)
-						freg |= REG_REGISTER | REG_TREAT;
+						reg.REGISTER = true;
 					else if(wParam == ID_UNREG)
-						freg |= REG_UNREGISTER | REG_TREAT;
-					//else if(wParam == ID_RESTART)
-					//	reg.Restart = true;
-					return Register(freg, hWnd);
+						reg.UNREGISTER = true;
+					return Register(reg, hWnd);
 				}
             }
             break;
@@ -1362,21 +1110,12 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
                         case 'E':
                             main_window->SendCommand(ID_EMAIL);
                             break;
-                        case 'B':
-                            main_window->SendCommand(ID_BUG);
+                        case 'G':
+                            main_window->SendCommand(ID_GITHUB);
                             break;
                         case 'D':
                             main_window->SendCommand(ID_DONATE);
                             break;
-                        case 'F':
-                            main_window->SendCommand(ID_FACEBOOK);
-                            break;
-                        case 'T':
-                            main_window->SendCommand(ID_TWITTER);
-                            break;
-						case 'I':
-							main_window->SendCommand(ID_REDDIT);
-							break;
                     }
                 }
             }
@@ -1416,7 +1155,6 @@ BOOL CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, [[maybe_unused]] L
                 L"Examples:\r\nshell.exe -register -treat\r\n"
               //  L"shell.exe -runas:admin -cmd:'cmd.exe' -args:\"/K echo Hello world!\"\r\n"
                 ;
-
             ::SetDlgItemTextW(hwnd, IDC_CMDLINE_TEXT, usage);
            // SendDlgItemMessage(hwnd, IDC_CMDLINE_TEXT, EM_SETSEL, -1, -1);
             break;

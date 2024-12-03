@@ -420,6 +420,7 @@ namespace Nilesoft
 			struct {
 				Scope global;
 				Scope runtime;
+				Scope loc;
 			} variables;
 
 			std::vector<NativeMenu*>	statics;
@@ -454,6 +455,7 @@ namespace Nilesoft
 				
 				variables.global.clear(true);
 				variables.runtime.clear(true);
+				variables.loc.clear(true);
 
 				Packages.list.clear();
 			}

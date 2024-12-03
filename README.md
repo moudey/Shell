@@ -1,8 +1,7 @@
 [![Ceasefire Now](https://badge.techforpalestine.org/default)](https://techforpalestine.org/learn-more)
 
-[![Build artifacts from main branch with MSBuild](../../actions/workflows/msbuild.yml/badge.svg)](../../actions/workflows/msbuild.yml)
-
-[![Latest nightly build](https://img.shields.io/badge/download%20latest%20nightly%20build-nightly.link-purple)](https://nightly.link/moudey/Shell/workflows/msbuild/main)
+[![Build](../../actions/workflows/msbuild.yml/badge.svg)](../../actions/workflows/msbuild.yml)
+[![Nightly](https://img.shields.io/badge/download%20latest%20nightly%20build-nightly.link-purple)](https://nightly.link/moudey/Shell/workflows/msbuild/main)
 
 # [Shell](https://nilesoft.org)
 Powerful manager for Windows File Explorer context menu.
@@ -13,15 +12,11 @@ Powerful manager for Windows File Explorer context menu.
  <br>
 </p>
 
-This repository is used to [report issues](https://nilesoft.org/forum/issues).<br>
-You're also welcome to join [the Nilesoft forum](https://nilesoft.org/forum) for a discussion.
-
 ## Details
 <p>
 Shell is a context menu extender that lets you handpick the items to integrate into the Windows File Explorer context menu, create custom commands to access all your favorite web pages, files, and folders, and launch any application directly from the context menu.<br>
 It also provides you a convenient solution to modify or remove any context menu item added by the system or third-party software.
 </p>
-
 
 Features
 ------------------
@@ -55,7 +50,6 @@ Download
 Download the latest version:  
 https://nilesoft.org/download
 
-
 Screenshots
 ------------------
 <p align="center">
@@ -76,6 +70,3 @@ If you really love Shell and would like to see it continue to improve.
 [![Paypal](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://www.paypal.me/nilesoft)
 [![BuyMeACoffee](https://img.shields.io/badge/Donate-BuyMeACoffee-yellow.svg)](https://www.buymeacoffee.com/moudey)
 
-Sponsors
-------------------
-[RubicBG](https://github.com/RubicBG), [hiranokite](https://github.com/hiranokite), [SteffanDonal](https://github.com/SteffanDonal), Ousseynou SANKHARE

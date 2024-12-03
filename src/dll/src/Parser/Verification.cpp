@@ -458,9 +458,9 @@ namespace Nilesoft
 								case IDENT_TITLE:
 								case IDENT_NAME:
 								case IDENT_QUOTE:
-									return check(argc == 0, 2);
+									return check(argc <= 1, 2);
 								case IDENT_ZERO:
-									return check(argc <= 1, 1);
+									return check(argc <= 2, 1);
 								default:
 									return error_at(2);
 							}
@@ -669,8 +669,22 @@ namespace Nilesoft
 						case IDENT_APPDATA:
 						case IDENT_USERS:
 						case IDENT_TEMPLATES:
-						case IDENT_LANGID:
+						case IDENT_LANG:
+						case IDENT_LOC:
+						{
+							switch(id[2])
+							{
+								case IDENT_ID:
+								case IDENT_NAME:
+								case IDENT_COUNTRY:
+									return check(argc == 0, 2);
+								case IDENT_ZERO:
+									return check(argc == 0, 1);
+								default:
+									return error_at(2);
+							}
 							return check(argc == 0, 1);
+						}
 						case IDENT_ISOREARLIER:
 						case IDENT_ISORGREATER:
 							return check(argc < 3, 1);
@@ -1927,8 +1941,15 @@ namespace Nilesoft
 					}
 					return error_at(0);
 				}
+				case IDENT_LOC:
+				{
+					if(length != 2)
+						return error_at(0);
+					//if(argc == 0 && context.Cache->variables.loc.exists(id[1], false))
+						return ExpressionType::Identifier;
+					//return error_at(1);
+				}
 			}
-
 
 			//if(argc == 0)
 			{

@@ -1,0 +1,7 @@
+﻿<Project Sdk="WixToolset.Sdk/5.0.2">
+  <PropertyGroup>
+    <OutputType>Package</OutputType>
+    <OutputPath>..\..\bin\</OutputPath>
+    <TargetName>setup-$(Platform.ToLower().Replace('win32', 'x86'))</TargetName>
+  </PropertyGroup>
+</Project>

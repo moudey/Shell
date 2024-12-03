@@ -28,7 +28,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <Keyword>Win32Proj</Keyword>
+    <Keyword></Keyword>
     <ProjectGuid>{FFFD0DDB-48FB-4681-A3B6-8E787FA98C98}</ProjectGuid>
     <RootNamespace>Shell</RootNamespace>
     <TargetName>shell</TargetName>
@@ -57,10 +57,6 @@
     <Xdcmake>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt).xml</OutputFile>
     </Xdcmake>
-    <PreBuildEvent>
-      <Command>..\tools\version\version.exe</Command>
-      <Message>Generating version number...</Message>
-    </PreBuildEvent>
     <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

@@ -1030,16 +1030,20 @@ namespace Nilesoft
 		}
 
 		//predefined constant variable
-		bool Parser::parse_variable(Scope *variables)
+		bool Parser::parse_variable(Scope *variables, bool has_sign)
 		{
 			skip();
 
-			if(l->tok != L'$')
-				return false;
+			if(has_sign)
+			{
+				if(l->tok != L'$')
+					return false;
 
-			skip();
-			prevCol = l->column;
-			l->next(); // skip $
+				skip();
+				prevCol = l->column;
+				l->next(); // skip $
+			}
+
 			error_if(!l->is_ident(0), TokenError::VariableExpected, prevCol);
 			Ident id;
 			id.push_back(parse_ident(true));
@@ -1178,6 +1182,20 @@ namespace Nilesoft
 			return 0;
 		}
 
+		void Parser::parse_loc(bool has_curly)
+		{
+			if(has_curly)
+				expect_openCurly();
+			while(!l->eof)
+			{
+				if(has_curly && l->tok == L'}')
+					break;
+				parse_variable(&context.Cache->variables.loc, false);
+			}
+			if(has_curly)
+				expect_closeCurly();
+		}
+
 		// load data from disk and populate
 		void Parser::parse_config()
 		{
@@ -1229,26 +1247,50 @@ namespace Nilesoft
 					}
 					case IDENT_IMPORT:
 					{
+						skip();
+						bool bloc = false;
+						if(l->peek_ident(IDENT_LOC))
+						{
+							bloc = true;
+							l->next(3);
+						}
+						else if(l->peek_ident(IDENT_LANG))
+						{
+							bloc = true;
+							l->next(4);
+						}
+
 						auto ret = load_import(l->line, l->column, true, false);
 						if(ret == 1)
 						{
-							parse_config();
+							if(bloc)
+								parse_loc(false);
+							else
+								parse_config();
 							pop_import();
 						}
 						break;
 					}
-					case 0:
+					case IDENT_LANG:
+					case IDENT_LOC:
 					{
-						if(l->eof)
-							break;
-						if(parse_variable(&cache->variables.global))
-							break;
-						if(parse_image())
-							break;
+						parse_loc(true);
+						break;
 					}
 					default:
+					{
+						if(id == 0)
+						{
+							if(l->eof)
+								break;
+							if(parse_variable(&cache->variables.global))
+								break;
+							if(parse_image())
+								break;
+						}
 						error(TokenError::IdentifierConfigUnexpected, prevCol);
 						break;
+					}
 				}
 			}
 		}

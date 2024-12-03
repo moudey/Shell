@@ -2100,6 +2100,12 @@ namespace Nilesoft
 				case IDENT_INDEXOF:
 					_result = Object(new Object[]{ IDENT_INDEXOF, (int)argc, eval_arg(0).move(), eval_arg(1).move(), eval_arg(2).move() }, true).move();
 					break;
+				case IDENT_LOC:
+				{
+					auto e = context->Cache->variables.loc[Id[1]];
+					_result = context->Eval(e).move();
+					break;
+				}
 				default:
 				{
 					eval_var(_result);
@@ -2351,10 +2357,10 @@ namespace Nilesoft
 								_result = p->get_title(quote).move();
 								break;
 							case IDENT_QUOTE:
-								_result = p->get(quote.empty() ? string(L"\"") : quote).move();
+								_result = p->get(quote.empty() ? string(L"\"") : quote, argc == 1 ? sep.c_str() : nullptr).move();
 								break;
 							default:
-								_result = p->get(quote).move();
+								_result = p->get(quote, argc == 2 ? sep.c_str() : nullptr).move();
 								break;
 						}
 					}
@@ -4239,34 +4245,34 @@ namespace Nilesoft
 					break;
 				}
 				case IDENT_IS7ORGREATER:
-					_result = ver->Major > 6 || (ver->Major == 6 && ver->Minor >= 1);
+					_result = ver->Major >= 6 && ver->Minor >= 1;
 					break;
 				case IDENT_IS8ORGREATER:
-					_result = ver->Major > 6 || (ver->Major == 6 && ver->Minor >= 2);
+					_result = ver->Major >= 6 && ver->Minor >= 2;
 					break;
 				case IDENT_IS81ORGREATER:
-					_result = ver->Major > 6 || (ver->Major == 6 && ver->Minor >= 3);
+					_result = ver->Major >= 6 && ver->Minor >= 3;
 					break;
 				case IDENT_IS10ORGREATER:
 					_result = ver->Major >= 10;
 					break;
 				case IDENT_S11ORGREATER:
-					_result = ver->Major >10 || (ver->Major == 10 && ver->Build >= 22000);
+					_result = ver->Major >= 10 && ver->Build >= 22000;
 					break;
 				case IDENT_IS7OREARLIER:
-					_result = ver->Major < 6 || (ver->Major == 6 && ver->Minor <= 1);
+					_result = ver->Major <= 6 && ver->Minor <= 1;
 					break;
 				case IDENT_IS8OREARLIER:
-					_result = ver->Major < 6 || (ver->Major == 6 && ver->Minor <= 2);
+					_result = ver->Major <= 6 && ver->Minor <= 2;
 					break;
 				case IDENT_IS81OREARLIER:
-					_result = ver->Major < 6 || (ver->Major == 6 && ver->Minor <= 3);
+					_result = ver->Major <= 6 && ver->Minor <= 3;
 					break;
 				case IDENT_IS10OREARLIER:
-					_result = ver->Major < 10 || (ver->Major == 10 && ver->Build < 22000);
+					_result = ver->Major <= 10 && ver->Build < 22000;
 					break;
 				case IDENT_IS11OREARLIER:
-					_result = ver->Major < 10 || (ver->Major == 10 && ver->Build <= 22000);
+					_result = ver->Major <= 10 && ver->Build <= 22000;
 					break;
 				case IDENT_IS_PRIMARY_MONITOR:
 					_result = context->helper.is_primary_monitor;
@@ -4357,9 +4363,74 @@ namespace Nilesoft
 				case IDENT_TEMPLATES:
 					_result = Path::GetKnownFolder(FOLDERID_CommonTemplates).trim_end(trim).move();
 					break;
-				case IDENT_LANGID:
-					_result = ::GetThreadUILanguage(); //context->helper.languageId;
+				case IDENT_LANG:
+				case IDENT_LOC:
+				{
+					wchar_t szISOLang[51] = { };
+					if(Id.length() == 2)
+					{
+						auto len = ::GetUserDefaultLocaleName(szISOLang, 50);
+						if(len > 0)
+							_result = szISOLang;
+					}
+					else if(Id.length() == 3)
+					{
+						auto locid = ::GetThreadUILanguage();
+
+						switch(Id[2])
+						{
+							case IDENT_ID:
+								_result = locid; //context->helper.languageId;
+								break;
+							case IDENT_NAME:
+							{
+								
+								auto ret = ::GetLocaleInfoW(locid,
+															LOCALE_SISO639LANGNAME,
+															szISOLang,
+															sizeof(szISOLang) / sizeof(wchar_t));
+								if(ret)
+									_result = szISOLang;
+								break;
+							}
+							case IDENT_COUNTRY:
+							{
+								auto ret = ::GetLocaleInfoW(locid,
+													   LOCALE_SISO3166CTRYNAME,
+															szISOLang,
+													   sizeof(szISOLang) / sizeof(wchar_t));
+								if(ret)
+									_result = szISOLang;
+								break; 
+							}
+						}
+					}
+					
+					/*wchar_t szISOLang[10] = { 0 };
+					wchar_t szISOCountry[10] = { 0 };
+					auto lid = ::GetThreadUILanguage();
+
+					auto ret = ::GetLocaleInfoW(lid,
+									LOCALE_SISO639LANGNAME,
+									szISOLang,
+									sizeof(szISOLang) / sizeof(wchar_t));
+					if(ret)
+					{
+						loc = szISOLang;
+						ret = ::GetLocaleInfoW(lid,
+										 LOCALE_SISO3166CTRYNAME,
+										 szISOCountry,
+										 sizeof(szISOCountry) / sizeof(wchar_t));
+						if(ret)
+						{
+							loc += L"-";
+							loc += szISOCountry;
+						}
+					}
+					*/
+					
 					break;
+				}
 				case IDENT_DATETIME:
 				{
 					SYSTEMTIME lt = { };
