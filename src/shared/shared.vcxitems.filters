@@ -57,8 +57,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Library\plutosvg.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Library\plutovg.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)RegistryConfig.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="$(MSBuildThisFileDirectory)Resource\main.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)VC-LTL.props" />
   </ItemGroup>
 </Project>

@@ -64,6 +64,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)System\Windows\Window.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)System\Windows\Windows.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)RegistryConfig.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)System\Log.cpp" />
@@ -74,6 +75,10 @@
   </ItemGroup>
   <ItemGroup>
     <Manifest Include="$(MSBuildThisFileDirectory)Resource\Shell.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)packages.config" />
+    <None Include="$(MSBuildThisFileDirectory)VC-LTL.props" />
   </ItemGroup>
   <!--<ItemGroup>
     <Library Include="$(MSBuildThisFileDirectory)Library\plutosvg.lib" />

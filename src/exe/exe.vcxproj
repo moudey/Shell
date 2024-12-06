@@ -153,6 +153,6 @@
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ItemGroup>
-    <None Include="$(SolutionDir)shared\packages.config" />
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

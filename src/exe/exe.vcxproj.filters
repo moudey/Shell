@@ -39,6 +39,6 @@
     <None Include="$(SolutionDir)shared\VC-LTL.props">
       <Filter>Others Files</Filter>
     </None>
-    <None Include="$(SolutionDir)shared\packages.config" />
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>
