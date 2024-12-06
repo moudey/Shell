@@ -36,9 +36,7 @@
     <None Include="src\Shell.def">
       <Filter>Others Files</Filter>
     </None>
-    <None Include="..\shared\VC-LTL.props">
-      <Filter>Others Files</Filter>
-    </None>
+    <None Include="$(SolutionDir)shared\packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp">
@@ -183,7 +181,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\shared\Resource\Shell.rc">
+    <ResourceCompile Include="$(SolutionDir)shared\Resource\Shell.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>

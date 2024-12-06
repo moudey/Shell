@@ -41,13 +41,12 @@
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <ImportGroup Label="Shared">
-    <Import Project="..\shared\shared.vcxitems" Label="Shared" />
+    <Import Project="$(SolutionDir)shared\shared.vcxitems" Label="Shared" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\shared\VC-LTL.props" Condition="'$(Configuration)|$(Platform)'=='release|$(Platform)'" />
+    <Import Project="$(SolutionDir)shared\VC-LTL.props" Condition="Exists('$(SolutionDir)shared\VC-LTL.props')" />
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <LibraryPath>$(SolutionDir)shared\Library;$(LibraryPath)</LibraryPath>
@@ -133,6 +132,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="$(SolutionDir)shared\packages.config" />
     <None Include="readme.txt" />
     <None Include="src\Shell.def" />
   </ItemGroup>
@@ -187,10 +187,7 @@
     <ClCompile Include="src\Initializer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\shared\Resource\Shell.rc" />
+    <ResourceCompile Include="$(SolutionDir)shared\Resource\Shell.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ItemGroup>
-    <None Include="..\shared\VC-LTL.props" />
-  </ItemGroup>
 </Project>

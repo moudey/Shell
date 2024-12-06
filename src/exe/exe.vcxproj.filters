@@ -23,12 +23,12 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\shared\Resource\Shell.rc">
+    <ResourceCompile Include="$(SolutionDir)shared\Resource\Shell.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\shared\Resource\resource.h">
+    <ClInclude Include="$(SolutionDir)shared\Resource\resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Control.h">
@@ -36,8 +36,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\shared\VC-LTL.props">
+    <None Include="$(SolutionDir)shared\VC-LTL.props">
       <Filter>Others Files</Filter>
     </None>
+    <None Include="$(SolutionDir)shared\packages.config" />
   </ItemGroup>
 </Project>

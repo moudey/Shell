@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="release|ARM64">
       <Configuration>release</Configuration>
@@ -16,7 +17,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <Keyword></Keyword>
+    <Keyword>
+    </Keyword>
     <ProjectGuid>{FFFD0DDB-48FB-4681-A3B6-8E787FA98C98}</ProjectGuid>
     <RootNamespace>Shell</RootNamespace>
     <TargetName>shell</TargetName>
@@ -48,18 +50,18 @@
     <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-   <PropertyGroup Label="Configuration" Condition="'$(Configuration)'=='release'">
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)'=='release'">
     <UseDebugLibraries>false</UseDebugLibraries>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <ImportGroup Label="Shared">
-    <Import Project="..\shared\shared.vcxitems" Label="Shared" />
+    <Import Project="$(SolutionDir)shared\shared.vcxitems" Label="Shared" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\shared\VC-LTL.props" Condition="'$(Configuration)|$(Platform)'=='release|$(Platform)'" />
+    <Import Project="$(SolutionDir)shared\VC-LTL.props" Condition="Exists('$(SolutionDir)shared\VC-LTL.props')" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
@@ -143,16 +145,14 @@
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\shared\Resource\Shell.rc" />
+    <ResourceCompile Include="$(SolutionDir)shared\Resource\Shell.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\shared\Resource\resource.h" />
+    <ClInclude Include="$(SolutionDir)shared\Resource\resource.h" />
     <ClInclude Include="src\Control.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Label="ExtensionTargets">
-  </ImportGroup>
   <ItemGroup>
-    <None Include="..\shared\VC-LTL.props" />
+    <None Include="$(SolutionDir)shared\packages.config" />
   </ItemGroup>
 </Project>

@@ -34,15 +34,9 @@ If you are not satisfied with the default search order, you can modify this file
 		<!--<SupportWinXP>true</SupportWinXP>-->
 	</PropertyGroup>
 
-
 	<PropertyGroup>
 		<!--Shared.props file root directory exists VC-LTL? -->
-		<VC_LTL_Root Condition=" ('$(VC_LTL_Root)'=='') And (Exists('$(MSBuildThisFileDirectory)_msvcrt.h')) ">$(MSBuildThisFileDirectory)</VC_LTL_Root>
-		<VC_LTL_Root Condition=" ('$(VC_LTL_Root)'=='') And (Exists('$(ProjectDir)VC-LTL\_msvcrt.h')) ">$(ProjectDir)VC-LTL</VC_LTL_Root>
-		<VC_LTL_Root Condition=" ('$(VC_LTL_Root)'=='') And ('$(SolutionDir)'!='') And (Exists('$(SolutionDir)VC-LTL\_msvcrt.h')) ">$(SolutionDir)VC-LTL</VC_LTL_Root>
-		<VC_LTL_Root Condition=" ('$(VC_LTL_Root)'=='') And (Exists('$(ProjectDir)..\VC-LTL\_msvcrt.h')) ">$(ProjectDir)..\VC-LTL</VC_LTL_Root>
-		<VC_LTL_Root Condition=" ('$(VC_LTL_Root)'=='') And ('$(SolutionDir)'!='') And (Exists('$(SolutionDir)..\VC-LTL\_msvcrt.h')) ">$(SolutionDir)..\VC-LTL</VC_LTL_Root>
-		<VC_LTL_Root Condition=" '$(VC_LTL_Root)'=='' ">$(Registry:HKEY_CURRENT_USER\Code\VC-LTL@Root)</VC_LTL_Root>
+		<VC_LTL_Root Condition=" '$(VC_LTL_Root)'=='' ">$(SolutionDir)packages\VC-LTL.5.1.1\build\native</VC_LTL_Root>
 	</PropertyGroup>
 
 	<ImportGroup Condition=" '$(VC_LTL_Root)'!=''">
