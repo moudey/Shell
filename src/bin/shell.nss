@@ -10,6 +10,7 @@
 
 // localization
 import lang 'imports/lang/en.nss'
+import lang 'imports/lang/zh.nss'
 
 import 'imports/theme.nss'
 import 'imports/images.nss'
