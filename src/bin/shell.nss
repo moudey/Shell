@@ -9,7 +9,12 @@
 }
 
 // localization
-import lang 'imports/lang/en.nss'
+$loc_path='imports\lang\'
+import lang if(path.exists(loc_path + sys.lang + ".nss"), 
+				loc_path + sys.lang + ".nss", 
+				loc_path + "\\en.nss")
+
+// or import lang 'imports/lang/en.nss'
 
 import 'imports/theme.nss'
 import 'imports/images.nss'
