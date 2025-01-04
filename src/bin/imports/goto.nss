@@ -1,6 +1,6 @@
 menu(type='*' where=window.is_taskbar||sel.count mode=mode.multiple title=title.go_to sep=sep.both image=\uE14A)
 {
-	menu(title='Folder' image=\uE1F4)
+	menu(title=loc.folder image=\uE1F4)
 	{
 		item(title='Windows' image=inherit cmd=sys.dir)
 		item(title='System' image=inherit cmd=sys.bin)
@@ -26,36 +26,37 @@ menu(type='*' where=window.is_taskbar||sel.count mode=mode.multiple title=title.
 	menu(where=sys.ver.major >= 10 title=title.settings sep=sep.before image=\uE0F3)
 	{
 		// https://docs.microsoft.com/en-us/windows/uwp/launch-resume/launch-settings-app
-		item(title='system' image=inherit cmd='ms-settings:')
-		item(title='about' image=inherit cmd='ms-settings:about')
-		item(title='your-info' image=inherit cmd='ms-settings:yourinfo')
-		item(title='system-info' image=inherit cmd-line='/K systeminfo')
-		item(title='search' cmd='search-ms:' image=inherit)
-		item(title='usb' image=inherit cmd='ms-settings:usb')
-		item(title='windows-update' image=inherit cmd='ms-settings:windowsupdate')
-		item(title='windows-defender' image=inherit cmd='ms-settings:windowsdefender')
-		menu(title='apps' image=inherit)
+		item(title=loc.system image=inherit cmd='ms-settings:')
+		item(title=loc.about image=inherit cmd='ms-settings:about')
+		item(title=loc.your_info image=inherit cmd='ms-settings:yourinfo')
+		item(title=loc.system_info image=inherit cmd-line='/K systeminfo')
+		item(title=loc.search cmd='search-ms:' image=inherit)
+		item(title=loc.usb image=inherit cmd='ms-settings:usb')
+		item(title=loc.windows_update image=inherit cmd='ms-settings:windowsupdate')
+		item(title=loc.windows_defender image=inherit cmd='ms-settings:windowsdefender')
+		menu(title=loc.apps image=inherit)
 		{
-			item(title='apps-features' image=inherit cmd='ms-settings:appsfeatures')
-			item(title='default-apps' image=inherit cmd='ms-settings:defaultapps')
-			item(title='optional-features' image=inherit cmd='ms-settings:optionalfeatures')
-			item(title='startup' image=inherit cmd='ms-settings:startupapps')
+			item(title=loc.apps_features image=inherit cmd='ms-settings:appsfeatures')
+			item(title=loc.default_apps image=inherit cmd='ms-settings:defaultapps')
+			item(title=loc.optional_features image=inherit cmd='ms-settings:optionalfeatures')
+			item(title=loc.startup image=inherit cmd='ms-settings:startupapps')
 		}
-		menu(title='personalization' image=inherit)
+		menu(title=loc.personalization image=inherit)
 		{
-			item(title='personalization' image=inherit cmd='ms-settings:personalization')
-			item(title='lockscreen' image=inherit cmd='ms-settings:lockscreen')
-			item(title='background' image=inherit cmd='ms-settings:personalization-background')
-			item(title='colors' image=inherit cmd='ms-settings:colors')
-			item(title='themes' image=inherit cmd='ms-settings:themes')
-			item(title='start' image=inherit cmd='ms-settings:personalization-start')
-			item(title='taskbar' image=inherit cmd='ms-settings:taskbar')
+			item(title=loc.personalization image=inherit cmd='ms-settings:personalization')
+			item(title=loc.lockscreen image=inherit cmd='ms-settings:lockscreen')
+			item(title=loc.background image=inherit cmd='ms-settings:personalization-background')
+			item(title=loc.colors image=inherit cmd='ms-settings:colors')
+			item(title=loc.themes image=inherit cmd='ms-settings:themes')
+			item(title=loc.start image=inherit cmd='ms-settings:personalization-start')
+			item(title=loc.taskbar image=inherit cmd='ms-settings:taskbar')
 		}
-		menu(title='network' image=inherit)
+		menu(title=loc.network image=inherit)
 		{
-			item(title='status' image=inherit cmd='ms-settings:network-status')
-			item(title='ethernet' image=inherit cmd='ms-settings:network-ethernet')
-			item(title='connections' image=inherit cmd='shell:::{7007ACC7-3202-11D1-AAD2-00805FC1270E}')
+			item(title=loc.status image=inherit cmd='ms-settings:network-status')
+			item(title=loc.ethernet image=inherit cmd='ms-settings:network-ethernet')
+			item(title=loc.wifi image=inherit cmd='ms-settings:network-wifi')
+			item(title=loc.connections image=inherit cmd='shell:::{7007ACC7-3202-11D1-AAD2-00805FC1270E}')
 		}
 	}
 }

@@ -9,28 +9,25 @@
 }
 menu(where=@(this.count == 0) type="taskbar" image=icon.settings expanded=true)
 {
-	menu(title="Apps" image=\uE254)
+	menu(title=loc.apps image=\uE254)
 	{
-		item(title='Paint' image=\uE116 cmd='mspaint')
-		item(title='Edge' image cmd='@sys.prog32\Microsoft\Edge\Application\msedge.exe')
-		item(title='Calculator' image=\ue1e7 cmd='calc.exe')
+		item(title=loc.paint image=\uE116 cmd='mspaint')
+		item(title=loc.edge image cmd='@sys.prog32\Microsoft\Edge\Application\msedge.exe')
+		item(title=loc.calculator image=\ue1e7 cmd='calc.exe')
 		item(title=str.res('regedit.exe,-16') image cmd='regedit.exe')
-		sep
-		item(title='WinSCP' image cmd='D:\config\Programs\network\WinSCP\WinSCP.exe')
-		item(title="GitHubDesktop" image cmd='D:\config\Programs\dev\github\GitHubDesktop.exe')
 	}
-	menu(title=title.windows image=\uE1FB)
+	menu(title=loc.windows image=\uE1FB)
 	{
-		item(title=title.cascade_windows cmd=command.cascade_windows)
-		item(title=title.Show_windows_stacked cmd=command.Show_windows_stacked)
-		item(title=title.Show_windows_side_by_side cmd=command.Show_windows_side_by_side)
+		item(title=loc.cascade_windows cmd=command.cascade_windows)
+		item(title=loc.Show_windows_stacked cmd=command.Show_windows_stacked)
+		item(title=loc.Show_windows_side_by_side cmd=command.Show_windows_side_by_side)
 		sep
-		item(title=title.minimize_all_windows cmd=command.minimize_all_windows)
-		item(title=title.restore_all_windows cmd=command.restore_all_windows)
+		item(title=loc.minimize_all_windows cmd=command.minimize_all_windows)
+		item(title=loc.restore_all_windows cmd=command.restore_all_windows)
 	}
 	item(title=title.desktop image=icon.desktop cmd=command.toggle_desktop)
 	item(title=title.settings image=icon.settings(auto, image.color1) cmd='ms-settings:')
-	item(title=title.task_manager sep=both image=icon.task_manager cmd='taskmgr.exe')
-	item(title=title.taskbar_Settings sep=both image=inherit cmd='ms-settings:taskbar')
+	item(title=loc.task_manager sep=both image=icon.task_manager cmd='taskmgr.exe')
+	item(title=loc.taskbar_Settings sep=both image=inherit cmd='ms-settings:taskbar')
 	item(vis=key.shift() title=title.exit_explorer cmd=command.restart_explorer)
 }
