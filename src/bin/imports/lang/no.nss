@@ -1,5 +1,5 @@
 /*
-English
+Norwegian
 by: https://github.com/Vatnar
 */
 
