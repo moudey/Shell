@@ -1,0 +1,82 @@
+/*
+Norwegian
+by: https://github.com/Vatnar
+*/
+
+xxx="Velkommen på norsk"
+// shell.nss
+pin_unpin="Fest/Løsne"
+
+// develop.nss
+develop="&Utvikle"
+editors="editorer"
+windows_notepad="Windows notepad"
+
+// file-manage.nss
+file_manage="Administrer fil"
+all="Alle"
+invert="Inverter"
+none="Ingen"
+change_extension="Endre filtype"
+take_ownership="Ta eierskap"
+show_hide="Vis/Skjul"
+system_files="Systemfiler"
+file_name_extensions="Filtypenavn"
+attributes="Attributter"
+register_server="Registrer Server"
+register="Registrer"
+unregister="Avregistrer"
+hidden="Skjult"
+system="System"
+readonly="Skrivebeskyttet"
+archive="Arkiv"
+created="Skapt"
+modified="Endret"
+accessed="Aksessert"
+new_folder="Ny Mappe"
+new_file="Ny Fil"
+datetime="tidsdato"
+guid="Guid"
+
+// goto.nss
+folder="Mappe"
+all_control_panel_items="Alle kontrollpanelelementer"
+system="System"
+about="Om"
+your_info="Infoen din"
+system_info="Systeminfo"
+search="Søk"
+usb="USB"
+windows_update="Windows Update"
+windows_defender="Windows Defender"
+apps="Apper"
+apps_features="Apper og funksjoner"
+default_apps="Standardapper"
+optional_features="Valgfrie funksjoner"
+startup="Oppstart"
+personalization="Personalisering"
+lockscreen="Låseskjerm"
+background="Bakgrunn"
+colors="Farger"
+themes="Temaer"
+start="Start"
+taskbar="Oppgavelinje"
+network="Nettverk"
+status="Status"
+ethernet="Ethernet"
+wifi="WLAN"
+connections="Tilkoblinger"
+
+
+// taskbar.nss
+apps="Apper"
+paint="Paint"
+edge="Edge"
+calculator="Kalkulator"
+cascade_windows="Kaskadér vinduer"
+Show_windows_stacked="Vis vinduer stablet"
+Show_windows_side_by_side="Vis vinduer side om side"
+minimize_all_windows="Minimer alle vinduer"
+restore_all_windows="Gjenopprett alle vinduer"
+task_manager="Oppgavebehandling"
+taskbar_Settings="Alternativer for oppgavelinjen"
