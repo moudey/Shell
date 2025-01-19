@@ -70,6 +70,5 @@ If you really love Shell and would like to see it continue to improve.
 
 [![Paypal](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://www.paypal.me/nilesoft)
 [![BuyMeACoffee](https://img.shields.io/badge/Donate-BuyMeACoffee-yellow.svg)](https://www.buymeacoffee.com/moudey)
-<!--
-[<img src="https://api.gitsponsors.com/api/badge/img?id=400920341" height="20">](https://api.gitsponsors.com/api/badge/link?p=2naU/zAJRfcIyZ3ZBf9wNTtsJqlGATqLAy9WS+aWUgedqEkge2A6YuvIARblGA6sX3hiTpwdc4bPcVLdpSDu6J1xTWToGXPTMeD7Pt9ofGRwqdCjqgMptVxIAO4WhNx42rLjku/VYsBi6dgqAVCXMg==)-->
+
 
