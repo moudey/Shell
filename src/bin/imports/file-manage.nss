@@ -2,7 +2,7 @@
 {
 	menu(separator="after" title=title.copy_path image=icon.copy_path)
 	{
-		item(where=sel.count > 1 title='Copy (@sel.count) items selected' cmd=command.copy(sel(false, "\n")))
+		item(where=sel.count > 1 title=loc.copy_multiple_paths cmd=command.copy(sel(false, "\n")))
 		item(mode="single" title=@sel.path tip=sel.path cmd=command.copy(sel.path))
 		item(mode="single" type='file' separator="before" where=length(sel.lnk)>0 title=sel.lnk cmd=command.copy(sel.lnk))
 		separator

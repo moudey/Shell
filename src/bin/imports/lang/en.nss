@@ -14,6 +14,7 @@ windows_notepad="Windows notepad"
 
 // file-manage.nss
 file_manage="File manage"
+copy_multiple_paths='Copy (@sel.count) items selected'
 all="All"
 invert="Invert"
 none="None"
@@ -73,6 +74,7 @@ apps="Apps"
 paint="Paint"
 edge="Edge"
 calculator="Calculator"
+windows="windows"
 cascade_windows="Cascade windows"
 Show_windows_stacked="Show windows stacked"
 Show_windows_side_by_side="Show windows side by side"
