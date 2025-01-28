@@ -78,6 +78,11 @@
 					<Component Id='LANG' Guid='{FF987BEA-6195-4C05-8523-00936A1BD092}' NeverOverwrite='yes'>
 						<File Id='en.nss' Source='$(var.bin)\imports\lang\en.nss' />
 						<File Id='ar.nss' Source='$(var.bin)\imports\lang\ar.nss' />
+						<File Id='de_DE.nss' Source='$(var.bin)\imports\lang\de-DE.nss' />
+						<File Id='ko.nss' Source='$(var.bin)\imports\lang\ko.nss' />
+						<File Id='no.nss' Source='$(var.bin)\imports\lang\no.nss' />
+						<File Id='pt_BR.nss' Source='$(var.bin)\imports\lang\pt-BR.nss' />
+						<File Id='zh_CN.nss' Source='$(var.bin)\imports\lang\zh-CN.nss' />
 					</Component>
 				</Directory>
 				</Directory>

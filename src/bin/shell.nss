@@ -10,9 +10,10 @@
 
 // localization
 $loc_path='imports\lang\'
-import lang if(path.exists(loc_path + sys.lang + ".nss"), 
-				loc_path + sys.lang + ".nss", 
-				loc_path + "\\en.nss")
+import lang loc_path + "en.nss"
+import lang if(path.exists(loc_path + sys.lang + ".nss"),
+               loc_path + sys.lang + ".nss",
+               loc_path + "en.nss")
 
 // or import lang 'imports/lang/en.nss'
 

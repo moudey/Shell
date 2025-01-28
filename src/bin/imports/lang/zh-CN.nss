@@ -1,8 +1,10 @@
 /*
 Simplified Chinese
 by: github.com/JohnsonRan
+    github.com/XY0797
 */
 
+xxx="欢迎用中文"
 // shell.nss
 pin_unpin="固定/取消固定"
 
@@ -13,6 +15,7 @@ windows_notepad="Windows 记事本"
 
 // file-manage.nss
 file_manage="文件管理"
+copy_multiple_paths='复制选中的 (@sel.count) 个项目'
 all="全选"
 invert="反选"
 none="全不选"
@@ -35,7 +38,7 @@ accessed="访问时间"
 new_folder="新建文件夹"
 new_file="新建文件"
 datetime="当前时间"
-guid="GUID"
+guid="Guid"
 
 // goto.nss
 folder="文件夹"
@@ -65,6 +68,7 @@ status="网络和 Internet"
 ethernet="以太网"
 wifi="WLAN"
 connections="网络连接"
+
 
 // taskbar.nss
 apps="应用"
