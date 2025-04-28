@@ -45,6 +45,7 @@ Documentation
 ------------------
 Browse the [online documentation here.](https://nilesoft.org/docs)
 
+[<img src="https://devin.ai/assets/deepwiki-badge.png" alt="Ask DeepWiki.com" height="20"/>](https://deepwiki.com/moudey/Shell)
 
 Download
 ------------------
