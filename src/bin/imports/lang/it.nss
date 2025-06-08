@@ -1,0 +1,83 @@
+/*
+Italian
+by: Andrea Brandi <andreabrandi.com>
+*/
+
+xxx="Benvenuti in italiano"
+// shell.nss
+pin_unpin="Blocca/Sblocca"
+
+// develop.nss
+develop="&Sviluppo"
+editors="Editor"
+windows_notepad="Blocco note"
+
+// file-manage.nss
+file_manage="Gestione file"
+copy_multiple_paths='Copia (@sel.count) elementi selezionati'
+all="Tutti"
+invert="Inverti"
+none="Nessuno"
+change_extension="Cambia estensione"
+take_ownership="Diventa proprietario"
+show_hide="Mostra/Nascondi"
+system_files="File di sistema"
+file_name_extensions="Estensioni nomi file"
+attributes="Attributi"
+register_server="Register server"
+register="Registra"
+unregister="Rimuovi"
+hidden="Nascosto"
+system="Sistema"
+readonly="Sola lettura"
+archive="Archivio"
+created="Creato"
+modified="Modificato"
+accessed="Ultimo accesso"
+new_folder="Nuova cartella"
+new_file="Nuovo file"
+datetime="Data/ora"
+guid="Guid"
+
+// goto.nss
+folder="Cartella"
+all_control_panel_items="Tutte le attività"
+system="Sistema"
+about="Informazioni"
+your_info="Le tue info"
+system_info="Informazioni di sistema"
+search="Cerca"
+usb="USB"
+windows_update="Windows Update"
+windows_defender="Windows Defender"
+apps="App"
+apps_features="App e funzionalità"
+default_apps="App predefinite"
+optional_features="Funzionalità facoltative"
+startup="Avvio"
+personalization="Personalizzazione"
+lockscreen="Schermata di blocco"
+background="Sfondo"
+colors="Colori"
+themes="Temi"
+start="Start"
+taskbar="Barra delle applicazioni"
+network="Rete"
+status="Stato"
+ethernet="Ethernet"
+wifi="Wi-Fi"
+connections="Connessioni"
+
+// taskbar.nss
+apps="App"
+paint="Paint"
+edge="Edge"
+calculator="Calcolatrice"
+windows="Finestre"
+cascade_windows="Finestre a cascata"
+Show_windows_stacked="Finestre sovrapposte"
+Show_windows_side_by_side="Finestre affiancate"
+minimize_all_windows="Minimizza tutte le finestre"
+restore_all_windows="Ripristina tutte le finestre"
+task_manager="Gestione attività"
+taskbar_Settings="Impostazioni barra"
