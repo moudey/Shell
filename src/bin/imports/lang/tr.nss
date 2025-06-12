@@ -8,7 +8,7 @@ xxx="Türkçe hoş geldiniz"
 pin_unpin="Sabitle/Kaldır"
 
 // develop.nss
-develop="&Geliştiririci"
+develop="&Geliştirici"
 editors="düzenleyiciler"
 windows_notepad="Windows not defteri"
 
