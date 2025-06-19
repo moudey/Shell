@@ -1,4 +1,3 @@
-
 #include <pch.h>
 #include "Include/Theme.h"
 #include "Include/ContextMenu.h"
@@ -2175,6 +2174,11 @@ namespace Nilesoft
 			rcblock.top += _theme.back.margin.top;
 			rcblock.bottom -= _theme.back.margin.bottom;
 
+			// Ensure we have at least minimal height for the item
+			if (rcblock.height() < 4) {
+				rcblock.bottom = rcblock.top + 4;
+			}
+
 			if(mii->cch > 0 || !menu->has_col)
 			{
 				rcblock.left += _theme.back.margin.left;
@@ -2186,6 +2190,11 @@ namespace Nilesoft
 				rcblock.right -= _theme.back.margin.right + dpi(3);
 			}
 
+			// Ensure proper width for the item
+			if (rcblock.width() <= 0) {
+				rcblock.right = rcblock.left + 10;
+			}
+
 			const auto width = rcblock.width();
 			const auto height = rcblock.height();
 
@@ -2194,6 +2203,14 @@ namespace Nilesoft
 
 			rcimg.top = rcblock.top + ((height - image_size) / 2);
 			rcimg.bottom = rcimg.top + image_size;
+
+			// Fix for last item - ensure image rectangle has valid dimensions
+			if (rcimg.bottom > rc->bottom) {
+				rcimg.bottom = rc->bottom - 1;
+				if (rcimg.height() < 4) {
+					rcimg.top = rcimg.bottom - 4;
+				}
+			}
 
 			if(mii->cch > 0 || !menu->has_col)
 			{
@@ -2233,6 +2250,11 @@ namespace Nilesoft
 						border_color = _theme.back.border.nor_dis;
 				}
 				
+				// Ensure we don't draw outside the item's rectangle
+				RECT clipRect = *rc;
+				dc.save_dc();
+				dc.intersect_clip_rect(clipRect);
+				
 				//dc.draw_fill_rounded_rect(rcblock, _theme.back.radius+2, 0,0);
 				//draw_rect(&dc, rcblock.point(), { width, height }, 0xff000000, {}, _theme.back.radius);
 				//draw_rect(&dc, rcblock.point(), { width, height }, _theme.background.color, {}, _theme.back.radius);
@@ -2241,6 +2263,8 @@ namespace Nilesoft
 					back_color.a = op;
 					draw_rect(&dc, rcblock.point(), { width, height }, back_color, border_color, _theme.back.radius);
 				}
+				
+				dc.restore_dc();
 			}
 
 			auto has_checked_image = menu->draw.checks && menu->draw.images && (_theme.image.display >= 2);
@@ -3588,7 +3612,7 @@ namespace Nilesoft
 
 			//New feature "showdelay" to change the menu show delay time and it is applied immediately without saving the value in the registry.
 			//Gets or sets the time, in milliseconds, that the system waits before displaying a shortcut menu when the mouse cursor is over a submenu item.
-			//New-Item -Path “HKCU:\Software\Control Panel\Desktop” -Name MenuShowDelay -Force -Value 200
+			//New-Item -Path "HKCU:\Software\Control Panel\Desktop" -Name MenuShowDelay -Force -Value 200
 			if(_context.eval_number(sets->showdelay, obj))
 			{
 				::SystemParametersInfoW(SPI_GETMENUSHOWDELAY, 0, &_showdelay[0], 0);
