@@ -21,6 +21,12 @@ namespace Nilesoft
 			uint32_t Type = 1;
 			uint32_t Architecture = PROCESSOR_ARCHITECTURE_UNKNOWN;
 
+			// Windows Insider build flags
+			bool IsCanaryBuild = false;
+			bool IsDevBuild = false;
+			bool IsBetaBuild = false;
+			bool IsPreviewBuild = false;
+
 			//bool Is64Bit = false;
 			string ProductType;
 			string Name;
@@ -70,6 +76,24 @@ namespace Nilesoft
 						//Build = build.ToInt();
 						if(Major == 10 && Build >= 22000)
 						{
+							// Check for Windows Insider build
+							if (auto insiderKey = keyLM.OpenSubKey(L"SOFTWARE\\Microsoft\\WindowsSelfHost\\Applicability"))
+							{
+								string flightRing = insiderKey.GetString(L"FlightRing").move();
+								if(!flightRing.empty())
+								{
+									if(flightRing.iequals(L"Canary"))
+										IsCanaryBuild = true;
+									else if(flightRing.iequals(L"Dev"))
+										IsDevBuild = true;
+									else if(flightRing.iequals(L"Beta"))
+										IsBetaBuild = true;
+									else if(flightRing.iequals(L"ReleasePreview"))
+										IsPreviewBuild = true;
+								}
+								insiderKey.Close();
+							}
+
 							//https://dennisbabkin.com/blog/?t=how-to-tell-the-real-version-of-windows-your-app-is-running-on#ver_string
 							/*
 							%WINDOWS_GENERIC%
@@ -165,6 +189,7 @@ namespace Nilesoft
 			}
 
 			bool IsWindows11OrGreater() const { return (Major > 10 || (Major == 10 && Build >= 22000)); }
+			bool IsWindows11CanaryOrDev() const { return IsWindows11OrGreater() && (IsCanaryBuild || IsDevBuild); }
 			bool IsWindows10OrGreater() const { return IsWindowsVersionOrGreater(10, 0); }
 			bool IsWindows81OrGreater() const { return IsWindowsVersionOrGreater(6, 3); }
 			bool IsWindows8OrGreater() const { return IsWindowsVersionOrGreater(6, 2); }

@@ -1,4 +1,3 @@
-
 #include <pch.h>
 #include "Include/Theme.h"
 #include "Include/ContextMenu.h"
@@ -2801,6 +2800,9 @@ namespace Nilesoft
 						{
 							Color nor, sel, dis, dis_sel;
 
+							// Special handling for Windows 11 Canary and Dev builds
+							bool isCanaryOrDev = ver->IsWindows11CanaryOrDev();
+
 							auto get_bk_clr = [&](Color &clr, int iPartId, int iStateId, int x = -1, int y = -1, int size = 9)->bool
 							{
 								DC dc = hwnd.owner;
@@ -2827,23 +2829,86 @@ namespace Nilesoft
 								return false;
 							};
 
-							get_clr(nor, MENU_POPUPITEM, MPI_NORMAL, TMT_TEXTCOLOR);
-							get_clr(sel, MENU_POPUPITEM, MPI_HOT, TMT_TEXTCOLOR);
-							get_clr(dis, MENU_POPUPITEM, MPI_DISABLED, TMT_TEXTCOLOR);
-							get_clr(dis_sel, MENU_POPUPITEM, MPI_DISABLEDHOT, TMT_TEXTCOLOR);
+							// Use more reliable theme color detection for Canary builds
+							if (isCanaryOrDev)
+							{
+								// Get text colors with fallbacks to system colors
+								if (!get_clr(nor, MENU_POPUPITEM, MPI_NORMAL, TMT_TEXTCOLOR))
+								{
+									nor.from(::GetSysColor(COLOR_MENUTEXT), 100);
+								}
+								
+								if (!get_clr(sel, MENU_POPUPITEM, MPI_HOT, TMT_TEXTCOLOR))
+								{
+									sel.from(::GetSysColor(COLOR_HIGHLIGHTTEXT), 100);
+								}
+								
+								if (!get_clr(dis, MENU_POPUPITEM, MPI_DISABLED, TMT_TEXTCOLOR))
+								{
+									dis.from(::GetSysColor(COLOR_GRAYTEXT), 100);
+								}
+								
+								if (!get_clr(dis_sel, MENU_POPUPITEM, MPI_DISABLEDHOT, TMT_TEXTCOLOR))
+								{
+									dis_sel.from(::GetSysColor(COLOR_GRAYTEXT), 100);
+								}
+							}
+							else
+							{
+								// Standard theme color detection for non-Canary builds
+								get_clr(nor, MENU_POPUPITEM, MPI_NORMAL, TMT_TEXTCOLOR);
+								get_clr(sel, MENU_POPUPITEM, MPI_HOT, TMT_TEXTCOLOR);
+								get_clr(dis, MENU_POPUPITEM, MPI_DISABLED, TMT_TEXTCOLOR);
+								get_clr(dis_sel, MENU_POPUPITEM, MPI_DISABLEDHOT, TMT_TEXTCOLOR);
+							}
 
 							_theme.text.color = { nor, sel, dis, dis_sel };
 							_theme.symbols.checked = { nor, sel, dis, dis_sel };
 							_theme.symbols.bullet = { nor, sel, dis, dis_sel };
 							_theme.symbols.chevron = { nor, sel, dis, dis_sel };
 
-							if(!get_clr(_theme.background.color, MENU_POPUPBACKGROUND, MPI_NORMAL, TMT_FILLCOLOR))
-								get_bk_clr(_theme.background.color, MENU_POPUPITEM, MPI_NORMAL);
+							// More reliable background color detection for Canary builds
+							if (isCanaryOrDev)
+							{
+								if (!get_clr(_theme.background.color, MENU_POPUPBACKGROUND, MPI_NORMAL, TMT_FILLCOLOR))
+								{
+									if (!get_bk_clr(_theme.background.color, MENU_POPUPITEM, MPI_NORMAL))
+									{
+										_theme.background.color.from(::GetSysColor(COLOR_MENU), 100);
+									}
+								}
+								
+								if (!get_bk_clr(_theme.back.color.sel, MENU_POPUPITEM, MPI_HOT))
+								{
+									_theme.back.color.sel.from(::GetSysColor(COLOR_HIGHLIGHT), 100);
+								}
+								
+								if (!get_bk_clr(_theme.back.color.nor_dis, MENU_POPUPITEM, MPI_DISABLED))
+								{
+									_theme.back.color.nor_dis.from(::GetSysColor(COLOR_MENU), 100);
+								}
+								
+								if (!get_bk_clr(_theme.back.color.sel_dis, MENU_POPUPITEM, MPI_DISABLEDHOT))
+								{
+									_theme.back.color.sel_dis.from(::GetSysColor(COLOR_BTNFACE), 100);
+								}
+								
+								if (!get_bk_clr(_theme.separator.color, MENU_POPUPSEPARATOR, 0, -1, -1, 3))
+								{
+									_theme.separator.color.from(::GetSysColor(COLOR_GRAYTEXT), 100);
+								}
+							}
+							else
+							{
+								// Standard background color detection for non-Canary builds
+								if(!get_clr(_theme.background.color, MENU_POPUPBACKGROUND, MPI_NORMAL, TMT_FILLCOLOR))
+									get_bk_clr(_theme.background.color, MENU_POPUPITEM, MPI_NORMAL);
 
-							get_bk_clr(_theme.back.color.sel, MENU_POPUPITEM, MPI_HOT);
-							get_bk_clr(_theme.back.color.nor_dis, MENU_POPUPITEM, MPI_DISABLED);
-							get_bk_clr(_theme.back.color.sel_dis, MENU_POPUPITEM, MPI_DISABLEDHOT);
-							get_bk_clr(_theme.separator.color, MENU_POPUPSEPARATOR, 0, -1, -1, 3);
+								get_bk_clr(_theme.back.color.sel, MENU_POPUPITEM, MPI_HOT);
+								get_bk_clr(_theme.back.color.nor_dis, MENU_POPUPITEM, MPI_DISABLED);
+								get_bk_clr(_theme.back.color.sel_dis, MENU_POPUPITEM, MPI_DISABLEDHOT);
+								get_bk_clr(_theme.separator.color, MENU_POPUPSEPARATOR, 0, -1, -1, 3);
+							}
 
 							_theme.border.color = _theme.separator.color;// getbkclr(MENU_POPUPBORDERS, 0, 0, 4, 9);
 							if(enableTransparency)
@@ -3588,7 +3653,7 @@ namespace Nilesoft
 
 			//New feature "showdelay" to change the menu show delay time and it is applied immediately without saving the value in the registry.
 			//Gets or sets the time, in milliseconds, that the system waits before displaying a shortcut menu when the mouse cursor is over a submenu item.
-			//New-Item -Path “HKCU:\Software\Control Panel\Desktop” -Name MenuShowDelay -Force -Value 200
+			//New-Item -Path "HKCU:\Software\Control Panel\Desktop" -Name MenuShowDelay -Force -Value 200
 			if(_context.eval_number(sets->showdelay, obj))
 			{
 				::SystemParametersInfoW(SPI_GETMENUSHOWDELAY, 0, &_showdelay[0], 0);
