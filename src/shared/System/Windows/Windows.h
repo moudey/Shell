@@ -82,13 +82,13 @@ namespace Nilesoft
 								string flightRing = insiderKey.GetString(L"FlightRing").move();
 								if(!flightRing.empty())
 								{
-									if(flightRing.iequals(L"Canary"))
+									if(flightRing.equals(L"Canary"))
 										IsCanaryBuild = true;
-									else if(flightRing.iequals(L"Dev"))
+									else if(flightRing.equals(L"Dev"))
 										IsDevBuild = true;
-									else if(flightRing.iequals(L"Beta"))
+									else if(flightRing.equals(L"Beta"))
 										IsBetaBuild = true;
-									else if(flightRing.iequals(L"ReleasePreview"))
+									else if(flightRing.equals(L"ReleasePreview"))
 										IsPreviewBuild = true;
 								}
 								insiderKey.Close();
