@@ -565,20 +565,21 @@ namespace Nilesoft
 				}
 				else if(isw11)
 				{
+					// Updated Windows 11 light theme colors and styling
 					th.separator.color = 0xFFD7D7D7;
 					th.border.color = 0xFFE5E5E5;
 					th.background.color = 0xFFF9F9F9;
 					th.text.color = { 0xFF000000, 0xFFFFFFFF, 0xFF9F9F9F, 0xFF9F9F9F };
 					th.back.color = { 0xFFF9F9F9, Color::Swap(0xFF0078D4), 0xFFF9F9F9, 0xFFF0F0F0 };
 					
+					// Improved Windows 11 styling for borders and padding
 					th.border.padding.left = 4;
 					th.border.padding.right = 4;
-					th.border.radius = th.radius(2);
-					th.back.radius = th.radius(1);
-					th.back.padding.top = 0;
-					th.back.padding.bottom = 0;
-					th.back.margin = { 0, 4, 0, 4 };
-					th.shadow.size = 3;
+					th.border.radius = 8; // Windows 11 uses 8px border radius
+					th.back.radius = 4;   // Inner selection radius
+					th.back.padding = { 8, 6, 8, 6 }; // Better padding for menu items
+					th.back.margin = { 4, 4, 4, 4 };  // Better margin for menu items
+					th.shadow.size = 4;               // Slightly larger shadow
 
 					if(enableTransparency)
 					{
@@ -613,7 +614,6 @@ namespace Nilesoft
 				}
 
 				th.shadow.color.a = 0x10;
-				//th.back.border = th.back.color.nor;
 				th.set_symbols_as_text(0);
 				return th;
 			}
@@ -637,20 +637,21 @@ namespace Nilesoft
 				}
 				else if(isw11)
 				{
+					// Updated Windows 11 dark theme colors and styling
 					th.separator.color = 0xFF3E3E3E;
 					th.border.color = 0xFF3E3E3E;
 					th.background.color = 0xFF2B2B2B;
 					th.text.color = { 0xFFFFFFFF, 0xFFFFFFFF, 0xFF6D6D6D, 0xFF6D6D6D };
 					th.back.color = { 0xFF2B2B2B, Color::Swap(0xFF0078D4), 0xFF2B2B2B, 0xFF353535 };
 
+					// Improved Windows 11 styling for borders and padding
 					th.border.padding.left = 4;
 					th.border.padding.right = 4;
-					th.border.radius = th.radius(2);
-					th.back.radius = th.radius(1);
-					th.back.padding.top = 0;
-					th.back.padding.bottom = 0;
-					th.back.margin = { 0, 4, 0, 4 };
-					th.shadow.size = 3;
+					th.border.radius = 8; // Windows 11 uses 8px border radius
+					th.back.radius = 4;   // Inner selection radius
+					th.back.padding = { 8, 6, 8, 6 }; // Better padding for menu items
+					th.back.margin = { 4, 4, 4, 4 };  // Better margin for menu items
+					th.shadow.size = 4;               // Slightly larger shadow
 
 					if(enableTransparency)
 					{
@@ -689,7 +690,6 @@ namespace Nilesoft
 				}
 
 				th.shadow.color.opacity(25);
-				//th.back.border = th.back.color.nor;
 				th.set_symbols_as_text(1);
 
 				return th;
