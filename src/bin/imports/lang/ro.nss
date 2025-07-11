@@ -14,7 +14,7 @@ windows_notepad="Windows Notepad"
 
 // file-manage.nss
 file_manage="Gestionare fișiere"
-copy_multiple_paths='Copiază (@sel.count) elemente selectate'
+copy_multiple_paths='Copiază (@sel.count) (de) elemente selectate'
 all="Toate"
 invert="Inversează"
 none="Nimic"
@@ -77,7 +77,7 @@ calculator="Calculator"
 windows="Ferestre"
 cascade_windows="Ferestre în cascadă"
 Show_windows_stacked="Afișează ferestrele în stivă"
-Show_windows_side_by_side="Afișează ferestrele alăturate"
+Show_windows_side_by_side="Afișează ferestrele una lângă alta"
 minimize_all_windows="Minimizează toate ferestrele"
 restore_all_windows="Restaurează toate ferestrele"
 task_manager="Manager de activități"
