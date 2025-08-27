@@ -52,7 +52,7 @@
 		item(title=loc.accessed keys=io.dt.accessed(sel.path, 'y/m/d') cmd=io.dt.accessed(sel.path,2000,1,1) vis=label)
 	}
 
-	menu(mode="single" type='file' find='.dll|.ocx' separator="before" title=loc.register_erver image=\uea86)
+	menu(mode="single" type='file' find='.dll|.ocx' separator="before" title=loc.register_server image=\uea86)
 	{
 		item(title=loc.register admin cmd='regsvr32.exe' args='@sel.path.quote' invoke="multiple")
 		item(title=loc.unregister admin cmd='regsvr32.exe' args='/u @sel.path.quote' invoke="multiple")
