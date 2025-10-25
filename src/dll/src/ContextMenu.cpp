@@ -4976,78 +4976,59 @@ namespace Nilesoft
 
 		WND *ContextMenu::OnMenuCreate(HWND hWnd)
 		{
-			auto wnd = &_map[hWnd];
-
-			wnd->ctx = this;
+			auto wnd = &_windows[hWnd];
 			wnd->handle = hWnd;
-			wnd->set_prop();
-			set_prop(hWnd);
+			wnd->menu = current.menu;
+			wnd->layer.handle = nullptr;
+			wnd->blurry.handle = nullptr;
 
-			///	auto hMenu = (HMENU)::SendMessageW(hWnd, MN_GETHMENU, 0, 0);
-			//	wnd->hMenu = hMenu;
-			//	map_menu_wnd[hMenu] = { hMenu, hWnd };
+			bool composition = false;
+			::DwmIsCompositionEnabled(&composition);
 
-			current.hWnd = hWnd;
-			_level.push_back(wnd);
-
-			Flag<ULONG_PTR> cs_style = ::GetClassLongPtrW(hWnd, GCL_STYLE);
-			Flag<LONG_PTR> style = ::GetWindowLongPtrW(hWnd, GWL_STYLE);
-			Flag<LONG_PTR> ex_style = ::GetWindowLongPtrW(hWnd, GWL_EXSTYLE);
-
-			auto cs_style_old = cs_style;
-			auto style_old = style;
-			auto ex_style_old = ex_style;
-
-			//RECT r = { 0 };
-			//AdjustWindowRectEx(&r, (DWORD)style.value, false, (DWORD)ex_style.value);
-
-			cs_style.remove(CS_DROPSHADOW);
-			style.remove(WS_BORDER);
-
-			ex_style.remove(WS_EX_WINDOWEDGE);
-			ex_style.remove(WS_EX_DLGMODALFRAME);
-
-			if(composition)
-				ex_style.add(WS_EX_COMPOSITED);
-
-			//ex_style.add(WS_EX_LAYERED);
-			//ex_style.add(WS_EX_NOREDIRECTIONBITMAP);
-
-			if(!cs_style.equals(cs_style_old))
-				::SetClassLongPtrW(hWnd, GCL_STYLE, cs_style);
-
-			if(!style.equals(style_old))
-				::SetWindowLongPtrW(hWnd, GWL_STYLE, style);
-
-			if(!ex_style.equals(ex_style_old))
-				::SetWindowLongPtrW(hWnd, GWL_EXSTYLE, ex_style);
-						
-			//::SetClassLongPtrW(hWnd, GCL_STYLE, 0);
-			//::SetWindowLongPtrW(hWnd, GWL_STYLE, WS_POPUP);
-			//::SetWindowLongPtrW(hWnd, GWL_EXSTYLE, WS_EX_NOREDIRECTIONBITMAP);
-
-			::PostMessageW(hWnd, WM_SETCURSOR, 0, 0);
-
-			//int opacity = 100;
-			//SetLayeredWindowAttributes(hWnd, 0, (255 * 100) / 100, LWA_ALPHA);
-			//SetLayeredWindowAttributes(hWnd, 0x0ff00, 0, LWA_COLORKEY);
+			BOOL isGlass = FALSE;
 			if(composition)
 			{
+				// For Windows 11, apply rounded corners and mica effect
+				if(ver->IsWindows11OrGreater())
+				{
+					DWM dwm(hWnd);
+					// Apply rounded corners for Windows 11
+					dwm.SetCorner(DWM::Corner::Round);
+					
+					// Apply proper backdrop effect based on Windows 11 build
+					if(ver->Build >= 22523)
+					{
+						// For newer Windows 11 builds, use the proper backdrop type
+						if(_theme.enableTransparency)
+						{
+							dwm.SetBackdropType(_theme.mode ? DWM::BackdropType::Acrylic : DWM::BackdropType::Mica);
+						}
+					}
+					else if(ver->Build >= 22000)
+					{
+						// For older Windows 11 builds, use the Mica API
+						if(_theme.enableTransparency)
+						{
+							dwm.SetMica(TRUE);
+						}
+					}
+					
+					// Set dark mode appropriately
+					dwm.SetImmersiveDarkMode(_theme.mode ? TRUE : FALSE);
+				}
+				
 				AccentPolicy ap(hWnd);
-				//ap.set(AccentPolicy::Disabled);
-				//ap.set(ap.AcrylicBlurBehind, ap.AllowSetWindowRgn, _theme.background.color.to_ABGR());
-
-				//if(_theme.transparent)
-				Compositor::TransparentArea(hWnd);
+				if(_theme.enableTransparency)
+				{
+					if(_theme.background.effect > 0)
+					{
+						ap.enable(_theme.background.effect, _theme.background.tintcolor.to_BGR());
+						isGlass = TRUE;
+					}
+				}
 			}
 
-			BOOL ENABLED = TRUE;
-			::DwmSetWindowAttribute(hWnd, DWMWA_NCRENDERING_ENABLED, &ENABLED, sizeof(BOOL));
-			::DwmSetWindowAttribute(hWnd, DWMWA_ALLOW_NCPAINT, &ENABLED, sizeof(BOOL));
-			::DwmSetWindowAttribute(hWnd, DWMWA_NONCLIENT_RTL_LAYOUT, &ENABLED, sizeof(BOOL));
-
-			WindowSubclass::Set(hWnd, MenuSubClassProc, 0, this);
-			//::ShowWindowAsync(hWnd, SW_HIDE);
+			wnd->is_glass = isGlass;
 			return wnd;
 		}
 
