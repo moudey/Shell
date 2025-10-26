@@ -1,6 +1,6 @@
 /*
 Korean
-by: github.com/moudey
+by: github.com/venusgirl
 */
 
 xxx="한국어 번역 - 비너스걸"
