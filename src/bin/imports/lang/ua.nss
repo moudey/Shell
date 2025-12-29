@@ -3,6 +3,7 @@ Ukrainian
 by: github.com/Silletr
 */
 
+
 xxx="Ласкаво просимо!"
 // shell.nss
 pin_unpin="Закріпити/Відкріпити"
