@@ -375,6 +375,7 @@ namespace Nilesoft
 
 		bool Selections::verify_types(const FileSystemObjects &fso) const
 		{
+			return true;
 			if(fso.any_types)
 				return true;
 
@@ -974,6 +975,20 @@ namespace Nilesoft
 				*/
 
 				HWND current_window{};
+
+				if (!Window.has_IShellBrowser) {
+					current_window = Window.handle;
+					while(current_window)
+					{
+						// Get IShellBrowser interface for current hWnd
+						ShellBrowser = GetIShellBrowser(current_window, true);
+						if(ShellBrowser) break;
+						current_window = ::GetParent(current_window);
+					}
+					__trace(L"In QuerySelected: Window has no IShellBrowser but try anyways");
+					__trace(L"Ptr to ShellBrowser: %p", ShellBrowser);
+
+				}
 				
 				if(!Window.has_IShellBrowser)
 					return false;
@@ -1185,6 +1200,7 @@ MultitaskingViewFrame // Multitask Button
 		*/
 		bool Selections::QueryShellWindow()
 		{
+			__trace(L"In QueryShellWindow");
 			auto window = &Window.handle;
 			try
 			{
@@ -1217,9 +1233,11 @@ Edit >> ComboBox > #32770 > Notepad
 
 				auto hParent = window->parent();
 				Hash cur_Parent = hParent.class_hash();
+				__trace(L"In QueryShellWindow: hParent class: %ls", hParent.class_name().c_str());
 
 				if(cur_hash.equals({ WC_SHELLDLL_DefView, WC_SysListView32, WC__STATIC, WC_ShellTabWindowClass/*, WC_CabinetWClass, WC_ExplorerWClass*//*, WC_DirectUIHWND*/ }))
 				{
+					__trace(L"In QueryShellWindow: is explorer");
 					Window.id = WINDOW_EXPLORER;
 					Window.explorer = true;
 
@@ -1239,6 +1257,7 @@ Edit >> ComboBox > #32770 > Notepad
 				}
 				else if(cur_hash.equals(WC_SysTreeView32))
 				{
+					__trace(L"In QueryShellWindow: is WC_SysTreeView32 explorer_tree");
 					if(!cur_Parent.equals(WC_NamespaceTreeControl))
 					{
 						auto active = window->ActiveWindow();
@@ -1260,6 +1279,7 @@ Edit >> ComboBox > #32770 > Notepad
 				}
 				else if(cur_hash.equals({ WC__EDIT, WC__SEARCHEDITBOXFAKEWINDOW }))
 				{
+					__trace(L"In QueryShellWindow: is EDIT");
 					Window.id = WINDOW_EDIT;
 					Types[FSO_EDIT] = 1;
 					Types[FSO_COUNT]++;
@@ -1267,6 +1287,7 @@ Edit >> ComboBox > #32770 > Notepad
 				}
 				else
 				{
+					__trace(L"In QueryShellWindow: is taskbar or other");
 					Hash root_owner_hash;
 					bool from_root_owner = false;
 					bool from_taskbar = cur_hash.equals({ WC_Shell_TrayWnd, WC_Shell_SecondaryTrayWnd,

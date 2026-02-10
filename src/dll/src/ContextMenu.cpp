@@ -176,6 +176,8 @@ namespace Nilesoft
 			//d2d.create_render();
 			//d2d.create_res();
 
+			_log.info(L"ContextMenu::ContextMenu %d", 1);
+
 			Window window = hWnd;
 
 			hwnd.owner = hWnd;
@@ -211,6 +213,8 @@ namespace Nilesoft
 			_context.Keyboard = &keyboard;
 
 			ThreadId = window.get_threadId(&ProcessId);
+
+			_log.info(L"ContextMenu::ContextMenu ProcessId: %d, ThreadId: %d", ProcessId, ThreadId);
 
 			GUITHREADINFO gti = { sizeof(GUITHREADINFO) };
 			if(::GetGUIThreadInfo(ThreadId, &gti))
@@ -4047,6 +4051,8 @@ namespace Nilesoft
 
 			auto items = &menu->items;
 
+			__trace(L"In build_main_system_menuitems: ");
+
 			for(auto si : _cache->statics)
 			{
 				if(si->has_clsid)
@@ -4081,6 +4087,7 @@ namespace Nilesoft
 							_this.length = item->length; ;// mii->title.length<uint32_t>();
 							_this.title = item->title;
 							_this.title_normalize = item->name;
+							__trace(L"item(instruction) #%d, name=%ls", i, item->name.c_str());
 						}
 
 						_context._this = &_this;
@@ -4217,6 +4224,8 @@ namespace Nilesoft
 
 			auto itmes_count = ::GetMenuItemCount(hMenu);
 
+			__trace(L"In build_system_menuitems: items count %d", itmes_count);
+
 			menu->items.reserve(itmes_count);
 
 			for(int i = 0; i < itmes_count; i++)
@@ -4267,6 +4276,8 @@ namespace Nilesoft
 						if(mii.cch > 0)
 						{
 							item->title = title.release(mii.cch).move();
+
+							__trace(L"  system menu item #%d, name=%ls", i, item->title.c_str());
 							item->hash = MenuItemInfo::normalize(item->title, &item->name, &item->tab, &item->length, &item->keys);
 
 							item->ui = Initializer::get_muid(item->hash);
@@ -4343,6 +4354,7 @@ namespace Nilesoft
 				if(!Initializer::Inited()) return false;
 
 				__trace(L"ContextMenu init");
+				_log.info(L"ContextMenu init");
 
 				auto initializer = Initializer::instance;
 
@@ -4353,9 +4365,12 @@ namespace Nilesoft
 				Selected.Window.handle = hwnd.owner;
 				Selected.Window.hInstance = _window.instance();
 
-				if(!Selected.QueryShellWindow())
+				bool has_shell_window = Selected.QueryShellWindow();
+				__trace(L"Out QueryShellWindow: Window.has_IShellBrowser=%d, explorer=%d, Window.id=%d", Selected.Window.has_IShellBrowser, Selected.Window.explorer, Selected.Window.id);
+
+				if(!has_shell_window)
 				{
-					__trace(L"QueryShellWindow");
+					__trace(L"No Shell window");
 					return false;
 				}
 
@@ -4467,7 +4482,11 @@ namespace Nilesoft
 				__system_menu_tree->type = 10;
 				__map_system_menu[0] = __system_menu_tree;
 
-				if(0 == ::GetPropW(hwnd.owner, UxSubclass))
+				auto prop = ::GetPropW(hwnd.owner, UxSubclass);
+
+				__trace(L"UxSubclass Prop: %d, modify items enabled: %d", prop, _settings.modify_items.enabled);
+
+				if(0 == prop)
 					build_system_menuitems(_hMenu_original, __system_menu_tree, true);
 
 				if(_settings.modify_items.enabled)

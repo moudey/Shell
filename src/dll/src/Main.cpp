@@ -1150,6 +1150,11 @@ STDAPI DllGetClassObject(_In_ REFCLSID rclsid, [[maybe_unused]] _In_ REFIID riid
 	//Guid iid2 = riid;
 	if(ppv) *ppv = nullptr;
 
+	// __trace(L"In DllGetClassObject: iid={%08lX-%04X-%04X-%02X%02X-%02X%02X%02X%02X%02X%02X}\n", iid.Data1, iid.Data2, iid.Data3,
+    //    iid.Data4[0], iid.Data4[1],
+    //    iid.Data4[2], iid.Data4[3], iid.Data4[4], 
+    //    iid.Data4[5], iid.Data4[6], iid.Data4[7]);
+
 	__try
 	{
 		if(iid.equals(IID_FolderExtensions))

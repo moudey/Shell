@@ -1,7 +1,7 @@
 ﻿settings
 {
 	priority=1
-	exclude.where = !process.is_explorer
+	exclude.where = !process.is_explorer && (process.name != "XYplorer") && (process.name != "notepad")
 	showdelay = 200
 	// Options to allow modification of system items
 	modify.remove.duplicate=1
@@ -34,3 +34,5 @@ import 'imports/file-manage.nss'
 import 'imports/develop.nss'
 import 'imports/goto.nss'
 import 'imports/taskbar.nss'
+
+item(title = 'hello' cmd=msg('hello'))
