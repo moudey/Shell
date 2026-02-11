@@ -4051,7 +4051,7 @@ namespace Nilesoft
 
 			auto items = &menu->items;
 
-			__trace(L"In build_main_system_menuitems: ");
+			// __trace(L"In build_main_system_menuitems: ");
 
 			for(auto si : _cache->statics)
 			{
@@ -4087,7 +4087,7 @@ namespace Nilesoft
 							_this.length = item->length; ;// mii->title.length<uint32_t>();
 							_this.title = item->title;
 							_this.title_normalize = item->name;
-							__trace(L"item(instruction) #%d, name=%ls", i, item->name.c_str());
+							// __trace(L"item(instruction) #%d, name=%ls", i, item->name.c_str());
 						}
 
 						_context._this = &_this;
@@ -4224,7 +4224,7 @@ namespace Nilesoft
 
 			auto itmes_count = ::GetMenuItemCount(hMenu);
 
-			__trace(L"In build_system_menuitems: items count %d", itmes_count);
+			// __trace(L"In build_system_menuitems: items count %d", itmes_count);
 
 			menu->items.reserve(itmes_count);
 
@@ -4277,7 +4277,7 @@ namespace Nilesoft
 						{
 							item->title = title.release(mii.cch).move();
 
-							__trace(L"  system menu item #%d, name=%ls", i, item->title.c_str());
+							// __trace(L"  system menu item #%d, name=%ls", i, item->title.c_str());
 							item->hash = MenuItemInfo::normalize(item->title, &item->name, &item->tab, &item->length, &item->keys);
 
 							item->ui = Initializer::get_muid(item->hash);

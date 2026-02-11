@@ -3,6 +3,7 @@
 #include "Library/detours.h"
 #include "RegistryConfig.h"
 #include <UIAutomation.h>
+#include "Include/ClassFactory.h"
 using namespace Nilesoft::Shell;
 using namespace Diagnostics;
 
@@ -158,6 +159,7 @@ std::unordered_map< uint32_t, const wchar_t *> msg_map0 = {
 #define GET_Y_LPARAM(lp) ((int)(short)HIWORD(lp))  // windowsx.h
 
 HINSTANCE _hInstance{};
+long g_cDllRef = 0;
 Initializer _initializer;
 extern Logger &_log = Logger::Instance();
 const Windows::Version *ver = &Windows::Version::Instance();
@@ -1140,6 +1142,19 @@ BOOL APIENTRY DllMain(HINSTANCE hInstance, DWORD dwReason, LPVOID)
 	return FALSE;
 }
 
+HRESULT make_class_factory_query_interface(REFIID riid, LPVOID FAR *ppv)
+{
+	__trace(L"In make_class_factory_query_interface");
+	HRESULT hr = E_OUTOFMEMORY;
+	ClassFactory *pClassFactory = new ClassFactory();
+	if (pClassFactory)
+	{
+		hr = pClassFactory->QueryInterface(riid, ppv);
+		pClassFactory->Release();
+	}
+	return hr;
+}
+
 //IID_FolderExtensions
 //#pragma comment(linker, "/export:DllGetClassObject=DllGetClassObject")
 _Check_return_
@@ -1176,6 +1191,8 @@ STDAPI DllGetClassObject(_In_ REFCLSID rclsid, [[maybe_unused]] _In_ REFIID riid
 		{
 			_loader.contextmenuhandler = true;
 			Selections::point.GetCursorPos();
+			// make class for retrieving selected objects in third-party file explorers
+			hr = make_class_factory_query_interface(riid, ppv);
 		}
 
 		if(!_initializer.Status.Loaded)
@@ -1201,6 +1218,9 @@ STDAPI DllGetClassObject(_In_ REFCLSID rclsid, [[maybe_unused]] _In_ REFIID riid
 __control_entrypoint(DllExport)
 STDAPI DllCanUnloadNow(void)
 {
+	if (g_cDllRef > 0) {
+		return S_FALSE;
+	}
 	if(!_loader.explorer || !is_registered())
 		return S_OK;
 	return S_FALSE;
