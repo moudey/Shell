@@ -2,6 +2,7 @@
 #include "Include/Theme.h"
 #include "Include/ContextMenu.h"
 #include "Include/stb_image_write.h"
+#include "Include/ShellExtSelectionRetriever.h"
 
 using namespace Nilesoft::Diagnostics;
 #include <mutex>
@@ -133,7 +134,7 @@ struct DWM
 
 inline HMENU GET_HMENU(HWND hWnd) { return SendMSG<HMENU>(hWnd, MN_GETHMENU, 0, 0); }
 
-auto ver = &Windows::Version::Instance();
+auto ver = &Nilesoft::Windows::Version::Instance();
 
 #pragma endregion
 
@@ -4211,9 +4212,12 @@ namespace Nilesoft
 			}
 		}
 
-		void ContextMenu::build_system_menuitems(HMENU hMenu, menuitem_t *menu, bool is_root)
+		void ContextMenu::build_system_menuitems(HMENU hMenu, menuitem_t *menu, bool is_root, bool skip_init)
 		{
-			::SendMessageW(hwnd.owner, WM_INITMENUPOPUP, reinterpret_cast<WPARAM>(hMenu), 0xFFFFFFFF);
+			if (!skip_init)
+			{
+				::SendMessageW(hwnd.owner, WM_INITMENUPOPUP, reinterpret_cast<WPARAM>(hMenu), 0xFFFFFFFF);
+			}
 
 			auto itmes_count = ::GetMenuItemCount(hMenu);
 
@@ -4267,6 +4271,12 @@ namespace Nilesoft
 						if(mii.cch > 0)
 						{
 							item->title = title.release(mii.cch).move();
+							if (item->title.equals(shell_ext_selection_retriever_placeholder, false))
+							{
+								// skip placeholder
+								continue;
+							}
+
 							item->hash = MenuItemInfo::normalize(item->title, &item->name, &item->tab, &item->length, &item->keys);
 
 							item->ui = Initializer::get_muid(item->hash);
@@ -4336,7 +4346,31 @@ namespace Nilesoft
 			}
 		}
 
-		bool ContextMenu::Initialize()
+		bool ContextMenu::check_shell_ext_selection_retriever_placeholder(HMENU hMenu)
+		{
+			auto itmes_count = ::GetMenuItemCount(hMenu);
+
+			for(int i = 0; i < itmes_count; i++)
+			{
+				string title;
+				MENUITEMINFOW mii{ sizeof(MENUITEMINFOW) };
+				mii.fMask = MenuItemInfo::FMASK;
+				mii.dwTypeData = title.buffer((1024));
+				mii.cch = 1024;
+				if(::GetMenuItemInfoW(hMenu, i, true, &mii))
+				{
+					title.release(mii.cch);
+					// __trace(L"In check_shell_ext_selection_retriever_placeholder: %ls", title.c_str());
+					if (title.equals(shell_ext_selection_retriever_placeholder, false))
+					{
+						return true;
+					}
+				}
+			}
+			return false;
+		}
+
+		bool ContextMenu::Initialize(bool is_exclusion_test)
 		{
 			try
 			{
@@ -4353,9 +4387,11 @@ namespace Nilesoft
 				Selected.Window.handle = hwnd.owner;
 				Selected.Window.hInstance = _window.instance();
 
-				if(!Selected.QueryShellWindow())
+				bool has_shell_window = Selected.QueryShellWindow();
+
+				if(!has_shell_window)
 				{
-					__trace(L"QueryShellWindow");
+					__trace(L"No Shell window");
 					return false;
 				}
 
@@ -4390,6 +4426,13 @@ namespace Nilesoft
 				_context.variables.runtime = &_cache->variables.runtime;
 				_context.variables.local = nullptr;
 
+				auto prop = ::GetPropW(hwnd.owner, UxSubclass);
+
+				// initialize popup menu to check whether to use ShellExtSelectionRetriever
+				if(0 == prop) {
+					::SendMessageW(hwnd.owner, WM_INITMENUPOPUP, reinterpret_cast<WPARAM>(_hMenu_original), 0xFFFFFFFF);
+				}
+
 				switch(Selected.Window.id)
 				{
 					case WINDOW_TASKBAR:
@@ -4398,7 +4441,12 @@ namespace Nilesoft
 						Selected.Directory = Path::GetKnownFolder(FOLDERID_Desktop).move();
 						break;
 					default:
-						if(!Selected.QuerySelected())
+						bool use_shell_ext_selection_retriever = check_shell_ext_selection_retriever_placeholder(_hMenu_original);
+						if (use_shell_ext_selection_retriever)
+						{
+							__trace(L"Menu has ShellExtSelectionRetriever placeholder");
+						}
+						if(!Selected.QuerySelected(use_shell_ext_selection_retriever))
 						{
 							__trace(L"QuerySelected");
 							//return false;
@@ -4421,9 +4469,16 @@ namespace Nilesoft
 					__trace(L"Selected.Preparing");
 					return false;
 				}
-
-				if(is_excluded())
+				
+				if (is_exclusion_test)
+				{
 					return false;
+				}
+				if(is_excluded())
+				{
+					__trace(L"Excluded");
+					return false;
+				}
 
 				hInstance = _window.instance();
 
@@ -4467,8 +4522,8 @@ namespace Nilesoft
 				__system_menu_tree->type = 10;
 				__map_system_menu[0] = __system_menu_tree;
 
-				if(0 == ::GetPropW(hwnd.owner, UxSubclass))
-					build_system_menuitems(_hMenu_original, __system_menu_tree, true);
+				if(0 == prop)
+					build_system_menuitems(_hMenu_original, __system_menu_tree, true, true);
 
 				if(_settings.modify_items.enabled)
 					build_main_system_menuitems(__system_menu_tree, true);

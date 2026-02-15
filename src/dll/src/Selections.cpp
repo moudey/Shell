@@ -1,4 +1,5 @@
 #include <pch.h>
+#include "Include/ShellExtSelectionRetriever.h"
 
 //Enable Narrow Classic Context Menu on Windows 10
 // HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\FlightedFeatures\ImmersiveContextMenu:0
@@ -894,7 +895,7 @@ namespace Nilesoft
 			return result;
 		}
 
-		bool Selections::QuerySelected()
+		bool Selections::QuerySelectedWithShellBrowser()
 		{
 			try
 			{
@@ -1008,11 +1009,12 @@ namespace Nilesoft
 			//		ShellBrowser->AddRef();
 				
 
-			//	Logger::Info(L"%x %s %x", current_window, Window::class_name(current_window).c_str(), sb);
+				// Logger::Info(L"In QuerySelected: current_window=%x class_name=%s", current_window, Window::class_name(current_window).c_str());
 
 				if(ShellBrowser == nullptr)
 					return false;
 
+				
 				if(Window.id == WINDOW_EXPLORER)
 				{
 					IComPtr<IShellView> sv;
@@ -1036,7 +1038,7 @@ namespace Nilesoft
 					Selections::GetFileProperties(si, &folderProp);
 					
 					IComPtr<IShellItemArray> sia;
-					if(S_OK == fv->GetSelection(FALSE, sia))
+					if(S_OK == fv->GetSelection(FALSE, sia)) // Selected are foreground objects
 					{
 						DWORD sel_count = 0;
 						if(S_OK != sia->GetCount(&sel_count))
@@ -1174,6 +1176,101 @@ namespace Nilesoft
 #endif
 			}
 			return false;
+		}
+
+		bool Selections::QuerySelectedWithShellExtSelectionRetriever()
+		{
+			__trace(L"In QuerySelectedWithShellExtSelectionRetriever");
+			FileProperties folderProp;
+			if (!Selections::GetFileProperties(g_ShellContext.ParentFolder.Get(), &folderProp))
+			{
+				return false;
+			}
+
+			Window.id = WINDOW_EXPLORER;
+			Window.explorer = true;
+			if (!g_ShellContext.IsBackground)
+			{
+				__trace(L"In QuerySelectedWithShellExtSelectionRetriever: is foreground");
+				ComPtr<IShellItemArray> sia = g_ShellContext.SelectionArray;
+				DWORD sel_count = 0;
+				if(S_OK != sia->GetCount(&sel_count))
+					return false;
+				__trace(L"In QuerySelected: get selection count = %d", sel_count);
+
+				Items.reserve(sel_count);
+
+				for(DWORD i = 0; i < sel_count; i++)
+				{
+					__trace(L"Parse selection item #%d", i);
+					IShellItem* item;
+					if(S_OK == sia->GetItemAt(i, &item) && item)
+						Parse(item);
+				}
+
+				Parent = folderProp.Path;
+				ParentRaw = folderProp.PathRaw;
+
+				return !Items.empty();
+			}
+
+			if(folderProp.Folder) // has background folder
+			{
+				__trace(L"In QuerySelected: folder is Folder type");
+				if(folderProp.FileSystem || folderProp.FileSysAnceStor)
+					folderProp.Background = TRUE;
+				else
+					folderProp.Background = folderProp.DropTarget;
+
+				if(!folderProp.Background)
+				{
+					auto h = folderProp.PathRaw.hash();
+					if(h == GUID_HOME or h == GUID_QUICK_ACCESS or h == GUID_LIBRARIES)
+					{
+
+						Window.id = (h == GUID_HOME) ? WINDOW_HOME : (h == GUID_QUICK_ACCESS) ? WINDOW_QUICK_ACCESS : WINDOW_LIBRARIES;
+						folderProp.Background = TRUE;
+					}
+				}
+				__trace(L"In QuerySelected: folder is background? %d", folderProp.Background);
+			}
+
+			IComPtr<IShellItem> sip;
+			if(S_OK == g_ShellContext.ParentFolder.Get()->GetParent(sip))
+			{
+				FileProperties fp_parent;
+				if(Selections::GetFileProperties(sip, &fp_parent))
+				{
+					//if(fpParent.IsDir)
+					Parent = fp_parent.Path.move();
+					ParentRaw = fp_parent.PathRaw.move();
+				}
+			}
+
+			if(folderProp.Background)
+			{
+				__trace(L"In QuerySelected: Selected is background");
+				this->Background = true;
+				this->Parse(&folderProp);
+				//return true;
+			}
+			return true;
+		}
+
+		bool Selections::QuerySelected(bool use_shell_ext_selection_retriever)
+		{
+			if (QuerySelectedWithShellBrowser())
+			{
+				return true;
+			}
+			if (use_shell_ext_selection_retriever)
+			{
+				return QuerySelectedWithShellExtSelectionRetriever();
+			}
+			else
+			{
+				return false;
+			}
 		}
 
 		/*
