@@ -122,15 +122,21 @@ IFACEMETHODIMP ShellExtSelectionRetriever::Initialize(LPCITEMIDLIST pidlFolder, 
                             CoTaskMemFree(pszItemPath);
                         }
 
+                        __trace(L"[ShellExt] Getting parent");
+
                         // Parent verification logic
                         if (i == 0) {
-                            spCurrentItem->GetParent(&spFirstParent);
-                            // Log individual item path
-                            PWSTR pszItemPath1 = nullptr;
-                            // Use SIGDN_FILESYSPATH for local paths, fallback to SIGDN_NORMALDISPLAY for virtual items
-                            if (SUCCEEDED(spFirstParent->GetDisplayName(SIGDN_NORMALDISPLAY, &pszItemPath1))) {
-                                __trace(L"[ShellExt]   Parent: %ls", pszItemPath1);
-                                CoTaskMemFree(pszItemPath1);
+                            if (!SUCCEEDED(spCurrentItem->GetParent(&spFirstParent)))
+                            {
+                                allSameParent = false;
+                            } else {
+                                // Log individual item path
+                                PWSTR pszItemPath1 = nullptr;
+                                // Use SIGDN_FILESYSPATH for local paths, fallback to SIGDN_NORMALDISPLAY for virtual items
+                                if (SUCCEEDED(spFirstParent->GetDisplayName(SIGDN_NORMALDISPLAY, &pszItemPath1))) {
+                                    __trace(L"[ShellExt]   Parent: %ls", pszItemPath1);
+                                    CoTaskMemFree(pszItemPath1);
+                                }
                             }
                         } else if (allSameParent) {
                             ComPtr<IShellItem> spCurrentParent;
