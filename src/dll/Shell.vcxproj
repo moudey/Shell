@@ -169,7 +169,7 @@
     <ClInclude Include="src\Parser\Parser.h" />
     <ClInclude Include="src\Parser\Token.h" />
     <ClInclude Include="src\Include\ClassFactory.h" />
-    <ClInclude Include="src\Include\FileContextMenuExt.h" />
+    <ClInclude Include="src\Include\ShellExtSelectionRetriever.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Expression\ArrayExpression.cpp" />
@@ -188,7 +188,7 @@
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Initializer.cpp" />
     <ClCompile Include="src\ClassFactory.cpp" />
-    <ClCompile Include="src\FileContextMenuExt.cpp" />
+    <ClCompile Include="src\ShellExtSelectionRetriever.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="$(SolutionDir)shared\Resource\Shell.rc" />

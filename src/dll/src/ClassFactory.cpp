@@ -16,7 +16,7 @@ WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
 
 #include <pch.h>
 #include "Include/ClassFactory.h"
-#include "Include/FileContextMenuExt.h"
+#include "Include/ShellExtSelectionRetriever.h"
 #include <new>
 #include <Shlwapi.h>
 #pragma comment(lib, "shlwapi.lib")
@@ -83,7 +83,7 @@ IFACEMETHODIMP ClassFactory::CreateInstance(IUnknown *pUnkOuter, REFIID riid, vo
         hr = E_OUTOFMEMORY;
 
         // Create the COM component.
-        FileContextMenuExt *pExt = new (std::nothrow) FileContextMenuExt();
+        ShellExtSelectionRetriever *pExt = new (std::nothrow) ShellExtSelectionRetriever();
         if (pExt)
         {
             // Query the specified interface.
