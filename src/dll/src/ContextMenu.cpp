@@ -177,8 +177,6 @@ namespace Nilesoft
 			//d2d.create_render();
 			//d2d.create_res();
 
-			_log.info(L"ContextMenu::ContextMenu: hWnd=%zx, hMenu=%zx", (size_t)hWnd, (size_t)hMenu);
-
 			Window window = hWnd;
 
 			hwnd.owner = hWnd;
@@ -214,8 +212,6 @@ namespace Nilesoft
 			_context.Keyboard = &keyboard;
 
 			ThreadId = window.get_threadId(&ProcessId);
-
-			_log.info(L"ContextMenu::ContextMenu ProcessId: %d, ThreadId: %d", ProcessId, ThreadId);
 
 			GUITHREADINFO gti = { sizeof(GUITHREADINFO) };
 			if(::GetGUIThreadInfo(ThreadId, &gti))
@@ -4052,8 +4048,6 @@ namespace Nilesoft
 
 			auto items = &menu->items;
 
-			// __trace(L"In build_main_system_menuitems: ");
-
 			for(auto si : _cache->statics)
 			{
 				if(si->has_clsid)
@@ -4088,7 +4082,6 @@ namespace Nilesoft
 							_this.length = item->length; ;// mii->title.length<uint32_t>();
 							_this.title = item->title;
 							_this.title_normalize = item->name;
-							// __trace(L"item(instruction) #%d, name=%ls", i, item->name.c_str());
 						}
 
 						_context._this = &_this;
@@ -4228,8 +4221,6 @@ namespace Nilesoft
 
 			auto itmes_count = ::GetMenuItemCount(hMenu);
 
-			// __trace(L"In build_system_menuitems: items count %d", itmes_count);
-
 			menu->items.reserve(itmes_count);
 
 			for(int i = 0; i < itmes_count; i++)
@@ -4286,7 +4277,6 @@ namespace Nilesoft
 								continue;
 							}
 
-							// __trace(L"  system menu item #%d, name=%ls", i, item->title.c_str());
 							item->hash = MenuItemInfo::normalize(item->title, &item->name, &item->tab, &item->length, &item->keys);
 
 							item->ui = Initializer::get_muid(item->hash);
@@ -4387,7 +4377,6 @@ namespace Nilesoft
 				if(!Initializer::Inited()) return false;
 
 				__trace(L"ContextMenu init");
-				_log.info(L"ContextMenu init");
 
 				auto initializer = Initializer::instance;
 
@@ -4399,7 +4388,6 @@ namespace Nilesoft
 				Selected.Window.hInstance = _window.instance();
 
 				bool has_shell_window = Selected.QueryShellWindow();
-				__trace(L"Out QueryShellWindow: Window.has_IShellBrowser=%d, explorer=%d, Window.id=%d", Selected.Window.has_IShellBrowser, Selected.Window.explorer, Selected.Window.id);
 
 				if(!has_shell_window)
 				{
@@ -4440,8 +4428,6 @@ namespace Nilesoft
 
 				auto prop = ::GetPropW(hwnd.owner, UxSubclass);
 
-				__trace(L"UxSubclass Prop: %d, modify items enabled: %d", prop, _settings.modify_items.enabled);
-
 				// initialize popup menu to check whether to use ShellExtSelectionRetriever
 				if(0 == prop) {
 					::SendMessageW(hwnd.owner, WM_INITMENUPOPUP, reinterpret_cast<WPARAM>(_hMenu_original), 0xFFFFFFFF);
@@ -4462,7 +4448,7 @@ namespace Nilesoft
 						}
 						if(!Selected.QuerySelected(use_shell_ext_selection_retriever))
 						{
-							__trace(L"QuerySelected");	
+							__trace(L"QuerySelected");
 							//return false;
 						}
 						//::{2cc5ca98-6485-489a-920e-b3e88a6ccce3}

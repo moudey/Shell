@@ -306,13 +306,11 @@ namespace Nilesoft
 		{
 			if(Background)
 			{
-				__trace(L"In QuerySelectionMode: Single because of background");
 				Mode = SelectionMode::Single;
 			}
 			else
 			{
 				auto const &c = count();
-				__trace(L"In QuerySelectionMode: count %d", c);
 				if(c == 0)
 					Mode = SelectionMode::None;
 				else if(c == 1)
@@ -360,7 +358,6 @@ namespace Nilesoft
 					}
 				}
 			}
-			__trace(L"Out QuerySelectionMode: Mode=%d", Mode);
 		}
 
 		bool Selections::verify_mode(SelectionMode mode)
@@ -611,7 +608,6 @@ namespace Nilesoft
 
 		bool Selections::Parse(FileProperties *prop)
 		{
-			__trace(L"Parse file %ls inserting to Types", prop->Path.c_str());
 			std::unique_ptr<Selections::PathItem> pathItem;
 			try
 			{
@@ -1013,7 +1009,7 @@ namespace Nilesoft
 			//		ShellBrowser->AddRef();
 				
 
-				Logger::Info(L"In QuerySelected: current_window=%x class_name=%s", current_window, Window::class_name(current_window).c_str());
+				// Logger::Info(L"In QuerySelected: current_window=%x class_name=%s", current_window, Window::class_name(current_window).c_str());
 
 				if(ShellBrowser == nullptr)
 					return false;
@@ -1021,7 +1017,6 @@ namespace Nilesoft
 				
 				if(Window.id == WINDOW_EXPLORER)
 				{
-					__trace(L"In QuerySelected: Window is explorer");
 					IComPtr<IShellView> sv;
 
 					if(S_OK != ShellBrowser->QueryActiveShellView(sv))
@@ -1041,8 +1036,6 @@ namespace Nilesoft
 
 					FileProperties folderProp;
 					Selections::GetFileProperties(si, &folderProp);
-					__trace(L"In QuerySelected: get folder properties: path=%ls, rawpath=%ls", folderProp.Path.c_str(), folderProp.PathRaw.c_str());
-
 					
 					IComPtr<IShellItemArray> sia;
 					if(S_OK == fv->GetSelection(FALSE, sia)) // Selected are foreground objects
@@ -1050,13 +1043,11 @@ namespace Nilesoft
 						DWORD sel_count = 0;
 						if(S_OK != sia->GetCount(&sel_count))
 							return false;
-						__trace(L"In QuerySelected: get selection count = %d", sel_count);
 
 						Items.reserve(sel_count);
 
 						for(DWORD i = 0; i < sel_count; i++)
 						{
-							__trace(L"Parse selection item #%d", i);
 							IComPtr<IShellItem> item;
 							if(S_OK == sia->GetItemAt(i, item) && item)
 								Parse(item);
@@ -1068,9 +1059,8 @@ namespace Nilesoft
 						return !Items.empty();
 					}
 					
-					if(folderProp.Folder) // has background folder
+					if(folderProp.Folder)
 					{
-						__trace(L"In QuerySelected: folder is Folder type");
 						if(folderProp.FileSystem || folderProp.FileSysAnceStor)
 							folderProp.Background = TRUE;
 						else
@@ -1081,23 +1071,19 @@ namespace Nilesoft
 							auto h = folderProp.PathRaw.hash();
 							if(h == GUID_HOME or h == GUID_QUICK_ACCESS or h == GUID_LIBRARIES)
 							{
-
 								Window.id = (h == GUID_HOME) ? WINDOW_HOME : (h == GUID_QUICK_ACCESS) ? WINDOW_QUICK_ACCESS : WINDOW_LIBRARIES;
 								folderProp.Background = TRUE;
 							}
 						}
-						__trace(L"In QuerySelected: folder is background? %d", folderProp.Background);
 					}
 
 					if(Window.desktop)
 					{
-						__trace(L"In QuerySelected: Window is desktop");
 						Parent = Path::Parent(folderProp.Path).move();
 						ParentRaw = Path::Parent(folderProp.PathRaw).move();
 					}
 					else
 					{
-						__trace(L"In QuerySelected: Window is NOT desktop");
 						IComPtr<IShellItem> sip;
 						if(S_OK == si->GetParent(sip))
 						{
@@ -1110,11 +1096,9 @@ namespace Nilesoft
 							}
 						}
 					}
-					__trace(L"In QuerySelected: Folder Parent is %ls", Parent.c_str());
 
 					if(folderProp.Background)
 					{
-						__trace(L"In QuerySelected: Selected is background");
 						this->Background = true;
 						this->Parse(&folderProp);
 						//return true;
@@ -1123,7 +1107,6 @@ namespace Nilesoft
 				}
 				else if(Window.explorer_tree)
 				{
-					__trace(L"In QuerySelected: Window is explorer tree");
 					IComPtr<INameSpaceTreeControl> nstc;
 					IComPtr<IServiceProvider> sp;
 					
@@ -1163,12 +1146,10 @@ namespace Nilesoft
 							}*/
 						}
 						Window.id = WINDOW_UI;
-						__trace(L"In QuerySelected: Tree part is UI");
 					}
 
 					if(si)
 					{
-						__trace(L"In QuerySelected: Tree part is something");
 						auto ret = Parse(si);
 						IComPtr<IShellItem> sip;
 						if(S_OK == si->GetParent(sip))
@@ -1301,7 +1282,6 @@ MultitaskingViewFrame // Multitask Button
 		*/
 		bool Selections::QueryShellWindow()
 		{
-			__trace(L"In QueryShellWindow");
 			auto window = &Window.handle;
 			try
 			{
@@ -1334,11 +1314,9 @@ Edit >> ComboBox > #32770 > Notepad
 
 				auto hParent = window->parent();
 				Hash cur_Parent = hParent.class_hash();
-				__trace(L"In QueryShellWindow: hParent class: %ls", hParent.class_name().c_str());
 
 				if(cur_hash.equals({ WC_SHELLDLL_DefView, WC_SysListView32, WC__STATIC, WC_ShellTabWindowClass/*, WC_CabinetWClass, WC_ExplorerWClass*//*, WC_DirectUIHWND*/ }))
 				{
-					__trace(L"In QueryShellWindow: is explorer");
 					Window.id = WINDOW_EXPLORER;
 					Window.explorer = true;
 
@@ -1358,7 +1336,6 @@ Edit >> ComboBox > #32770 > Notepad
 				}
 				else if(cur_hash.equals(WC_SysTreeView32))
 				{
-					__trace(L"In QueryShellWindow: is WC_SysTreeView32 explorer_tree");
 					if(!cur_Parent.equals(WC_NamespaceTreeControl))
 					{
 						auto active = window->ActiveWindow();
@@ -1380,7 +1357,6 @@ Edit >> ComboBox > #32770 > Notepad
 				}
 				else if(cur_hash.equals({ WC__EDIT, WC__SEARCHEDITBOXFAKEWINDOW }))
 				{
-					__trace(L"In QueryShellWindow: is EDIT");
 					Window.id = WINDOW_EDIT;
 					Types[FSO_EDIT] = 1;
 					Types[FSO_COUNT]++;
@@ -1388,7 +1364,6 @@ Edit >> ComboBox > #32770 > Notepad
 				}
 				else
 				{
-					__trace(L"In QueryShellWindow: is taskbar or other");
 					Hash root_owner_hash;
 					bool from_root_owner = false;
 					bool from_taskbar = cur_hash.equals({ WC_Shell_TrayWnd, WC_Shell_SecondaryTrayWnd,

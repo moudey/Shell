@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#define TRACE
+//#define TRACE
 
 namespace Nilesoft
 {
