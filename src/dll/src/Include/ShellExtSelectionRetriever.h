@@ -1,9 +1,6 @@
 #pragma once
 
-#include <shobjidl_core.h>
-#include <shlobj.h>
 #include <wrl/client.h>
-#include <vector>
 
 using Microsoft::WRL::ComPtr;
 
@@ -15,6 +12,7 @@ struct GlobalSelectionContext {
 };
 
 extern GlobalSelectionContext g_ShellContext;
+extern const wchar_t shell_ext_selection_retriever_placeholder[];
 
 class ShellExtSelectionRetriever : public IShellExtInit, public IContextMenu
 {

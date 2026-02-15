@@ -733,8 +733,9 @@ plutovg_move_to(pluto, start.x, start.y);
 			bool Initialize();
 			int Uninitialize();
 			int InvokeCommand(int id);	
-			void build_system_menuitems(HMENU hMenu, menuitem_t *menu, bool is_root = false);
+			void build_system_menuitems(HMENU hMenu, menuitem_t *menu, bool is_root = false, bool skip_init = false);
 			void build_main_system_menuitems(menuitem_t *menu, bool is_root = false);
+			bool check_shell_ext_selection_retriever_placeholder(HMENU hMenu);
 
 
 			void backup_native_items(HMENU hMenu, uint32_t id, bool check = false);

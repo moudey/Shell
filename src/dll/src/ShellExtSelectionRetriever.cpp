@@ -3,10 +3,8 @@
 #include <strsafe.h>
 #include <Shlwapi.h>
 #pragma comment(lib, "shlwapi.lib")
-#include <shobjidl.h> // 必须包含现代 Shell 接口头文件
+#include <shobjidl.h>
 #include <shlobj.h>
-#include <wrl/client.h> // 推荐使用 Microsoft::WRL::ComPtr 管理引用计数
-#include <vector>
 
 using Microsoft::WRL::ComPtr;
 
@@ -17,7 +15,7 @@ extern long g_cDllRef;
 
 GlobalSelectionContext g_ShellContext;
 
-wchar_t menutext[] = L"Menu text";
+const wchar_t shell_ext_selection_retriever_placeholder[] = L"ShellExtSelectionRetriever Placeholder";
 
 HRESULT GetThisPCItem(ComPtr<IShellItem2>& spItem) {
     return SHCreateItemFromParsingName(L"::{20D04FE0-3AEA-1069-A2D8-08002B30309D}", 
@@ -127,11 +125,11 @@ IFACEMETHODIMP ShellExtSelectionRetriever::Initialize(LPCITEMIDLIST pidlFolder, 
                         if (i == 0) {
                             spCurrentItem->GetParent(&spFirstParent);
                             // Log individual item path
-                            PWSTR pszItemPath = nullptr;
+                            PWSTR pszItemPath1 = nullptr;
                             // Use SIGDN_FILESYSPATH for local paths, fallback to SIGDN_NORMALDISPLAY for virtual items
-                            if (SUCCEEDED(spFirstParent->GetDisplayName(SIGDN_NORMALDISPLAY, &pszItemPath))) {
-                                __trace(L"[ShellExt]   Parent: %ls", pszItemPath);
-                                CoTaskMemFree(pszItemPath);
+                            if (SUCCEEDED(spFirstParent->GetDisplayName(SIGDN_NORMALDISPLAY, &pszItemPath1))) {
+                                __trace(L"[ShellExt]   Parent: %ls", pszItemPath1);
+                                CoTaskMemFree(pszItemPath1);
                             }
                         } else if (allSameParent) {
                             ComPtr<IShellItem> spCurrentParent;
@@ -170,7 +168,7 @@ IFACEMETHODIMP ShellExtSelectionRetriever::QueryContextMenu(HMENU hmenu, UINT in
 
     // Insert the placeholder menu item
     // idCmdFirst is the starting ID for your commands
-    InsertMenu(hmenu, indexMenu, MF_BYPOSITION | MF_STRING, idCmdFirst, L"ShellExtSelectionRetriever Placeholder");
+    InsertMenu(hmenu, indexMenu, MF_BYPOSITION | MF_STRING, idCmdFirst, shell_ext_selection_retriever_placeholder);
 
     // Return the number of items added (1)
     return MAKE_HRESULT(SEVERITY_SUCCESS, 0, 1);

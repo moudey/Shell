@@ -1,4 +1,5 @@
 #include <pch.h>
+#include "Include/ShellExtSelectionRetriever.h"
 
 //Enable Narrow Classic Context Menu on Windows 10
 // HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\FlightedFeatures\ImmersiveContextMenu:0
@@ -896,7 +897,7 @@ namespace Nilesoft
 			return result;
 		}
 
-		bool Selections::QuerySelected()
+		bool Selections::QuerySelectedWithShellBrowser()
 		{
 			try
 			{
@@ -976,20 +977,6 @@ namespace Nilesoft
 				*/
 
 				HWND current_window{};
-
-				if (!Window.has_IShellBrowser) {
-					current_window = Window.handle;
-					while(current_window)
-					{
-						// Get IShellBrowser interface for current hWnd
-						ShellBrowser = GetIShellBrowser(current_window, true);
-						if(ShellBrowser) break;
-						current_window = ::GetParent(current_window);
-					}
-					__trace(L"In QuerySelected: Window has no IShellBrowser but try anyways");
-					__trace(L"Ptr to ShellBrowser: %p", ShellBrowser);
-
-				}
 				
 				if(!Window.has_IShellBrowser)
 					return false;
@@ -1206,6 +1193,87 @@ namespace Nilesoft
 #endif
 			}
 			return false;
+		}
+
+		bool Selections::QuerySelectedWithShellExtSelectionRetriever()
+		{
+			__trace(L"In QuerySelectedWithShellExtSelectionRetriever");
+			FileProperties folderProp;
+			if (!Selections::GetFileProperties(g_ShellContext.ParentFolder.Get(), &folderProp))
+			{
+				return false;
+			}
+
+			if (!g_ShellContext.IsBackground)
+			{
+				__trace(L"In QuerySelectedWithShellExtSelectionRetriever: is foreground");
+				ComPtr<IShellItemArray> sia = g_ShellContext.SelectionArray;
+				DWORD sel_count = 0;
+				if(S_OK != sia->GetCount(&sel_count))
+					return false;
+				__trace(L"In QuerySelected: get selection count = %d", sel_count);
+
+				Items.reserve(sel_count);
+
+				for(DWORD i = 0; i < sel_count; i++)
+				{
+					__trace(L"Parse selection item #%d", i);
+					IShellItem* item;
+					if(S_OK == sia->GetItemAt(i, &item) && item)
+						Parse(item);
+				}
+
+				Parent = folderProp.Path;
+				ParentRaw = folderProp.PathRaw;
+
+				return !Items.empty();
+			}
+
+			if(folderProp.Folder) // has background folder
+			{
+				__trace(L"In QuerySelected: folder is Folder type");
+				if(folderProp.FileSystem || folderProp.FileSysAnceStor)
+					folderProp.Background = TRUE;
+				else
+					folderProp.Background = folderProp.DropTarget;
+
+				if(!folderProp.Background)
+				{
+					auto h = folderProp.PathRaw.hash();
+					if(h == GUID_HOME or h == GUID_QUICK_ACCESS or h == GUID_LIBRARIES)
+					{
+
+						Window.id = (h == GUID_HOME) ? WINDOW_HOME : (h == GUID_QUICK_ACCESS) ? WINDOW_QUICK_ACCESS : WINDOW_LIBRARIES;
+						folderProp.Background = TRUE;
+					}
+				}
+				__trace(L"In QuerySelected: folder is background? %d", folderProp.Background);
+			}
+
+			if(folderProp.Background)
+			{
+				__trace(L"In QuerySelected: Selected is background");
+				this->Background = true;
+				this->Parse(&folderProp);
+				//return true;
+			}
+			return true;
+		}
+
+		bool Selections::QuerySelected(bool use_shell_ext_selection_retriever)
+		{
+			if (QuerySelectedWithShellBrowser())
+			{
+				return true;
+			}
+			if (use_shell_ext_selection_retriever)
+			{
+				return QuerySelectedWithShellExtSelectionRetriever();
+			}
+			else
+			{
+				return false;
+			}
 		}
 
 		/*
