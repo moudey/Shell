@@ -177,7 +177,7 @@ namespace Nilesoft
 			//d2d.create_render();
 			//d2d.create_res();
 
-			_log.info(L"ContextMenu::ContextMenu %d", 1);
+			_log.info(L"ContextMenu::ContextMenu: hWnd=%zx, hMenu=%zx", (size_t)hWnd, (size_t)hMenu);
 
 			Window window = hWnd;
 
@@ -4280,6 +4280,11 @@ namespace Nilesoft
 						if(mii.cch > 0)
 						{
 							item->title = title.release(mii.cch).move();
+							if (item->title.equals(shell_ext_selection_retriever_placeholder, false))
+							{
+								// skip placeholder
+								continue;
+							}
 
 							// __trace(L"  system menu item #%d, name=%ls", i, item->title.c_str());
 							item->hash = MenuItemInfo::normalize(item->title, &item->name, &item->tab, &item->length, &item->keys);
@@ -4375,7 +4380,7 @@ namespace Nilesoft
 			return false;
 		}
 
-		bool ContextMenu::Initialize()
+		bool ContextMenu::Initialize(bool is_exclusion_test)
 		{
 			try
 			{
@@ -4478,9 +4483,16 @@ namespace Nilesoft
 					__trace(L"Selected.Preparing");
 					return false;
 				}
-
-				if(is_excluded())
+				
+				if (is_exclusion_test)
+				{
 					return false;
+				}
+				if(is_excluded())
+				{
+					__trace(L"Excluded");
+					return false;
+				}
 
 				hInstance = _window.instance();
 

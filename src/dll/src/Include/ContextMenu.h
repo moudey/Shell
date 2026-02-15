@@ -730,7 +730,7 @@ plutovg_move_to(pluto, start.x, start.y);
 
 			uint32_t invoke(CommandProperty *cmd_prop);
 			bool is_excluded();
-			bool Initialize();
+			bool Initialize(bool is_exclusion_test = false);
 			int Uninitialize();
 			int InvokeCommand(int id);	
 			void build_system_menuitems(HMENU hMenu, menuitem_t *menu, bool is_root = false, bool skip_init = false);

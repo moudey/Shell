@@ -1,5 +1,6 @@
 #include <pch.h>
 #include "Include/ShellExtSelectionRetriever.h"
+#include "Include/ContextMenu.h"
 #include <strsafe.h>
 #include <Shlwapi.h>
 #pragma comment(lib, "shlwapi.lib")
@@ -165,6 +166,16 @@ IFACEMETHODIMP ShellExtSelectionRetriever::QueryContextMenu(HMENU hmenu, UINT in
 {
     // If CMF_DEFAULTONLY is set, we should not add any items
     if (uFlags & CMF_DEFAULTONLY) return MAKE_HRESULT(SEVERITY_SUCCESS, 0, 0);
+
+    HWND hWnd = GetActiveWindow();
+    // Create a dummy ContextMenu to check if is excluded
+    Nilesoft::Shell::ContextMenu dummyContextMenu = Nilesoft::Shell::ContextMenu(hWnd, hmenu, {0, 0});
+    dummyContextMenu.Initialize(true);
+    if (dummyContextMenu.is_excluded())
+    {
+        __trace(L"In QueryContextMenu: is excluded.");
+        return MAKE_HRESULT(SEVERITY_SUCCESS, 0, 0);
+    }
 
     // Insert the placeholder menu item
     // idCmdFirst is the starting ID for your commands

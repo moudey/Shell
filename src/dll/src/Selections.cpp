@@ -306,11 +306,13 @@ namespace Nilesoft
 		{
 			if(Background)
 			{
+				__trace(L"In QuerySelectionMode: Single because of background");
 				Mode = SelectionMode::Single;
 			}
 			else
 			{
 				auto const &c = count();
+				__trace(L"In QuerySelectionMode: count %d", c);
 				if(c == 0)
 					Mode = SelectionMode::None;
 				else if(c == 1)
@@ -358,6 +360,7 @@ namespace Nilesoft
 					}
 				}
 			}
+			__trace(L"Out QuerySelectionMode: Mode=%d", Mode);
 		}
 
 		bool Selections::verify_mode(SelectionMode mode)
@@ -376,7 +379,6 @@ namespace Nilesoft
 
 		bool Selections::verify_types(const FileSystemObjects &fso) const
 		{
-			return true;
 			if(fso.any_types)
 				return true;
 
@@ -1204,6 +1206,8 @@ namespace Nilesoft
 				return false;
 			}
 
+			Window.id = WINDOW_EXPLORER;
+			Window.explorer = true;
 			if (!g_ShellContext.IsBackground)
 			{
 				__trace(L"In QuerySelectedWithShellExtSelectionRetriever: is foreground");
@@ -1248,6 +1252,18 @@ namespace Nilesoft
 					}
 				}
 				__trace(L"In QuerySelected: folder is background? %d", folderProp.Background);
+			}
+
+			IComPtr<IShellItem> sip;
+			if(S_OK == g_ShellContext.ParentFolder.Get()->GetParent(sip))
+			{
+				FileProperties fp_parent;
+				if(Selections::GetFileProperties(sip, &fp_parent))
+				{
+					//if(fpParent.IsDir)
+					Parent = fp_parent.Path.move();
+					ParentRaw = fp_parent.PathRaw.move();
+				}
 			}
 
 			if(folderProp.Background)
