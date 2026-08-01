@@ -1,0 +1,82 @@
+/*
+Nederlands - Dutch
+by: https://github.com/YESNLars
+*/
+
+xxx="Welkom in het Nederlands"
+// shell.nss
+pin_unpin="Vastmaken/Losmaken"
+
+// develop.nss
+develop="&Ontwikkelen"
+editors="Editor"
+windows_notepad="Kladblok"
+
+// file-manage.nss
+file_manage="Bestandbeheer"
+all="Alle"
+invert="Omkeren"
+none="Geen"
+change_extension="Extensie veranderen"
+take_ownership="Neem eigendom over"
+show_hide="Tonen/Verbergen"
+system_files="Systeembestanden"
+file_name_extensions="Bestandsnaamextensies"
+attributes="Attributen"
+register_server="DLL-Server Registeren"
+register="Registreren"
+unregister="Uitregisteren"
+hidden="Verstopt"
+system="Systeem"
+readonly="Alleen-Lezen"
+archive="Archief"
+created="Gemaakt"
+modified="Veranderd"
+accessed="Geraadpleegd"
+new_folder="Nieuwe Map"
+new_file="Nieuw Bestand"
+datetime="Datum/Uur"
+guid="GUID"
+
+// goto.nss
+folder="Map"
+all_control_panel_items="Alle elementen van het Configuratiescherm"
+system="Systeem"
+about="Over"
+your_info="Jouw Info"
+system_info="Systeeminformatie"
+search="Zoeken"
+usb="USB"
+windows_update="Windows Update"
+windows_defender="Windows Defender"
+apps="Apps"
+apps_features="Apps' Features"
+default_apps="Standaardapps"
+optional_features="Optionele Features"
+startup="Opstart"
+personalization="Personalisering"
+lockscreen="Vergrendelscherm"
+background="Achtergrond"
+colors="Kleuren"
+themes="Thema's"
+start="Start"
+taskbar="Taakbalk"
+network="Netwerk"
+status="Status"
+ethernet="Ethernet"
+wifi="Wi-Fi"
+connections="Verbindingen"
+
+
+// taskbar.nss
+apps="Apps"
+paint="Paint"
+edge="Edge"
+calculator="Rekenmachine"
+cascade_windows="Vensters rangschikken"
+Show_windows_stacked="Vensters gestapelt weergeven"
+Show_windows_side_by_side="Vensters naast elkaar weergeven"
+minimize_all_windows="Alle vensters minimaliseren"
+restore_all_windows="Alle vensters herstellen"
+task_manager="Taakbeheer"
+taskbar_Settings="Taakbalkinstellingen"
