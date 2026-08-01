@@ -64,7 +64,7 @@ taskbar="Taakbalk"
 network="Netwerk"
 status="Status"
 ethernet="Ethernet"
-wifi="WLAN"
+wifi="Wi-Fi"
 connections="Verbindingen"
 
 
