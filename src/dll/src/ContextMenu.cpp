@@ -4934,8 +4934,8 @@ namespace Nilesoft
 							long x = rect.left + (rect.width() / 2) - (size.cx / 2);
 							long y = rect.top - size.cy - ctx->dpi(10);
 
-							if(x < 0) x = 0;
-							if(y < 0) y = rect.bottom + ctx->dpi(10);
+							if(x < ctx->_rcMonitor.left) x = ctx->_rcMonitor.left;
+							if(y < ctx->_rcMonitor.top) y = rect.bottom + ctx->dpi(10);
 
 							if((x + size.cx) > ctx->_rcMonitor.right)
 								x = ctx->_rcMonitor.right - size.cx;
@@ -5819,13 +5819,13 @@ namespace Nilesoft
 
 							if(wnd->has_scroll)
 							{
-								wp->y = (ctx->_rcMonitor.height() - wnd->height) / 2;
+								wp->y = ctx->_rcMonitor.top + ((ctx->_rcMonitor.height() - wnd->height) / 2);
 							}
 							else if((wnd->height + 100) > (ctx->_rcMonitor.height() / 2))
 							{
 								//wp->y -= 50;
 							}
-							else if((wp->y + wnd->height) > (ctx->_rcMonitor.height() - ctx->dpi(40)))
+							else if((wp->y + wnd->height) > (ctx->_rcMonitor.bottom - ctx->dpi(40)))
 							{
 								//wp->y -= ctx->dpi(40);
 								//wp->y /= 2;
