@@ -1357,6 +1357,19 @@ namespace Nilesoft
 				}
 			}
 
+			// remove leading separators
+			{
+				size_t leading = 0;
+				while(leading < items.size() && items[leading]->is_separator())
+					leading++;
+				if(leading > 0)
+				{
+					if(leading < items.size() && items[leading]->is_sep_before())
+						items[leading]->separator &= ~(int)Separator::Top;
+					items.erase(items.begin(), items.begin() + leading);
+				}
+			}
+
 			_items.reserve(items.size());
 			_items_command.reserve(items.size());
 			_items_popup.reserve(items.size());
