@@ -560,7 +560,7 @@ BOOL WINAPI NtUserTrackPopupMenu(HMENU hMenu, uint32_t uFlags, int x, int y, HWN
 				// is injected from explorer
 				if(!_initializer.Status.Loaded)
 				{
-					if(_initializer.has_error() || has_inited)
+					if(_initializer.has_error(true) || has_inited)
 						__leave; //goto skip;
 					_initializer.init();
 				}
@@ -758,10 +758,10 @@ LRESULT __stdcall TaskbarProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam
 				}
 			}
 
-			if(_initializer.has_error())
+			if(_initializer.has_error(true))
 			{
 				_initializer.OnState();
-				if(_initializer.has_error())
+				if(_initializer.has_error(true))
 					return wndproc(hWnd, uMsg, wParam, lParam);
 			}
 			else
@@ -845,14 +845,14 @@ LRESULT __stdcall TaskbarSubclassProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARA
 				}
 			}
 
-			if(_initializer.has_error())
+			if(_initializer.has_error(true))
 			{
 				if(msg != WM_RBUTTONDOWN)
 					return lret;
 
 				_initializer.OnState();
 
-				if(_initializer.has_error())
+				if(_initializer.has_error(true))
 					return lret;
 			}
 			else
@@ -1164,7 +1164,7 @@ STDAPI DllGetClassObject(_In_ REFCLSID rclsid, [[maybe_unused]] _In_ REFIID riid
 		if(!is_registered())
 			return hr;
 		
-		if(_initializer.has_error())
+		if(_initializer.has_error(true))
 			return hr;
 		
 		if(rclsid == IID_ContextMenu)

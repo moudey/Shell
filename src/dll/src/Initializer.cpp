@@ -95,6 +95,8 @@ namespace Nilesoft
 
 					cache->Packages.load();
 
+					config_has_changed();
+
 					if(!parser.Load())
 					{
 						Status.Error = true;
@@ -170,13 +172,16 @@ namespace Nilesoft
 		{
 			__try
 			{
+				if(config_has_changed())
+					Status.Refresh = true;
+
 				if(Status.Disabled)
 				{
 					uninit();
 					return false;
 				}
 
-				if(Status.Error && ch < 2)
+				if(Status.Error && ch < 2 && !Status.Refresh)
 					return false;
 
 				if(Status.Refresh)
@@ -228,7 +233,16 @@ namespace Nilesoft
 		{
 			if(Status.Error)
 			{
-				return detect_changes ? !config_has_changed() : true;
+				if(Status.Refresh)
+					return false;
+
+				if(detect_changes && config_has_changed())
+				{
+					Status.Refresh = true;
+					return false;
+				}
+
+				return true;
 			}
 			return false;
 		}
