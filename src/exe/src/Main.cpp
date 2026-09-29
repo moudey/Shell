@@ -414,7 +414,8 @@ bool Register(REGOP reg, HWND hwnd = nullptr)
 	
 	if(!dll)
 	{
-		auto ernf = L"shell.dll not found.";
+		string ernf = string::Extract(IDS_DLL_NOT_FOUND);
+		if(ernf.empty()) ernf = L"shell.dll not found.";
 		_log->error(ernf);
 		if(!reg.SILENT)
 			MessageBox::Show(ernf, APP_FULLNAME, MessageBoxIcon::Warning);
@@ -703,26 +704,44 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ LPWSTR,
 		PlutoVG pluto(dd.data(), static_cast<int>(dd.length()), dpi(96), dpi(96), 96);
 		hbitmap_logo = pluto.tobitmap();
 
-		auto btn_close = new UI::Button(L"\uE256", { rc_window.right - dpi(27), dpi(1), dpi(26), dpi(26) }, ID_CLOSE, main_window, BS_OWNERDRAW, _hfont_icon, L"Close");
+		string str_close = string::Extract(IDS_BTN_CLOSE);
+		if(str_close.empty()) str_close = L"Close";
+		auto btn_close = new UI::Button(L"\uE256", { rc_window.right - dpi(27), dpi(1), dpi(26), dpi(26) }, ID_CLOSE, main_window, BS_OWNERDRAW, _hfont_icon, str_close);
         
-		auto btn_reg = new UI::Button(L"Register\tCtrl+R", rc_reg, ID_REG, main_window, BS_OWNERDRAW);
-        auto btn_unreg = new UI::Button(L"Unregister\tCtrl+U", rc_unreg, ID_UNREG, main_window, BS_OWNERDRAW);
-        auto btn_restart = new UI::Button(L"Restart Explorer\tCtrl+X", { rc_reg.left, rc_unreg.top + offset_2 + btn_h, btn_w, btn_h }, ID_RESTART, main_window, BS_OWNERDRAW);
+		string str_reg = string::Extract(IDS_BTN_REGISTER);
+		if(str_reg.empty()) str_reg = L"Register\tCtrl+R";
+		auto btn_reg = new UI::Button(str_reg, rc_reg, ID_REG, main_window, BS_OWNERDRAW);
 
-        auto tt = btn_restart->Rect.top + dpi(30) + btn_h + offset_2;
-        auto tl = btn_restart->Rect.left;
+		string str_unreg = string::Extract(IDS_BTN_UNREGISTER);
+		if(str_unreg.empty()) str_unreg = L"Unregister\tCtrl+U";
+		auto btn_unreg = new UI::Button(str_unreg, rc_unreg, ID_UNREG, main_window, BS_OWNERDRAW);
 
-        auto btn_web = new UI::Button(L"\uE11F", { tl, tt, btn_h, btn_h }, ID_WEB, main_window, BS_OWNERDRAW, _hfont_icon,  L"Website Ctrl+W");
+		string str_restart = string::Extract(IDS_BTN_RESTART_EXPLORER);
+		if(str_restart.empty()) str_restart = L"Restart Explorer\tCtrl+X";
+		auto btn_restart = new UI::Button(str_restart, { rc_reg.left, rc_unreg.top + offset_2 + btn_h, btn_w, btn_h }, ID_RESTART, main_window, BS_OWNERDRAW);
+
+		auto tt = btn_restart->Rect.top + dpi(30) + btn_h + offset_2;
+		auto tl = btn_restart->Rect.left;
+
+		string str_web = string::Extract(IDS_BTN_WEBSITE);
+		if(str_web.empty()) str_web = L"Website Ctrl+W";
+		auto btn_web = new UI::Button(L"\uE11F", { tl, tt, btn_h, btn_h }, ID_WEB, main_window, BS_OWNERDRAW, _hfont_icon, str_web);
        
-        tl += btn_h + offset_2;
-        auto btn_email = new UI::Button(L"\uE115", { tl, tt, btn_h, btn_h }, ID_EMAIL, main_window, BS_OWNERDRAW, _hfont_icon, L"Email Ctrl+E");
+		tl += btn_h + offset_2;
+		string str_email = string::Extract(IDS_BTN_EMAIL);
+		if(str_email.empty()) str_email = L"Email Ctrl+E";
+		auto btn_email = new UI::Button(L"\uE115", { tl, tt, btn_h, btn_h }, ID_EMAIL, main_window, BS_OWNERDRAW, _hfont_icon, str_email);
        
-        tl += btn_h + offset_2;
-        auto btn_bug = new UI::Button(L"\uE22B", { tl, tt, btn_h, btn_h }, ID_GITHUB, main_window, BS_OWNERDRAW, _hfont_icon, L"Github Ctrl+G");
+		tl += btn_h + offset_2;
+		string str_github = string::Extract(IDS_BTN_GITHUB);
+		if(str_github.empty()) str_github = L"Github Ctrl+G";
+		auto btn_bug = new UI::Button(L"\uE22B", { tl, tt, btn_h, btn_h }, ID_GITHUB, main_window, BS_OWNERDRAW, _hfont_icon, str_github);
 
 		//tl += (dpi(50) - btn_h) + btn_h + dpi(12);
 		tl += btn_h + offset_2;
-        auto btn_donate = new UI::Button(L"\uE1A8", { tl, tt, btn_h, btn_h }, ID_DONATE, main_window, BS_OWNERDRAW, _hfont_icon, L"Donate Ctrl+D");
+		string str_donate = string::Extract(IDS_BTN_DONATE);
+		if(str_donate.empty()) str_donate = L"Donate Ctrl+D";
+		auto btn_donate = new UI::Button(L"\uE1A8", { tl, tt, btn_h, btn_h }, ID_DONATE, main_window, BS_OWNERDRAW, _hfont_icon, str_donate);
 
 
         main_window->SetColor({ btn_reg, btn_unreg,btn_restart,btn_donate,btn_web,btn_email,btn_bug }, 
@@ -1014,9 +1033,16 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
 
 				dc.set_text(0x808080);
 
-				auto ofont = (HFONT)::GetStockObject(DEFAULT_GUI_FONT);
-				auto cfont = FontSize(ofont, dpi(14), CLEARTYPE_NATURAL_QUALITY);
-				ofont = dc.set_font(cfont);
+				LOGFONT lf_ui{};
+				NONCLIENTMETRICSW ncm_ui{ sizeof(ncm_ui) };
+				if(::SystemParametersInfoW(SPI_GETNONCLIENTMETRICS, sizeof(ncm_ui), &ncm_ui, 0))
+					lf_ui = ncm_ui.lfMessageFont;
+				else
+					::GetObject(::GetStockObject(DEFAULT_GUI_FONT), sizeof(LOGFONT), &lf_ui);
+				lf_ui.lfHeight = -dpi(14);
+				lf_ui.lfQuality = CLEARTYPE_NATURAL_QUALITY;
+				auto cfont = ::CreateFontIndirectW(&lf_ui);
+				auto ofont = dc.set_font(cfont);
 
 				RECT rect = { 0, dpi(150 + 10), dpi(150), dpi(25 + 128 + 32) };
 
@@ -1142,19 +1168,18 @@ BOOL CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, [[maybe_unused]] L
         {
 			//WCHAR szTitle[100];
 			// LoadString(g_hInstance, IDS_APP_TITLE, szTitle, ARRAYSIZE(szTitle));
-            auto usage = L"Command-Line Help\r\n\r\n"
-                //L"shell.exe [-[r][u]] [-i] [-s] [-re]\n\n"
-                L"-register\t\tRegistering.\r\n"
-                L"-unregister\tUnregistering.\r\n"
-                L"-treat\t\tDisable Windows 11 context menu.\r\n"
-                L"-silent\t\tPrevents displaying messages.\r\n"
-                L"-restart\t\tRestart Windows Explorer.\r\n\r\n"
-                //L"-runas:N\t\tLaunch with elevated privileges.\r\n"
-                //L"\t\tN=[admin | system | trustedinsaller]\r\n\r\n"
-                L"-?\t\tDispay this help message.\r\n\r\n"
-                L"Examples:\r\nshell.exe -register -treat\r\n"
-              //  L"shell.exe -runas:admin -cmd:'cmd.exe' -args:\"/K echo Hello world!\"\r\n"
-                ;
+			string usage = string::Extract(IDS_CMDLINE_HELP);
+			if(usage.empty())
+			{
+				usage = L"Command-Line Help\r\n\r\n"
+					L"-register\t\tRegistering.\r\n"
+					L"-unregister\tUnregistering.\r\n"
+					L"-treat\t\tDisable Windows 11 context menu.\r\n"
+					L"-silent\t\tPrevents displaying messages.\r\n"
+					L"-restart\t\tRestart Windows Explorer.\r\n\r\n"
+					L"-?\t\tDispay this help message.\r\n\r\n"
+					L"Examples:\r\nshell.exe -register -treat\r\n";
+			}
             ::SetDlgItemTextW(hwnd, IDC_CMDLINE_TEXT, usage);
            // SendDlgItemMessage(hwnd, IDC_CMDLINE_TEXT, EM_SETSEL, -1, -1);
             break;

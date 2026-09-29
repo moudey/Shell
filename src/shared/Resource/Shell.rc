@@ -1,5 +1,4 @@
-//#pragma code_page(65001) // utf-8
-//#pragma code_page(1252) // English
+#pragma code_page(65001) // utf-8
 
 #include <windows.h>
 #include <commctrl.h>
@@ -82,6 +81,16 @@ STRINGTABLE
 	IDS_WINDOWS_COMPATIBILITY		L"Windows Version Not Supported, You need at least Windows 7."
 	IDS_RESTART_EXPLORERQ			L"Restart Windows Explorer?"
 	IDS_RESTART_EXPLORER			L"Restart Explorer."
+	IDS_BTN_REGISTER				L"Register\tCtrl+R"
+	IDS_BTN_UNREGISTER				L"Unregister\tCtrl+U"
+	IDS_BTN_RESTART_EXPLORER		L"Restart Explorer\tCtrl+X"
+	IDS_BTN_WEBSITE					L"Website Ctrl+W"
+	IDS_BTN_EMAIL					L"Email Ctrl+E"
+	IDS_BTN_GITHUB					L"Github Ctrl+G"
+	IDS_BTN_DONATE					L"Donate Ctrl+D"
+	IDS_BTN_CLOSE					L"Close"
+	IDS_DLL_NOT_FOUND				L"shell.dll not found."
+	IDS_CMDLINE_HELP				L"Command-Line Help\r\n\r\n-register\t\tRegistering.\r\n-unregister\tUnregistering.\r\n-treat\t\tDisable Windows 11 context menu.\r\n-silent\t\tPrevents displaying messages.\r\n-restart\t\tRestart Windows Explorer.\r\n\r\n-?\t\tDispay this help message.\r\n\r\nExamples:\r\nshell.exe -register -treat\r\n"
 }
 
 //
@@ -112,3 +121,60 @@ FONT 8, "MS Shell Dlg", 0, 0, 0x1
 }
 
 #endif
+
+//
+// Simplified Chinese Resources
+//
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+
+STRINGTABLE
+{
+#ifdef _WINDLL
+	IDS_SELECT_FOLDER				L"请选择一个文件夹。"
+#endif
+	IDS_REGISTER_SUCCESS			L"注册成功完成。"
+	IDS_UNREGISTER_SUCCESS			L"取消注册成功完成。"
+	IDS_REGISTER_NOT_SUCCESS		L"注册未完成。"
+	IDS_UNREGISTER_NOT_SUCCESS		L"取消注册未完成。"
+	IDS_ADMIN_PRIVILEGES			L"缺少管理员权限！"
+	IDS_WINDOWS_COMPATIBILITY		L"不支持的 Windows 版本，至少需要 Windows 7。"
+	IDS_RESTART_EXPLORERQ			L"是否重启 Windows 资源管理器？"
+	IDS_RESTART_EXPLORER			L"正在重启资源管理器。"
+	IDS_BTN_REGISTER				L"注册\tCtrl+R"
+	IDS_BTN_UNREGISTER				L"取消注册\tCtrl+U"
+	IDS_BTN_RESTART_EXPLORER		L"重启资源管理器\tCtrl+X"
+	IDS_BTN_WEBSITE					L"官方网站 Ctrl+W"
+	IDS_BTN_EMAIL					L"反馈邮箱 Ctrl+E"
+	IDS_BTN_GITHUB					L"开源主页 Ctrl+G"
+	IDS_BTN_DONATE					L"捐赠支持 Ctrl+D"
+	IDS_BTN_CLOSE					L"关闭"
+	IDS_DLL_NOT_FOUND				L"未找到 shell.dll。"
+	IDS_CMDLINE_HELP				L"命令行帮助\r\n\r\n-register\t\t注册扩展组件。\r\n-unregister\t取消注册扩展组件。\r\n-treat\t\t接管/禁用 Windows 11 原生右键菜单。\r\n-silent\t\t静默模式，不弹出任何消息框。\r\n-restart\t\t重启 Windows 资源管理器。\r\n\r\n-?\t\t显示此帮助信息。\r\n\r\n示例:\r\nshell.exe -register -treat\r\n"
+}
+
+#ifdef _WINDLL
+
+IDD_INPUTBOX DIALOGEX 0, 0, 300, 60
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_CAPTION | WS_SYSMENU | DS_CENTER
+CAPTION "Shell 输入"
+FONT 9, "MS Shell Dlg", 0, 0, 0x1
+{
+	LTEXT           "提示:", IDC_INPUTBOX_PROMPT, 5, 5, 290, 14, SS_NOPREFIX
+	EDITTEXT        IDC_INPUTBOX_EDIT, 5, 20, 290, 14, ES_AUTOHSCROLL
+	DEFPUSHBUTTON   "确定", IDOK, 245, 40, 50, 14, WS_GROUP
+	PUSHBUTTON      "取消", IDCANCEL, 190, 40, 50, 14, WS_GROUP
+}
+
+#else
+
+IDD_CMDLINE DIALOGEX 0, 0, 280, 185
+STYLE DS_SETFONT | DS_CENTER | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Nilesoft Shell 命令行帮助"
+FONT 9, "MS Shell Dlg", 0, 0, 0x1
+{
+	EDITTEXT		IDC_CMDLINE_TEXT, 10, 10, 260, 150, ES_MULTILINE | ES_READONLY | NOT WS_BORDER | WS_VSCROLL | NOT WS_TABSTOP
+	DEFPUSHBUTTON   "确定", IDOK, 220, 165, 50, 15
+}
+
+#endif
+

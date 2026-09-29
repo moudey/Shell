@@ -109,14 +109,26 @@ namespace Nilesoft
 
 			Control()
 			{
-				Font.Handle = (HFONT)::GetStockObject(DEFAULT_GUI_FONT);
 				LOGFONT lf{};
-				if(::GetObject(Font.Handle, sizeof(LOGFONT), &lf))
+				NONCLIENTMETRICSW ncm{ sizeof(ncm) };
+				if(::SystemParametersInfoW(SPI_GETNONCLIENTMETRICS, sizeof(ncm), &ncm, 0))
 				{
-					if(lf.lfQuality < ANTIALIASED_QUALITY)
+					lf = ncm.lfMessageFont;
+					lf.lfQuality = CLEARTYPE_NATURAL_QUALITY;
+					_hfont = ::CreateFontIndirectW(&lf);
+					Font.Handle = _hfont;
+				}
+				else
+				{
+					Font.Handle = (HFONT)::GetStockObject(DEFAULT_GUI_FONT);
+					if(::GetObject(Font.Handle, sizeof(LOGFONT), &lf))
 					{
-						lf.lfQuality = CLEARTYPE_NATURAL_QUALITY;
-						_hfont = CreateFontIndirectW(&lf);
+						if(lf.lfQuality < ANTIALIASED_QUALITY)
+						{
+							lf.lfQuality = CLEARTYPE_NATURAL_QUALITY;
+							_hfont = ::CreateFontIndirectW(&lf);
+							Font.Handle = _hfont;
+						}
 					}
 				}
 			}

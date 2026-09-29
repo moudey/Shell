@@ -4,7 +4,7 @@ by: github.com/JohnsonRan
     github.com/XY0797
 */
 
-xxx="欢迎用中文"
+xxx="欢迎使用中文"
 // shell.nss
 pin_unpin="固定/取消固定"
 
@@ -15,12 +15,13 @@ windows_notepad="Windows 记事本"
 
 // file-manage.nss
 file_manage="文件管理"
-copy_multiple_paths='复制选中的 (@sel.count) 个项目'
+copy_multiple_paths='复制选中的 (@sel.count) 个项目路径'
 all="全选"
 invert="反选"
 none="全不选"
 change_extension="更改扩展名"
-take_ownership="更改所有权"
+type_extension="请输入扩展名"
+take_ownership="取得所有权"
 show_hide="显示/隐藏"
 system_files="系统文件"
 file_name_extensions="文件扩展名"
@@ -41,12 +42,27 @@ datetime="当前时间"
 guid="Guid"
 
 // goto.nss
-folder="文件夹"
+folder="常用文件夹"
+windows="Windows"
+system_bin="System32"
+program_files="Program Files"
+program_files_x86="Program Files (x86)"
+program_data="ProgramData"
+applications="应用程序"
+users="用户"
+desktop="桌面"
+downloads="下载"
+pictures="图片"
+documents="文档"
+startmenu="开始菜单"
+profile="个人文件夹"
+appdata="应用数据 (AppData)"
+temp="临时文件 (Temp)"
 all_control_panel_items="所有控制面板项"
 system="系统"
-about="系统信息"
-your_info="账户信息"
-system_info="系统信息(CMD)"
+about="关于"
+your_info="你的信息"
+system_info="系统信息 (CMD)"
 search="搜索"
 usb="USB"
 windows_update="Windows 更新"
@@ -71,6 +87,12 @@ connections="网络连接"
 
 
 // taskbar.nss
+config="配置文件"
+manager="管理器"
+directory="程序目录"
+version="版本"
+docs="帮助文档"
+donate="赞助支持"
 apps="应用"
 paint="画图"
 edge="Edge"
@@ -83,3 +105,7 @@ minimize_all_windows="最小化所有窗口"
 restore_all_windows="还原所有窗口"
 task_manager="任务管理器"
 taskbar_Settings="任务栏设置"
+
+// terminal.nss
+tip_run_admin_prefix="按住 [Shift 键] 或 [单击右键] 以管理员身份运行 "
+tip_run_admin_suffix=""

@@ -1,4 +1,4 @@
-﻿menu(where=sel.count>0 type='file|dir|drive|namespace|back' mode="multiple" title=loc.file_manage image=\uE253)
+menu(where=sel.count>0 type='file|dir|drive|namespace|back' mode="multiple" title=loc.file_manage image=\uE253)
 {
 	menu(separator="after" title=title.copy_path image=icon.copy_path)
 	{
@@ -13,7 +13,7 @@
 		item(mode="single" type='file' where=sel.file.ext.len>0 title=sel.file.ext cmd=command.copy(sel.file.ext))
 	}
 
-	item(mode="single" type="file" title=loc.change_extension image=\uE0B5 cmd=if(input(loc.change_extension, "Type extension"),
+	item(mode="single" type="file" title=loc.change_extension image=\uE0B5 cmd=if(input(loc.change_extension, loc.type_extension),
 		io.rename(sel.path, path.join(sel.dir, sel.file.title + "." + input.result))))
 
 	menu(separator="after" image=\uE290 title=title.select)

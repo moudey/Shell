@@ -1,4 +1,4 @@
-﻿settings
+settings
 {
 	priority=1
 	exclude.where = !process.is_explorer
@@ -13,7 +13,9 @@ $loc_path='imports\lang\'
 import lang loc_path + "en.nss"
 import lang if(path.exists(loc_path + sys.lang + ".nss"),
                loc_path + sys.lang + ".nss",
-               loc_path + "en.nss")
+               if(path.exists(loc_path + sys.lang.name + ".nss"),
+                  loc_path + sys.lang.name + ".nss",
+                  loc_path + "en.nss"))
 
 // or import lang 'imports/lang/en.nss'
 
