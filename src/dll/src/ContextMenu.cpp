@@ -995,6 +995,7 @@ namespace Nilesoft
 					
 					m_sub->owner = mii;
 					m_sub->std_items = &item->items;
+					m_sub->std_owner = item;
 
 					string path;
 					if(!mii->path.empty())
@@ -1096,12 +1097,14 @@ namespace Nilesoft
 			MenuItemInfo *owner = nullptr;
 			if(menu->is_main)
 			{
+				refresh_system_submenus(__system_menu_tree);
 				menu->dynamics = _cache->dynamic.items;
 				menu->std_items = &__system_menu_tree->items;
 			}
 			else
 			{
 				owner = menu->owner;
+				refresh_system_submenu_item(menu->std_owner);
 			}
 			
 			prepare_system_items(_system_items, menu);
@@ -4256,6 +4259,7 @@ namespace Nilesoft
 					else
 					{
 						item->type = mii.hSubMenu != nullptr;
+						item->source_handle = mii.hSubMenu;
 						item->disabled = mii.fState & MFS_DISABLED;
 						item->checked = mii.fState & MFS_CHECKED;
 						item->radio_check = mii.fType & MFT_RADIOCHECK;
@@ -4333,6 +4337,48 @@ namespace Nilesoft
 						menu->items.push_back(item.release());
 					}
 				}
+			}
+		}
+
+		// shell32 fills some submenus (e.g. "SendTo") lazily, after QueryContextMenu.
+		// Our snapshot taken at Initialize() time can therefore be incomplete.
+		// Re-snapshot any submenu whose native source menu already has more items.
+		void ContextMenu::refresh_system_submenu_item(menuitem_t *item)
+		{
+			if(!item || !item->is_menu())
+				return;
+
+			if(!item->source_handle || !::IsMenu(item->source_handle))
+				return;
+
+			const auto source_count = ::GetMenuItemCount(item->source_handle);
+			const auto snapshot_count = static_cast<int>(item->items.size());
+
+			if(source_count <= snapshot_count)
+				return;
+
+			for(auto child : item->items)
+				delete child;
+			item->items.clear();
+
+			build_system_menuitems(item->source_handle, item, false);
+
+			_log.info(L"[FIX] refetch '%s' snapshot=%d now=%d",
+					  item->title.c_str(), snapshot_count, static_cast<int>(item->items.size()));
+		}
+
+		void ContextMenu::refresh_system_submenus(menuitem_t *menu)
+		{
+			if(!menu)
+				return;
+
+			for(auto item : menu->items)
+			{
+				if(!item || !item->is_menu())
+					continue;
+
+				refresh_system_submenu_item(item);
+				refresh_system_submenus(item);
 			}
 		}
 

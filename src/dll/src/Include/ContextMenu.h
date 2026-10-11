@@ -92,6 +92,7 @@ namespace Nilesoft
 			int checked = 0;
 			ULONG_PTR dwItemData = 0;
 			HBITMAP image = nullptr;
+			HMENU source_handle = nullptr;
 			menuitem_t *parent = nullptr;
 			string path;
 			Position position = Position::Auto;
@@ -359,6 +360,7 @@ plutovg_move_to(pluto, start.x, start.y);
 				std::vector<NativeMenu *> dynamics;
 
 				std::vector<menuitem_t *> *std_items = nullptr;
+				menuitem_t *std_owner = nullptr;
 
 				NativeMenu *parent{};
 				//bool dynamic{};
@@ -734,6 +736,8 @@ plutovg_move_to(pluto, start.x, start.y);
 			int Uninitialize();
 			int InvokeCommand(int id);	
 			void build_system_menuitems(HMENU hMenu, menuitem_t *menu, bool is_root = false);
+			void refresh_system_submenus(menuitem_t *menu);
+			void refresh_system_submenu_item(menuitem_t *item);
 			void build_main_system_menuitems(menuitem_t *menu, bool is_root = false);
 
 
