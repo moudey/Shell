@@ -4,6 +4,9 @@
 #include "Include/stb_image_write.h"
 
 using namespace Nilesoft::Diagnostics;
+
+// Defined in Main.cpp: true while the self-built taskbar "app button" menu is open (global namespace)
+extern bool in_taskbar_button_menu;
 #include <mutex>
 
 extern Logger &_log;
@@ -1108,6 +1111,9 @@ namespace Nilesoft
 			
 			std::vector<MenuItemInfo *> bottom_items;
 
+			// New menu(...)/item(...) entries from the config are added here. The button menu uses the same path:
+			// it has its own context type (FSO_TASKBAR_BUTTON), so plain taskbar items do not match it and no
+			// in_taskbar_button_menu guard is needed here any more.
 			if(_settings.new_items.enabled)
 			{
 				if(!(owner && owner->is_disabled()))
@@ -1195,7 +1201,7 @@ namespace Nilesoft
 							else 
 							{
 								bool rb = !Selected.Background && (Selected.Window.id == WINDOW_RECYCLEBIN);
-								if(!Selected.Types[FSO_TASKBAR] && !rb)
+								if(!Selected.Types[FSO_TASKBAR] && !Selected.Types[FSO_TASKBAR_BUTTON] && !rb)
 								{
 									dynamic_pos = items.size() == 0 ? 1 : findpos();
 								}
@@ -4393,7 +4399,15 @@ namespace Nilesoft
 				switch(Selected.Window.id)
 				{
 					case WINDOW_TASKBAR:
-						Selected.Types[FSO_TASKBAR] = TRUE;
+						// The self-built taskbar "app button" menu (see in_taskbar_button_menu in Main.cpp) uses its own type bit:
+						// it is a taskbar context, but flagged as FSO_TASKBAR_BUTTON rather than FSO_TASKBAR, so items
+						// written for type='taskbar'/window.is_taskbar ("Go to", imports/taskbar.nss) do not flood the
+						// button menu; use where=window.is_taskbar_button to target it.
+						if(in_taskbar_button_menu)
+							Selected.Types[FSO_TASKBAR_BUTTON] = TRUE;
+						else
+							Selected.Types[FSO_TASKBAR] = TRUE;
+						// 'front' stays FSO_TASKBAR: the button menu had this value before, keeping display logic intact.
 						Selected.front = FSO_TASKBAR;
 						Selected.Directory = Path::GetKnownFolder(FOLDERID_Desktop).move();
 						break;
@@ -4470,6 +4484,8 @@ namespace Nilesoft
 				if(0 == ::GetPropW(hwnd.owner, UxSubclass))
 					build_system_menuitems(_hMenu_original, __system_menu_tree, true);
 
+				// modify(...) rules that alter existing items may also apply to the button menu (it has its own
+				// type, so generic taskbar rules cannot hit it), hence no in_taskbar_button_menu guard here.
 				if(_settings.modify_items.enabled)
 					build_main_system_menuitems(__system_menu_tree, true);
 

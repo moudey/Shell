@@ -43,6 +43,9 @@ namespace Nilesoft
 
 			FSO_SIZE,
 			FSO_NAMESPACE_LIBRARIES,
+			// Context type of the self-built taskbar "app button" menu. Like FSO_NAMESPACE_LIBRARIES it is
+			// placed after FSO_SIZE so it stays out of the fs_types table and no existing FSO_* value changes.
+			FSO_TASKBAR_BUTTON,
 			FSO_COUNT,
 			FSO_MAX
 		};

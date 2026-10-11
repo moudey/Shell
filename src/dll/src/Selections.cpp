@@ -362,7 +362,7 @@ namespace Nilesoft
 		bool Selections::verify_mode(SelectionMode mode)
 		{
 			bool result = true;
-			if(Types[FSO_TASKBAR]) 
+			if(Types[FSO_TASKBAR] || Types[FSO_TASKBAR_BUTTON]) 
 				result = true;
 			else if(mode == SelectionMode::Single)
 				result = Mode == SelectionMode::Single;
@@ -381,7 +381,7 @@ namespace Nilesoft
 			if(!fso.defined && Count() == 0)
 				return false;
 
-			if(Items.empty() && !(Types[FSO_START] + Types[FSO_TASKBAR] + Types[FSO_EDIT] + Types[FSO_TITLEBAR]))
+			if(Items.empty() && !(Types[FSO_START] + Types[FSO_TASKBAR] + Types[FSO_TASKBAR_BUTTON] + Types[FSO_EDIT] + Types[FSO_TITLEBAR]))
 			{
 				return false;
 			}

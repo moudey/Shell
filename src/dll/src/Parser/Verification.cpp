@@ -1757,6 +1757,8 @@ namespace Nilesoft
 							return error_at(1);
 						case IDENT_IS_DESKTOP:
 						case IDENT_IS_TASKBAR:
+						case IDENT_IS_TASKBAR_BUTTON:
+						case IDENT_TASKBAR_BUTTON_WINDOWS:
 						case IDENT_IS_EXPLORER:
 						case IDENT_IS_NAV:
 						case IDENT_IS_TREE:
@@ -1806,6 +1808,7 @@ namespace Nilesoft
 						case IDENT_COMMAND_TOGGLEEXT:
 						case IDENT_COMMAND_TOGGLEHIDDEN:
 						case IDENT_COMMAND_RESTART_EXPLORER:
+						case IDENT_COMMAND_KILL_PROCESS_TREE:
 						case IDENT_ID_SELECT_ALL:
 						case IDENT_ID_INVERT_SELECTION:
 						case IDENT_ID_SELECT_NONE:

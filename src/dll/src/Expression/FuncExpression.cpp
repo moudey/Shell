@@ -9,6 +9,11 @@
 
 #include <regex>
 
+// Defined in Main.cpp: kills the process tree of the windows of the current taskbar button menu.
+extern bool kill_taskbar_button_process_tree();
+// Defined in Main.cpp: top-level windows matched by the current button menu (window.taskbar_button_windows).
+extern std::vector<HWND> taskbar_button_windows;
+
 //#include <filesystem>
 
 namespace Nilesoft
@@ -1461,7 +1466,20 @@ namespace Nilesoft
 								_result = sel->Window.desktop;
 								break;
 							case IDENT_IS_TASKBAR:
-								_result = sel->Window.parent == WINDOW_TASKBAR;
+								// The button menu also lives on the taskbar but has its own context type
+								// (FSO_TASKBAR_BUTTON), so return false here to keep items written for
+								// type='taskbar' / window.is_taskbar (such as "Go to")
+								// out of the button menu.
+								_result = (sel->Window.parent == WINDOW_TASKBAR) && !(sel->Types[FSO_TASKBAR_BUTTON] > 0);
+								break;
+							case IDENT_IS_TASKBAR_BUTTON:
+								// True only for the self-built taskbar "app button" menu (see the WINDOW_TASKBAR branch).
+								_result = sel->Types[FSO_TASKBAR_BUTTON] > 0;
+								break;
+							case IDENT_TASKBAR_BUTTON_WINDOWS:
+								// Number of windows matched by the current button menu: 0 means the button has no usable target
+								// (window not recognized / app exited); config items can use it to hide dead entries.
+								_result = static_cast<int>(taskbar_button_windows.size());
 								break;
 							case IDENT_IS_EXPLORER:
 								_result = sel->Window.explorer;
@@ -1717,6 +1735,10 @@ namespace Nilesoft
 							break;
 						case IDENT_COMMAND_RESTART_EXPLORER:
 							_result = Windows::Explorer::Restart();
+							break;
+						case IDENT_COMMAND_KILL_PROCESS_TREE:
+							// Kill the process tree of the windows of this taskbar button (menu item provided by command.kill_process_tree)
+							_result = kill_taskbar_button_process_tree();
 							break;
 						case IDENT_COMMAND_TOGGLEHIDDEN:
 							Explorer::ToggleHiddenFiles();
