@@ -13,7 +13,7 @@
 		item(mode="single" type='file' where=sel.file.ext.len>0 title=sel.file.ext cmd=command.copy(sel.file.ext))
 	}
 
-	item(mode="single" type="file" title=loc.change_extension image=\uE0B5 cmd=if(input(loc.change_extension, "Type extension"),
+	item(mode="single" type="file" title=loc.change_extension image=\uE0B5 cmd=if(input(loc.change_extension, loc.type_extension),
 		io.rename(sel.path, path.join(sel.dir, sel.file.title + "." + input.result))))
 
 	menu(separator="after" image=\uE290 title=title.select)

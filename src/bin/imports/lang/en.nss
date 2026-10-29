@@ -82,3 +82,47 @@ minimize_all_windows="Minimize all windows"
 restore_all_windows="Restore all windows"
 task_manager="Task Manager"
 taskbar_Settings="Taskbar Settings"
+
+
+// file-manage.nss
+type_extension="Type extension"
+
+// goto.nss
+dir_system="System"
+dir_applications="Applications"
+dir_users="Users"
+dir_desktop="Desktop"
+dir_downloads="Downloads"
+dir_pictures="Pictures"
+dir_documents="Documents"
+dir_startmenu="Startmenu"
+dir_profile="Profile"
+
+// taskbar.nss
+config="config"
+manager="manager"
+directory="directory"
+version="version"
+docs="docs"
+donate="donate"
+
+// terminal.nss
+tip_run_admin_before="Press [SHIFT key] or [RIGHT-CLICK] to run "
+tip_run_admin_after=" as administrator"
+
+
+// develop.nss (dotnet)
+dotnet_run="run"
+dotnet_watch="watch"
+dotnet_clean="clean"
+dotnet_build_debug="build debug"
+dotnet_build_release="build release"
+dotnet_publish="publish"
+dotnet_publish_single_file="publish single file"
+dotnet_framework_dependent_deployment="framework-dependent deployment"
+dotnet_framework_dependent_executable="framework-dependent executable"
+dotnet_self_contained_deployment="self-contained deployment"
+dotnet_single_file="single-file"
+dotnet_single_file_trimmed="single-file-trimmed"
+dotnet_help="help"
+dotnet_info="version"
